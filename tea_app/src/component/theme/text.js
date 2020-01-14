@@ -1,0 +1,9 @@
+export const website_name = '直接跟茶農買';
+export const post_page_name = '最新消息';
+export const shopping_page_name = '買茶去';
+export const about_page_name = '關於我們';
+export const slide1_caption = '南投鹿谷鳳凰村';
+export const slide2_caption = 'Leafhopper';
+export const slide3_caption = '林氏凍頂烏龍茶';
+export const hero_title_home = '阮予你尚青欸';
+export const hero_paragraph_home = '來自鹿谷鄉的茶農  向您獻上最經典的凍頂烏龍'
