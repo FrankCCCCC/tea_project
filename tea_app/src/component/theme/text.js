@@ -7,3 +7,5 @@ export const slide2_caption = 'Leafhopper';
 export const slide3_caption = '林氏凍頂烏龍茶';
 export const hero_title_home = '阮予你尚青欸';
 export const hero_paragraph_home = '來自鹿谷鄉的茶農  向您獻上最經典的凍頂烏龍'
+export const fb_link = "https://www.facebook.com/%E7%B6%A0%E8%9F%AC%E6%95%B8%E6%93%9ALeafhopper";
+export const ig_link = "";
