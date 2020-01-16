@@ -1,9 +1,4 @@
 import React from 'react';
-import {Carousel} from 'react-bootstrap';
-import {slide1_caption, slide2_caption, slide3_caption} from '../theme/text'
-import slide_pic1 from '../img/slide_pic1.jpg'
-import slide_pic2 from '../img/slide_pic2.jpg'
-import slide_pic3 from '../img/slide_pic3.jpg'
 import {caption_title_style, caption_subtitle_style} from '../theme/font'
 import './Slider.css'
 
