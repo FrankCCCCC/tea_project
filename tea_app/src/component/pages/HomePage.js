@@ -14,8 +14,8 @@ function HomePage() {
   return (
     <div>
       <Slider slide_pics = {[slide_pic1, slide_pic2, slide_pic3]} slide_caption_titles = {[slide1_caption, slide2_caption, slide3_caption]} slide_caption_subtitles = {[slide1_caption, slide2_caption, slide3_caption]} is_show_indicator = {true} is_show_control = {true}/>
-      <div class="float-left">Float left on all viewport sizes</div><br></br>
-      <Post/>
+      {/* <div class="float-left">Float left on all viewport sizes</div><br></br> */}
+      {/* <Post/> */}
       <HeroTitle/>
       <Gallery/>
     </div>

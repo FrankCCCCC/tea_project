@@ -2,11 +2,15 @@ import React from 'react';
 import farmer1 from '../img/farmer1.jpg';
 import farmer2 from '../img/farmer2.jpg';
 import child from '../img/child.jpg';
+import {font_style} from '../theme/font';
 
 function Gallery(){
 
+    var pics = [];
+    // for(int i=0; i)
+
     return (
-        <div>
+        <div style={font_style}>
         <div class="row">
             <div class="col-md-12 d-flex justify-content-center mb-5">
                 <button type="button" class="btn btn-outline-black waves-effect filter" data-rel="all">All</button>
@@ -18,50 +22,50 @@ function Gallery(){
         <div class="gallery" id="gallery" style={{columnCount: "3",columnWidth: "250px"}}>
             <div class="mb-3" data-aos="fade-right">
                 <div style={{position: "relative", textAlign: "right", color: "white"}}>
-                    <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(73).jpg" alt="Card image cap" style={{width: "100%"}}/>
+                    <img class="img-fluid" src="https://images.unsplash.com/photo-1569322330263-2c53758bcb05?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" alt="Card image cap" style={{width: "100%"}}/>
                     <div style={{position: "absolute", bottom: "0rem", right: "0rem", width: "100%", paddingRight: "0.5rem", paddingLeft: "0.5rem", paddingTop: "0.3rem", backgroundColor: "rgba(0, 0, 0, 0.2)"}}>
-                        <h4>Image caption</h4>
-                        <p>By Jason Doe</p>
+                        <h4>張大春</h4>
+                        <p>鹿谷  鳳凰</p>
                     </div>
                 </div>
             </div>
 
             <div class="mb-3" data-aos="fade-right">
                 <div style={{position: "relative", textAlign: "right", color: "white", width: "100%"}}>
-                    <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Vertical/mountain1.jpg" alt="Card image cap" style={{width: "100%"}}/>
+                    <img class="img-fluid" src="https://images.unsplash.com/photo-1518744865364-a5323b5a9e29?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" alt="Card image cap" style={{width: "100%"}}/>
                     <div style={{position: "absolute", bottom: "0rem", right: "0rem", width: "100%", paddingRight: "0.5rem", paddingLeft: "0.5rem", paddingTop: "0.3rem", backgroundColor: "rgba(0, 0, 0, 0.2)"}}>
-                        <h4>Image caption</h4>
-                        <p>By Jason Doe</p>
+                        <h4>陳朝鳳</h4>
+                        <p>鹿谷  凍頂</p>
                     </div>
                 </div>
             </div>
             
             <div class="mb-3 pics animation all 1">
-                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Vertical/mountain1.jpg" alt="Card image cap"/>
+                <img class="img-fluid" src="https://images.unsplash.com/photo-1499848144902-af767f6d0c7f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1052&q=80" alt="Card image cap"/>
             </div>
             
 
             
             <div class="mb-3 pics animation all 1">
-                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Vertical/mountain2.jpg" alt="Card image cap"/>
+                <img class="img-fluid" src="https://images.unsplash.com/photo-1433704334812-6c45b0b8784d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1053&q=80" alt="Card image cap"/>
             </div>
             
 
             
             <div class="mb-3 pics animation all 2">
-                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg" alt="Card image cap"/>
+                <img class="img-fluid" src="https://images.unsplash.com/photo-1458360112982-28942a1f776e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=694&q=80" alt="Card image cap"/>
             </div>
             
 
             
             <div class="mb-3 pics animation all 2">
-                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(18).jpg" alt="Card image cap"/>
+                <img class="img-fluid" src="https://images.unsplash.com/photo-1437315306147-0923bdb3fc12?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80" alt="Card image cap"/>
             </div>
             
 
             
             <div class="mb-3 pics animation all 1">
-                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Vertical/mountain3.jpg" alt="Card image cap"/>
+                <img class="img-fluid" src="https://images.unsplash.com/photo-1550058905-c91bce5e0bf5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" alt="Card image cap"/>
             </div>
             
 
