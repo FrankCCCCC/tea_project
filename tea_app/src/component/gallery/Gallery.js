@@ -1,78 +1,76 @@
 import React from 'react';
-import farmer1 from '../img/farmer1.jpg';
-import farmer2 from '../img/farmer2.jpg';
-import child from '../img/child.jpg';
+import {Link, Switch, Route, useParams, useRouteMatch} from 'react-router-dom';
 import {font_style} from '../theme/font';
+import Post from '../post/Post'
 
-function Gallery(){
+function Gallery(props){
+    if(!Array.isArray(props.galleryInput)){
+        console.log("Error GalleryInput is not array")
+        throw "Error GalleryInput is not array";
+        return -1;
+    }
+    var content = [];
 
-    var pics = [];
-    // for(int i=0; i)
+    let {path, url} = useRouteMatch();
+    console.log(`${url}`)
+    for(let i=0; i < props.galleryInput.length; i++){
+        console.log(`${url}post/${props.galleryInput[i].id}`)
+        content.push(
+            <div class="mb-3" data-aos={i % 2? "fade-right" : "fade-left"}>
+                
+                    <div style={{position: "relative", textAlign: "right", color: "white"}}>
+                        <Link to={`${url}post/${props.galleryInput[i].id}`}>
+                            <img class="img-fluid" src={props.galleryInput[i].img} alt="Card image cap" style={{width: "100%"}}/>
+                        </Link>
+                        <div style={{position: "absolute", bottom: "0rem", right: "0rem", width: "100%", paddingRight: "0.5rem", paddingLeft: "0.5rem", paddingTop: "0.3rem", backgroundColor: "rgba(0, 0, 0, 0.2)"}}>
+                            <h4>{props.galleryInput[i].caption_title}</h4>
+                            <p>{props.galleryInput[i].caption_subtitle}</p>
+                        </div>
+                    </div>
+                
+            </div>
+        );
+    }
 
     return (
         <div style={font_style}>
-        <div class="row">
-            <div class="col-md-12 d-flex justify-content-center mb-5">
-                <button type="button" class="btn btn-outline-black waves-effect filter" data-rel="all">All</button>
-                <button type="button" class="btn btn-outline-black waves-effect filter" data-rel="1">Mountains</button>
-                <button type="button" class="btn btn-outline-black waves-effect filter" data-rel="2">Sea</button>
-            </div>
-        </div>
-        
-        <div class="gallery" id="gallery" style={{columnCount: "3",columnWidth: "250px"}}>
-            <div class="mb-3" data-aos="fade-right">
-                <div style={{position: "relative", textAlign: "right", color: "white"}}>
-                    <img class="img-fluid" src="https://images.unsplash.com/photo-1569322330263-2c53758bcb05?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" alt="Card image cap" style={{width: "100%"}}/>
-                    <div style={{position: "absolute", bottom: "0rem", right: "0rem", width: "100%", paddingRight: "0.5rem", paddingLeft: "0.5rem", paddingTop: "0.3rem", backgroundColor: "rgba(0, 0, 0, 0.2)"}}>
-                        <h4>張大春</h4>
-                        <p>鹿谷  鳳凰</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mb-3" data-aos="fade-right">
-                <div style={{position: "relative", textAlign: "right", color: "white", width: "100%"}}>
-                    <img class="img-fluid" src="https://images.unsplash.com/photo-1518744865364-a5323b5a9e29?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" alt="Card image cap" style={{width: "100%"}}/>
-                    <div style={{position: "absolute", bottom: "0rem", right: "0rem", width: "100%", paddingRight: "0.5rem", paddingLeft: "0.5rem", paddingTop: "0.3rem", backgroundColor: "rgba(0, 0, 0, 0.2)"}}>
-                        <h4>陳朝鳳</h4>
-                        <p>鹿谷  凍頂</p>
-                    </div>
+            <div class="row">
+                <div class="col-md-12 d-flex justify-content-center mb-5">
+                    <button type="button" class="btn btn-outline-black waves-effect filter" data-rel="all">All</button>
+                    <button type="button" class="btn btn-outline-black waves-effect filter" data-rel="1">Mountains</button>
+                    <button type="button" class="btn btn-outline-black waves-effect filter" data-rel="2">Sea</button>
                 </div>
             </div>
             
-            <div class="mb-3 pics animation all 1">
-                <img class="img-fluid" src="https://images.unsplash.com/photo-1499848144902-af767f6d0c7f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1052&q=80" alt="Card image cap"/>
+            <div class="gallery" style={{columnCount: "3",columnWidth: "250px"}}>
+                {content}
             </div>
-            
-
-            
-            <div class="mb-3 pics animation all 1">
-                <img class="img-fluid" src="https://images.unsplash.com/photo-1433704334812-6c45b0b8784d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1053&q=80" alt="Card image cap"/>
-            </div>
-            
-
-            
-            <div class="mb-3 pics animation all 2">
-                <img class="img-fluid" src="https://images.unsplash.com/photo-1458360112982-28942a1f776e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=694&q=80" alt="Card image cap"/>
-            </div>
-            
-
-            
-            <div class="mb-3 pics animation all 2">
-                <img class="img-fluid" src="https://images.unsplash.com/photo-1437315306147-0923bdb3fc12?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80" alt="Card image cap"/>
-            </div>
-            
-
-            
-            <div class="mb-3 pics animation all 1">
-                <img class="img-fluid" src="https://images.unsplash.com/photo-1550058905-c91bce5e0bf5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" alt="Card image cap"/>
-            </div>
-            
-
+            <Switch>
+                <Route path={`${path}post/:postId`}>
+                    <Post/>
+                </Route>
+            </Switch>
         </div>
-    </div>
     );
 }
+class funct extends React.Component{
+    constructor(props){
+        super(props);
+    }
+
+    render(){
+        let { topicId } = useParams();
+        console.log(topicId)
+  return (
+    <div>
+      <h3>{topicId}</h3>
+    </div>
+  );
+    }
+}
+// function funct() {
+    
+// }
 
 export default Gallery;
 

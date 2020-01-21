@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, BrowserRouter as Router} from 'react-router-dom'
+import {useRouteMatch, Route, BrowserRouter as Router} from 'react-router-dom'
 import {Switch} from 'react-router-dom'
 // import leafhopper_logo from './component/img/leafhopper_logo.png';
 // import './App.css'
@@ -8,6 +8,7 @@ import HomePage from './component/pages/HomePage'
 import FarmerPage from './component/pages/FarmerPage'
 import CartPage from './component/pages/CartPage'
 import Test from './test'
+import Post from './component/post/Post'
 
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -22,7 +23,7 @@ function App() {
   AOS.init({
     duration: 2000,
   });
-  
+  // let {path, url} = useRouteMatch();
   return (
     <div className="App">
       <Router>
@@ -32,10 +33,12 @@ function App() {
             <Route path="/about" exact component={FarmerPage}/>
             <Route path="/shopping" exact component={FarmerPage}/>
             <Route path="/cart" exact component={CartPage}/>
-            <Route path="/post" exact component={FarmerPage}/>
+            <Route path={`/farmer/:farmerId`} exact component={FarmerPage}/>
+            <Route path={`/post/:postId`} exact component={Post}/>
             <Route component={HomePage}/>
           </Switch>
           {/* <Test/> */}
+          {/* <Post/> */}
           <Footer/>
       </Router>
       

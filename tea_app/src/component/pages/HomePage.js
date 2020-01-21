@@ -6,18 +6,74 @@ import Gallery from '../gallery/Gallery'
 import Post from '../post/Post'
 
 import {slide1_caption, slide2_caption, slide3_caption} from '../theme/text';
-import slide_pic1 from '../img/slide_pic1.jpg';
-import slide_pic2 from '../img/slide_pic2.jpg';
-import slide_pic3 from '../img/slide_pic3.jpg';
+
+const sliderInput = [{
+  img: "http://localhost:5000/img/hill1.jpg",
+  caption_title: slide1_caption,
+  caption_subtitle: slide1_caption
+},
+{
+  img: "http://localhost:5000/img/hill2.jpg",
+  caption_title: slide2_caption,
+  caption_subtitle: slide2_caption
+},
+{
+  img: "http://localhost:5000/img/tea.jpg",
+  caption_title: slide3_caption,
+  caption_subtitle: slide3_caption
+}];
+
+const galleryInput = [{
+  img: "http://localhost:5000/img/farmer1.jpg",
+  caption_title: "陳朝鳳",
+  caption_subtitle: "鹿谷 凍頂",
+  id: 1
+},
+{
+  img: "http://localhost:5000/img/farmer2.jpg",
+  caption_title: "張大春",
+  caption_subtitle: "鹿谷 鳳凰",
+  id: 2
+},
+{
+  img: "http://localhost:5000/img/farmer3.jpg",
+  caption_title: "林大宇",
+  caption_subtitle: "鹿谷 鳳凰",
+  id: 3
+},
+{
+  img: "http://localhost:5000/img/farmer4.jpg",
+  caption_title: "林大宇",
+  caption_subtitle: "鹿谷 鳳凰",
+  id: 1
+},
+{
+  img: "http://localhost:5000/img/tea_tree.jpg",
+  caption_title: "林大宇",
+  caption_subtitle: "鹿谷 鳳凰",
+  id: 1
+},
+{
+  img: "http://localhost:5000/img/child.jpg",
+  caption_title: "林大宇",
+  caption_subtitle: "鹿谷 鳳凰",
+  id: 1
+},
+{
+  img: "http://localhost:5000/img/farmer7.jpg",
+  caption_title: "林大宇",
+  caption_subtitle: "鹿谷 鳳凰",
+  id: 1
+}]
 
 function HomePage() {
   return (
     <div>
-      <Slider slide_pics = {[slide_pic1, slide_pic2, slide_pic3]} slide_caption_titles = {[slide1_caption, slide2_caption, slide3_caption]} slide_caption_subtitles = {[slide1_caption, slide2_caption, slide3_caption]} is_show_indicator = {true} is_show_control = {true}/>
+      <Slider sliderInput = {sliderInput} is_show_indicator = {true} is_show_control = {true}/>
       {/* <div class="float-left">Float left on all viewport sizes</div><br></br> */}
       {/* <Post/> */}
       <HeroTitle/>
-      <Gallery/>
+      <Gallery galleryInput={galleryInput}/>
     </div>
   );
 }
