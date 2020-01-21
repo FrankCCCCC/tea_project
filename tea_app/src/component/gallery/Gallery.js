@@ -1,7 +1,6 @@
 import React from 'react';
 import {Link, Switch, Route, useParams, useRouteMatch} from 'react-router-dom';
 import {font_style} from '../theme/font';
-import Post from '../post/Post'
 
 function Gallery(props){
     if(!Array.isArray(props.galleryInput)){
@@ -19,7 +18,7 @@ function Gallery(props){
             <div class="mb-3" data-aos={i % 2? "fade-right" : "fade-left"}>
                 
                     <div style={{position: "relative", textAlign: "right", color: "white"}}>
-                        <Link to={`${url}post/${props.galleryInput[i].id}`}>
+                        <Link to={`${url}farmer/${props.galleryInput[i].id}`}>
                             <img class="img-fluid" src={props.galleryInput[i].img} alt="Card image cap" style={{width: "100%"}}/>
                         </Link>
                         <div style={{position: "absolute", bottom: "0rem", right: "0rem", width: "100%", paddingRight: "0.5rem", paddingLeft: "0.5rem", paddingTop: "0.3rem", backgroundColor: "rgba(0, 0, 0, 0.2)"}}>
@@ -45,32 +44,9 @@ function Gallery(props){
             <div class="gallery" style={{columnCount: "3",columnWidth: "250px"}}>
                 {content}
             </div>
-            <Switch>
-                <Route path={`${path}post/:postId`}>
-                    <Post/>
-                </Route>
-            </Switch>
         </div>
     );
 }
-class funct extends React.Component{
-    constructor(props){
-        super(props);
-    }
-
-    render(){
-        let { topicId } = useParams();
-        console.log(topicId)
-  return (
-    <div>
-      <h3>{topicId}</h3>
-    </div>
-  );
-    }
-}
-// function funct() {
-    
-// }
 
 export default Gallery;
 

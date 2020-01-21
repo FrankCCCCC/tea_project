@@ -1,11 +1,12 @@
 import React from 'react';
+import {Link, useRouteMatch} from 'react-router-dom';
 import {caption_title_style, caption_subtitle_style} from '../theme/font'
 import './Slider.css'
 
 // @sliderInput = [{
-//     img: '',
-//     caption_title: '',
-//     caption_subtitle: ''
+//     img: 'image_url string',
+//     caption_title: 'string',
+//     caption_subtitle: 'string'
 // }];
 
 function Slider(props){
@@ -22,17 +23,21 @@ function Slider(props){
     }
 
     var content = []
-    
+    let {path, url} = useRouteMatch();
     for(let i=0; i<props.sliderInput.length; i++){
         if(i==0){var classA = "carousel-item active";}
         else{var classA = "carousel-item";}
         content.push(
-            <div class={classA} style={{backgroundImage: "url("+ props.sliderInput[i].img +")"}}>
-                <div class="carousel-caption d-md-block" style={{textAlign: "left"}}>
-                    <h2 class="display-4" style={caption_title_style}>{props.sliderInput[i].caption_title}</h2>
-                    <p class="lead" style={caption_subtitle_style}>{props.sliderInput[i].caption_subtitle}</p>
-                </div>
-            </div>
+            <div>
+                <Link to={`${url}post/${props.sliderInput[i].id}`}>
+                    <div class={classA} style={{backgroundImage: "url("+ props.sliderInput[i].img +")"}}>
+                        <div class="carousel-caption d-md-block" style={{textAlign: "left"}}>
+                            <h2 class="display-4" style={caption_title_style}>{props.sliderInput[i].caption_title}</h2>
+                            <p class="lead" style={caption_subtitle_style}>{props.sliderInput[i].caption_subtitle}</p>
+                        </div>
+                    </div>
+                </Link>
+            </div>  
         );
     }
 

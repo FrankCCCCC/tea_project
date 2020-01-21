@@ -8,7 +8,7 @@ import HomePage from './component/pages/HomePage'
 import FarmerPage from './component/pages/FarmerPage'
 import CartPage from './component/pages/CartPage'
 import Test from './test'
-import Post from './component/post/Post'
+import PostPage from './component/pages/PostPage'
 
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -29,12 +29,12 @@ function App() {
       <Router>
           <AppNav/>          
           <Switch>
-            <Route path="/home" exact component={HomePage}/>
+            <Route path="/" exact component={HomePage}/>
             <Route path="/about" exact component={FarmerPage}/>
             <Route path="/shopping" exact component={FarmerPage}/>
             <Route path="/cart" exact component={CartPage}/>
             <Route path={`/farmer/:farmerId`} exact component={FarmerPage}/>
-            <Route path={`/post/:postId`} exact component={Post}/>
+            <Route path={`/post/:postId`} exact component={PostPage}/>
             <Route component={HomePage}/>
           </Switch>
           {/* <Test/> */}

@@ -10,8 +10,8 @@ function AppNav(){
     return (
         <div style={font_style}>
             <nav class="navbar navbar-expand-lg navbar-light fixed-top" style={{backgroundColor: "rgba(255,255,255,0.5)"}}>
-              <a class="navbar-brand" href="#"><img src={leafhopper_logo} style={{width:"2rem"}}></img></a>
-              <a class="navbar-brand" href="/home"><strong>{website_name}</strong></a>
+              <a class="navbar-brand" href="/"><img src={leafhopper_logo} style={{width:"2rem"}}></img></a>
+              <a class="navbar-brand" href="/"><strong>{website_name}</strong></a>
               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>  
               </button>

@@ -9,9 +9,20 @@ export const secondary_color = {
 export const font_style = {
     fontFamily: "Helvetica, Arial, LiHei Pro, 黑體-繁, 微軟正黑體, sans-serif"
 };
+export const title_style = {
+    fontFamily: font_style.fontFamily,
+    fontSize: "3rem",
+    color: "white"
+}
+export const subtitle_style = {
+    fontFamily: font_style.fontFamily,
+    fontSize: "2rem",
+    color: "white"
+}
 export const paragraph_style = {
     fontFamily: font_style.fontFamily,
-    fontSize: "1rem"
+    fontSize: "1rem",
+    color: "white"
 };
 export const caption_title_style = {
     fontFamily: font_style.fontFamily,

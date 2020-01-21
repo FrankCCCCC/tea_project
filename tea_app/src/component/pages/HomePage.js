@@ -8,59 +8,62 @@ import Post from '../post/Post'
 import {slide1_caption, slide2_caption, slide3_caption} from '../theme/text';
 
 const sliderInput = [{
-  img: "http://localhost:5000/img/hill1.jpg",
+  id: 1,
+  img: "http://192.168.43.203:5000/img/hill1.jpg",
   caption_title: slide1_caption,
   caption_subtitle: slide1_caption
 },
 {
-  img: "http://localhost:5000/img/hill2.jpg",
+  id: 2,
+  img: "http://192.168.43.203:5000/img/hill2.jpg",
   caption_title: slide2_caption,
   caption_subtitle: slide2_caption
 },
 {
-  img: "http://localhost:5000/img/tea.jpg",
+  id: 3,
+  img: "http://192.168.43.203:5000/img/tea.jpg",
   caption_title: slide3_caption,
   caption_subtitle: slide3_caption
 }];
 
 const galleryInput = [{
-  img: "http://localhost:5000/img/farmer1.jpg",
+  img: "http://192.168.43.203:5000/img/farmer1.jpg",
   caption_title: "陳朝鳳",
   caption_subtitle: "鹿谷 凍頂",
   id: 1
 },
 {
-  img: "http://localhost:5000/img/farmer2.jpg",
+  img: "http://192.168.43.203:5000/img/farmer2.jpg",
   caption_title: "張大春",
   caption_subtitle: "鹿谷 鳳凰",
   id: 2
 },
 {
-  img: "http://localhost:5000/img/farmer3.jpg",
+  img: "http://192.168.43.203:5000/img/farmer3.jpg",
   caption_title: "林大宇",
   caption_subtitle: "鹿谷 鳳凰",
   id: 3
 },
 {
-  img: "http://localhost:5000/img/farmer4.jpg",
+  img: "http://192.168.43.203:5000/img/farmer4.jpg",
   caption_title: "林大宇",
   caption_subtitle: "鹿谷 鳳凰",
   id: 1
 },
 {
-  img: "http://localhost:5000/img/tea_tree.jpg",
+  img: "http://192.168.43.203:5000/img/tea_tree.jpg",
   caption_title: "林大宇",
   caption_subtitle: "鹿谷 鳳凰",
   id: 1
 },
 {
-  img: "http://localhost:5000/img/child.jpg",
+  img: "http://192.168.43.203:5000/img/child.jpg",
   caption_title: "林大宇",
   caption_subtitle: "鹿谷 鳳凰",
   id: 1
 },
 {
-  img: "http://localhost:5000/img/farmer7.jpg",
+  img: "http://192.168.43.203:5000/img/farmer7.jpg",
   caption_title: "林大宇",
   caption_subtitle: "鹿谷 鳳凰",
   id: 1
