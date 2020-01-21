@@ -32,7 +32,7 @@ function Section(props) {
                     <h3 style={font_style}>{props.sectionInput.subtitle}</h3>
                     <p style={font_style}>{props.sectionInput.paragraph}</p>
                 </div>
-                <div class="col-lg-6" style={{height: "100%"}}>
+                <div class="col-lg-6" style={{height: "100%", padding: 0}}>
                     <div class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner" role="listbox">
                             <div class="carousel-item active" style={{backgroundImage: "url("+ props.sectionInput.img +")", height: "100vh", minHeight: "350px"}}>
