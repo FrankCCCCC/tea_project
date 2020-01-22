@@ -4,6 +4,7 @@ import Slider from '../slider/Slider'
 import HeroTitle from '../hero_title/HeroTitle'
 import Gallery from '../gallery/Gallery'
 import Post from '../post/Post'
+import TestSlider from '../slider/testSlider'
 
 import {slide1_caption, slide2_caption, slide3_caption} from '../theme/text';
 
@@ -73,8 +74,6 @@ function HomePage() {
   return (
     <div>
       <Slider sliderInput = {sliderInput} is_show_indicator = {true} is_show_control = {true}/>
-      {/* <div class="float-left">Float left on all viewport sizes</div><br></br> */}
-      {/* <Post/> */}
       <HeroTitle/>
       <Gallery galleryInput={galleryInput}/>
     </div>

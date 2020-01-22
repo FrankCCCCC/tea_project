@@ -4,6 +4,8 @@ import Slider from '../slider/Slider'
 import HeroTitle from '../hero_title/HeroTitle'
 import Gallery from '../gallery/Gallery'
 import Section from '../section/Section'
+import VideoSlide from '../videoSlide/VideoSlider'
+import {slide1_caption, slide2_caption, slide3_caption} from '../theme/text'
 
 var sectionInput1 = {
   title: "林氏傳統凍頂烏龍茶",
@@ -49,6 +51,26 @@ var sectionInput3 = {
 };
 var sectionList = [sectionInput1, sectionInput2, sectionInput3]
 var content = []
+
+const videoSliderInput = [{
+  id: 1,
+  video: "https://mdbootstrap.com/img/video/Tropical.mp4",
+  caption_title: slide1_caption,
+  caption_subtitle: slide1_caption
+},
+{
+  id: 2,
+  video: "https://mdbootstrap.com/img/video/forest.mp4",
+  caption_title: slide2_caption,
+  caption_subtitle: slide2_caption
+},
+{
+  id: 3,
+  video: "https://mdbootstrap.com/img/video/Agua-natural.mp4",
+  caption_title: slide3_caption,
+  caption_subtitle: slide3_caption
+}];
+
 function FarmerPage() {
   for(let i=0; i<sectionList.length; i++){
     // sectionList[i].is_reverse = (i%2 == 1? true : false);
@@ -61,6 +83,7 @@ function FarmerPage() {
   }
   return (
     <div>
+      <VideoSlide videoSliderInput={videoSliderInput} is_show_indicator={true} is_show_control={true}/>
       {content}
     </div>
   );

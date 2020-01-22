@@ -1,52 +1,39 @@
 import React from 'react';
-import {Link, useRouteMatch} from 'react-router-dom';
-import {caption_title_style, caption_subtitle_style} from '../theme/font'
-import './Slider.css'
+import {useRouteMatch, Link} from 'react-router-dom'
+import {caption_subtitle_style, caption_title_style} from '../theme/font'
 
-// @sliderInput = [{
-//     img: 'image_url string',
-//     caption_title: 'string',
-//     caption_subtitle: 'string'
-// }];
-
-function Slider(props){
-    // props.slide_imgs = [slide_pic1, slide_pic2, slide_pic3];
-    // props.slide_caption_titles = [slide1_caption, slide2_caption, slide3_caption];
-    // props.slide_caption_subtitles = [slide1_caption, slide2_caption, slide3_caption];
-    // props.propsis_show_indicator = true;
-    // props.is_show_control = true;
-
-    if(!Array.isArray(props.sliderInput)){
-        console.log("Error sliderInput is not array")
-        throw "Error sliderInput is not array";
+function VideoSlide(props) {
+    if(!Array.isArray(props.videoSliderInput)){
+        console.log("Error videoSliderInput is not array")
+        throw "Error videoSliderInput is not array";
         return -1;
     }
 
     var content = []
     let {path, url} = useRouteMatch();
-    console.log(props.sliderInput)
-    for(let i=0; i<props.sliderInput.length; i++){
+    for(let i=0; i<props.videoSliderInput.length; i++){
         if(i==0){var classA = "carousel-item active";}
         else{var classA = "carousel-item";}
         content.push(
-            <div class={classA} style={{backgroundImage: "url("+ props.sliderInput[i].img +")"}}>
-                <Link to={`${url}post/${props.sliderInput[i].id}`}>
+            <div class={classA}>
+                <Link to={`${url}post/${props.videoSliderInput[i].id}`}>
                     <div style={{height: "100%", width: "100%"}}>
+                        <video class="video-fluid" autoPlay loop muted style={{width: "100%", height: "100%"}}>
+                            <source src={props.videoSliderInput[i].video} type="video/mp4"/>
+                        </video>
                         <div class="carousel-caption d-md-block" style={{textAlign: "left"}}>
-                            <h2 class="display-4" style={caption_title_style}>{props.sliderInput[i].caption_title}</h2>
-                            <p class="lead" style={caption_subtitle_style}>{props.sliderInput[i].caption_subtitle}</p>
-                        </div>  
+                            <h2 class="display-4" style={caption_title_style}>{props.videoSliderInput[i].caption_title}</h2>
+                            <p class="lead" style={caption_subtitle_style}>{props.videoSliderInput[i].caption_subtitle}</p>
+                        </div>
                     </div>
                 </Link>
-            </div>
+            </div>  
         );
     }
 
-
-
     return (
-        <div data-aos="fade-right">
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <div>
+            <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel">
                 {props.is_show_indicator?
                 <ol class="carousel-indicators">
                     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -70,8 +57,7 @@ function Slider(props){
                 </div>
             </div>
         </div>
-        
     );
 }
 
-export default Slider;
+export default VideoSlide;
