@@ -6,7 +6,7 @@ import Gallery from '../gallery/Gallery'
 import Post from '../post/Post'
 import TestSlider from '../slider/testSlider'
 
-import {slide1_caption, slide2_caption, slide3_caption} from '../theme/text';
+import {slide1_caption, slide2_caption, slide3_caption, hero_title_home, hero_paragraph_home} from '../theme/text';
 
 const sliderInput = [{
   id: 1,
@@ -74,8 +74,8 @@ function HomePage() {
   return (
     <div>
       <Slider sliderInput = {sliderInput} is_show_indicator = {true} is_show_control = {true}/>
-      <HeroTitle/>
-      <Gallery galleryInput={galleryInput}/>
+      <HeroTitle title={hero_title_home} paragraph={hero_paragraph_home}/>
+      <Gallery galleryInput={galleryInput} route="farmer"/>
     </div>
   );
 }

@@ -54,19 +54,22 @@ var content = []
 
 const videoSliderInput = [{
   id: 1,
-  video: "https://mdbootstrap.com/img/video/Tropical.mp4",
+  video: "http://192.168.43.203:5000/video/tea_farmer.MP4",
+  link: "http://192.168.43.203:5000/video/tea_farmer.MP4",
   caption_title: slide1_caption,
   caption_subtitle: slide1_caption
 },
 {
   id: 2,
-  video: "https://mdbootstrap.com/img/video/forest.mp4",
+  video: "http://192.168.43.203:5000/video/dai_ui.MP4",
+  link: "http://192.168.43.203:5000/video/dai_ui.MP4",
   caption_title: slide2_caption,
   caption_subtitle: slide2_caption
 },
 {
   id: 3,
   video: "https://mdbootstrap.com/img/video/Agua-natural.mp4",
+  link: "https://mdbootstrap.com/img/video/Agua-natural.mp4",
   caption_title: slide3_caption,
   caption_subtitle: slide3_caption
 }];

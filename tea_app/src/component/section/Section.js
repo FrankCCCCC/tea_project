@@ -1,6 +1,6 @@
 import React from 'react';
 import {font_style, title_style, subtitle_style, paragraph_style} from '../theme/font';
-
+import './Section.css';
 // const sectionInput = {
 //     title: "林氏傳統凍頂烏龍茶",
 //     subtitle: "在瞬息萬變的現代 傳承百年的好味道",
@@ -35,7 +35,7 @@ function Section(props) {
                 <div class="col-lg-6" style={{height: "100%", padding: 0}}>
                     <div class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner" role="listbox">
-                            <div class="carousel-item active" style={{backgroundImage: "url("+ props.sectionInput.img +")", height: "100vh", minHeight: "350px"}}>
+                            <div class="carousel-item active section" style={{backgroundImage: "url("+ props.sectionInput.img +")", width: "100%"}}>
                             </div>
                         </div>
                     </div>

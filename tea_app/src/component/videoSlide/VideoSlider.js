@@ -12,21 +12,25 @@ function VideoSlide(props) {
     var content = []
     let {path, url} = useRouteMatch();
     for(let i=0; i<props.videoSliderInput.length; i++){
-        if(i==0){var classA = "carousel-item active";}
-        else{var classA = "carousel-item";}
+        if(i==0){var classA = "carousel-item active video_slider";}
+        else{var classA = "carousel-item video_slider";}
         content.push(
             <div class={classA}>
-                <Link to={`${url}post/${props.videoSliderInput[i].id}`}>
-                    <div style={{height: "100%", width: "100%"}}>
-                        <video class="video-fluid" autoPlay loop muted style={{width: "100%", height: "100%"}}>
+                {/* <Link to={`${url}post/${props.videoSliderInput[i].id}`}> */}
+                <a  href={props.videoSliderInput[i].link}>
+                {/* style={{width: "100%", height: "100%"}} */}
+                    <div>
+                        <video class="video-fluid" autoPlay loop muted style={{width: "100%"}}>
                             <source src={props.videoSliderInput[i].video} type="video/mp4"/>
                         </video>
-                        <div class="carousel-caption d-md-block" style={{textAlign: "left"}}>
+                        <div class="carousel-caption d-none d-md-block" style={{textAlign: "left"}}>
                             <h2 class="display-4" style={caption_title_style}>{props.videoSliderInput[i].caption_title}</h2>
                             <p class="lead" style={caption_subtitle_style}>{props.videoSliderInput[i].caption_subtitle}</p>
                         </div>
                     </div>
-                </Link>
+                </a>
+                    
+                {/* </Link> */}
             </div>  
         );
     }

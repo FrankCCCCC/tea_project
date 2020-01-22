@@ -26,8 +26,8 @@ function Slider(props){
     let {path, url} = useRouteMatch();
     console.log(props.sliderInput)
     for(let i=0; i<props.sliderInput.length; i++){
-        if(i==0){var classA = "carousel-item active";}
-        else{var classA = "carousel-item";}
+        if(i==0){var classA = "carousel-item active slider";}
+        else{var classA = "carousel-item slider";}
         content.push(
             <div class={classA} style={{backgroundImage: "url("+ props.sliderInput[i].img +")"}}>
                 <Link to={`${url}post/${props.sliderInput[i].id}`}>

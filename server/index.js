@@ -18,8 +18,12 @@ const config = {
     post: {
         id: {key: "id", schema: "id serial PRIMARY KEY NOT NULL"},
         title: {key: "title", schema: "title TEXT NOT NULL"},
+        subtitle: {key: "subtitle", schema: "subtitle TEXT NOT NULL"},
+        author: {key: "author", schema:"author TEXT NOT NULL"},
         content: {key: "content", schema: "content TEXT NOT NULL"},
         create_on: {key: "create_on", schema: "create_on TIMESTAMP default current_timestamp"},
+        latest_modify: {key: "latest_modify", schema: "latest_modify TIMESTAMP default current_timestamp"},
+        cover_img: {key: "cover_img", schema: "cover_img TEXT"}
     },
     farmer: {
         id: {key: "id", schema: "id serial PROMARY KEY NOT NULL"},
@@ -75,6 +79,21 @@ async function create_slider(){
     });
 }
 
+async function create_posts_table(){
+    let q = await pool.query(`CREATE TABLE IF NOT EXISTS posts_table(
+        ${config.post.id.schema},
+        ${config.post.title.schema},
+        ${config.post.subtitle.schema},
+        ${config.post.author.schema},
+        ${config.post.content.schema},
+        ${config.post.cover_img.schema},
+        ${config.post.create_on.schema},
+        ${config.post.latest_modify.schema}
+    )`, (res, err) => {
+        console.log(err, res);
+    })
+}
+
 async function query_slider_data(count){
     if(typeof(count)  != "number"){return -1;}
     let row_counts = ""
@@ -87,6 +106,20 @@ async function query_slider_data(count){
         `)
 }
 
+async function query_posts(count){
+    if(typeof(count) != "number"){return -1;}
+    let row_counts = ""
+    if(count == -1){
+    }else{
+        row_counts = "TOP " + count.toString();
+    }
+    var q = await pool.query(`
+        SELECT ${row_counts} * FROM posts_table;
+    `, (res, err) => {
+        console.log(res, err);
+    })
+}
+
 async function insert_slider_data(img, caption_title, caption_subtitle){
     if(typeof(img) != 'string' || typeof(caption_title) != 'string' || typeof(caption_subtitle) != 'string'){return -1;}
     var q = await pool.query(`
@@ -94,8 +127,20 @@ async function insert_slider_data(img, caption_title, caption_subtitle){
     `);
 }
 
+async function insert_posts(title, subtitle, author, content, cover_img){
+    if(typeof(title) != 'string' || typeof(title) != 'string' || typeof(subtitle) != 'string' || typeof(author) != 'string' || typeof(content) != 'string' || typeof(cover_img) != 'string'){return -1;}
+    var q = await pool.query(`
+        INSERT INTO posts_table(title, subtitle, author, content, cover_img) VALUES('${title}', '${subtitle}', '${author}', '${content}', '${cover_img}');
+    `, (res, err) => {
+        console.log(res, err);
+    })
+}
+
 // query_test();
 // create_slider();
-insert_slider_data('test.jpg', 'test_title', 'test_subtitle');
+// insert_slider_data('test.jpg', 'test_title', 'test_subtitle');
+// create_posts_table();
+// insert_posts('Test Title', 'Test Subtile', 'Test Author', '# Hi Test Post', 'child.jpg');
+query_posts(-1);
 
 pool.end();
