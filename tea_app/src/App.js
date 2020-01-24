@@ -11,6 +11,7 @@ import Test from './test'
 import PostPage from './component/pages/PostPage'
 import PostListPage from './component/pages/PostListPage'
 import ShoppingPage from './component/pages/ShoppingPage'
+import LoadingPage from './component/pages/LoadingPage'
 
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -40,8 +41,7 @@ function App() {
             <Route path={`/post/:postId`} exact component={PostPage}/>
             <Route component={HomePage}/>
           </Switch>
-          {/* <Test/> */}
-          {/* <Post/> */}
+          {/* <LoadingPage/> */}
           <Footer/>
       </Router>
       

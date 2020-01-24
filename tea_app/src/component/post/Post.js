@@ -1,6 +1,7 @@
 import React from 'react';
 import {Remarkable} from 'remarkable';
 import '../darkdown_air_style/css/air_md.css';
+// import { response } from 'express';
 
 const h = `<h1 id="sample-markdown">Sample Markdown</h1>
 <p>This is some basic, sample markdown.</p>
@@ -31,12 +32,46 @@ const h = `<h1 id="sample-markdown">Sample Markdown</h1>
 <p>The end ...</p>
 `;
 
-function Post(){
+class Post extends React.Component{
+  constructor(props){
+    super(props);
     var md = new Remarkable();
+    this.state = {html: document.createElement('div')};
+    this.state = {
+      html: {
+        __html: md.render("# Loading")
+      }
+    };
+  }
+
+  componentDidMount(){
+    
     // console.log(md.render())
-    var html = document.createElement('div');
-    // html = { __html: md.render("# HI Remarkable")};
-    html = { __html: h};
+    // var html = document.createElement('div');
+    
+    fetch('http://192.168.43.203:8000/post_action/query_post?id=13').then(
+      (response) => {
+        console.log(response)
+        // console.log(response.json())
+        // html = { __html: JSON.parse(resolve).content};
+        return response.json()
+      }
+    ).then(
+      (resolve) => {
+        console.log(resolve)
+        this.setState({
+          html: { __html: resolve.content}
+        });
+      }
+    ).catch(
+      (reject) => {
+        console.log(reject)
+        // html = { __html: <h1>Error</h1>};
+      }
+    )
+  }
+
+  render(){
     return (
       <div class="md">
         <div style={{fontFamily: 'inherit',
@@ -46,13 +81,14 @@ function Post(){
         margin: '6rem auto 1rem',
         maxWidth: '48rem',
         lineHeight: '1.85'}}>
-            <div dangerouslySetInnerHTML={html}>
+            <div dangerouslySetInnerHTML={this.state.html}>
             </div>
         </div>
-      </div>
-        
-        
+      </div>  
     );
-}
+  }
+};
+
+
 
 export default Post;
