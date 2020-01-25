@@ -87,7 +87,7 @@ function query_post_list(count, offset){
 async function insert_slider_data(img, caption_title, caption_subtitle){
     if(typeof(img) != 'string' || typeof(caption_title) != 'string' || typeof(caption_subtitle) != 'string'){return -1;}
     var q = await pool.query(`
-        INSERT INTO slider0(image, caption_title, caption_subtitle) VALUES ('${img}', '${caption_title}', '${caption_subtitle}');
+        INSERT INTO slider0(image, caption_title, caption_subtitle) VALUES ('${String(img)}', '${String(caption_title)}', '${String(caption_subtitle)}');
     `);
 }
 
