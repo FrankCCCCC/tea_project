@@ -20,6 +20,21 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(cors());
 
+post_action.get('/query_posts_count_all', (req, res) => {
+    db.query_posts_count_all().then(
+        (resolve) => {
+            console.log(resolve)
+            res.send(JSON.stringify(resolve.rows[0]))
+        }
+    ).catch(
+        (reject) => {
+            console.log("Error: ", reject);
+            res.header("Access-Control-Allow-Origin", "*");
+            res.send(reject)
+        }
+    )
+})
+
 post_action.post('/insert_post', (req, res) => {
     var content = req.body.content;
     content = content.replace(/"/g, `""`);
@@ -28,11 +43,13 @@ post_action.post('/insert_post', (req, res) => {
         (resolve) => {
             
             console.log(resolve);
+            res.header("Access-Control-Allow-Origin", "*");
             res.send(config.success)
         }
     ).catch(
         (reject) => {
             console.log("Error: ", reject);
+            res.header("Access-Control-Allow-Origin", "*");
             res.send(reject)
         }
     )
@@ -46,7 +63,7 @@ post_action.post('/query_post', (req, res) => {
             var res_post = resolve.rows[0];
             
             // console.log(resolve)
-            console.log(md.render(resolve.rows[0].content))
+            // console.log(md.render(resolve.rows[0].content))
             res_post.content = md.render(resolve.rows[0].content)
             // console.log(res_post)
             res.header("Access-Control-Allow-Origin", "*");

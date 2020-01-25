@@ -1,5 +1,20 @@
 const config = require('./config')
 
+function fetchPostsCountAll(){
+  return fetch(config.query_posts_count_all_url,{
+    method: 'GET'
+  }).then(
+    (response) => {
+      // console.log(response)
+      return response.json()
+    }
+  ).catch(
+    (reject) => {
+      console.log(reject)            
+    }
+  )
+}
+
 function fetchPost(id){
   return fetch(config.query_post_url,{
     method: 'POST',
@@ -33,7 +48,7 @@ function fetchPostList(count, offset){
     }
   }).then(
     (response) => {
-      console.log(response)
+      // console.log(response)
       return response.json()
     }
   ).then(
@@ -54,5 +69,6 @@ function fetchPostList(count, offset){
     }
   ) 
 }
+exports.fetchPostsCountAll = fetchPostsCountAll;
 exports.fetchPost = fetchPost;
 exports.fetchPostList = fetchPostList;

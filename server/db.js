@@ -60,6 +60,18 @@ async function query_slider_data(count){
         `)
 }
 
+function query_posts_count_all(){
+    return pool.query(`
+    SELECT COUNT(*) FROM ${ds.dataStructure.post.table_name};
+    `).then(resolve => {
+        console.log(resolve)
+        return resolve;
+    }).catch(reject => {
+        console.log("Error: ", reject)
+        return reject
+    });
+}
+
 function query_post_list(count, offset){
     if(typeof(count) != "number"){console.log("Error: query_post_list parameter count is not a number");}
     if(typeof(offset) != "number"){console.log("Error: query_post_list parameter offset is not a number");}
@@ -70,13 +82,17 @@ function query_post_list(count, offset){
     }else{
         row_counts = "LIMIT " + String(count);
     }
-    row_offset = "OFFSET " + String(offset);
+
+    if(offset == -1){
+    }else{
+        row_offset = "OFFSET " + String(offset);
+    }
     // console.log("Command: ", `SELECT * FROM ${ds.dataStructure.post.table_name} ${row_counts};`)
 
     return pool.query(`
     SELECT * FROM ${ds.dataStructure.post.table_name} ORDER BY ${ds.dataStructure.post.latest_modify.key} DESC ${row_counts} ${row_offset};
     `).then(resolve => {
-        console.log("Query: ", resolve)
+        // console.log(resolve)
         return resolve;
     }).catch(reject => {
         console.log("Error: ", reject)
@@ -145,6 +161,7 @@ async function insert_post(title, subtitle, author, content, cover_img){
 // pool.end();
 
 exports.pool = pool;
+exports.query_posts_count_all = query_posts_count_all;
 exports.query_post_list = query_post_list;
 exports.query_post = query_post;
 exports.insert_post = insert_post;

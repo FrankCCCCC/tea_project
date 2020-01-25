@@ -16,13 +16,17 @@ class LoadingPage extends React.Component{
     }
 
     componentDidMount(){
-        setInterval(() => {
+        this.intervalId = setInterval(() => {
             let last = this.state.is_fadein;
-            console.log(last)
+            // console.log(last)
             this.setState({
                 is_fadein: !last
             })
         }, this.duration * 1000)
+    }
+
+    componentWillUnmount(){
+        clearInterval(this.intervalId);
     }
 
     render(){
