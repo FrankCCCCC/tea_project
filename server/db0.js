@@ -60,23 +60,20 @@ async function query_slider_data(count){
         `)
 }
 
-function query_post_list(count, offset){
-    if(typeof(count) != "number"){console.log("Error: query_post_list parameter count is not a number");}
-    if(typeof(offset) != "number"){console.log("Error: query_post_list parameter offset is not a number");}
+function query_post_list(count){
+    if(typeof(count) != "number"){return -1;}
 
     let row_counts = ""
-    let row_offset = ""
     if(count == -1){
     }else{
-        row_counts = "LIMIT " + String(count);
+        row_counts = "LIMIT " + count.toString();
     }
-    row_offset = "OFFSET " + String(offset);
     // console.log("Command: ", `SELECT * FROM ${ds.dataStructure.post.table_name} ${row_counts};`)
 
     return pool.query(`
-    SELECT * FROM ${ds.dataStructure.post.table_name} ORDER BY ${ds.dataStructure.post.latest_modify.key} DESC ${row_counts} ${row_offset};
+    SELECT * FROM ${ds.dataStructure.post.table_name} ${row_counts};
     `).then(resolve => {
-        console.log("Query: ", resolve)
+        // console.log("Query: ", resolve)
         return resolve;
     }).catch(reject => {
         console.log("Error: ", reject)
@@ -148,3 +145,5 @@ exports.pool = pool;
 exports.query_post_list = query_post_list;
 exports.query_post = query_post;
 exports.insert_post = insert_post;
+
+// INSERT INTO posts_table(title, subtitle, author, content, cover_img) VALUES('Remarkable Test', 'A Test of MD', 'SHC', `# Remarkable`, 'child.jpg')

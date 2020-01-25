@@ -35,17 +35,40 @@ const h = `<h1 id="sample-markdown">Sample Markdown</h1>
 class Post extends React.Component{
   constructor(props){
     super(props);
-    // var md = new Remarkable();
+    var md = new Remarkable();
     this.state = {html: document.createElement('div')};
     this.state = {
       html: {
-        __html: props.content
+        __html: md.render("# Loading")
       }
     };
   }
 
   componentDidMount(){
-
+    
+    // console.log(md.render())
+    // var html = document.createElement('div');
+    
+    fetch('http://192.168.43.203:8000/post_action/query_post?id=13').then(
+      (response) => {
+        console.log(response)
+        // console.log(response.json())
+        // html = { __html: JSON.parse(resolve).content};
+        return response.json()
+      }
+    ).then(
+      (resolve) => {
+        console.log(resolve)
+        this.setState({
+          html: { __html: resolve.content}
+        });
+      }
+    ).catch(
+      (reject) => {
+        console.log(reject)
+        // html = { __html: <h1>Error</h1>};
+      }
+    )
   }
 
   render(){

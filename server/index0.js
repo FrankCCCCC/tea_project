@@ -1,24 +1,15 @@
 const db = require('./db.js');
 const express = require('express');
 const { Remarkable } = require('remarkable');
-const bodyParser = require('body-parser');
-const cors = require('cors')
 
 var app = express()
 var post_action = express();
-const urlencode_parser = bodyParser.urlencoded({extended: false});
 
 const config = {
     success: 'Success',
     error: "Error"
     
 }
-
-// app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(bodyParser.json());
-app.use(express.urlencoded({extended: false}));
-app.use(express.json());
-app.use(cors());
 
 post_action.post('/insert_post', (req, res) => {
     
@@ -216,13 +207,11 @@ post_action.post('/insert_post', (req, res) => {
     )
 })
 
-post_action.post('/query_post', (req, res) => {
-    console.log(req.body)
-    db.query_post(parseInt(req.body.id, 10)).then(
+post_action.get('/query_post', (req, res) => {
+    db.query_post(parseInt(req.query.id, 10)).then(
         (resolve) => {
             var md = new Remarkable()
             var res_post = resolve.rows[0];
-            
             // console.log(resolve)
             // console.log(md.render(resolve.rows[0].content))
             // res_post.content = md.render(resolve.rows[0].content)
@@ -239,14 +228,14 @@ post_action.post('/query_post', (req, res) => {
     );
 })
 
-post_action.post('/query_post_list', (req, res) => {
-    db.query_post_list(Number(req.body.count), Number(req.body.offset)).then(
+post_action.get('/query_post_list', (req, res) => {
+    db.query_post_list(parseInt(req.query.count, 10)).then(
         (resolve) => {
-            res.header("Access-Control-Allow-Origin", "*");
             res.send(JSON.stringify(resolve.rows));
+            // console.log(JSON.parse(JSON.stringify(resolve.rows)));
+            // res.send(resolve.rows);
     }).catch(
         (reject) => {
-        res.header("Access-Control-Allow-Origin", "*");
         console.log("Error: ", reject);
         res.send(reject)
     });

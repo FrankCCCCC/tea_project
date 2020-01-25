@@ -1,9 +1,8 @@
 import React from 'react';
+import {useParams} from 'react-router-dom';
 import Post from '../post/Post';
 import LoadingPage from '../pages/LoadingPage'
 import {title_style, subtitle_style, paragraph_style} from '../theme/font'
-const fetchDb = require('../util/fetchDb')
-const fetchMedia = require('../util/fetchMedia')
 
 // @const postInput = {
 //     title: "string",
@@ -15,73 +14,64 @@ const fetchMedia = require('../util/fetchMedia')
 //     cover_img: "image url or null in string"
 // };
 
-var t = {};
-
-// const props = {
-//     title: "凍頂烏龍的故事",
-//     subtitle: "subtitle string",
-//     author: "author string",
-//     create_on: "ISO time format string",
-//     lastest_modify: "ISO time format string",
-//     content: "<h5>String</h5>",
-//     cover_img: 'http://192.168.43.203:5000/img/farmer2.jpg'
-// }
+const props = {
+    title: "凍頂烏龍的故事",
+    subtitle: "subtitle string",
+    author: "author string",
+    create_on: "ISO time format string",
+    lastest_modify: "ISO time format string",
+    content: "<h5>String</h5>",
+    cover_img: 'http://192.168.43.203:5000/img/farmer2.jpg'
+}
 
 class PostPage extends React.Component{
     constructor(props){
         super(props)
+
         this.state = {
             is_loaded: false,
-            props_id: Number(this.props.match.params.postId)
+            props_id: props.id,
+            // id: 
+
         }
     }
 
     componentDidMount(){
-      
-      if(typeof(this.state.props_id) != "number"){
-        console.log("Error: PostPage parameter id is not number")
-      }
-      console.log(this.state.props_id)
-        fetchDb.fetchPost(this.state.props_id).then(
-          (resolve_post) => {
-            fetchMedia.fetchImage(resolve_post.cover_img).then(
-              (resolve_media) => {
-                this.setState({
-                  cover_img: resolve_media
-                })
-              }
-            ).catch(
-              (reject) => {
-                console.log(reject)
-              }
-            )
-            this.setState({
-              id: resolve_post.id,
-              title: resolve_post.title,
-              subtitle: resolve_post.subtitle,
-              author: resolve_post.author,
-              content: resolve_post.content,
-              create_on: resolve_post.create_on,
-              lastest_modify: resolve_post.lastest_modify,
-            });
-            console.log(this.state)
-            return (resolve_post);
+    
+        // console.log(md.render())
+        // var html = document.createElement('div');
+        
+        fetch('http://192.168.43.203:8000/post_action/query_post?id=13').then(
+          (response) => {
+            console.log(response)
+            // console.log(response.json())
+            // html = { __html: JSON.parse(resolve).content};
+            return response.json()
           }
         ).then(
-          (resolve_post) => {
+          (resolve) => {
+            console.log(resolve)
             this.setState({
-              is_loaded: true,
+                is_loaded: true,
+                id: resolve.id,
+                title: resolve.title,
+                subtitle: resolve.subtitle,
+                author: resolve.author,
+                html: { __html: resolve.content},
+                create_on: resolve.create_on,
+                lastest_modify: resolve.lastest_modify,
+                cover_img: "http://192.168.43.203:5000/img/" + resolve.cover_img
             });
           }
         ).catch(
           (reject) => {
             console.log(reject)
+            // html = { __html: <h1>Error</h1>};
           }
         )
       }
 
     render(){
-      // console.log("url("+ this.state.cover_img +")")
         return(
           <div>
             {this.state.is_loaded? 
@@ -96,7 +86,7 @@ class PostPage extends React.Component{
                       </div>
                   </div>
                   <div class="container" data-aos="fade-right">
-                      <Post content={this.state.content}/>
+                      <Post/>
                   </div>
               </div> :
               <LoadingPage/>
