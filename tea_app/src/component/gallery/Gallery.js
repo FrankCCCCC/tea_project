@@ -27,16 +27,17 @@ class Gallery extends React.Component{
 
     componentDidMount(){
         // let {path, url} = useRouteMatch();
-        let url = "http://localhost:3000/post"
-        console.log(`${url}`)
+        // let url = "http://localhost:3000/post"
+        // console.log(`${url}`)
         var t = [];
         for(let i=0; i < this.props.galleryInput.length; i++){
             // console.log(`${url}${this.props.route}/${this.props.galleryInput[i].id}`)
+            // data-aos={i % 2? "fade-right" : "fade-left"}
             t.push(
-                <div key={this.props.galleryInput[i].id} class="mb-3" data-aos={i % 2? "fade-right" : "fade-left"}>
+                <div key={i} class="mb-3">
                     
                         <div style={{position: "relative", textAlign: "right", color: "white"}}>
-                            <Link to={`${url}${this.props.route}/${this.props.galleryInput[i].id}`}>
+                            <Link to={`${this.props.route}/${this.props.galleryInput[i].id}`}>
                                 <img class="img-fluid" src={this.props.galleryInput[i].img} alt="Card image cap" style={{width: "100%"}}/>
                             </Link>
                             <div style={{position: "absolute", bottom: "0rem", right: "0rem", width: "100%", paddingRight: "0.5rem", paddingLeft: "0.5rem", paddingTop: "0.3rem", backgroundColor: "rgba(0, 0, 0, 0.2)"}}>
@@ -57,14 +58,14 @@ class Gallery extends React.Component{
     componentDidUpdate(prevProps, prevState, snapshot){
         if(this.state.content.length != this.props.galleryInput.length){
             // let {path, url} = useRouteMatch();
-            let url = "http://localhost:3000/post"
-            console.log(`${url}`)
+            // let url = "http://localhost:3000/post"
+            // console.log(`${url}`)
             var t = [];
             for(let i=0; i < this.props.galleryInput.length; i++){
-                console.log(`${url}${this.props.route}/${this.props.galleryInput[i].id}`)
+                console.log(`${this.props.route}/${this.props.galleryInput[i].id}`)
                 
                 t.push(
-                    <div key={this.props.galleryInput[i].id} class="mb-3">
+                    <div key={i} class="mb-3">
                         
                             <div style={{position: "relative", textAlign: "right", color: "white"}}>
                                 <Link to={`${this.props.route}/${this.props.galleryInput[i].id}`}>
@@ -157,93 +158,3 @@ class Gallery extends React.Component{
 // }
 
 export default Gallery;
-
-
-        // <div class="section" id="projects">
-        //     <div class="container">
-        //         <div class="col-md-12">
-        //             <h4>03</h4>
-        //             <h1 class="size-50">My <br /> Product</h1> 
-        //         </div>
-        //         {/*<!-- main container -->*/}
-        //         <div class="main-container portfolio-inner clearfix">
-        //             {/*<!-- portfolio div -->*/}
-        //             <div class="portfolio-div">
-        //                 <div class="portfolio">
-        //                     {/*<!-- portfolio_filter -->*/}
-        //                     <div class="categories-grid wow fadeInLeft">
-        //                         <nav class="categories">
-        //                             <ul class="portfolio_filter">
-        //                                 <li><a href="" class="active" data-filter="*">全品項</a></li>
-        //                                 <li><a href="" data-filter=".photography">高山茶</a></li>
-        //                                 <li><a href="" data-filter=".logo">春茶</a></li>
-        //                                 <li><a href="" data-filter=".graphics">夏茶</a></li>
-        //                                 <li><a href="" data-filter=".ads">秋茶</a></li>
-        //                                 <li><a href="" data-filter=".fashion">冬茶</a></li>
-        //                             </ul>
-        //                         </nav>
-        //                     </div>
-        //                     {/*<!-- portfolio_filter -->*/}
-                            
-        //                     {/*<!-- portfolio_container -->*/}
-        //                     <div class="no-padding portfolio_container clearfix" data-aos="fade-up">
-        //                         {/*<!-- single work -->*/}
-        //                         <div class="col-md-4 col-sm-6  fashion logo">
-        //                             <a id="demo01" href="#animatedModal" class="portfolio_item"> <img src={farmer1} alt="image" class="img-responsive" />
-        //                                 <div class="portfolio_item_hover">
-        //                                     <div class="portfolio-border clearfix">
-        //                                         <div class="item_info">
-        //                                             <span>茶聖黑茶</span>
-        //                                             <em>高山茶 / 黑茶</em> <br/>
-        //                                             <button class="btn btn-primary">Buy</button>
-        //                                         </div>
-        //                                     </div>
-        //                                 </div>
-        //                             </a>
-        //                         </div>
-        //                         {/*<!-- end single work -->*/}
-        //                     {/* </div> */}
-                                
-        //                         {/*<!-- single work -->*/}
-        //                         <div class="col-md-4 col-sm-6 ads graphics">
-        //                             <a id="demo02" href="#animatedModal" class="portfolio_item"> <img src={farmer2} alt="image" class="img-responsive" />
-        //                                 <div class="portfolio_item_hover">
-        //                                     <div class="portfolio-border clearfix">
-        //                                         <div class="item_info">
-        //                                             <span>茶聖茉莉花茶</span> 
-        //                                             <em>高山茶 / 青茶</em> <br/>
-        //                                             <button class="btn btn-primary">Buy</button>
-        //                                         </div>
-        //                                     </div>
-        //                                 </div>
-        //                             </a>
-        //                         </div>
-        //                         {/*<!-- end single work -->*/}
-                                
-        //                         {/*<!-- single work -->*/}
-        //                         <div class="col-md-4 col-sm-6 photography">
-        //                             <a id="demo03" href="#animatedModal" class="portfolio_item"> <img src={child} alt="image" class="img-responsive" />
-        //                                 <div class="portfolio_item_hover">
-        //                                     <div class="portfolio-border clearfix">
-        //                                         <div class="item_info">
-        //                                             <span>茶聖鐵觀音</span> 
-        //                                             <em>平地茶 / 青茶</em> <br/>
-        //                                             <button class="btn btn-primary">Buy</button>
-        //                                         </div>
-        //                                     </div>
-        //                                 </div>
-        //                             </a>
-        //                         </div>
-        //                         {/*<!-- end single work -->*/}
-        //                     </div>
-        //                     {/*<!-- end portfolio_container -->*/}
-        //                 </div>
-        //                 {/*<!-- portfolio -->*/}
-        //             </div>
-        //             {/*<!-- end portfolio div -->*/}
-        //         </div>
-        //         {/*<!-- end main container -->*/}
-        //     </div>
-        // </div>
-
-

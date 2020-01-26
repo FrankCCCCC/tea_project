@@ -1,5 +1,20 @@
 const config = require('./config')
 
+function fetchFarmersCountAll(){
+  return fetch(config.query_posts_count_all_url,{
+    method: 'GET'
+  }).then(
+    (response) => {
+      // console.log(response)
+      return response.json()
+    }
+  ).catch(
+    (reject) => {
+      console.log(reject)            
+    }
+  )
+}
+
 function fetchPostsCountAll(){
   return fetch(config.query_posts_count_all_url,{
     method: 'GET'

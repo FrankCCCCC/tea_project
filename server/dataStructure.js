@@ -16,6 +16,7 @@ const config = {
         cover_img: {key: "cover_img", schema: "cover_img TEXT"}
     },
     farmer: {
+        table_name: "farmers_table",
         id: {key: "id", schema: "id serial PROMARY KEY NOT NULL"},
         name: {key: "name", schema: "name TEXT NOT NULL"},
         country: {key: "country", schema: "country TEXT NOT NULL"},
@@ -24,29 +25,41 @@ const config = {
         township: {key: "township", schema: "township TEXT NOT NULL"},
         village: {key: "village", schema: "village TEXT NOT NULL"},
         road: {key: "road", schema: "road TEXT NOT NULL"},
-        description: {key: "description", schema: "TEXT NOT NULL"},
-        item: {key: "item", schema: "item item ARRAY"},
+        slogan: {key: "slogan", schema: "slogan TEXT"},
+        description: {key: "description", schema: "description TEXT NOT NULL"}, // Markdown Format
+        content: {key: "content", schema: "content Section ARRAY NOT NULL"},
+        items: {key: "items", schema: "items JSON"}, // id Array
         cover_img: {key: "cover_img", schema: "cover_img TEXT NOT NULL"},
-        img: {key: "img", schema: "img TEXT ARRAY"},
+        imgs: {key: "imgs", schema: "imgs JSON"},
         create_on: {key: "create_on", schema: "create_on TIMESTAMP default current_timestamp"}
     },
     item: {
+        table_name: "items_table",
+        type_name: "Item",
+        id: {key: "id", schema: "id serial PROMARY KEY NOT NULL"},
         name: {key: "name", schema: "name TEXT NOT NULL"},
-        price: {key: "price", schema: "price TEXT NOT NULL"},
-        options: {key: "options", schema: "options TEXT ARRAY"},
-        description: {key: "description", schema: "description"}
+        producer: {key: "producer", schema: "producer TEXT NOT NULL"},
+        price: {key: "price", schema: "price NUNERIC NOT NULL"},
+        unit: {key: "unit", schema: "unit TEXT NOT NULL"},
+        description: {key: "description", schema: "description TEXT NOT NULL"}, // Markdown Format
+        spec: {key: "spec", schema: "spec JSON"}, // 
+        cover_img: {key: "cover_img", schema: "cover_img TEXT NOT NULL"},
+        imgs: {key: "imgs", schema: "imgs JSON"}, // String Array
+        create_on: {key: "create_on", schema: "create_on TIMESTAMP default current_timestamp"}
     },
     section: {
-        title: "title TEXT",
-        text: "text TEXT",
-        img: "img TEXT"
-    },
-    img: {
-        name: "name TEXT NOT NULL",
-        caption_title: "caption_title TEXT",
-        caption_subtitle: "",
-        caption_description: ""
+        type_name: "Section",
+        title: {key: "title", schema: "title TEXT NOT NULL"},
+        subtitle: {key: "subtitle", schema: "subtitle TEXT NOT NULL"},
+        description: {key: "description", schema: "description TEXT NOT NULL"}, // Markdown Format
+        img: {key: "img", schema: "img TEXT NOT NULL"},
     }
+    // img: {
+    //     name: "name TEXT NOT NULL",
+    //     caption_title: "caption_title TEXT",
+    //     caption_subtitle: "",
+    //     caption_description: ""
+    // }
 }
 
 exports.dataStructure = config;

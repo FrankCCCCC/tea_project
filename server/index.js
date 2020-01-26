@@ -36,10 +36,7 @@ post_action.get('/query_posts_count_all', (req, res) => {
 })
 
 post_action.post('/insert_post', (req, res) => {
-    var content = req.body.content;
-    content = content.replace(/"/g, `""`);
-    content = content.replace(/'/g, `''`);
-    db.insert_post(req.body.title, req.body.subtitle, req.body.author, content, req.body.cover_img).then(
+    db.insert_post(req.body.title, req.body.subtitle, req.body.author, req.body.content, req.body.cover_img).then(
         (resolve) => {
             
             console.log(resolve);
@@ -59,12 +56,13 @@ post_action.post('/query_post', (req, res) => {
     console.log(req.body)
     db.query_post(parseInt(req.body.id, 10)).then(
         (resolve) => {
-            var md = new Remarkable()
+            var md = new Remarkable({html: true})
             var res_post = resolve.rows[0];
             
             // console.log(resolve)
             // console.log(md.render(resolve.rows[0].content))
             res_post.content = md.render(resolve.rows[0].content)
+            // res_post.content = md.render('Some Markdown text with <span style="color:blue">some *blue* text</span>.')
             // console.log(res_post)
             res.header("Access-Control-Allow-Origin", "*");
             res.send(JSON.stringify(res_post));

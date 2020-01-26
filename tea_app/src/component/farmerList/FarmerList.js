@@ -3,7 +3,7 @@ import InfiniteScroll from 'react-infinite-scroller';
 import Gallery from '../gallery/Gallery'
 const fetchDb = require('../util/fetchDb');
 
-class PostList extends React.Component{
+class FarmerList extends React.Component{
     constructor(props){
         super(props);
         this.handleLoadMore = this.handleLoadMore.bind(this);
@@ -61,7 +61,7 @@ class PostList extends React.Component{
         console.log("HI")
         console.log(this.state.posts_count)
         console.log(this.state.loaded_item_number)
-        if(this.state.loaded_item_number < this.state.posts_count){
+        if(this.state.loaded_item_number < 18){
             fetchDb.fetchPostList(this.state.load_item_number_per_time,this.state.loaded_item_number).then(
                 (response) => {
                     console.log(response);
@@ -113,4 +113,4 @@ class PostList extends React.Component{
     }
 }
 
-export default PostList;
+export default FarmerList;
