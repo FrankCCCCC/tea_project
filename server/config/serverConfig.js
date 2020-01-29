@@ -4,8 +4,8 @@ const farmer_action = '/farmer_action'
 const local_url = 'http://localhost'
 const port = 8000
 
-const success = 'Success'
-const error = 'Error'
+const success = 'SUCCESS'
+const error = 'ERROR'
 
 const post_action_url = local_url + ':' + String(port) + post_action
 const item_action_url = local_url + ':'  + String(port) + item_action

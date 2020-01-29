@@ -28,10 +28,11 @@ const config = {
         slogan: {key: "slogan", schema: "slogan TEXT"},
         description: {key: "description", schema: "description TEXT NOT NULL"}, // Markdown Format
         content: {key: "content", schema: "content Section ARRAY NOT NULL"},
-        items: {key: "items", schema: "items Good"}, // id, name Array
+        items: {key: "items", schema: "items Good ARRAY"}, // id, name Array
         cover_img: {key: "cover_img", schema: "cover_img TEXT NOT NULL"},
-        imgs: {key: "imgs", schema: "imgs JSON"},
-        create_on: {key: "create_on", schema: "create_on TIMESTAMP default current_timestamp"}
+        imgs: {key: "imgs", schema: "imgs TEXT[]"},
+        create_on: {key: "create_on", schema: "create_on TIMESTAMP default current_timestamp"},
+        latest_modify: {key: "latest_modify", schema: "latest_modify TIMESTAMP default current_timestamp"},
     },
     item: {
         table_name: "items_table",
@@ -49,10 +50,10 @@ const config = {
     },
     Section: {
         type_name: "Section",
-        title: {key: "title", schema: "title"},
-        subtitle: {key: "subtitle", schema: "subtitle"},
-        description: {key: "description", schema: "description"}, // Markdown Format
-        img: {key: "img", schema: "img"},
+        title: {key: "title", schema: "title TEXT"},
+        subtitle: {key: "subtitle", schema: "subtitle TEXT"},
+        description: {key: "description", schema: "description TEXT"}, // Markdown Format
+        img: {key: "img", schema: "img TEXT"},
     },
     Producer: {
         type_name: "Producer",

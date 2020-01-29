@@ -1,9 +1,6 @@
+const Db = require('./Db')
 const ds = require('../dataStructure');
-const {Pool, Client} = require('pg');
-const util = require('../util/Util');
-const dbConfig = require('../config/dbConfig')
-
-const pool = new Pool(dbConfig.config)
+const Util = require('../util/Util');
 
 function createProducerType(){
     let command = `
@@ -12,20 +9,7 @@ function createProducerType(){
     EXCEPTION
         WHEN duplicate_object THEN null;
     END $$;`;
-    util.log(command);
-    return pool.query(command).then(
-        (resolve) => {
-            // console.log(resolve)
-            util.log(`command: ${resolve.command}, rowCount: ${resolve.rowCount}`)
-            return resolve;
-        }
-    ).catch(
-        (reject) => {
-            // console.log("Error: ", reject)
-            util.log(`Error: ${reject}`)
-            return reject;
-        }
-    )
+    return Db.query(command)
 }
 
 function createSpecType(){
@@ -35,20 +19,7 @@ function createSpecType(){
     EXCEPTION
         WHEN duplicate_object THEN null;
     END $$;`;
-    util.log(command);
-    return pool.query(command).then(
-        (resolve) => {
-            // console.log(resolve)
-            util.log(`command: ${resolve.command}, rowCount: ${resolve.rowCount}`)
-            return resolve;
-        }
-    ).catch(
-        (reject) => {
-            // console.log("Error: ", reject)
-            util.log(`Error: ${reject}`)
-            return reject;
-        }
-    )
+    return Db.query(command)
 }
 
 function createItemsTable(){
@@ -64,20 +35,8 @@ function createItemsTable(){
     ${ds.dataStructure.item.cover_img.schema}, 
     ${ds.dataStructure.item.imgs.schema}, 
     ${ds.dataStructure.item.create_on.schema});`;
-    util.log(command);
-    return pool.query(command).then(
-        (resolve) => {
-            // console.log(resolve)
-            util.log(`command: ${resolve.command}, rowCount: ${resolve.rowCount}`)
-            return resolve;
-        }
-    ).catch(
-        (reject) => {
-            // console.log("Error: ", reject)
-            util.log(`Error: ${reject}`)
-            return reject;
-        }
-    );
+    return Db.query(command)
+    
 }
 
 function insertItem(name, producer, price, unit, description, spec, cover_img, imgs){
@@ -93,34 +52,12 @@ ${ds.dataStructure.item.spec.key},
 ${ds.dataStructure.item.cover_img.key},
 ${ds.dataStructure.item.imgs.key})
 VALUES('${name}', json_populate_record(null::Producer, '${JSON.stringify(producer)}'), '${price}', '${unit}', '${description_new}', json_populate_record(null::Spec, '${JSON.stringify(spec)}'), '${cover_img}', ARRAY(SELECT json_array_elements_text('${JSON.stringify(imgs)}'))) RETURNING id;`;
-    console.log(command);
-
-    return pool.query(command).then(
-            (resolve) => {
-                // console.log(resolve)
-                util.log(`command: ${resolve.command}, rowCount: ${resolve.rowCount} return id = ${resolve.rows[0].id}`)
-                return resolve;
-            }
-        ).catch(
-            (reject) => {
-                // console.log("Error: ", reject)
-                util.log(`Error: ${reject}`)
-                return reject;
-            }
-        );
+    return Db.query(command)
 }
 
 function queryItemsCountAll(){
     let command = `SELECT COUNT(*) FROM ${ds.dataStructure.item.table_name};`;
-    util.log(command)
-    return pool.query(command).then(resolve => {
-        // console.log(resolve)
-        util.log(`command: ${resolve.command}, rowCount: ${resolve.rowCount}`)
-        return resolve;
-    }).catch(reject => {
-        util.log(`Error: ${reject}`)
-        return reject
-    });
+    return Db.query(command)
 }
 
 function queryItemById(itemId){
@@ -137,21 +74,7 @@ function queryItemById(itemId){
     array_to_json(${ds.dataStructure.item.imgs.key}) AS ${ds.dataStructure.item.imgs.key},
     ${ds.dataStructure.item.create_on.key} 
     FROM ${ds.dataStructure.item.table_name} WHERE ${ds.dataStructure.item.id.key} = '${Number(itemId)}';`;
-    // console.log(command);
-
-    return pool.query(command).then(
-            (resolve) => {
-                // console.log(resolve);
-                util.log(`command: ${resolve.command}, rowCount: ${resolve.rowCount}`)
-                return resolve;
-            }
-        ).catch(
-            (reject) => {
-                // console.log("Error: ", reject)
-                util.log(`Error: ${reject}`)
-                return reject;
-            }
-        );
+    return Db.query(command)
 }
 
 function queryItemByName(itemName){
@@ -167,20 +90,7 @@ function queryItemByName(itemName){
     array_to_json(${ds.dataStructure.item.imgs.key}) AS ${ds.dataStructure.item.imgs.key},
     ${ds.dataStructure.item.create_on.key}
     FROM ${ds.dataStructure.item.table_name} WHERE ${ds.dataStructure.item.name.key} = '${String(itemName)}';`;
-    // console.log(command);
-
-    return pool.query(command).then(
-            (resolve) => {
-                util.log(`command: ${resolve.command}, rowCount: ${resolve.rowCount}`)
-                return resolve;
-            }
-        ).catch(
-            (reject) => {
-                // console.log("Error: ", reject)
-                util.log(`Error: ${reject}`)
-                return reject;
-            }
-        );
+    return Db.query(command)
 }
 
 function queryItemByProducerId(producerId){
@@ -196,21 +106,7 @@ function queryItemByProducerId(producerId){
     array_to_json(${ds.dataStructure.item.imgs.key}) AS ${ds.dataStructure.item.imgs.key},
     ${ds.dataStructure.item.create_on.key} 
     FROM ${ds.dataStructure.item.table_name} WHERE (${ds.dataStructure.item.producer.key}).${ds.dataStructure.Producer.id.key} = '${Number(producerId)}';`;
-    // console.log(command);
-
-    return pool.query(command).then(
-            (resolve) => {
-                // console.log(resolve);
-                util.log(`command: ${resolve.command}, rowCount: ${resolve.rowCount}`)
-                return resolve;
-            }
-        ).catch(
-            (reject) => {
-                // console.log("Error: ", reject)
-                util.log(`Error: ${reject}`)
-                return reject;
-            }
-        );
+    return Db.query(command)
 }
 
 function queryItemByProducerName(producerName){
@@ -226,26 +122,14 @@ function queryItemByProducerName(producerName){
     array_to_json(${ds.dataStructure.item.imgs.key}) AS ${ds.dataStructure.item.imgs.key},
     ${ds.dataStructure.item.create_on.key} 
     FROM ${ds.dataStructure.item.table_name} WHERE (${ds.dataStructure.item.producer.key}).${ds.dataStructure.Producer.name.key} = '${String(producerName)}';`;
-    // console.log(command);
-
-    return pool.query(command).then(
-            (resolve) => {
-                // console.log(resolve);
-                util.log(`command: ${resolve.command}, rowCount: ${resolve.rowCount}`)
-                return resolve;
-            }
-        ).catch(
-            (reject) => {
-                // console.log("Error: ", reject)
-                util.log(`Error: ${reject}`)
-                return reject;
-            }
-        );
+    return Db.query(command)
 }
 
 function queryItemList(count, offset){
-    if(typeof(count) != "number"){util.log("Error: query_post_list parameter count is not a number");}
-    if(typeof(offset) != "number"){util.log("Error: query_post_list parameter offset is not a number");}
+    // if(typeof(count) != "number"){util.log("Error: query_post_list parameter count is not a number");}
+    // if(typeof(offset) != "number"){util.log("Error: query_post_list parameter offset is not a number");}
+    Util.checkInt(count, `DbItem.queryItemList count`)
+    Util.checkInt(offset, `DbItem.queryItemList offset`)
 
     let row_counts = ""
     let row_offset = ""
@@ -270,16 +154,7 @@ function queryItemList(count, offset){
     array_to_json(${ds.dataStructure.item.imgs.key}) AS ${ds.dataStructure.item.imgs.key},
     ${ds.dataStructure.item.create_on.key}
     FROM ${ds.dataStructure.item.table_name} AS ${ds.dataStructure.item.table_name} ORDER BY ${ds.dataStructure.item.create_on.key} DESC ${row_counts} ${row_offset};`
-    util.log(command)
-
-    return pool.query(command).then(resolve => {
-        // console.log(resolve)
-        util.log(`command: ${resolve.command}, rowCount: ${resolve.rowCount}`)
-        return resolve;
-    }).catch(reject => {
-        util.log(`Error: ${reject}`)
-        return reject
-    });
+    return Db.query(command)
 }
 
 // createProducerType();

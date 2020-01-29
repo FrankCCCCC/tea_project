@@ -139,10 +139,11 @@ describe('ItemAction.queryItemsCountAll', () => {
         }).then((response) => {
             return response.json()
         }).then((response) => {
-            //   console.log(response)
-              itemCountActions = response.count
-              done()
-              return response
+              console.log(response.result)
+            response.status.should.equal(config.success)
+            itemCountActions = response.result.count
+            done()
+            return response
         }).catch(
             (reject) => {
               console.log(reject)            
@@ -171,11 +172,13 @@ describe('ItemAction.insertItem', () => {
         }).then((response) => {
             return response.json()
         }).then((response) => {
-            console.log(response.id)
-            response.id.should.equal(itemCountActions+1)
+            console.log(response.result.id)
+            console.log(itemCountActions)
+            response.status.should.equal(config.success)
+            response.result.id.should.equal(itemCountActions+1)
             itemCountActions = itemCountActions + 1
-              done()
-              return response
+            done()
+            return response
         }).catch((reject) => {
               console.log(reject)            
         })
@@ -196,7 +199,8 @@ describe('ItemAction.queryItemById', () => {
             return response.json()
         }).then((response) => {
             // console.log(response)
-            response.id.should.equal(5)
+            response.status.should.equal(config.success)
+            response.result.id.should.equal(5)
               done()
               return response
         }).catch((reject) => {
@@ -219,7 +223,8 @@ describe('ItemAction.queryItemByName', () => {
             return response.json()
         }).then((response) => {
             //   console.log(response)
-            response.forEach((item, index, array) => {
+            response.status.should.equal(config.success)
+            response.result.forEach((item, index, array) => {
                 item.name.should.equal('Oolong Tea')
             })
             
@@ -244,8 +249,9 @@ describe('ItemAction.queryItemByProducerId', () => {
         }).then((response) => {
             return response.json()
         }).then((response) => {
-            //   console.log(response)s
-            response.forEach((item, index, array) => {
+            //   console.log(response)
+            response.status.should.equal(config.success)
+            response.result.forEach((item, index, array) => {
                 item.producer.id.should.equal(2)
             })
               done()
@@ -269,8 +275,9 @@ describe('ItemAction.queryItemByProducerName', () => {
         }).then((response) => {
             return response.json()
         }).then((response) => {
-            //   console.log(response)s
-            response.forEach((item, index, array) => {
+            //   console.log(response)
+            response.status.should.equal(config.success)
+            response.result.forEach((item, index, array) => {
                 item.producer.name.should.equal('Dai')
             })
               done()
@@ -295,7 +302,8 @@ describe('ItemAction.queryItemList', () => {
         }).then((response) => {
             return response.json()
         }).then((response) => {
-            response.length.should.equal(2)
+            response.status.should.equal(config.success)
+            response.result.length.should.equal(2)
             done()
             return response
         }).catch((reject) => {

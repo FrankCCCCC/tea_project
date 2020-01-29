@@ -16,7 +16,7 @@ item_action.on('mount', function (parent) {
                     DbItem.createItemsTable().then(
                         (resolve) => {
                             util.log(`Created items_table`)
-                            util.log(`Mounted By ${parent}`)
+                            util.log(`item_action is mounted By ${parent}`)
                             return resolve
                     }).catch(
                         (reject) => {
@@ -42,13 +42,15 @@ item_action.get('/query_items_count_all', (req, res) => {
         (resolve) => {
             util.log(`Sending ${resolve.rowCount} rows to ${req.ip} with ${req.ips}`)
             res.header("Access-Control-Allow-Origin", "*");
-            res.send({count: parseInt(resolve.rows[0].count, 10)})
+            // res.send({count: parseInt(resolve.rows[0].count, 10)})
+            res.json(util.makeRes({count: parseInt(resolve.rows[0].count, 10)}))
         }
     ).catch(
         (reject) => {
             util.log(`Error: ${reject}`)
             res.header("Access-Control-Allow-Origin", "*");
-            res.send(reject)
+            // res.send(reject)
+            res.json(util.makeRes(reject))
         }
     )
 })
@@ -61,13 +63,15 @@ item_action.post('/insert_item', (req, res) => {
             console.log(resolve.rows[0])
             util.log(`Sending ${resolve.rowCount} rows to ${req.ip} with ${req.ips}`)
             res.header("Access-Control-Allow-Origin", "*");
-            res.send(resolve.rows[0])
+            // res.send(resolve.rows[0])
+            res.json(util.makeRes(resolve.rows[0]))
         }
     ).catch(
         (reject) => {
             util.log(`Error: ${reject}`)
             res.header("Access-Control-Allow-Origin", "*");
-            res.send(reject)
+            // res.send(reject)
+            res.json(util.makeRes(reject))
         }
     )
 })
@@ -83,13 +87,15 @@ item_action.post('/query_item_by_id', (req, res) => {
             // res_item.content = md.render('Some Markdown text with <span style="color:blue">some *blue* text</span>.')
             util.log(`Sending ${resolve.rowCount} rows to ${req.ip} with ${req.ips}`)
             res.header("Access-Control-Allow-Origin", "*");
-            res.send(res_item)
+            // res.send(res_item)
+            res.json(util.makeRes(res_item))
         }
     ).catch(
         (reject) => {
             util.log(`Error: ${reject}`)
             res.header("Access-Control-Allow-Origin", "*");
-            res.send(reject)
+            // res.send(reject)
+            res.json(util.makeRes(reject))
         }
     );
 })
@@ -109,13 +115,15 @@ item_action.post('/query_item_by_name', (req, res) => {
             // res_item.content = md.render('Some Markdown text with <span style="color:blue">some *blue* text</span>.')
             util.log(`Sending ${resolve.rowCount} rows to ${req.ip} with ${req.ips}`)
             res.header("Access-Control-Allow-Origin", "*");
-            res.send(res_post)
+            // res.send(res_post)
+            res.json(util.makeRes(res_post))
         }
     ).catch(
         (reject) => {
             util.log(`Error: ${reject}`)
             res.header("Access-Control-Allow-Origin", "*");
-            res.send(reject)
+            // res.send(reject)
+            res.json(util.makeRes(reject))
         }
     );
 })
@@ -135,13 +143,15 @@ item_action.post('/query_item_by_producer_id', (req, res) => {
             // res_item.content = md.render('Some Markdown text with <span style="color:blue">some *blue* text</span>.')
             util.log(`Sending ${resolve.rowCount} rows to ${req.ip} with ${req.ips}`)
             res.header("Access-Control-Allow-Origin", "*");
-            res.send(JSON.stringify(res_post));
+            // res.send(res_post)
+            res.json(util.makeRes(res_post))
         }
     ).catch(
         (reject) => {
             util.log(`Error: ${reject}`)
             res.header("Access-Control-Allow-Origin", "*");
-            res.send(reject)
+            // res.send(reject)
+            res.json(util.makeRes(reject))
         }
     );
 })
@@ -161,13 +171,15 @@ item_action.post('/query_item_by_producer_name', (req, res) => {
             // res_item.content = md.render('Some Markdown text with <span style="color:blue">some *blue* text</span>.')
             util.log(`Sending ${resolve.rowCount} rows to ${req.ip} with ${req.ips}`)
             res.header("Access-Control-Allow-Origin", "*");
-            res.send(JSON.stringify(res_post));
+            // res.send(res_post)
+            res.json(util.makeRes(res_post))
         }
     ).catch(
         (reject) => {
             util.log(`Error: ${reject}`)
             res.header("Access-Control-Allow-Origin", "*");
-            res.send(reject)
+            // res.send(reject)
+            res.json(util.makeRes(reject))
         }
     );
 })
@@ -178,12 +190,14 @@ item_action.post('/query_item_list', (req, res) => {
             util.log(`Sending ${resolve.rowCount} rows to ${req.ip} with ${req.ips}`)
             res.header("Access-Control-Allow-Origin", "*");
             // res.send(JSON.stringify(resolve.rows));
-            res.send(resolve.rows);
+            // res.send(resolve.rows)
+            res.json(util.makeRes(resolve.rows))
     }).catch(
         (reject) => {
         res.header("Access-Control-Allow-Origin", "*");
         util.log(`Error: ${reject}`)
-        res.send(reject)
+        // res.send(reject)
+        res.json(util.makeRes(reject))
     });
 });
 
