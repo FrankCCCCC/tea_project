@@ -11,15 +11,6 @@ const pool = new Pool({
     port: "5432",
 })
 
-
-
-async function query_test(){
-    var q = await pool.query('SELECT * FROM posts', (err, res) => {
-        console.log(err, res);
-        // pool.end();
-    });
-}
-
 async function create_slider(){
     var q = await pool.query(`CREATE TABLE IF NOT EXISTS slider0(
         id serial PRIMARY KEY NOT NULL,
@@ -65,7 +56,7 @@ function create_farmers_items_table(){
         console.log(resolve)
         return resolve;
     }).catch(reject => {
-        console.log("Error: ", reject)
+        util.log(`Error: ${reject}`)
         return reject
     });
 
@@ -85,7 +76,7 @@ function create_farmers_items_table(){
         console.log(resolve)
         return resolve;
     }).catch(reject => {
-        console.log("Error: ", reject)
+        util.log(`Error: ${reject}`)
         return reject
     });
 
@@ -101,7 +92,7 @@ function query_farmer(id){
         // console.log(resolve)
         return resolve;
     }).catch(reject => {
-        console.log("Error: ", reject)
+        util.log(`Error: ${reject}`)
         return reject;
     })
 }
@@ -129,7 +120,7 @@ function query_farmer_list(count, offset){
         // console.log(resolve)
         return resolve;
     }).catch(reject => {
-        console.log("Error: ", reject)
+        util.log(`Error: ${reject}`)
         return reject
     });
 }
@@ -173,7 +164,7 @@ function insert_item(name, producer, price, unit, description, spec, cover_img, 
             }
         ).catch(
             (reject) => {
-                console.log("Error: ", reject)
+                util.log(`Error: ${reject}`)
                 return reject;
             }
         )
@@ -229,7 +220,7 @@ function insert_farmer(name, country, province, county, township, village, road,
         console.log(resolve);
         return resolve;
     }).catch((reject) => {
-        console.log("Error: ", reject);
+        util.log(`Error: ${reject}`);
         return reject;
     })
 }
@@ -256,7 +247,7 @@ function query_posts_count_all(){
         console.log(resolve)
         return resolve;
     }).catch(reject => {
-        console.log("Error: ", reject)
+        util.log(`Error: ${reject}`)
         return reject
     });
 }
@@ -284,7 +275,7 @@ function query_post_list(count, offset){
         // console.log(resolve)
         return resolve;
     }).catch(reject => {
-        console.log("Error: ", reject)
+        util.log(`Error: ${reject}`)
         return reject
     });
 }
@@ -305,7 +296,7 @@ function query_post(id){
         // console.log(resolve)
         return resolve;
     }).catch(reject => {
-        console.log("Error: ", reject)
+        util.log(`Error: ${reject}`)
         return reject;
     })
 }
@@ -334,7 +325,7 @@ function insert_post(title, subtitle, author, content, cover_img){
         console.log(resolve);
         return resolve;
     }).catch((reject) => {
-        console.log("Error: ", reject);
+        util.log(`Error: ${reject}`);
         return reject;
     })
 }

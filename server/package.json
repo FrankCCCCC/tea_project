@@ -12,8 +12,13 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "node-fetch": "^2.6.0",
     "pg": "^7.17.1",
     "pg-promise": "^10.3.5",
     "remarkable": "^2.0.0"
+  },
+  "devDependencies": {
+    "mocha": "^7.0.1",
+    "should": "^13.2.3"
   }
 }
