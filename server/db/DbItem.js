@@ -40,6 +40,14 @@ function createItemsTable(){
 }
 
 function insertItem(name, producer, price, unit, description, spec, cover_img, imgs){
+    Util.checkString(name, `DbItem.insertItem name`)
+    Util.checkObject(producer, `DbItem.insertItem producer`)
+    Util.checkNumber(price, `DbItem.insertItem price`)
+    Util.checkString(unit, `DbItem.insertItem unit`)
+    Util.checkString(description, `DbItem.insertItem description`)
+    Util.checkArray(spec, `DbItem.insertItem spec`)
+    Util.checkString(cover_img, `DbItem.insertItem cover_img`)
+    Util.checkArray(imgs, `DbItem.insertItem imgs`)
     var description_new = description.replace(/'/g, `''`);
     let command = `
 INSERT INTO ${ds.dataStructure.item.table_name}(
@@ -61,7 +69,7 @@ function queryItemsCountAll(){
 }
 
 function queryItemById(itemId){
-    // console.log(itemId)
+    Util.checkInt(itemId, `DbItem.queryItemById itemId`)
     let command = `SELECT 
     ${ds.dataStructure.item.id.key},
     ${ds.dataStructure.item.name.key},
@@ -78,6 +86,7 @@ function queryItemById(itemId){
 }
 
 function queryItemByName(itemName){
+    Util.checkString(itemName, `DbItem.queryItemByName itemName`)
     let command = `SELECT 
     ${ds.dataStructure.item.id.key},
     ${ds.dataStructure.item.name.key},
@@ -94,6 +103,7 @@ function queryItemByName(itemName){
 }
 
 function queryItemByProducerId(producerId){
+    Util.checkInt(producerId, `DbItem.queryItemByProducerId producerId`)
     let command = `SELECT 
     ${ds.dataStructure.item.id.key},
     ${ds.dataStructure.item.name.key},
@@ -110,6 +120,7 @@ function queryItemByProducerId(producerId){
 }
 
 function queryItemByProducerName(producerName){
+    Util.checkString(producerName, `DbItem.queryItemByProducerName producerName`)
     let command = `SELECT 
     ${ds.dataStructure.item.id.key},
     ${ds.dataStructure.item.name.key},

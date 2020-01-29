@@ -8856,3 +8856,1217 @@ VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'
     FROM items_table AS items_table ORDER BY create_on DESC  OFFSET 0; 
 2020-01-29T18:42:19.655Z Local: 1/30/2020, 2:42:19 AM Sending 113 rows to ::1 with  
 2020-01-29T18:42:19.654Z Local: 1/30/2020, 2:42:19 AM command: SELECT, rowCount: 113 
+2020-01-29T18:59:57.879Z Local: 1/30/2020, 2:59:57 AM 
+    DO $$ BEGIN
+        CREATE TYPE Producer AS (id INTEGER, name TEXT);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-01-29T18:59:57.910Z Local: 1/30/2020, 2:59:57 AM command: DO, rowCount: null 
+2020-01-29T18:59:57.914Z Local: 1/30/2020, 2:59:57 AM 
+    DO $$ BEGIN
+        CREATE TYPE Spec AS (property TEXT, value TEXT);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-01-29T18:59:57.916Z Local: 1/30/2020, 2:59:57 AM command: DO, rowCount: null 
+2020-01-29T18:59:57.918Z Local: 1/30/2020, 2:59:57 AM 
+    CREATE TABLE IF NOT EXISTS items_table(
+    id serial PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL,
+    producer Producer NOT NULL,
+    price NUMERIC NOT NULL,
+    unit TEXT NOT NULL,
+    description TEXT NOT NULL,
+    spec Spec,
+    cover_img TEXT NOT NULL, 
+    imgs TEXT[], 
+    create_on TIMESTAMP default current_timestamp); 
+2020-01-29T18:59:57.920Z Local: 1/30/2020, 2:59:57 AM command: CREATE, rowCount: null 
+2020-01-29T18:59:57.924Z Local: 1/30/2020, 2:59:57 AM SELECT COUNT(*) FROM items_table; 
+2020-01-29T18:59:57.928Z Local: 1/30/2020, 2:59:57 AM command: SELECT, rowCount: 1 
+2020-01-29T18:59:57.930Z Local: 1/30/2020, 2:59:57 AM 
+INSERT INTO items_table(
+name,
+producer,
+price,
+unit,
+description,
+spec,
+cover_img,
+imgs)
+VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'), '500', 'NTD', '# Traditional Flavor', json_populate_record(null::Spec, '{"property":"100g","value":"Heavily Baked","comment":"Strongest"}'), 'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","tea.jpg","child.jpg"]'))) RETURNING id; 
+2020-01-29T18:59:57.945Z Local: 1/30/2020, 2:59:57 AM command: INSERT, rowCount: 1 
+2020-01-29T18:59:57.948Z Local: 1/30/2020, 2:59:57 AM SELECT 
+    id, 
+    name,
+    row_to_json(producer) AS producer, 
+    price, 
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on
+    FROM items_table AS items_table ORDER BY create_on DESC LIMIT 3 OFFSET 2; 
+2020-01-29T18:59:57.952Z Local: 1/30/2020, 2:59:57 AM command: SELECT, rowCount: 3 
+2020-01-29T18:59:57.953Z Local: 1/30/2020, 2:59:57 AM SELECT 
+    id, 
+    name,
+    row_to_json(producer) AS producer, 
+    price, 
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on
+    FROM items_table AS items_table ORDER BY create_on DESC  OFFSET 0; 
+2020-01-29T18:59:57.960Z Local: 1/30/2020, 2:59:57 AM command: SELECT, rowCount: 114 
+2020-01-29T18:59:57.962Z Local: 1/30/2020, 2:59:57 AM SELECT 
+    id, 
+    name,
+    row_to_json(producer) AS producer, 
+    price, 
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on
+    FROM items_table AS items_table ORDER BY create_on DESC  ; 
+2020-01-29T18:59:57.968Z Local: 1/30/2020, 2:59:57 AM command: SELECT, rowCount: 114 
+2020-01-29T18:59:57.971Z Local: 1/30/2020, 2:59:57 AM SELECT 
+    id,
+    name,
+    row_to_json(producer) AS producer,
+    price,
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on 
+    FROM items_table WHERE id = '2'; 
+2020-01-29T18:59:57.973Z Local: 1/30/2020, 2:59:57 AM command: SELECT, rowCount: 1 
+2020-01-29T18:59:57.975Z Local: 1/30/2020, 2:59:57 AM SELECT 
+    id,
+    name,
+    row_to_json(producer) AS producer,
+    price,
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on
+    FROM items_table WHERE name = 'Oolong Tea'; 
+2020-01-29T18:59:57.977Z Local: 1/30/2020, 2:59:57 AM command: SELECT, rowCount: 2 
+2020-01-29T18:59:57.981Z Local: 1/30/2020, 2:59:57 AM SELECT 
+    id,
+    name,
+    row_to_json(producer) AS producer,
+    price,
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on 
+    FROM items_table WHERE (producer).id = '2'; 
+2020-01-29T18:59:57.983Z Local: 1/30/2020, 2:59:57 AM command: SELECT, rowCount: 2 
+2020-01-29T18:59:57.985Z Local: 1/30/2020, 2:59:57 AM SELECT 
+    id,
+    name,
+    row_to_json(producer) AS producer,
+    price,
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on 
+    FROM items_table WHERE (producer).name = 'dai'; 
+2020-01-29T18:59:57.987Z Local: 1/30/2020, 2:59:57 AM command: SELECT, rowCount: 2 
+2020-01-29T19:00:12.018Z Local: 1/30/2020, 3:00:12 AM CREATE TABLE IF NOT EXISTS posts_table(id serial PRIMARY KEY NOT NULL,title TEXT NOT NULL,subtitle TEXT NOT NULL,author TEXT NOT NULL,content TEXT NOT NULL,cover_img TEXT,create_on TIMESTAMP default current_timestamp, latest_modify TIMESTAMP default current_timestamp) 
+2020-01-29T19:00:12.040Z Local: 1/30/2020, 3:00:12 AM command: CREATE, rowCount: null 
+2020-01-29T19:00:12.043Z Local: 1/30/2020, 3:00:12 AM SELECT COUNT(*) FROM posts_table; 
+2020-01-29T19:00:12.045Z Local: 1/30/2020, 3:00:12 AM command: SELECT, rowCount: 1, post count: 40 
+2020-01-29T19:00:12.047Z Local: 1/30/2020, 3:00:12 AM SELECT * FROM posts_table ORDER BY latest_modify DESC LIMIT 3 OFFSET 2; 
+2020-01-29T19:00:12.050Z Local: 1/30/2020, 3:00:12 AM command: SELECT, rowCount: 3 
+2020-01-29T19:00:12.052Z Local: 1/30/2020, 3:00:12 AM SELECT * FROM posts_table ORDER BY latest_modify DESC  OFFSET 0; 
+2020-01-29T19:00:12.056Z Local: 1/30/2020, 3:00:12 AM command: SELECT, rowCount: 40 
+2020-01-29T19:00:12.057Z Local: 1/30/2020, 3:00:12 AM SELECT * FROM posts_table ORDER BY latest_modify DESC  ; 
+2020-01-29T19:00:12.061Z Local: 1/30/2020, 3:00:12 AM command: SELECT, rowCount: 40 
+2020-01-29T19:00:12.063Z Local: 1/30/2020, 3:00:12 AM SELECT * FROM posts_table WHERE id = '2'; 
+2020-01-29T19:00:12.064Z Local: 1/30/2020, 3:00:12 AM command: SELECT, rowCount: 1 
+2020-01-29T19:00:12.066Z Local: 1/30/2020, 3:00:12 AM Warning: testUtil.checkInt 1 = 5 is not a Integer 
+2020-01-29T19:00:12.069Z Local: 1/30/2020, 3:00:12 AM Warning: testUtil.checkInt 2 = 5.3 is not a Integer 
+2020-01-29T19:00:12.072Z Local: 1/30/2020, 3:00:12 AM Warning: testUtil.checkInt 3 = 5.3 is not a Integer 
+2020-01-29T19:00:12.074Z Local: 1/30/2020, 3:00:12 AM Warning: testUtil.checkInt 5 = [object Object] is not a String 
+2020-01-29T19:00:12.076Z Local: 1/30/2020, 3:00:12 AM Warning: testUtil.checkInt 6 = NaN is not a String 
+2020-01-29T19:00:12.077Z Local: 1/30/2020, 3:00:12 AM Warning: testUtil.checkInt 7 = undefined is not a String 
+2020-01-29T19:00:12.079Z Local: 1/30/2020, 3:00:12 AM Warning: testUtil.checkNumber 1 = 5 is not a Number 
+2020-01-29T19:00:12.086Z Local: 1/30/2020, 3:00:12 AM Warning: testUtil.checkNumber 2 = 5.3 is not a Number 
+2020-01-29T19:00:12.090Z Local: 1/30/2020, 3:00:12 AM Warning: testUtil.checkString 1 = 5 is not a String 
+2020-01-29T19:00:12.091Z Local: 1/30/2020, 3:00:12 AM Warning: testUtil.checkString 2 = 5.3 is not a String 
+2020-01-29T19:00:12.092Z Local: 1/30/2020, 3:00:12 AM Warning: testUtil.checkString 3 = [object Object] is not a String 
+2020-01-29T19:00:12.094Z Local: 1/30/2020, 3:00:12 AM Warning: testUtil.checkString 4 = NaN is not a String 
+2020-01-29T19:00:12.097Z Local: 1/30/2020, 3:00:12 AM Warning: testUtil.checkString 5 = undefined is not a String 
+2020-01-29T19:00:43.854Z Local: 1/30/2020, 3:00:43 AM 
+    DO $$ BEGIN
+        CREATE TYPE Producer AS (id INTEGER, name TEXT);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-01-29T19:00:43.867Z Local: 1/30/2020, 3:00:43 AM Server is listening on port 8000 
+2020-01-29T19:00:43.890Z Local: 1/30/2020, 3:00:43 AM command: DO, rowCount: null 
+2020-01-29T19:00:43.891Z Local: 1/30/2020, 3:00:43 AM Created Producer type 
+2020-01-29T19:00:43.892Z Local: 1/30/2020, 3:00:43 AM 
+    DO $$ BEGIN
+        CREATE TYPE Spec AS (property TEXT, value TEXT);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-01-29T19:00:43.893Z Local: 1/30/2020, 3:00:43 AM command: DO, rowCount: null 
+2020-01-29T19:00:43.894Z Local: 1/30/2020, 3:00:43 AM Created Spec type 
+2020-01-29T19:00:43.895Z Local: 1/30/2020, 3:00:43 AM 
+    CREATE TABLE IF NOT EXISTS items_table(
+    id serial PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL,
+    producer Producer NOT NULL,
+    price NUMERIC NOT NULL,
+    unit TEXT NOT NULL,
+    description TEXT NOT NULL,
+    spec Spec,
+    cover_img TEXT NOT NULL, 
+    imgs TEXT[], 
+    create_on TIMESTAMP default current_timestamp); 
+2020-01-29T19:00:43.897Z Local: 1/30/2020, 3:00:43 AM command: CREATE, rowCount: null 
+2020-01-29T19:00:43.897Z Local: 1/30/2020, 3:00:43 AM Created items_table 
+2020-01-29T19:00:43.898Z Local: 1/30/2020, 3:00:43 AM item_action is mounted By function(req, res, next) {
+    app.handle(req, res, next);
+  } 
+2020-01-29T19:00:46.286Z Local: 1/30/2020, 3:00:46 AM 
+    DO $$ BEGIN
+        CREATE TYPE Producer AS (id INTEGER, name TEXT);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-01-29T19:00:46.314Z Local: 1/30/2020, 3:00:46 AM command: DO, rowCount: null 
+2020-01-29T19:00:46.317Z Local: 1/30/2020, 3:00:46 AM 
+    DO $$ BEGIN
+        CREATE TYPE Spec AS (property TEXT, value TEXT);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-01-29T19:00:46.318Z Local: 1/30/2020, 3:00:46 AM command: DO, rowCount: null 
+2020-01-29T19:00:46.320Z Local: 1/30/2020, 3:00:46 AM 
+    CREATE TABLE IF NOT EXISTS items_table(
+    id serial PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL,
+    producer Producer NOT NULL,
+    price NUMERIC NOT NULL,
+    unit TEXT NOT NULL,
+    description TEXT NOT NULL,
+    spec Spec,
+    cover_img TEXT NOT NULL, 
+    imgs TEXT[], 
+    create_on TIMESTAMP default current_timestamp); 
+2020-01-29T19:00:46.322Z Local: 1/30/2020, 3:00:46 AM command: CREATE, rowCount: null 
+2020-01-29T19:00:46.326Z Local: 1/30/2020, 3:00:46 AM SELECT COUNT(*) FROM items_table; 
+2020-01-29T19:00:46.329Z Local: 1/30/2020, 3:00:46 AM command: SELECT, rowCount: 1 
+2020-01-29T19:00:46.331Z Local: 1/30/2020, 3:00:46 AM 
+INSERT INTO items_table(
+name,
+producer,
+price,
+unit,
+description,
+spec,
+cover_img,
+imgs)
+VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'), '500', 'NTD', '# Traditional Flavor', json_populate_record(null::Spec, '{"property":"100g","value":"Heavily Baked","comment":"Strongest"}'), 'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","tea.jpg","child.jpg"]'))) RETURNING id; 
+2020-01-29T19:00:46.341Z Local: 1/30/2020, 3:00:46 AM command: INSERT, rowCount: 1 
+2020-01-29T19:00:46.344Z Local: 1/30/2020, 3:00:46 AM SELECT 
+    id, 
+    name,
+    row_to_json(producer) AS producer, 
+    price, 
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on
+    FROM items_table AS items_table ORDER BY create_on DESC LIMIT 3 OFFSET 2; 
+2020-01-29T19:00:46.348Z Local: 1/30/2020, 3:00:46 AM command: SELECT, rowCount: 3 
+2020-01-29T19:00:46.350Z Local: 1/30/2020, 3:00:46 AM SELECT 
+    id, 
+    name,
+    row_to_json(producer) AS producer, 
+    price, 
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on
+    FROM items_table AS items_table ORDER BY create_on DESC  OFFSET 0; 
+2020-01-29T19:00:46.357Z Local: 1/30/2020, 3:00:46 AM command: SELECT, rowCount: 115 
+2020-01-29T19:00:46.358Z Local: 1/30/2020, 3:00:46 AM SELECT 
+    id, 
+    name,
+    row_to_json(producer) AS producer, 
+    price, 
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on
+    FROM items_table AS items_table ORDER BY create_on DESC  ; 
+2020-01-29T19:00:46.365Z Local: 1/30/2020, 3:00:46 AM command: SELECT, rowCount: 115 
+2020-01-29T19:00:46.367Z Local: 1/30/2020, 3:00:46 AM SELECT 
+    id,
+    name,
+    row_to_json(producer) AS producer,
+    price,
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on 
+    FROM items_table WHERE id = '2'; 
+2020-01-29T19:00:46.369Z Local: 1/30/2020, 3:00:46 AM command: SELECT, rowCount: 1 
+2020-01-29T19:00:46.371Z Local: 1/30/2020, 3:00:46 AM SELECT 
+    id,
+    name,
+    row_to_json(producer) AS producer,
+    price,
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on
+    FROM items_table WHERE name = 'Oolong Tea'; 
+2020-01-29T19:00:46.373Z Local: 1/30/2020, 3:00:46 AM command: SELECT, rowCount: 2 
+2020-01-29T19:00:46.377Z Local: 1/30/2020, 3:00:46 AM SELECT 
+    id,
+    name,
+    row_to_json(producer) AS producer,
+    price,
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on 
+    FROM items_table WHERE (producer).id = '2'; 
+2020-01-29T19:00:46.378Z Local: 1/30/2020, 3:00:46 AM command: SELECT, rowCount: 2 
+2020-01-29T19:00:46.380Z Local: 1/30/2020, 3:00:46 AM SELECT 
+    id,
+    name,
+    row_to_json(producer) AS producer,
+    price,
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on 
+    FROM items_table WHERE (producer).name = 'dai'; 
+2020-01-29T19:00:46.383Z Local: 1/30/2020, 3:00:46 AM command: SELECT, rowCount: 2 
+2020-01-29T19:00:46.398Z Local: 1/30/2020, 3:00:46 AM SELECT COUNT(*) FROM items_table; 
+2020-01-29T19:00:46.403Z Local: 1/30/2020, 3:00:46 AM command: SELECT, rowCount: 1 
+2020-01-29T19:00:46.404Z Local: 1/30/2020, 3:00:46 AM Sending 1 rows to ::ffff:127.0.0.1 with  
+2020-01-29T19:00:46.443Z Local: 1/30/2020, 3:00:46 AM 
+INSERT INTO items_table(
+name,
+producer,
+price,
+unit,
+description,
+spec,
+cover_img,
+imgs)
+VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'), '500', 'NTD', '# Traditional Flavor', json_populate_record(null::Spec, '{"property":"100g","value":"Heavily Baked","comment":"Strongest"}'), 'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","tea.jpg","child.jpg"]'))) RETURNING id; 
+2020-01-29T19:00:46.452Z Local: 1/30/2020, 3:00:46 AM command: INSERT, rowCount: 1 
+2020-01-29T19:00:46.453Z Local: 1/30/2020, 3:00:46 AM Sending 1 rows to ::ffff:127.0.0.1 with  
+2020-01-29T19:00:46.459Z Local: 1/30/2020, 3:00:46 AM SELECT 
+    id,
+    name,
+    row_to_json(producer) AS producer,
+    price,
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on 
+    FROM items_table WHERE id = '5'; 
+2020-01-29T19:00:46.462Z Local: 1/30/2020, 3:00:46 AM command: SELECT, rowCount: 1 
+2020-01-29T19:00:46.469Z Local: 1/30/2020, 3:00:46 AM Sending 1 rows to ::ffff:127.0.0.1 with  
+2020-01-29T19:00:46.476Z Local: 1/30/2020, 3:00:46 AM SELECT 
+    id,
+    name,
+    row_to_json(producer) AS producer,
+    price,
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on
+    FROM items_table WHERE name = 'Oolong Tea'; 
+2020-01-29T19:00:46.478Z Local: 1/30/2020, 3:00:46 AM command: SELECT, rowCount: 2 
+2020-01-29T19:00:46.480Z Local: 1/30/2020, 3:00:46 AM Sending 2 rows to ::ffff:127.0.0.1 with  
+2020-01-29T19:00:46.488Z Local: 1/30/2020, 3:00:46 AM SELECT 
+    id,
+    name,
+    row_to_json(producer) AS producer,
+    price,
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on 
+    FROM items_table WHERE (producer).id = '2'; 
+2020-01-29T19:00:46.490Z Local: 1/30/2020, 3:00:46 AM command: SELECT, rowCount: 2 
+2020-01-29T19:00:46.491Z Local: 1/30/2020, 3:00:46 AM Sending 2 rows to ::ffff:127.0.0.1 with  
+2020-01-29T19:00:46.498Z Local: 1/30/2020, 3:00:46 AM SELECT 
+    id,
+    name,
+    row_to_json(producer) AS producer,
+    price,
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on 
+    FROM items_table WHERE (producer).name = 'Dai'; 
+2020-01-29T19:00:46.503Z Local: 1/30/2020, 3:00:46 AM command: SELECT, rowCount: 0 
+2020-01-29T19:00:46.504Z Local: 1/30/2020, 3:00:46 AM Sending 0 rows to ::ffff:127.0.0.1 with  
+2020-01-29T19:00:46.509Z Local: 1/30/2020, 3:00:46 AM SELECT 
+    id, 
+    name,
+    row_to_json(producer) AS producer, 
+    price, 
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on
+    FROM items_table AS items_table ORDER BY create_on DESC LIMIT 2 OFFSET 3; 
+2020-01-29T19:00:46.514Z Local: 1/30/2020, 3:00:46 AM command: SELECT, rowCount: 2 
+2020-01-29T19:00:46.515Z Local: 1/30/2020, 3:00:46 AM Sending 2 rows to ::ffff:127.0.0.1 with  
+2020-01-29T19:00:46.522Z Local: 1/30/2020, 3:00:46 AM CREATE TABLE IF NOT EXISTS posts_table(id serial PRIMARY KEY NOT NULL,title TEXT NOT NULL,subtitle TEXT NOT NULL,author TEXT NOT NULL,content TEXT NOT NULL,cover_img TEXT,create_on TIMESTAMP default current_timestamp, latest_modify TIMESTAMP default current_timestamp) 
+2020-01-29T19:00:46.542Z Local: 1/30/2020, 3:00:46 AM command: CREATE, rowCount: null 
+2020-01-29T19:00:46.544Z Local: 1/30/2020, 3:00:46 AM SELECT COUNT(*) FROM posts_table; 
+2020-01-29T19:00:46.546Z Local: 1/30/2020, 3:00:46 AM command: SELECT, rowCount: 1, post count: 40 
+2020-01-29T19:00:46.548Z Local: 1/30/2020, 3:00:46 AM SELECT * FROM posts_table ORDER BY latest_modify DESC LIMIT 3 OFFSET 2; 
+2020-01-29T19:00:46.552Z Local: 1/30/2020, 3:00:46 AM command: SELECT, rowCount: 3 
+2020-01-29T19:00:46.553Z Local: 1/30/2020, 3:00:46 AM SELECT * FROM posts_table ORDER BY latest_modify DESC  OFFSET 0; 
+2020-01-29T19:00:46.556Z Local: 1/30/2020, 3:00:46 AM command: SELECT, rowCount: 40 
+2020-01-29T19:00:46.558Z Local: 1/30/2020, 3:00:46 AM SELECT * FROM posts_table ORDER BY latest_modify DESC  ; 
+2020-01-29T19:00:46.562Z Local: 1/30/2020, 3:00:46 AM command: SELECT, rowCount: 40 
+2020-01-29T19:00:46.564Z Local: 1/30/2020, 3:00:46 AM SELECT * FROM posts_table WHERE id = '2'; 
+2020-01-29T19:00:46.566Z Local: 1/30/2020, 3:00:46 AM command: SELECT, rowCount: 1 
+2020-01-29T19:00:46.568Z Local: 1/30/2020, 3:00:46 AM Warning: testUtil.checkInt 1 = 5 is not a Integer 
+2020-01-29T19:00:46.571Z Local: 1/30/2020, 3:00:46 AM Warning: testUtil.checkInt 2 = 5.3 is not a Integer 
+2020-01-29T19:00:46.573Z Local: 1/30/2020, 3:00:46 AM Warning: testUtil.checkInt 3 = 5.3 is not a Integer 
+2020-01-29T19:00:46.575Z Local: 1/30/2020, 3:00:46 AM Warning: testUtil.checkInt 5 = [object Object] is not a String 
+2020-01-29T19:00:46.576Z Local: 1/30/2020, 3:00:46 AM Warning: testUtil.checkInt 6 = NaN is not a String 
+2020-01-29T19:00:46.577Z Local: 1/30/2020, 3:00:46 AM Warning: testUtil.checkInt 7 = undefined is not a String 
+2020-01-29T19:00:46.579Z Local: 1/30/2020, 3:00:46 AM Warning: testUtil.checkNumber 1 = 5 is not a Number 
+2020-01-29T19:00:46.580Z Local: 1/30/2020, 3:00:46 AM Warning: testUtil.checkNumber 2 = 5.3 is not a Number 
+2020-01-29T19:00:46.585Z Local: 1/30/2020, 3:00:46 AM Warning: testUtil.checkString 1 = 5 is not a String 
+2020-01-29T19:00:46.586Z Local: 1/30/2020, 3:00:46 AM Warning: testUtil.checkString 2 = 5.3 is not a String 
+2020-01-29T19:00:46.587Z Local: 1/30/2020, 3:00:46 AM Warning: testUtil.checkString 3 = [object Object] is not a String 
+2020-01-29T19:00:46.588Z Local: 1/30/2020, 3:00:46 AM Warning: testUtil.checkString 4 = NaN is not a String 
+2020-01-29T19:00:46.590Z Local: 1/30/2020, 3:00:46 AM Warning: testUtil.checkString 5 = undefined is not a String 
+2020-01-29T19:08:54.316Z Local: 1/30/2020, 3:08:54 AM 
+    DO $$ BEGIN
+        CREATE TYPE Producer AS (id INTEGER, name TEXT);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-01-29T19:08:54.329Z Local: 1/30/2020, 3:08:54 AM Server is listening on port 8000 
+2020-01-29T19:08:54.353Z Local: 1/30/2020, 3:08:54 AM command: DO, rowCount: null 
+2020-01-29T19:08:54.355Z Local: 1/30/2020, 3:08:54 AM 
+    DO $$ BEGIN
+        CREATE TYPE Spec AS (property TEXT, value TEXT);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-01-29T19:08:54.354Z Local: 1/30/2020, 3:08:54 AM Created Producer type 
+2020-01-29T19:08:54.356Z Local: 1/30/2020, 3:08:54 AM command: DO, rowCount: null 
+2020-01-29T19:08:54.357Z Local: 1/30/2020, 3:08:54 AM Created Spec type 
+2020-01-29T19:08:54.358Z Local: 1/30/2020, 3:08:54 AM 
+    CREATE TABLE IF NOT EXISTS items_table(
+    id serial PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL,
+    producer Producer NOT NULL,
+    price NUMERIC NOT NULL,
+    unit TEXT NOT NULL,
+    description TEXT NOT NULL,
+    spec Spec,
+    cover_img TEXT NOT NULL, 
+    imgs TEXT[], 
+    create_on TIMESTAMP default current_timestamp); 
+2020-01-29T19:08:54.361Z Local: 1/30/2020, 3:08:54 AM command: CREATE, rowCount: null 
+2020-01-29T19:08:54.362Z Local: 1/30/2020, 3:08:54 AM Created items_table 
+2020-01-29T19:08:54.362Z Local: 1/30/2020, 3:08:54 AM item_action is mounted By function(req, res, next) {
+    app.handle(req, res, next);
+  } 
+2020-01-29T19:08:59.912Z Local: 1/30/2020, 3:08:59 AM 
+    DO $$ BEGIN
+        CREATE TYPE Producer AS (id INTEGER, name TEXT);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-01-29T19:08:59.940Z Local: 1/30/2020, 3:08:59 AM command: DO, rowCount: null 
+2020-01-29T19:08:59.944Z Local: 1/30/2020, 3:08:59 AM 
+    DO $$ BEGIN
+        CREATE TYPE Spec AS (property TEXT, value TEXT);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-01-29T19:08:59.945Z Local: 1/30/2020, 3:08:59 AM command: DO, rowCount: null 
+2020-01-29T19:08:59.947Z Local: 1/30/2020, 3:08:59 AM 
+    CREATE TABLE IF NOT EXISTS items_table(
+    id serial PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL,
+    producer Producer NOT NULL,
+    price NUMERIC NOT NULL,
+    unit TEXT NOT NULL,
+    description TEXT NOT NULL,
+    spec Spec,
+    cover_img TEXT NOT NULL, 
+    imgs TEXT[], 
+    create_on TIMESTAMP default current_timestamp); 
+2020-01-29T19:08:59.949Z Local: 1/30/2020, 3:08:59 AM command: CREATE, rowCount: null 
+2020-01-29T19:08:59.955Z Local: 1/30/2020, 3:08:59 AM SELECT COUNT(*) FROM items_table; 
+2020-01-29T19:08:59.969Z Local: 1/30/2020, 3:08:59 AM command: SELECT, rowCount: 1 
+2020-01-29T19:08:59.972Z Local: 1/30/2020, 3:08:59 AM Warning: DbItem.insertItem spec = [object Object] is not an Array 
+2020-01-29T19:08:59.972Z Local: 1/30/2020, 3:08:59 AM 
+INSERT INTO items_table(
+name,
+producer,
+price,
+unit,
+description,
+spec,
+cover_img,
+imgs)
+VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'), '500', 'NTD', '# Traditional Flavor', json_populate_record(null::Spec, '{"property":"100g","value":"Heavily Baked","comment":"Strongest"}'), 'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","tea.jpg","child.jpg"]'))) RETURNING id; 
+2020-01-29T19:08:59.982Z Local: 1/30/2020, 3:08:59 AM command: INSERT, rowCount: 1 
+2020-01-29T19:08:59.985Z Local: 1/30/2020, 3:08:59 AM SELECT 
+    id, 
+    name,
+    row_to_json(producer) AS producer, 
+    price, 
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on
+    FROM items_table AS items_table ORDER BY create_on DESC LIMIT 3 OFFSET 2; 
+2020-01-29T19:08:59.989Z Local: 1/30/2020, 3:08:59 AM command: SELECT, rowCount: 3 
+2020-01-29T19:08:59.991Z Local: 1/30/2020, 3:08:59 AM SELECT 
+    id, 
+    name,
+    row_to_json(producer) AS producer, 
+    price, 
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on
+    FROM items_table AS items_table ORDER BY create_on DESC  OFFSET 0; 
+2020-01-29T19:08:59.997Z Local: 1/30/2020, 3:08:59 AM command: SELECT, rowCount: 117 
+2020-01-29T19:09:00.000Z Local: 1/30/2020, 3:09:00 AM SELECT 
+    id, 
+    name,
+    row_to_json(producer) AS producer, 
+    price, 
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on
+    FROM items_table AS items_table ORDER BY create_on DESC  ; 
+2020-01-29T19:09:00.007Z Local: 1/30/2020, 3:09:00 AM command: SELECT, rowCount: 117 
+2020-01-29T19:09:00.009Z Local: 1/30/2020, 3:09:00 AM SELECT 
+    id,
+    name,
+    row_to_json(producer) AS producer,
+    price,
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on 
+    FROM items_table WHERE id = '2'; 
+2020-01-29T19:09:00.011Z Local: 1/30/2020, 3:09:00 AM command: SELECT, rowCount: 1 
+2020-01-29T19:09:00.013Z Local: 1/30/2020, 3:09:00 AM SELECT 
+    id,
+    name,
+    row_to_json(producer) AS producer,
+    price,
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on
+    FROM items_table WHERE name = 'Oolong Tea'; 
+2020-01-29T19:09:00.017Z Local: 1/30/2020, 3:09:00 AM command: SELECT, rowCount: 2 
+2020-01-29T19:09:00.020Z Local: 1/30/2020, 3:09:00 AM SELECT 
+    id,
+    name,
+    row_to_json(producer) AS producer,
+    price,
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on 
+    FROM items_table WHERE (producer).id = '2'; 
+2020-01-29T19:09:00.023Z Local: 1/30/2020, 3:09:00 AM command: SELECT, rowCount: 2 
+2020-01-29T19:09:00.025Z Local: 1/30/2020, 3:09:00 AM SELECT 
+    id,
+    name,
+    row_to_json(producer) AS producer,
+    price,
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on 
+    FROM items_table WHERE (producer).name = 'dai'; 
+2020-01-29T19:09:00.027Z Local: 1/30/2020, 3:09:00 AM command: SELECT, rowCount: 2 
+2020-01-29T19:09:00.027Z Local: 1/30/2020, 3:09:00 AM SELECT COUNT(*) FROM items_table; 
+2020-01-29T19:09:00.033Z Local: 1/30/2020, 3:09:00 AM command: SELECT, rowCount: 1 
+2020-01-29T19:09:00.034Z Local: 1/30/2020, 3:09:00 AM Sending 1 rows to ::ffff:127.0.0.1 with  
+2020-01-29T19:09:00.071Z Local: 1/30/2020, 3:09:00 AM Warning: DbItem.insertItem price = 500 is not a Number 
+2020-01-29T19:09:00.072Z Local: 1/30/2020, 3:09:00 AM Warning: DbItem.insertItem spec = [object Object] is not an Array 
+2020-01-29T19:09:00.072Z Local: 1/30/2020, 3:09:00 AM 
+INSERT INTO items_table(
+name,
+producer,
+price,
+unit,
+description,
+spec,
+cover_img,
+imgs)
+VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'), '500', 'NTD', '# Traditional Flavor', json_populate_record(null::Spec, '{"property":"100g","value":"Heavily Baked","comment":"Strongest"}'), 'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","tea.jpg","child.jpg"]'))) RETURNING id; 
+2020-01-29T19:09:00.084Z Local: 1/30/2020, 3:09:00 AM command: INSERT, rowCount: 1 
+2020-01-29T19:09:00.084Z Local: 1/30/2020, 3:09:00 AM Sending 1 rows to ::ffff:127.0.0.1 with  
+2020-01-29T19:09:00.091Z Local: 1/30/2020, 3:09:00 AM SELECT 
+    id,
+    name,
+    row_to_json(producer) AS producer,
+    price,
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on 
+    FROM items_table WHERE id = '5'; 
+2020-01-29T19:09:00.094Z Local: 1/30/2020, 3:09:00 AM command: SELECT, rowCount: 1 
+2020-01-29T19:09:00.100Z Local: 1/30/2020, 3:09:00 AM Sending 1 rows to ::ffff:127.0.0.1 with  
+2020-01-29T19:09:00.106Z Local: 1/30/2020, 3:09:00 AM SELECT 
+    id,
+    name,
+    row_to_json(producer) AS producer,
+    price,
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on
+    FROM items_table WHERE name = 'Oolong Tea'; 
+2020-01-29T19:09:00.108Z Local: 1/30/2020, 3:09:00 AM command: SELECT, rowCount: 2 
+2020-01-29T19:09:00.115Z Local: 1/30/2020, 3:09:00 AM Sending 2 rows to ::ffff:127.0.0.1 with  
+2020-01-29T19:09:00.124Z Local: 1/30/2020, 3:09:00 AM SELECT 
+    id,
+    name,
+    row_to_json(producer) AS producer,
+    price,
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on 
+    FROM items_table WHERE (producer).id = '2'; 
+2020-01-29T19:09:00.130Z Local: 1/30/2020, 3:09:00 AM command: SELECT, rowCount: 2 
+2020-01-29T19:09:00.131Z Local: 1/30/2020, 3:09:00 AM Sending 2 rows to ::ffff:127.0.0.1 with  
+2020-01-29T19:09:00.137Z Local: 1/30/2020, 3:09:00 AM SELECT 
+    id,
+    name,
+    row_to_json(producer) AS producer,
+    price,
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on 
+    FROM items_table WHERE (producer).name = 'Dai'; 
+2020-01-29T19:09:00.140Z Local: 1/30/2020, 3:09:00 AM command: SELECT, rowCount: 0 
+2020-01-29T19:09:00.144Z Local: 1/30/2020, 3:09:00 AM Sending 0 rows to ::ffff:127.0.0.1 with  
+2020-01-29T19:09:00.149Z Local: 1/30/2020, 3:09:00 AM SELECT 
+    id, 
+    name,
+    row_to_json(producer) AS producer, 
+    price, 
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on
+    FROM items_table AS items_table ORDER BY create_on DESC LIMIT 2 OFFSET 3; 
+2020-01-29T19:09:00.151Z Local: 1/30/2020, 3:09:00 AM command: SELECT, rowCount: 2 
+2020-01-29T19:09:00.152Z Local: 1/30/2020, 3:09:00 AM Sending 2 rows to ::ffff:127.0.0.1 with  
+2020-01-29T19:09:00.172Z Local: 1/30/2020, 3:09:00 AM CREATE TABLE IF NOT EXISTS posts_table(id serial PRIMARY KEY NOT NULL,title TEXT NOT NULL,subtitle TEXT NOT NULL,author TEXT NOT NULL,content TEXT NOT NULL,cover_img TEXT,create_on TIMESTAMP default current_timestamp, latest_modify TIMESTAMP default current_timestamp) 
+2020-01-29T19:09:00.193Z Local: 1/30/2020, 3:09:00 AM command: CREATE, rowCount: null 
+2020-01-29T19:09:00.194Z Local: 1/30/2020, 3:09:00 AM SELECT COUNT(*) FROM posts_table; 
+2020-01-29T19:09:00.197Z Local: 1/30/2020, 3:09:00 AM command: SELECT, rowCount: 1, post count: 40 
+2020-01-29T19:09:00.199Z Local: 1/30/2020, 3:09:00 AM SELECT * FROM posts_table ORDER BY latest_modify DESC LIMIT 3 OFFSET 2; 
+2020-01-29T19:09:00.201Z Local: 1/30/2020, 3:09:00 AM command: SELECT, rowCount: 3 
+2020-01-29T19:09:00.202Z Local: 1/30/2020, 3:09:00 AM SELECT * FROM posts_table ORDER BY latest_modify DESC  OFFSET 0; 
+2020-01-29T19:09:00.206Z Local: 1/30/2020, 3:09:00 AM command: SELECT, rowCount: 40 
+2020-01-29T19:09:00.207Z Local: 1/30/2020, 3:09:00 AM SELECT * FROM posts_table ORDER BY latest_modify DESC  ; 
+2020-01-29T19:09:00.211Z Local: 1/30/2020, 3:09:00 AM command: SELECT, rowCount: 40 
+2020-01-29T19:09:00.214Z Local: 1/30/2020, 3:09:00 AM SELECT * FROM posts_table WHERE id = '2'; 
+2020-01-29T19:09:00.215Z Local: 1/30/2020, 3:09:00 AM command: SELECT, rowCount: 1 
+2020-01-29T19:09:00.217Z Local: 1/30/2020, 3:09:00 AM Warning: testUtil.checkInt 1 = 5 is not a Integer 
+2020-01-29T19:09:00.221Z Local: 1/30/2020, 3:09:00 AM Warning: testUtil.checkInt 2 = 5.3 is not a Integer 
+2020-01-29T19:09:00.222Z Local: 1/30/2020, 3:09:00 AM Warning: testUtil.checkInt 3 = 5.3 is not a Integer 
+2020-01-29T19:09:00.224Z Local: 1/30/2020, 3:09:00 AM Warning: testUtil.checkInt 5 = [object Object] is not a String 
+2020-01-29T19:09:00.225Z Local: 1/30/2020, 3:09:00 AM Warning: testUtil.checkInt 6 = NaN is not a String 
+2020-01-29T19:09:00.226Z Local: 1/30/2020, 3:09:00 AM Warning: testUtil.checkInt 7 = undefined is not a String 
+2020-01-29T19:09:00.229Z Local: 1/30/2020, 3:09:00 AM Warning: testUtil.checkNumber 1 = 5 is not a Number 
+2020-01-29T19:09:00.230Z Local: 1/30/2020, 3:09:00 AM Warning: testUtil.checkNumber 2 = 5.3 is not a Number 
+2020-01-29T19:09:00.233Z Local: 1/30/2020, 3:09:00 AM Warning: testUtil.checkString 1 = 5 is not a String 
+2020-01-29T19:09:00.234Z Local: 1/30/2020, 3:09:00 AM Warning: testUtil.checkString 2 = 5.3 is not a String 
+2020-01-29T19:09:00.235Z Local: 1/30/2020, 3:09:00 AM Warning: testUtil.checkString 3 = [object Object] is not a String 
+2020-01-29T19:09:00.237Z Local: 1/30/2020, 3:09:00 AM Warning: testUtil.checkString 4 = NaN is not a String 
+2020-01-29T19:09:00.239Z Local: 1/30/2020, 3:09:00 AM Warning: testUtil.checkString 5 = undefined is not a String 
+2020-01-29T19:09:54.778Z Local: 1/30/2020, 3:09:54 AM 
+    DO $$ BEGIN
+        CREATE TYPE Producer AS (id INTEGER, name TEXT);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-01-29T19:09:54.808Z Local: 1/30/2020, 3:09:54 AM command: DO, rowCount: null 
+2020-01-29T19:09:54.811Z Local: 1/30/2020, 3:09:54 AM 
+    DO $$ BEGIN
+        CREATE TYPE Spec AS (property TEXT, value TEXT);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-01-29T19:09:54.813Z Local: 1/30/2020, 3:09:54 AM command: DO, rowCount: null 
+2020-01-29T19:09:54.815Z Local: 1/30/2020, 3:09:54 AM 
+    CREATE TABLE IF NOT EXISTS items_table(
+    id serial PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL,
+    producer Producer NOT NULL,
+    price NUMERIC NOT NULL,
+    unit TEXT NOT NULL,
+    description TEXT NOT NULL,
+    spec Spec,
+    cover_img TEXT NOT NULL, 
+    imgs TEXT[], 
+    create_on TIMESTAMP default current_timestamp); 
+2020-01-29T19:09:54.817Z Local: 1/30/2020, 3:09:54 AM command: CREATE, rowCount: null 
+2020-01-29T19:09:54.819Z Local: 1/30/2020, 3:09:54 AM SELECT COUNT(*) FROM items_table; 
+2020-01-29T19:09:54.835Z Local: 1/30/2020, 3:09:54 AM command: SELECT, rowCount: 1 
+2020-01-29T19:09:54.838Z Local: 1/30/2020, 3:09:54 AM Warning: DbItem.insertItem spec = [object Object] is not an Array 
+2020-01-29T19:09:54.839Z Local: 1/30/2020, 3:09:54 AM 
+INSERT INTO items_table(
+name,
+producer,
+price,
+unit,
+description,
+spec,
+cover_img,
+imgs)
+VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'), '500', 'NTD', '# Traditional Flavor', json_populate_record(null::Spec, '{"property":"100g","value":"Heavily Baked","comment":"Strongest"}'), 'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","tea.jpg","child.jpg"]'))) RETURNING id; 
+2020-01-29T19:09:54.854Z Local: 1/30/2020, 3:09:54 AM command: INSERT, rowCount: 1 
+2020-01-29T19:09:54.856Z Local: 1/30/2020, 3:09:54 AM SELECT 
+    id, 
+    name,
+    row_to_json(producer) AS producer, 
+    price, 
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on
+    FROM items_table AS items_table ORDER BY create_on DESC LIMIT 3 OFFSET 2; 
+2020-01-29T19:09:54.860Z Local: 1/30/2020, 3:09:54 AM command: SELECT, rowCount: 3 
+2020-01-29T19:09:54.862Z Local: 1/30/2020, 3:09:54 AM SELECT 
+    id, 
+    name,
+    row_to_json(producer) AS producer, 
+    price, 
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on
+    FROM items_table AS items_table ORDER BY create_on DESC  OFFSET 0; 
+2020-01-29T19:09:54.869Z Local: 1/30/2020, 3:09:54 AM command: SELECT, rowCount: 119 
+2020-01-29T19:09:54.870Z Local: 1/30/2020, 3:09:54 AM SELECT 
+    id, 
+    name,
+    row_to_json(producer) AS producer, 
+    price, 
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on
+    FROM items_table AS items_table ORDER BY create_on DESC  ; 
+2020-01-29T19:09:54.876Z Local: 1/30/2020, 3:09:54 AM command: SELECT, rowCount: 119 
+2020-01-29T19:09:54.878Z Local: 1/30/2020, 3:09:54 AM SELECT 
+    id,
+    name,
+    row_to_json(producer) AS producer,
+    price,
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on 
+    FROM items_table WHERE id = '2'; 
+2020-01-29T19:09:54.880Z Local: 1/30/2020, 3:09:54 AM command: SELECT, rowCount: 1 
+2020-01-29T19:09:54.882Z Local: 1/30/2020, 3:09:54 AM SELECT 
+    id,
+    name,
+    row_to_json(producer) AS producer,
+    price,
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on
+    FROM items_table WHERE name = 'Oolong Tea'; 
+2020-01-29T19:09:54.884Z Local: 1/30/2020, 3:09:54 AM command: SELECT, rowCount: 2 
+2020-01-29T19:09:54.886Z Local: 1/30/2020, 3:09:54 AM SELECT 
+    id,
+    name,
+    row_to_json(producer) AS producer,
+    price,
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on 
+    FROM items_table WHERE (producer).id = '2'; 
+2020-01-29T19:09:54.888Z Local: 1/30/2020, 3:09:54 AM command: SELECT, rowCount: 2 
+2020-01-29T19:09:54.891Z Local: 1/30/2020, 3:09:54 AM SELECT 
+    id,
+    name,
+    row_to_json(producer) AS producer,
+    price,
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on 
+    FROM items_table WHERE (producer).name = 'dai'; 
+2020-01-29T19:09:54.893Z Local: 1/30/2020, 3:09:54 AM command: SELECT, rowCount: 2 
+2020-01-29T19:09:54.892Z Local: 1/30/2020, 3:09:54 AM SELECT COUNT(*) FROM items_table; 
+2020-01-29T19:09:54.914Z Local: 1/30/2020, 3:09:54 AM command: SELECT, rowCount: 1 
+2020-01-29T19:09:54.915Z Local: 1/30/2020, 3:09:54 AM Sending 1 rows to ::ffff:127.0.0.1 with  
+2020-01-29T19:09:54.929Z Local: 1/30/2020, 3:09:54 AM Warning: DbItem.insertItem price = 500 is not a Number 
+2020-01-29T19:09:54.930Z Local: 1/30/2020, 3:09:54 AM Warning: DbItem.insertItem spec = [object Object] is not an Array 
+2020-01-29T19:09:54.930Z Local: 1/30/2020, 3:09:54 AM 
+INSERT INTO items_table(
+name,
+producer,
+price,
+unit,
+description,
+spec,
+cover_img,
+imgs)
+VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'), '500', 'NTD', '# Traditional Flavor', json_populate_record(null::Spec, '{"property":"100g","value":"Heavily Baked","comment":"Strongest"}'), 'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","tea.jpg","child.jpg"]'))) RETURNING id; 
+2020-01-29T19:09:54.940Z Local: 1/30/2020, 3:09:54 AM command: INSERT, rowCount: 1 
+2020-01-29T19:09:54.941Z Local: 1/30/2020, 3:09:54 AM Sending 1 rows to ::ffff:127.0.0.1 with  
+2020-01-29T19:09:54.948Z Local: 1/30/2020, 3:09:54 AM SELECT 
+    id,
+    name,
+    row_to_json(producer) AS producer,
+    price,
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on 
+    FROM items_table WHERE id = '5'; 
+2020-01-29T19:09:54.950Z Local: 1/30/2020, 3:09:54 AM command: SELECT, rowCount: 1 
+2020-01-29T19:09:54.951Z Local: 1/30/2020, 3:09:54 AM Sending 1 rows to ::ffff:127.0.0.1 with  
+2020-01-29T19:09:54.957Z Local: 1/30/2020, 3:09:54 AM SELECT 
+    id,
+    name,
+    row_to_json(producer) AS producer,
+    price,
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on
+    FROM items_table WHERE name = 'Oolong Tea'; 
+2020-01-29T19:09:54.960Z Local: 1/30/2020, 3:09:54 AM command: SELECT, rowCount: 2 
+2020-01-29T19:09:54.961Z Local: 1/30/2020, 3:09:54 AM Sending 2 rows to ::ffff:127.0.0.1 with  
+2020-01-29T19:09:54.968Z Local: 1/30/2020, 3:09:54 AM SELECT 
+    id,
+    name,
+    row_to_json(producer) AS producer,
+    price,
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on 
+    FROM items_table WHERE (producer).id = '2'; 
+2020-01-29T19:09:54.972Z Local: 1/30/2020, 3:09:54 AM command: SELECT, rowCount: 2 
+2020-01-29T19:09:54.973Z Local: 1/30/2020, 3:09:54 AM Sending 2 rows to ::ffff:127.0.0.1 with  
+2020-01-29T19:09:54.979Z Local: 1/30/2020, 3:09:54 AM SELECT 
+    id,
+    name,
+    row_to_json(producer) AS producer,
+    price,
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on 
+    FROM items_table WHERE (producer).name = 'Dai'; 
+2020-01-29T19:09:54.984Z Local: 1/30/2020, 3:09:54 AM command: SELECT, rowCount: 0 
+2020-01-29T19:09:54.985Z Local: 1/30/2020, 3:09:54 AM Sending 0 rows to ::ffff:127.0.0.1 with  
+2020-01-29T19:09:54.990Z Local: 1/30/2020, 3:09:54 AM SELECT 
+    id, 
+    name,
+    row_to_json(producer) AS producer, 
+    price, 
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on
+    FROM items_table AS items_table ORDER BY create_on DESC LIMIT 2 OFFSET 3; 
+2020-01-29T19:09:54.993Z Local: 1/30/2020, 3:09:54 AM command: SELECT, rowCount: 2 
+2020-01-29T19:09:54.997Z Local: 1/30/2020, 3:09:54 AM Sending 2 rows to ::ffff:127.0.0.1 with  
+2020-01-29T19:09:55.011Z Local: 1/30/2020, 3:09:55 AM CREATE TABLE IF NOT EXISTS posts_table(id serial PRIMARY KEY NOT NULL,title TEXT NOT NULL,subtitle TEXT NOT NULL,author TEXT NOT NULL,content TEXT NOT NULL,cover_img TEXT,create_on TIMESTAMP default current_timestamp, latest_modify TIMESTAMP default current_timestamp) 
+2020-01-29T19:09:55.030Z Local: 1/30/2020, 3:09:55 AM command: CREATE, rowCount: null 
+2020-01-29T19:09:55.031Z Local: 1/30/2020, 3:09:55 AM SELECT COUNT(*) FROM posts_table; 
+2020-01-29T19:09:55.034Z Local: 1/30/2020, 3:09:55 AM command: SELECT, rowCount: 1, post count: 40 
+2020-01-29T19:09:55.036Z Local: 1/30/2020, 3:09:55 AM SELECT * FROM posts_table ORDER BY latest_modify DESC LIMIT 3 OFFSET 2; 
+2020-01-29T19:09:55.039Z Local: 1/30/2020, 3:09:55 AM command: SELECT, rowCount: 3 
+2020-01-29T19:09:55.041Z Local: 1/30/2020, 3:09:55 AM SELECT * FROM posts_table ORDER BY latest_modify DESC  OFFSET 0; 
+2020-01-29T19:09:55.045Z Local: 1/30/2020, 3:09:55 AM command: SELECT, rowCount: 40 
+2020-01-29T19:09:55.047Z Local: 1/30/2020, 3:09:55 AM SELECT * FROM posts_table ORDER BY latest_modify DESC  ; 
+2020-01-29T19:09:55.051Z Local: 1/30/2020, 3:09:55 AM command: SELECT, rowCount: 40 
+2020-01-29T19:09:55.054Z Local: 1/30/2020, 3:09:55 AM SELECT * FROM posts_table WHERE id = '2'; 
+2020-01-29T19:09:55.056Z Local: 1/30/2020, 3:09:55 AM command: SELECT, rowCount: 1 
+2020-01-29T19:12:01.819Z Local: 1/30/2020, 3:12:01 AM 
+    DO $$ BEGIN
+        CREATE TYPE Producer AS (id INTEGER, name TEXT);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-01-29T19:12:01.831Z Local: 1/30/2020, 3:12:01 AM Server is listening on port 8000 
+2020-01-29T19:12:01.855Z Local: 1/30/2020, 3:12:01 AM command: DO, rowCount: null 
+2020-01-29T19:12:01.856Z Local: 1/30/2020, 3:12:01 AM Created Producer type 
+2020-01-29T19:12:01.857Z Local: 1/30/2020, 3:12:01 AM 
+    DO $$ BEGIN
+        CREATE TYPE Spec AS (property TEXT, value TEXT);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-01-29T19:12:01.858Z Local: 1/30/2020, 3:12:01 AM command: DO, rowCount: null 
+2020-01-29T19:12:01.859Z Local: 1/30/2020, 3:12:01 AM Created Spec type 
+2020-01-29T19:12:01.859Z Local: 1/30/2020, 3:12:01 AM 
+    CREATE TABLE IF NOT EXISTS items_table(
+    id serial PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL,
+    producer Producer NOT NULL,
+    price NUMERIC NOT NULL,
+    unit TEXT NOT NULL,
+    description TEXT NOT NULL,
+    spec Spec,
+    cover_img TEXT NOT NULL, 
+    imgs TEXT[], 
+    create_on TIMESTAMP default current_timestamp); 
+2020-01-29T19:12:01.861Z Local: 1/30/2020, 3:12:01 AM command: CREATE, rowCount: null 
+2020-01-29T19:12:01.862Z Local: 1/30/2020, 3:12:01 AM Created items_table 
+2020-01-29T19:12:01.862Z Local: 1/30/2020, 3:12:01 AM item_action is mounted By function(req, res, next) {
+    app.handle(req, res, next);
+  } 
+2020-01-29T19:12:05.867Z Local: 1/30/2020, 3:12:05 AM 
+    DO $$ BEGIN
+        CREATE TYPE Producer AS (id INTEGER, name TEXT);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-01-29T19:12:05.897Z Local: 1/30/2020, 3:12:05 AM command: DO, rowCount: null 
+2020-01-29T19:12:05.901Z Local: 1/30/2020, 3:12:05 AM 
+    DO $$ BEGIN
+        CREATE TYPE Spec AS (property TEXT, value TEXT);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-01-29T19:12:05.902Z Local: 1/30/2020, 3:12:05 AM command: DO, rowCount: null 
+2020-01-29T19:12:05.904Z Local: 1/30/2020, 3:12:05 AM 
+    CREATE TABLE IF NOT EXISTS items_table(
+    id serial PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL,
+    producer Producer NOT NULL,
+    price NUMERIC NOT NULL,
+    unit TEXT NOT NULL,
+    description TEXT NOT NULL,
+    spec Spec,
+    cover_img TEXT NOT NULL, 
+    imgs TEXT[], 
+    create_on TIMESTAMP default current_timestamp); 
+2020-01-29T19:12:05.905Z Local: 1/30/2020, 3:12:05 AM command: CREATE, rowCount: null 
+2020-01-29T19:12:05.907Z Local: 1/30/2020, 3:12:05 AM SELECT COUNT(*) FROM items_table; 
+2020-01-29T19:12:05.911Z Local: 1/30/2020, 3:12:05 AM command: SELECT, rowCount: 1 
+2020-01-29T19:12:05.913Z Local: 1/30/2020, 3:12:05 AM Warning: DbItem.insertItem spec = [object Object] is not an Array 
+2020-01-29T19:12:05.913Z Local: 1/30/2020, 3:12:05 AM 
+INSERT INTO items_table(
+name,
+producer,
+price,
+unit,
+description,
+spec,
+cover_img,
+imgs)
+VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'), '500', 'NTD', '# Traditional Flavor', json_populate_record(null::Spec, '{"property":"100g","value":"Heavily Baked","comment":"Strongest"}'), 'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","tea.jpg","child.jpg"]'))) RETURNING id; 
+2020-01-29T19:12:05.924Z Local: 1/30/2020, 3:12:05 AM command: INSERT, rowCount: 1 
+2020-01-29T19:12:05.926Z Local: 1/30/2020, 3:12:05 AM SELECT 
+    id, 
+    name,
+    row_to_json(producer) AS producer, 
+    price, 
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on
+    FROM items_table AS items_table ORDER BY create_on DESC LIMIT 3 OFFSET 2; 
+2020-01-29T19:12:05.930Z Local: 1/30/2020, 3:12:05 AM command: SELECT, rowCount: 3 
+2020-01-29T19:12:05.931Z Local: 1/30/2020, 3:12:05 AM SELECT 
+    id, 
+    name,
+    row_to_json(producer) AS producer, 
+    price, 
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on
+    FROM items_table AS items_table ORDER BY create_on DESC  OFFSET 0; 
+2020-01-29T19:12:05.938Z Local: 1/30/2020, 3:12:05 AM command: SELECT, rowCount: 121 
+2020-01-29T19:12:05.940Z Local: 1/30/2020, 3:12:05 AM SELECT 
+    id, 
+    name,
+    row_to_json(producer) AS producer, 
+    price, 
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on
+    FROM items_table AS items_table ORDER BY create_on DESC  ; 
+2020-01-29T19:12:05.946Z Local: 1/30/2020, 3:12:05 AM command: SELECT, rowCount: 121 
+2020-01-29T19:12:05.948Z Local: 1/30/2020, 3:12:05 AM SELECT 
+    id,
+    name,
+    row_to_json(producer) AS producer,
+    price,
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on 
+    FROM items_table WHERE id = '2'; 
+2020-01-29T19:12:05.951Z Local: 1/30/2020, 3:12:05 AM command: SELECT, rowCount: 1 
+2020-01-29T19:12:05.955Z Local: 1/30/2020, 3:12:05 AM SELECT 
+    id,
+    name,
+    row_to_json(producer) AS producer,
+    price,
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on
+    FROM items_table WHERE name = 'Oolong Tea'; 
+2020-01-29T19:12:05.957Z Local: 1/30/2020, 3:12:05 AM command: SELECT, rowCount: 2 
+2020-01-29T19:12:05.958Z Local: 1/30/2020, 3:12:05 AM SELECT 
+    id,
+    name,
+    row_to_json(producer) AS producer,
+    price,
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on 
+    FROM items_table WHERE (producer).id = '2'; 
+2020-01-29T19:12:05.960Z Local: 1/30/2020, 3:12:05 AM command: SELECT, rowCount: 2 
+2020-01-29T19:12:05.962Z Local: 1/30/2020, 3:12:05 AM SELECT 
+    id,
+    name,
+    row_to_json(producer) AS producer,
+    price,
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on 
+    FROM items_table WHERE (producer).name = 'dai'; 
+2020-01-29T19:12:05.964Z Local: 1/30/2020, 3:12:05 AM command: SELECT, rowCount: 2 
+2020-01-29T19:12:05.978Z Local: 1/30/2020, 3:12:05 AM SELECT COUNT(*) FROM items_table; 
+2020-01-29T19:12:05.983Z Local: 1/30/2020, 3:12:05 AM command: SELECT, rowCount: 1 
+2020-01-29T19:12:05.985Z Local: 1/30/2020, 3:12:05 AM Sending 1 rows to ::ffff:127.0.0.1 with  
+2020-01-29T19:12:06.019Z Local: 1/30/2020, 3:12:06 AM Warning: DbItem.insertItem price = 500 is not a Number 
+2020-01-29T19:12:06.020Z Local: 1/30/2020, 3:12:06 AM Warning: DbItem.insertItem spec = [object Object] is not an Array 
+2020-01-29T19:12:06.020Z Local: 1/30/2020, 3:12:06 AM 
+INSERT INTO items_table(
+name,
+producer,
+price,
+unit,
+description,
+spec,
+cover_img,
+imgs)
+VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'), '500', 'NTD', '# Traditional Flavor', json_populate_record(null::Spec, '{"property":"100g","value":"Heavily Baked","comment":"Strongest"}'), 'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","tea.jpg","child.jpg"]'))) RETURNING id; 
+2020-01-29T19:12:06.030Z Local: 1/30/2020, 3:12:06 AM command: INSERT, rowCount: 1 
+2020-01-29T19:12:06.040Z Local: 1/30/2020, 3:12:06 AM Sending 1 rows to ::ffff:127.0.0.1 with  
+2020-01-29T19:12:06.046Z Local: 1/30/2020, 3:12:06 AM SELECT 
+    id,
+    name,
+    row_to_json(producer) AS producer,
+    price,
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on 
+    FROM items_table WHERE id = '5'; 
+2020-01-29T19:12:06.049Z Local: 1/30/2020, 3:12:06 AM command: SELECT, rowCount: 1 
+2020-01-29T19:12:06.053Z Local: 1/30/2020, 3:12:06 AM Sending 1 rows to ::ffff:127.0.0.1 with  
+2020-01-29T19:12:06.060Z Local: 1/30/2020, 3:12:06 AM SELECT 
+    id,
+    name,
+    row_to_json(producer) AS producer,
+    price,
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on
+    FROM items_table WHERE name = 'Oolong Tea'; 
+2020-01-29T19:12:06.061Z Local: 1/30/2020, 3:12:06 AM command: SELECT, rowCount: 2 
+2020-01-29T19:12:06.069Z Local: 1/30/2020, 3:12:06 AM Sending 2 rows to ::ffff:127.0.0.1 with  
+2020-01-29T19:12:06.076Z Local: 1/30/2020, 3:12:06 AM SELECT 
+    id,
+    name,
+    row_to_json(producer) AS producer,
+    price,
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on 
+    FROM items_table WHERE (producer).id = '2'; 
+2020-01-29T19:12:06.077Z Local: 1/30/2020, 3:12:06 AM command: SELECT, rowCount: 2 
+2020-01-29T19:12:06.082Z Local: 1/30/2020, 3:12:06 AM Sending 2 rows to ::ffff:127.0.0.1 with  
+2020-01-29T19:12:06.089Z Local: 1/30/2020, 3:12:06 AM SELECT 
+    id,
+    name,
+    row_to_json(producer) AS producer,
+    price,
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on 
+    FROM items_table WHERE (producer).name = 'Dai'; 
+2020-01-29T19:12:06.090Z Local: 1/30/2020, 3:12:06 AM command: SELECT, rowCount: 0 
+2020-01-29T19:12:06.091Z Local: 1/30/2020, 3:12:06 AM Sending 0 rows to ::ffff:127.0.0.1 with  
+2020-01-29T19:12:06.097Z Local: 1/30/2020, 3:12:06 AM SELECT 
+    id, 
+    name,
+    row_to_json(producer) AS producer, 
+    price, 
+    unit,
+    description,
+    row_to_json(spec) AS spec,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on
+    FROM items_table AS items_table ORDER BY create_on DESC LIMIT 2 OFFSET 3; 
+2020-01-29T19:12:06.100Z Local: 1/30/2020, 3:12:06 AM command: SELECT, rowCount: 2 
+2020-01-29T19:12:06.102Z Local: 1/30/2020, 3:12:06 AM Sending 2 rows to ::ffff:127.0.0.1 with  
+2020-01-29T19:12:06.106Z Local: 1/30/2020, 3:12:06 AM CREATE TABLE IF NOT EXISTS posts_table(id serial PRIMARY KEY NOT NULL,title TEXT NOT NULL,subtitle TEXT NOT NULL,author TEXT NOT NULL,content TEXT NOT NULL,cover_img TEXT,create_on TIMESTAMP default current_timestamp, latest_modify TIMESTAMP default current_timestamp) 
+2020-01-29T19:12:06.124Z Local: 1/30/2020, 3:12:06 AM command: CREATE, rowCount: null 
+2020-01-29T19:12:06.126Z Local: 1/30/2020, 3:12:06 AM SELECT COUNT(*) FROM posts_table; 
+2020-01-29T19:12:06.128Z Local: 1/30/2020, 3:12:06 AM command: SELECT, rowCount: 1, post count: 40 
+2020-01-29T19:12:06.130Z Local: 1/30/2020, 3:12:06 AM SELECT * FROM posts_table ORDER BY latest_modify DESC LIMIT 3 OFFSET 2; 
+2020-01-29T19:12:06.133Z Local: 1/30/2020, 3:12:06 AM command: SELECT, rowCount: 3 
+2020-01-29T19:12:06.134Z Local: 1/30/2020, 3:12:06 AM SELECT * FROM posts_table ORDER BY latest_modify DESC  OFFSET 0; 
+2020-01-29T19:12:06.138Z Local: 1/30/2020, 3:12:06 AM command: SELECT, rowCount: 40 
+2020-01-29T19:12:06.139Z Local: 1/30/2020, 3:12:06 AM SELECT * FROM posts_table ORDER BY latest_modify DESC  ; 
+2020-01-29T19:12:06.145Z Local: 1/30/2020, 3:12:06 AM command: SELECT, rowCount: 40 
+2020-01-29T19:12:06.147Z Local: 1/30/2020, 3:12:06 AM SELECT * FROM posts_table WHERE id = '2'; 
+2020-01-29T19:12:06.149Z Local: 1/30/2020, 3:12:06 AM command: SELECT, rowCount: 1 

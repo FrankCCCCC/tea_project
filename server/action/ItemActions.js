@@ -56,8 +56,6 @@ item_action.get('/query_items_count_all', (req, res) => {
 })
 
 item_action.post('/insert_item', (req, res) => {
-    console.log(req.body)
-    console.log(req.body.description)
     DbItem.insertItem(String(req.body.name), JSON.parse(String(req.body.producer)), String(req.body.price), String(req.body.unit), String(req.body.description), JSON.parse(String(req.body.spec)), String(req.body.cover_img), JSON.parse(String(req.body.imgs))).then(
         (resolve) => {
             console.log(resolve.rows[0])
