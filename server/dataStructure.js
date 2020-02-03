@@ -39,11 +39,12 @@ const config = {
         type_name: "Item",
         id: {key: "id", schema: "id serial PRIMARY KEY NOT NULL"},
         name: {key: "name", schema: "name TEXT NOT NULL"},
+        // producer: {key: "producer", schema: "producer INTEGER REFERENCE farmers_table(id) ON  DELETE CASCADE"},
         producer: {key: "producer", schema: "producer Producer NOT NULL"}, // id Array
         price: {key: "price", schema: "price NUMERIC NOT NULL"},
         unit: {key: "unit", schema: "unit TEXT NOT NULL"},
         description: {key: "description", schema: "description TEXT NOT NULL"}, // Markdown Format
-        spec: {key: "spec", schema: "spec Spec"}, // 
+        spec: {key: "spec", schema: "spec Spec ARRAY"}, // 
         cover_img: {key: "cover_img", schema: "cover_img TEXT NOT NULL"},
         imgs: {key: "imgs", schema: "imgs TEXT[]"}, // String Array
         create_on: {key: "create_on", schema: "create_on TIMESTAMP default current_timestamp"}

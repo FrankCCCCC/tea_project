@@ -8,6 +8,7 @@ function query(command){
     util.log(command)
     return pool.query(command).then(
         (resolve) => {
+            console.log(resolve)
             util.log(`command: ${resolve.command}, rowCount: ${resolve.rowCount}`)
             return resolve
         }

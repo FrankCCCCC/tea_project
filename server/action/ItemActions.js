@@ -50,18 +50,19 @@ item_action.get('/query_items_count_all', (req, res) => {
             util.log(`Error: ${reject}`)
             res.header("Access-Control-Allow-Origin", "*");
             // res.send(reject)
-            res.json(util.makeRes(reject))
+            res.json(util.makeRes(reject, false))
         }
     )
 })
 
 item_action.post('/insert_item', (req, res) => {
-    DbItem.insertItem(String(req.body.name), JSON.parse(String(req.body.producer)), String(req.body.price), String(req.body.unit), String(req.body.description), JSON.parse(String(req.body.spec)), String(req.body.cover_img), JSON.parse(String(req.body.imgs))).then(
+    DbItem.insertItem(String(req.body.name), JSON.parse(String(req.body.producer)), Number(req.body.price), String(req.body.unit), String(req.body.description), JSON.parse(util.NaNUndefinedtoNull(req.body.spec)), String(req.body.cover_img), JSON.parse(util.NaNUndefinedtoNull(req.body.imgs))).then(
         (resolve) => {
             console.log(resolve.rows[0])
             util.log(`Sending ${resolve.rowCount} rows to ${req.ip} with ${req.ips}`)
             res.header("Access-Control-Allow-Origin", "*");
             // res.send(resolve.rows[0])
+            console.log(util.makeRes(resolve.rows[0]))
             res.json(util.makeRes(resolve.rows[0]))
         }
     ).catch(
@@ -69,7 +70,7 @@ item_action.post('/insert_item', (req, res) => {
             util.log(`Error: ${reject}`)
             res.header("Access-Control-Allow-Origin", "*");
             // res.send(reject)
-            res.json(util.makeRes(reject))
+            res.json(util.makeRes(reject, false))
         }
     )
 })
@@ -93,7 +94,7 @@ item_action.post('/query_item_by_id', (req, res) => {
             util.log(`Error: ${reject}`)
             res.header("Access-Control-Allow-Origin", "*");
             // res.send(reject)
-            res.json(util.makeRes(reject))
+            res.json(util.makeRes(reject, false))
         }
     );
 })
@@ -121,7 +122,7 @@ item_action.post('/query_item_by_name', (req, res) => {
             util.log(`Error: ${reject}`)
             res.header("Access-Control-Allow-Origin", "*");
             // res.send(reject)
-            res.json(util.makeRes(reject))
+            res.json(util.makeRes(reject, false))
         }
     );
 })
@@ -149,7 +150,7 @@ item_action.post('/query_item_by_producer_id', (req, res) => {
             util.log(`Error: ${reject}`)
             res.header("Access-Control-Allow-Origin", "*");
             // res.send(reject)
-            res.json(util.makeRes(reject))
+            res.json(util.makeRes(reject, false))
         }
     );
 })
@@ -177,7 +178,7 @@ item_action.post('/query_item_by_producer_name', (req, res) => {
             util.log(`Error: ${reject}`)
             res.header("Access-Control-Allow-Origin", "*");
             // res.send(reject)
-            res.json(util.makeRes(reject))
+            res.json(util.makeRes(reject, false))
         }
     );
 })
@@ -195,7 +196,7 @@ item_action.post('/query_item_list', (req, res) => {
         res.header("Access-Control-Allow-Origin", "*");
         util.log(`Error: ${reject}`)
         // res.send(reject)
-        res.json(util.makeRes(reject))
+        res.json(util.makeRes(reject, false))
     });
 });
 

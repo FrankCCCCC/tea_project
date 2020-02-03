@@ -38,51 +38,98 @@ function makeRes(resOgj, is_success=true){
     return res
 }
 
-function checkInt(i, paramName){
-    if(typeof(i) !== 'number' || parseInt(i, 10) !== i){
-        log(`Warning: ${paramName} = ${i} is not a Integer`)
-        throw `Warning: ${paramName} = ${i} is not a Integer`
+function checkInt(i, paramName, isRequired=true){
+    if(typeof(i) !== 'number' || parseInt(i, 10) !== i || i === null || i === undefined || Number.isNaN(i)){
+        if(isRequired){
+            log(`Warning: ${paramName} = ${i} is not a Integer`)
+            throw `Warning: ${paramName} = ${i} is not a Integer`
+        }else{
+            return null
+        }
+    }else{
+        return parseInt(i, 10)
     }
-    return parseInt(i, 10)
 }
 
-function checkNumber(i, paramName){
-    if(typeof(i) !== 'number'){
-        log(`Warning: ${paramName} = ${i} is not a Number`)
+function checkNumber(i, paramName, isRequired=true){
+    if(typeof(i) !== 'number' || i === null || i === undefined || Number.isNaN(i)){
+        if(isRequired){
+            log(`Warning: ${paramName} = ${i} is not a Number`)
+            throw `Warning: ${paramName} = ${i} is not a Number`
+        }else{
+            return null
+        }
+    }else{
+        return Number(i)
     }
-    return Number(i)
 }
 
-function checkString(i, paramName){
-    if(typeof(i) !== 'string'){
-        log(`Warning: ${paramName} = ${i} is not a String`)
-        throw `Warning: ${paramName} = ${i} is not a String`
+function checkString(i, paramName, isRequired=true){
+    if(typeof(i) !== 'string' || i === "" || i === null || i === undefined || Number.isNaN(i)){
+        if(isRequired){
+            log(`Warning: ${paramName} = ${i} is not a String`)
+            throw `Warning: ${paramName} = ${i} is not a String`
+        }else{
+            return null
+        }
+    }else{
+        return String(i)
     }
-    return String(i)
 }
 
-function checkObject(i, paramName){
-    if(typeof(i) !== 'object'){
-        log(`Warning: ${paramName} = ${i} is not an Object`)
-        return null
-    }else if(i === null){
-        log(`Warning: ${paramName} = ${i} is null`)
-        return i
+function checkObject(i, paramName, isRequired=true){
+    if(typeof(i) !== 'object' || Object.keys(i).length <=0 || i === null || i === undefined || Number.isNaN(i)){
+        if(isRequired){
+            log(`Warning: ${paramName} = ${i} is not an Object`)
+            throw `Warning: ${paramName} = ${i} is not an Object`
+        }else{
+            return null
+        }
     }else{
         return i
     }
 }
 
-function checkArray(i, paramName){
-    if(!Array.isArray(i)){
-        log(`Warning: ${paramName} = ${i} is not an Array`)
-        return []
+// function checkArray(i, paramName, isRequired=true){
+//     if(!Array.isArray(i)){
+//         log(`Warning: ${paramName} = ${i} is not an Array`)
+            // throw `Warning: ${paramName} = ${i} is not an Array`
+//         return []
+//     }else{
+//         if(isRequired){
+//             if(i === null || i === undefined || i === NaN || i === "" || i=== {} || i=== []){
+//                 log(`Warning: ${paramName} = ${i} is Required`)
+//                 throw `Warning: ${paramName} = ${i} is Required`
+//             }
+//         }else{
+//             if(i === null || i === undefined || i === NaN || i === "" || i=== {} || i=== []){
+//                 return null
+//             }else{
+//                 return i
+//             }
+//         }
+//     }
+// }
+
+function checkArray(i, paramName, isRequired=true){
+    if(!Array.isArray(i) || i.length <= 0 || i === undefined || i === null || Number.isNaN(i)){
+        if(isRequired){
+            log(`Warning: ${paramName} = ${i} is not an Array`)
+            throw `Warning: ${paramName} = ${i} is not an Array`
+        }else{
+            return null
+        }
     }else{
         return i
     }
 }
 
+function NaNUndefinedtoNull(i){
+    if(i === undefined || Number.isNaN(i)){return null}
+    else{return i}
+}
 
+// console.log(checkArray(undefined))
 
 exports.log = log
 exports.shortStr = shortStr
@@ -92,3 +139,4 @@ exports.checkNumber = checkNumber
 exports.checkString = checkString
 exports.checkObject = checkObject
 exports.checkArray = checkArray
+exports.NaNUndefinedtoNull = NaNUndefinedtoNull

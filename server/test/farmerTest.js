@@ -1,135 +1,157 @@
-// const should = require('should')
-// const DbFarmer = require('../db/DbFarmer');
-// const config = require('../config/serverConfig')
-// const fetch = require('node-fetch')
+const should = require('should')
+const DbFarmer = require('../db/DbFarmer');
+const config = require('../config/serverConfig')
+const fetch = require('node-fetch')
 
-// var allFarmerCount = 0;
+var allFarmerCount = 0;
 
-// describe('DbFarmer.createProducerType', () => {
-//     it('should create Producer type', done => {
-//         DbFarmer.createProducerType().then((resolve) => {
-//             resolve.command.should.equal('DO')
-//             done()
-//         })
-//     })
-// })
+describe('DbFarmer.createProducerType', () => {
+    it('should create Producer type', done => {
+        DbFarmer.createGoodType().then((resolve) => {
+            resolve.command.should.equal('DO')
+            done()
+        })
+    })
+})
 
-// describe('DbFarmer.createSpecType', () => {
-//     it('should create Spec type', done => {
-//         DbFarmer.createSpecType().then((resolve) => {
-//             resolve.command.should.equal('DO')
-//             done()
-//         })
-//     })
-// })
+describe('DbFarmer.createSpecType', () => {
+    it('should create Spec type', done => {
+        DbFarmer.createSectionType().then((resolve) => {
+            resolve.command.should.equal('DO')
+            done()
+        })
+    })
+})
 
-// describe('DbFarmer.createFarmerTable', () => {
-//     it('should create farmers_table', done => {
-//         DbFarmer.createFarmersTable().then((resolve) => {
-//             resolve.command.should.equal('CREATE')
-//             done()
-//         })
-//     })
-// })
+describe('DbFarmer.createFarmerTable', () => {
+    it('should create farmers_table', done => {
+        DbFarmer.createFarmersTable().then((resolve) => {
+            resolve.command.should.equal('CREATE')
+            done()
+        })
+    })
+})
 
-// describe('DbFarmer.queryFarmersCountAll', () => {
-//     it('should count all farmers in farmers_table', done => {
-//         DbFarmer.queryFarmersCountAll().then((resolve) => {
-//             allFarmerCount = parseInt(resolve.rows[0].count);
-//             console.log(`All Farmer Count: ${allFarmerCount}`)
-//             resolve.command.should.equal('SELECT')
-//             done()
-//         })
-//     })
-// })
+describe('DbFarmer.queryFarmersCountAll', () => {
+    it('should count all farmers in farmers_table', done => {
+        DbFarmer.queryFarmersCountAll().then((resolve) => {
+            allFarmerCount = parseInt(resolve.rows[0].count);
+            console.log(`All Farmer Count: ${allFarmerCount}`)
+            resolve.command.should.equal('SELECT')
+            done()
+        })
+    })
+})
 
-// describe('DbFarmer.insertFarmer', () => {
-//     it(`should insert farmer into farmers_table with values "Green Tea", {id: 3, name: "Lin"}, 500, "NTD", "# Traditional Flavor", {property: "100g", value: "Heavily Baked", comment: "Strongest"}, "farmer1.jpg", ['hill1.jpg', 'tea.jpg', 'child.jpg']`, done => {
-//         DbFarmer.insertFarmer("Green Tea", {id: 3, name: "Lin"}, 500, "NTD", "# Traditional Flavor", {property: "100g", value: "Heavily Baked", comment: "Strongest"}, "farmer1.jpg", ['hill1.jpg', 'tea.jpg', 'child.jpg']).then((resolve) => {
-//             resolve.command.should.equal('INSERT')
-//             resolve.rows[0].id.should.equal(allFarmerCount + 1)
-//             allFarmerCount = allFarmerCount + 1;
-//             done()
-//         })
-//     })
-// })
+describe('DbFarmer.insertFarmer', () => {
+    let sections = [
+        {title: "The Best", subtitle: "Best", description: "Universal Best Better Tea", img: "tea.jpg"},
+        {title: "The Better", subtitle: "Better", description: "Universal Better Tea", img: "tea_tree.jpg"},
+    ]
+    let items = [
+        {id: 1, name: "Oolong Tea",},
+        {id: 3, name: "Black Tea"}
+    ]
+    let imgs = ["hill1.jpg", "hill2.jpg", "child.jpg"]
+    it(`should insert farmer into farmers_table with values "Green Tea", {id: 3, name: "Lin"}, 500, "NTD", "# Traditional Flavor", {property: "100g", value: "Heavily Baked", comment: "Strongest"}, "farmer1.jpg", ['hill1.jpg', 'tea.jpg', 'child.jpg']`, done => {
+        DbFarmer.insertFarmer("Dai", "Taiwan", "Taiwan", "Nantou", "LuGu", "FongHuang", "indus.rd", "Universal Best Tea", "# Best Tea Ever", sections, items, "farmer1.jpg", imgs).then((resolve) => {
+            resolve.command.should.equal('INSERT')
+            resolve.rows[0].id.should.equal(allFarmerCount + 1)
+            allFarmerCount = allFarmerCount + 1;
+            done()
+        })
+    })
 
-// describe('DbFarmer.queryFarmerList', () => {
-//     it(`should list farmers in farmers_table count=3, offset=2, ${allFarmerCount}`, done => {
-//         DbFarmer.queryFarmerList(3, 2).then((resolve) => {
-//             resolve.command.should.equal('SELECT')
-//             resolve.rows[0].id.should.equal(allFarmerCount - 2)
-//             resolve.rowCount.should.equal(3)
-//             done()
-//         })
-//     })
-//     it(`should list all farmers in farmers_table count=-1, offset=0, ${allFarmerCount}`, done => {
-//         DbFarmer.queryFarmerList(-1, 0).then((resolve) => {
-//             resolve.command.should.equal('SELECT')
-//             resolve.rows[0].id.should.equal(allFarmerCount)
-//             resolve.rowCount.should.equal(allFarmerCount)
-//             done()
-//         })
-//     })
-//     it(`should list all farmers in farmers_table count=-1, offset=-2, ${allFarmerCount}`, done => {
-//         DbFarmer.queryFarmerList(-1, -1).then((resolve) => {
-//             resolve.command.should.equal('SELECT')
-//             resolve.rows[0].id.should.equal(allFarmerCount)
-//             resolve.rowCount.should.equal(allFarmerCount)
-//             done()
-//         })
-//     })
-// })
+    it(`should insert farmer into farmers_table with values "Green Tea", {id: 3, name: "Lin"}, 500, "NTD", "# Traditional Flavor", {property: "100g", value: "Heavily Baked", comment: "Strongest"}, "farmer1.jpg", ['hill1.jpg', 'tea.jpg', 'child.jpg']`, done => {
+        DbFarmer.insertFarmer("Dai", "Taiwan", "Taiwan", "Nantou", "LuGu", "FongHuang", "indus.rd", undefined, "# Best Tea Ever", sections, undefined, "farmer1.jpg", undefined).then((resolve) => {
+            resolve.command.should.equal('INSERT')
+            resolve.rows[0].id.should.equal(allFarmerCount + 1)
+            allFarmerCount = allFarmerCount + 1;
+            done()
+        })
+    })
+})
 
-// describe('DbFarmer.queryFarmerById', () => {
-//     it(`should query farmer in farmers_table by id=2`, done => {
-//         DbFarmer.queryFarmerById(2).then((resolve) => {
-//             resolve.command.should.equal('SELECT')
-//             resolve.rowCount.should.equal(1)
-//             resolve.rows[0].id.should.equal(2)
-//             done()
-//         })
-//     })
-// })
+describe('DbFarmer.queryFarmerList', () => {
+    it(`should list farmers in farmers_table count=3, offset=2, ${allFarmerCount}`, done => {
+        DbFarmer.queryFarmerList(3, 2).then((resolve) => {
+            resolve.command.should.equal('SELECT')
+            resolve.rows[0].id.should.equal(allFarmerCount - 2)
+            resolve.rowCount.should.equal(3)
+            done()
+        })
+    })
+    it(`should list all farmers in farmers_table count=-1, offset=0, ${allFarmerCount}`, done => {
+        DbFarmer.queryFarmerList(-1, 0).then((resolve) => {
+            resolve.command.should.equal('SELECT')
+            resolve.rows[0].id.should.equal(allFarmerCount)
+            resolve.rowCount.should.equal(allFarmerCount)
+            done()
+        })
+    })
+    it(`should list all farmers in farmers_table count=-1, offset=-2, ${allFarmerCount}`, done => {
+        DbFarmer.queryFarmerList(-1, -1).then((resolve) => {
+            resolve.command.should.equal('SELECT')
+            resolve.rows[0].id.should.equal(allFarmerCount)
+            resolve.rowCount.should.equal(allFarmerCount)
+            done()
+        })
+    })
+})
 
-// describe('DbFarmer.queryFarmerByName', () => {
-//     it(`should query farmer in farmers_table by name='Oolong Tea'`, done => {
-//         DbFarmer.queryFarmerByName('Oolong Tea').then((resolve) => {
-//             resolve.command.should.equal('SELECT')
-//             let rows = parseInt(resolve.rowCount)
-//             for(let i = 0; i < rows; i++){
-//                 resolve.rows[i].name.should.equal('Oolong Tea')
-//             }
-//             done()
-//         })
-//     })
-// })
+describe('DbFarmer.queryFarmerById', () => {
+    it(`should query farmer in farmers_table by id=2`, done => {
+        DbFarmer.queryFarmerById(2).then((resolve) => {
+            resolve.command.should.equal('SELECT')
+            resolve.rowCount.should.equal(1)
+            resolve.rows[0].id.should.equal(2)
+            done()
+        })
+    })
+})
 
-// describe('DbFarmer.queryFarmerByProducerId', () => {
-//     it(`should query farmer in farmers_table by producer id=2`, done => {
-//         DbFarmer.queryFarmerByProducerId(2).then((resolve) => {
-//             resolve.command.should.equal('SELECT')
-//             let rows = parseInt(resolve.rowCount)
-//             for(let i = 0; i < rows; i++){
-//                 resolve.rows[i].producer.id.should.equal(2)
-//             }
-//             done()
-//         })
-//     })
-// })
+describe('DbFarmer.queryFarmerByName', () => {
+    it(`should query farmer in farmers_table by name='Dai'`, done => {
+        DbFarmer.queryFarmerByName('Dai').then((resolve) => {
+            resolve.command.should.equal('SELECT')
+            let rows = parseInt(resolve.rowCount)
+            for(let i = 0; i < rows; i++){
+                resolve.rows[i].name.should.equal('Dai')
+            }
+            done()
+        })
+    })
+})
 
-// describe('DbFarmer.queryFarmerByProducerName', () => {
-//     it(`should query farmer in farmers_table by producer name='dai'`, done => {
-//         DbFarmer.queryFarmerByProducerName('dai').then((resolve) => {
-//             resolve.command.should.equal('SELECT')
-//             let rows = parseInt(resolve.rowCount)
-//             for(let i = 0; i < rows; i++){
-//                 resolve.rows[i].producer.name.should.equal('dai')
-//             }
-//             done()
-//         })
-//     })
-// })
+describe('DbFarmer.queryFarmerByItemId', () => {
+    it(`should query farmer in farmers_table by item id=2`, done => {
+        DbFarmer.queryFarmerByItemId(2).then((resolve) => {
+            resolve.command.should.equal('SELECT')
+            let rows = parseInt(resolve.rows[i].items.length)
+            let f = false
+            for(let i = 0; i < rows; i++){
+                if(resolve.rows[i].items[i].id == 2){f = true}
+            }
+            f.should.equal(true)
+            done()
+        })
+    })
+})
+
+describe('DbFarmer.queryFarmerByItemName', () => {
+    it(`should query farmer in farmers_table by item name='Oolong Tea'`, done => {
+        DbFarmer.queryFarmerByItemName('Oolong Tea').then((resolve) => {
+            resolve.command.should.equal('SELECT')
+            let rows = parseInt(resolve.rows[i].items.length)
+            let f = false
+            for(let i = 0; i < rows; i++){
+                if(resolve.rows[i].items[i].name == 'Oolong Tea'){f = true}
+            }
+            f.should.equal(true)
+            done()
+        })
+    })
+})
 
 // var farmerCountActions = 0;
 // describe('FarmerAction.queryFarmersCountAll', () => {

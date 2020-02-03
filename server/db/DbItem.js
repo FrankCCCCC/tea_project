@@ -45,10 +45,22 @@ function insertItem(name, producer, price, unit, description, spec, cover_img, i
     Util.checkNumber(price, `DbItem.insertItem price`)
     Util.checkString(unit, `DbItem.insertItem unit`)
     Util.checkString(description, `DbItem.insertItem description`)
-    Util.checkArray(spec, `DbItem.insertItem spec`)
+    let reSpec = Util.checkArray(spec, `DbItem.insertItem spec`, false)
     Util.checkString(cover_img, `DbItem.insertItem cover_img`)
-    Util.checkArray(imgs, `DbItem.insertItem imgs`)
+    let reImgs =  Util.checkArray(imgs, `DbItem.insertItem imgs`, false)
     var description_new = description.replace(/'/g, `''`);
+
+    if(reSpec === null) {
+        reSpec = `null`
+    }else{
+        reSpec = `ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('${JSON.stringify(reSpec)}')))`
+    }
+
+    if(reImgs === null){
+        reImgs = `null`
+    }else{
+        reImgs = `ARRAY(SELECT json_array_elements_text('${JSON.stringify(reImgs)}'))`
+    }
     let command = `
 INSERT INTO ${ds.dataStructure.item.table_name}(
 ${ds.dataStructure.item.name.key},
@@ -59,7 +71,7 @@ ${ds.dataStructure.item.description.key},
 ${ds.dataStructure.item.spec.key},
 ${ds.dataStructure.item.cover_img.key},
 ${ds.dataStructure.item.imgs.key})
-VALUES('${name}', json_populate_record(null::Producer, '${JSON.stringify(producer)}'), '${price}', '${unit}', '${description_new}', json_populate_record(null::Spec, '${JSON.stringify(spec)}'), '${cover_img}', ARRAY(SELECT json_array_elements_text('${JSON.stringify(imgs)}'))) RETURNING id;`;
+VALUES('${name}', json_populate_record(null::Producer, '${JSON.stringify(producer)}'), '${price}', '${unit}', '${description_new}', ${reSpec}, '${cover_img}', ${reImgs}) RETURNING id;`;
     return Db.query(command)
 }
 
@@ -77,11 +89,11 @@ function queryItemById(itemId){
     ${ds.dataStructure.item.price.key},
     ${ds.dataStructure.item.unit.key},
     ${ds.dataStructure.item.description.key},
-    row_to_json(${ds.dataStructure.item.spec.key}) AS ${ds.dataStructure.item.spec.key},
+    array_to_json(${ds.dataStructure.item.spec.key}) AS ${ds.dataStructure.item.spec.key},
     ${ds.dataStructure.item.cover_img.key},
     array_to_json(${ds.dataStructure.item.imgs.key}) AS ${ds.dataStructure.item.imgs.key},
     ${ds.dataStructure.item.create_on.key} 
-    FROM ${ds.dataStructure.item.table_name} WHERE ${ds.dataStructure.item.id.key} = '${Number(itemId)}';`;
+    FROM ${ds.dataStructure.item.table_name} WHERE ${ds.dataStructure.item.id.key} = '${parseInt(itemId, 10)}';`;
     return Db.query(command)
 }
 
@@ -94,7 +106,7 @@ function queryItemByName(itemName){
     ${ds.dataStructure.item.price.key},
     ${ds.dataStructure.item.unit.key},
     ${ds.dataStructure.item.description.key},
-    row_to_json(${ds.dataStructure.item.spec.key}) AS ${ds.dataStructure.item.spec.key},
+    array_to_json(${ds.dataStructure.item.spec.key}) AS ${ds.dataStructure.item.spec.key},
     ${ds.dataStructure.item.cover_img.key},
     array_to_json(${ds.dataStructure.item.imgs.key}) AS ${ds.dataStructure.item.imgs.key},
     ${ds.dataStructure.item.create_on.key}
@@ -111,11 +123,11 @@ function queryItemByProducerId(producerId){
     ${ds.dataStructure.item.price.key},
     ${ds.dataStructure.item.unit.key},
     ${ds.dataStructure.item.description.key},
-    row_to_json(${ds.dataStructure.item.spec.key}) AS ${ds.dataStructure.item.spec.key},
+    array_to_json(${ds.dataStructure.item.spec.key}) AS ${ds.dataStructure.item.spec.key},
     ${ds.dataStructure.item.cover_img.key},
     array_to_json(${ds.dataStructure.item.imgs.key}) AS ${ds.dataStructure.item.imgs.key},
     ${ds.dataStructure.item.create_on.key} 
-    FROM ${ds.dataStructure.item.table_name} WHERE (${ds.dataStructure.item.producer.key}).${ds.dataStructure.Producer.id.key} = '${Number(producerId)}';`;
+    FROM ${ds.dataStructure.item.table_name} WHERE (${ds.dataStructure.item.producer.key}).${ds.dataStructure.Producer.id.key} = '${parseInt(producerId, 10)}';`;
     return Db.query(command)
 }
 
@@ -128,7 +140,7 @@ function queryItemByProducerName(producerName){
     ${ds.dataStructure.item.price.key},
     ${ds.dataStructure.item.unit.key},
     ${ds.dataStructure.item.description.key},
-    row_to_json(${ds.dataStructure.item.spec.key}) AS ${ds.dataStructure.item.spec.key},
+    array_to_json(${ds.dataStructure.item.spec.key}) AS ${ds.dataStructure.item.spec.key},
     ${ds.dataStructure.item.cover_img.key},
     array_to_json(${ds.dataStructure.item.imgs.key}) AS ${ds.dataStructure.item.imgs.key},
     ${ds.dataStructure.item.create_on.key} 
@@ -160,7 +172,7 @@ function queryItemList(count, offset){
     ${ds.dataStructure.item.price.key}, 
     ${ds.dataStructure.item.unit.key},
     ${ds.dataStructure.item.description.key},
-    row_to_json(${ds.dataStructure.item.spec.key}) AS ${ds.dataStructure.item.spec.key},
+    array_to_json(${ds.dataStructure.item.spec.key}) AS ${ds.dataStructure.item.spec.key},
     ${ds.dataStructure.item.cover_img.key},
     array_to_json(${ds.dataStructure.item.imgs.key}) AS ${ds.dataStructure.item.imgs.key},
     ${ds.dataStructure.item.create_on.key}
@@ -171,13 +183,15 @@ function queryItemList(count, offset){
 // createProducerType();
 // createSpecType();
 // createItemsTable();
-// insertItem("Green Tea", {id: 3, name: "Lin"}, 500, "NTD", "# Traditional Flavor", {property: "100g", value: "Heavily Baked", comment: "Strongest"}, "farmer1.jpg", ['hill1.jpg', 'tea.jpg', 'child.jpg'])
+// insertItem("Green Tea", {id: 3, name: "Lin"}, 500, "NTD", "# Traditional Flavor", [{property: "100g", value: "Heavily Baked", comment: "Strongest"}, {property: "100g", value: "Heavily Baked", comment: "Strongest"}], "farmer1.jpg", ['hill1.jpg', 'tea.jpg', 'child.jpg'])
 // queryItemsCountAll();
-// queryItemById('1');
+// queryItemById(1);
 // queryItemByName(`1=1`);
 // queryItemByProducerId(2);
 // queryItemByProducerName('dai');
 // queryItemList(3,2);
+
+// pool.end()
 
 exports.createProducerType = createProducerType;
 exports.createSpecType = createSpecType;

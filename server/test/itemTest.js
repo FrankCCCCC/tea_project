@@ -45,7 +45,7 @@ describe('DbItem.queryItemsCountAll', () => {
 
 describe('DbItem.insertItem', () => {
     it(`should insert item into items_table with values "Green Tea", {id: 3, name: "Lin"}, 500, "NTD", "# Traditional Flavor", {property: "100g", value: "Heavily Baked", comment: "Strongest"}, "farmer1.jpg", ['hill1.jpg', 'tea.jpg', 'child.jpg']`, done => {
-        DbItem.insertItem("Green Tea", {id: 3, name: "Lin"}, 500, "NTD", "# Traditional Flavor", {property: "100g", value: "Heavily Baked", comment: "Strongest"}, "farmer1.jpg", ['hill1.jpg', 'tea.jpg', 'child.jpg']).then((resolve) => {
+        DbItem.insertItem("Green Tea", {id: 3, name: "Lin"}, 500, "NTD", "# Traditional Flavor", [{property: "100g", value: "Heavily Baked", comment: "Strongest"}, {property: "100g", value: "Heavily Baked", comment: "Strongest"}], "farmer1.jpg", ['hill1.jpg', 'tea.jpg', 'child.jpg']).then((resolve) => {
             resolve.command.should.equal('INSERT')
             resolve.rows[0].id.should.equal(allItemCount + 1)
             allItemCount = allItemCount + 1;
@@ -162,7 +162,7 @@ describe('ItemAction.insertItem', () => {
                 price: 500,
                 unit: "NTD",
                 description: "# Traditional Flavor",
-                spec: JSON.stringify({property: "100g", value: "Heavily Baked", comment: "Strongest"}),
+                spec: JSON.stringify([{property: "100g", value: "Heavily Baked", comment: "Strongest"}, {property: "100g", value: "Heavily Baked", comment: "Strongest"}]),
                 cover_img: "farmer1.jpg",
                 imgs: JSON.stringify(["hill1.jpg", "tea.jpg", "child.jpg"])
             }),
