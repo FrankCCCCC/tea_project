@@ -129,7 +129,7 @@ function NaNUndefinedtoNull(i){
     else{return i}
 }
 
-// console.log(checkArray(undefined))
+// console.log(checkString(undefined, "", false));
 
 exports.log = log
 exports.shortStr = shortStr

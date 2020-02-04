@@ -127,12 +127,16 @@ describe('DbFarmer.queryFarmerByItemId', () => {
     it(`should query farmer in farmers_table by item id=2`, done => {
         DbFarmer.queryFarmerByItemId(2).then((resolve) => {
             resolve.command.should.equal('SELECT')
-            let rows = parseInt(resolve.rows[i].items.length)
+            let rowCount = parseInt(resolve.rowCount, 10)
             let f = false
-            for(let i = 0; i < rows; i++){
-                if(resolve.rows[i].items[i].id == 2){f = true}
+            for(let i = 0; i < rowCount; i++){
+                let itemCount = parseInt(resolve.rows[i].items.length ,10)
+                for(let j = 0; j < itemCount; j++){
+                    if(resolve.rows[i].items[j].id == 2){f = true}
+                }
+                f.should.equal(true)
+                f = false
             }
-            f.should.equal(true)
             done()
         })
     })
@@ -142,194 +146,218 @@ describe('DbFarmer.queryFarmerByItemName', () => {
     it(`should query farmer in farmers_table by item name='Oolong Tea'`, done => {
         DbFarmer.queryFarmerByItemName('Oolong Tea').then((resolve) => {
             resolve.command.should.equal('SELECT')
-            let rows = parseInt(resolve.rows[i].items.length)
+            let rowCount = parseInt(resolve.rowCount, 10)
             let f = false
-            for(let i = 0; i < rows; i++){
-                if(resolve.rows[i].items[i].name == 'Oolong Tea'){f = true}
+            for(let i = 0; i < rowCount; i++){
+                let itemCount = parseInt(resolve.rows[i].items.length ,10)
+                for(let j = 0; j < itemCount; j++){
+                    if(resolve.rows[i].items[j].name == 'Oolong Tea'){f = true}
+                }
+                f.should.equal(true)
+                f = false
             }
-            f.should.equal(true)
             done()
         })
     })
 })
 
-// var farmerCountActions = 0;
-// describe('FarmerAction.queryFarmersCountAll', () => {
-//     it(`should send the count of all farmers in farmers_table`, done => {
-//         fetch(config.farmer_action_url + '/query_farmers_count_all',{
-//             method: 'GET'
-//         }).then((response) => {
-//             return response.json()
-//         }).then((response) => {
-//               console.log(response.result)
-//             response.status.should.equal(config.success)
-//             farmerCountActions = response.result.count
-//             done()
-//             return response
-//         }).catch(
-//             (reject) => {
-//               console.log(reject)            
-//             }
-//         )
-//     })
-// })
+var farmerCountActions = 0;
+describe('FarmerAction.queryFarmersCountAll', () => {
+    it(`should send the count of all farmers in farmers_table`, done => {
+        fetch(config.farmer_action_url + '/query_farmers_count_all',{
+            method: 'GET'
+        }).then((response) => {
+            return response.json()
+        }).then((response) => {
+              console.log(response.result)
+            response.status.should.equal(config.success)
+            farmerCountActions = response.result.count
+            done()
+            return response
+        }).catch(
+            (reject) => {
+              console.log(reject)            
+            }
+        )
+    })
+})
 
-// describe('FarmerAction.insertFarmer', () => {
-//     it(`should send the id of inserted farmers in farmers_table`, done => {
-//         fetch(config.farmer_action_url + '/insert_farmer',{
-//             method: 'POST',
-//             body: new URLSearchParams({
-//                 name: "Green Tea", 
-//                 producer: JSON.stringify({id: 3, name: "Lin"}),
-//                 price: 500,
-//                 unit: "NTD",
-//                 description: "# Traditional Flavor",
-//                 spec: JSON.stringify({property: "100g", value: "Heavily Baked", comment: "Strongest"}),
-//                 cover_img: "farmer1.jpg",
-//                 imgs: JSON.stringify(["hill1.jpg", "tea.jpg", "child.jpg"])
-//             }),
-//             headers: {
-//               'Content-Type': 'application/x-www-form-urlencoded'
-//             }
-//         }).then((response) => {
-//             return response.json()
-//         }).then((response) => {
-//             console.log(response.result.id)
-//             console.log(farmerCountActions)
-//             response.status.should.equal(config.success)
-//             response.result.id.should.equal(farmerCountActions+1)
-//             farmerCountActions = farmerCountActions + 1
-//             done()
-//             return response
-//         }).catch((reject) => {
-//               console.log(reject)            
-//         })
-//     })
-// })
+describe('FarmerAction.insertFarmer', () => {
+    it(`should send the id of inserted farmers in farmers_table`, done => {
+        fetch(config.farmer_action_url + '/insert_farmer',{
+            method: 'POST',
+            body: new URLSearchParams({
+                name: "Dai3",
+                country: "Taiwan",
+                province: "Taiwan",
+                county: "Nantou",
+                township: "Lu Gu",
+                village: "FongHuang",
+                road: "indus.rd",
+                slogan: "Universal Best Tea",
+                description: "# Best Tea Ever",
+                content: JSON.stringify([{title: "The Best", subtitle: "Best", description: "Universal Best Better Tea", img: "tea.jpg"},{title: "The Better", subtitle: "Better", description: "Universal Better Tea", img: "tea_tree.jpg"}]),
+                items: JSON.stringify([{id: 2, name: "Green Tea"},{id: 1, name: "Oolong Tea"}]),
+                cover_img: "farmer1.jpg",
+                imgs: JSON.stringify(["hill1.jpg", "hill2.jpg", "child.jpg"])
+            }),
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then((response) => {
+            return response.json()
+        }).then((response) => {
+            console.log(response.result.id)
+            console.log(farmerCountActions)
+            response.status.should.equal(config.success)
+            response.result.id.should.equal(farmerCountActions+1)
+            farmerCountActions = farmerCountActions + 1
+            done()
+            return response
+        }).catch((reject) => {
+              console.log(reject)            
+        })
+    })
+})
 
-// describe('FarmerAction.queryFarmerById', () => {
-//     it(`should send the farmer of queryed id=5 in farmers_table`, done => {
-//         fetch(config.farmer_action_url + '/query_farmer_by_id',{
-//             method: 'POST',
-//             body: new URLSearchParams({
-//                 id: 5
-//             }),
-//             headers: {
-//               'Content-Type': 'application/x-www-form-urlencoded'
-//             }
-//         }).then((response) => {
-//             return response.json()
-//         }).then((response) => {
-//             // console.log(response)
-//             response.status.should.equal(config.success)
-//             response.result.id.should.equal(5)
-//               done()
-//               return response
-//         }).catch((reject) => {
-//               console.log(reject)            
-//         })
-//     })
-// })
+describe('FarmerAction.queryFarmerById', () => {
+    it(`should send the farmer of queryed id=5 in farmers_table`, done => {
+        fetch(config.farmer_action_url + '/query_farmer_by_id',{
+            method: 'POST',
+            body: new URLSearchParams({
+                id: 5
+            }),
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then((response) => {
+            return response.json()
+        }).then((response) => {
+            // console.log(response)
+            response.status.should.equal(config.success)
+            response.result.id.should.equal(5)
+              done()
+              return response
+        }).catch((reject) => {
+              console.log(reject)            
+        })
+    })
+})
 
-// describe('FarmerAction.queryFarmerByName', () => {
-//     it(`should send the farmer of queryed name='Oolong Tea' in farmers_table`, done => {
-//         fetch(config.farmer_action_url + '/query_farmer_by_name',{
-//             method: 'POST',
-//             body: new URLSearchParams({
-//                 name: "Oolong Tea"
-//             }),
-//             headers: {
-//               'Content-Type': 'application/x-www-form-urlencoded'
-//             }
-//         }).then((response) => {
-//             return response.json()
-//         }).then((response) => {
-//             //   console.log(response)
-//             response.status.should.equal(config.success)
-//             response.result.forEach((farmer, index, array) => {
-//                 farmer.name.should.equal('Oolong Tea')
-//             })
+describe('FarmerAction.queryFarmerByName', () => {
+    it(`should send the farmer of queryed name='Dai' in farmers_table`, done => {
+        fetch(config.farmer_action_url + '/query_farmer_by_name',{
+            method: 'POST',
+            body: new URLSearchParams({
+                name: "Dai"
+            }),
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then((response) => {
+            return response.json()
+        }).then((response) => {
+            //   console.log(response)
+            response.status.should.equal(config.success)
+            response.result.forEach((farmer, index, array) => {
+                farmer.name.should.equal('Dai')
+            })
             
-//               done()
-//               return response
-//         }).catch((reject) => {
-//               console.log(reject)            
-//         })
-//     })
-// })
+              done()
+              return response
+        }).catch((reject) => {
+              console.log(reject)            
+        })
+    })
+})
 
-// describe('FarmerAction.queryFarmerByProducerId', () => {
-//     it(`should send the farmer of queryed producer id=2 in farmers_table`, done => {
-//         fetch(config.farmer_action_url + '/query_farmer_by_producer_id',{
-//             method: 'POST',
-//             body: new URLSearchParams({
-//                 id: 2
-//             }),
-//             headers: {
-//               'Content-Type': 'application/x-www-form-urlencoded'
-//             }
-//         }).then((response) => {
-//             return response.json()
-//         }).then((response) => {
-//             //   console.log(response)
-//             response.status.should.equal(config.success)
-//             response.result.forEach((farmer, index, array) => {
-//                 farmer.producer.id.should.equal(2)
-//             })
-//               done()
-//               return response
-//         }).catch((reject) => {
-//               console.log(reject)            
-//         })
-//     })
-// })
+describe('FarmerAction.queryFarmerByItemId', () => {
+    it(`should send the farmer of queryed item id=2 in farmers_table`, done => {
+        fetch(config.farmer_action_url + '/query_farmer_by_item_id',{
+            method: 'POST',
+            body: new URLSearchParams({
+                id: 2
+            }),
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then((response) => {
+            return response.json()
+        }).then((response) => {
+            //   console.log(response)
+            response.status.should.equal(config.success)
+            let rowCount = response.result.length
+            let f = false
+            for(let i = 0; i < rowCount; i++){
+                let itemCount = response.result[i].items.length
+                for(let j = 0; j < itemCount; j++){
+                    if(response.result[i].items[j].id == 2){f = true}
+                }
+                f.should.equal(true)
+                f = false
+            }
+            
+            done()
+            return response
+        }).catch((reject) => {
+              console.log(reject)            
+        })
+    })
+})
 
-// describe('FarmerAction.queryFarmerByProducerName', () => {
-//     it(`should send the farmer of queryed producer name='Dai' in farmers_table`, done => {
-//         fetch(config.farmer_action_url + '/query_farmer_by_producer_name',{
-//             method: 'POST',
-//             body: new URLSearchParams({
-//                 name: "Dai"
-//             }),
-//             headers: {
-//               'Content-Type': 'application/x-www-form-urlencoded'
-//             }
-//         }).then((response) => {
-//             return response.json()
-//         }).then((response) => {
-//             //   console.log(response)
-//             response.status.should.equal(config.success)
-//             response.result.forEach((farmer, index, array) => {
-//                 farmer.producer.name.should.equal('Dai')
-//             })
-//               done()
-//               return response
-//         }).catch((reject) => {
-//               console.log(reject)            
-//         })
-//     })
-// })
+describe('FarmerAction.queryFarmerByItemName', () => {
+    it(`should send the farmer of queryed item name='Dai' in farmers_table`, done => {
+        fetch(config.farmer_action_url + '/query_farmer_by_item_name',{
+            method: 'POST',
+            body: new URLSearchParams({
+                name: "Dai"
+            }),
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then((response) => {
+            return response.json()
+        }).then((response) => {
+            //   console.log(response)
+            response.status.should.equal(config.success)
+            let rowCount = response.result.length
+            let f = false
+            for(let i = 0; i < rowCount; i++){
+                let itemCount = response.result[i].items.length
+                for(let j = 0; j < itemCount; j++){
+                    if(response.result[i].items[j].name == 'Dai'){f = true}
+                }
+                f.should.equal(true)
+                f = false
+            }
+            done()
+            return response
+        }).catch((reject) => {
+              console.log(reject)            
+        })
+    })
+})
 
-// describe('FarmerAction.queryFarmerList', () => {
-//     it(`should send farmers list count=2, offset=3 in farmers_table`, done => {
-//         fetch(config.farmer_action_url + '/query_farmer_list',{
-//             method: 'POST',
-//             body: new URLSearchParams({
-//                 count: 2,
-//                 offset: 3
-//             }),
-//             headers: {
-//               'Content-Type': 'application/x-www-form-urlencoded'
-//             }
-//         }).then((response) => {
-//             return response.json()
-//         }).then((response) => {
-//             response.status.should.equal(config.success)
-//             response.result.length.should.equal(2)
-//             done()
-//             return response
-//         }).catch((reject) => {
-//               console.log(reject)            
-//         })
-//     })
-// })
+describe('FarmerAction.queryFarmerList', () => {
+    it(`should send farmers list count=2, offset=3 in farmers_table`, done => {
+        fetch(config.farmer_action_url + '/query_farmer_list',{
+            method: 'POST',
+            body: new URLSearchParams({
+                count: 2,
+                offset: 3
+            }),
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then((response) => {
+            return response.json()
+        }).then((response) => {
+            response.status.should.equal(config.success)
+            response.result.length.should.equal(2)
+            done()
+            return response
+        }).catch((reject) => {
+              console.log(reject)            
+        })
+    })
+})

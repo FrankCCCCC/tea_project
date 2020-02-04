@@ -112,8 +112,8 @@ function queryFarmerByName(farmerName){
     return Db.query(command)
 }
 
-function queryFarmerByItemId(ItemId){
-    Util.checkInt(ItemId, "DbFarmer.queryFarmerByItemId ItemId")
+function queryFarmerByItemId(itemId){
+    Util.checkInt(itemId, "DbFarmer.queryFarmerByItemId itemId")
 
     let command = `SELECT 
     ${ds.dataStructure.farmer.id.key},
@@ -132,7 +132,10 @@ function queryFarmerByItemId(ItemId){
     array_to_json(${ds.dataStructure.farmer.imgs.key}) AS ${ds.dataStructure.farmer.imgs.key},
     ${ds.dataStructure.farmer.create_on.key}, 
     ${ds.dataStructure.farmer.latest_modify.key}
-    FROM ${ds.dataStructure.farmer.table_name} WHERE ${ds.dataStructure.item.id.key} = '${parseInt(ItemId, 10)}';`;
+    FROM ${ds.dataStructure.farmer.table_name} WHERE ${ds.dataStructure.farmer.id.key} IN (
+        SELECT ${ds.dataStructure.farmer.id.key} FROM (
+            SELECT ${ds.dataStructure.farmer.id.key}, unnest(${ds.dataStructure.farmer.items.key}) AS items_list FROM ${ds.dataStructure.farmer.table_name}
+            ) AS selected_items_list  WHERE (selected_items_list.items_list).${ds.dataStructure.Good.id.key} = '${parseInt(itemId, 10)}' );`;
 
     return Db.query(command)
 }
@@ -157,7 +160,10 @@ function queryFarmerByItemName(itemName){
     array_to_json(${ds.dataStructure.farmer.imgs.key}) AS ${ds.dataStructure.farmer.imgs.key},
     ${ds.dataStructure.farmer.create_on.key}, 
     ${ds.dataStructure.farmer.latest_modify.key}
-    FROM ${ds.dataStructure.farmer.table_name} WHERE ${ds.dataStructure.farmer.name.key} = '${String(itemName)}';`;
+    FROM ${ds.dataStructure.farmer.table_name} WHERE ${ds.dataStructure.farmer.id.key} IN (
+        SELECT ${ds.dataStructure.farmer.id.key} FROM (
+            SELECT ${ds.dataStructure.farmer.id.key}, unnest(${ds.dataStructure.farmer.items.key}) AS items_list FROM ${ds.dataStructure.farmer.table_name}
+            ) AS selected_items_list  WHERE (selected_items_list.items_list).${ds.dataStructure.Good.name.key} = '${String(itemName)}' );`;
 
     return Db.query(command)
 }
@@ -282,16 +288,17 @@ let sections = [
     {title: "The Better", subtitle: "Better", description: "Universal Better Tea", img: "tea_tree.jpg"},
 ]
 let items = [
-    {id: 1, name: "Oolong Tea",},
-    {id: 3, name: "Black Tea"}
+    {id: 2, name: "Green Tea",},
+    {id: 1, name: "Oolong Tea"}
 ]
 let imgs = ["hill1.jpg", "hill2.jpg", "child.jpg"]
 // queryFarmersCountAll()
-// insertFarmer("Dai", "Taiwan", "Taiwan", "Nantou", "LuGu", "FongHuang", "indus.rd", "Universal Best Tea", "# Best Tea Ever", sections, items, "farmer1.jpg", undefined)
-// insertFarmer(2, "Taiwan", "Taiwan", "Nantou", "LuGu", "FongHuang", "indus.rd", "Universal Best Tea", "# Best Tea Ever", sections, items, "farmer1.jpg", imgs)
+// insertFarmer("Da", "Taiwan", "Taiwan", "Nantou", "LuGu", "FongHuang", "indus.rd", "Universal Best Tea", "# Best Tea Ever", sections, items, "farmer1.jpg", undefined)
+// insertFarmer("Ui", "Taiwan", "Taiwan", "Nantou", "LuGu", "FongHuang", "indus.rd", "Universal Best Tea", "# Best Tea Ever", sections, items, "farmer1.jpg", imgs)
 // insertFarmer("Dai3", "Taiwan", "Taiwan", "Nantou", "Lu/Gu", "FongHuang", "indus.rd", "Universal Best Tea", "# Best Tea Ever", sections, items, "farmer1.jpg", imgs)
 // queryFarmerById(1)
 // queryFarmerByItemId(1)
+// queryFarmerByItemName('Oolong Tea')
 // queryFarmerList(-1,1)
 
 
