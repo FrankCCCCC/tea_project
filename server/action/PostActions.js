@@ -5,27 +5,40 @@ const { Remarkable } = require('remarkable');
 
 var post_action = express();
 
-const config = {
-    success: 'Success',
-    error: "Error"
-}
+post_action.on('mount', function (parent) {
+    DbPost.createPostsTable().then(
+        (resolve) => {
+            util.log(`Created posts_table`)
+            util.log(`post_action is mounted By ${parent}`)
+            return resolve
+    }).catch(
+        (reject) => {
+            util.log(`Error: ${reject}`)
+            return reject;
+    })
+                    
+})
 
 post_action.get('/query_posts_count_all', (req, res) => {
     DbPost.queryPostsCountAll().then(
         (resolve) => {
-    //         var ip = req.headers['x-forwarded-for'] || 
-    //  req.connection.remoteAddress || 
-    //  req.socket.remoteAddress ||
-    //  (req.connection.socket ? req.connection.socket.remoteAddress : null);
-    //         console.log(ip)
+            // util.log(`Sending ${resolve.rowCount} rows to ${req.ip} with ${req.ips}`)
+            // res.send(JSON.stringify(resolve.rows[0]))
+
             util.log(`Sending ${resolve.rowCount} rows to ${req.ip} with ${req.ips}`)
-            res.send(JSON.stringify(resolve.rows[0]))
+            res.header("Access-Control-Allow-Origin", "*");
+            // res.send({count: parseInt(resolve.rows[0].count, 10)})
+            res.json(util.makeRes({count: parseInt(resolve.rows[0].count, 10)}))
         }
     ).catch(
         (reject) => {
+            // util.log(`Error: ${reject}`)
+            // res.header("Access-Control-Allow-Origin", "*");
+            // res.send(reject)
+
             util.log(`Error: ${reject}`)
             res.header("Access-Control-Allow-Origin", "*");
-            res.send(reject)
+            res.json(util.makeRes(reject, false))
         }
     )
 })
@@ -34,20 +47,28 @@ post_action.post('/insert_post', (req, res) => {
     DbPost.insertPost(req.body.title, req.body.subtitle, req.body.author, req.body.content, req.body.cover_img).then(
         (resolve) => {
             
+            // util.log(`Sending ${resolve.rowCount} rows to ${req.ip} with ${req.ips}`)
+            // res.header("Access-Control-Allow-Origin", "*");
+            // res.send(config.success)
+
             util.log(`Sending ${resolve.rowCount} rows to ${req.ip} with ${req.ips}`)
             res.header("Access-Control-Allow-Origin", "*");
-            res.send(config.success)
+            res.json(util.makeRes(resolve.rows[0]))
         }
     ).catch(
         (reject) => {
+            // util.log(`Error: ${reject}`)
+            // res.header("Access-Control-Allow-Origin", "*");
+            // res.send(reject)
+
             util.log(`Error: ${reject}`)
             res.header("Access-Control-Allow-Origin", "*");
-            res.send(reject)
+            res.json(util.makeRes(reject, false))
         }
     )
 })
 
-post_action.post('/query_post', (req, res) => {
+post_action.post('/query_post_by_id', (req, res) => {
     DbPost.queryPost(parseInt(req.body.id, 10)).then(
         (resolve) => {
             var md = new Remarkable({html: true})
@@ -58,13 +79,18 @@ post_action.post('/query_post', (req, res) => {
             // res_post.content = md.render('Some Markdown text with <span style="color:blue">some *blue* text</span>.')
             util.log(`Sending ${resolve.rowCount} rows to ${req.ip} with ${req.ips}`)
             res.header("Access-Control-Allow-Origin", "*");
-            res.send(JSON.stringify(res_post));
+            // res.send(JSON.stringify(res_post));
+            res.json(util.makeRes(res_post))
         }
     ).catch(
         (reject) => {
+            // util.log(`Error: ${reject}`)
+            // res.header("Access-Control-Allow-Origin", "*");
+            // res.send(reject)
+
             util.log(`Error: ${reject}`)
             res.header("Access-Control-Allow-Origin", "*");
-            res.send(reject)
+            res.json(util.makeRes(reject, false))
         }
     );
 })
@@ -74,12 +100,17 @@ post_action.post('/query_post_list', (req, res) => {
         (resolve) => {
             util.log(`Sending ${resolve.rowCount} rows to ${req.ip} with ${req.ips}`)
             res.header("Access-Control-Allow-Origin", "*");
-            res.send(JSON.stringify(resolve.rows));
+            // res.send(JSON.stringify(resolve.rows));
+            res.json(util.makeRes(resolve.rows))
     }).catch(
         (reject) => {
-        res.header("Access-Control-Allow-Origin", "*");
+        // res.header("Access-Control-Allow-Origin", "*");
+        // util.log(`Error: ${reject}`)
+        // res.send(reject)
+
         util.log(`Error: ${reject}`)
-        res.send(reject)
+        res.header("Access-Control-Allow-Origin", "*");
+        res.json(util.makeRes(reject, false))
     });
 });
 

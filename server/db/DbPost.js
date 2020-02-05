@@ -1,45 +1,22 @@
-const ds = require('../dataStructure');
-const {Pool, Client} = require('pg');
-const dbConfig = require('../config/dbConfig')
+const ds = require('./dataStructure');
+const Db = require('./Db')
 const util = require('../util/Util')
-// import 'express';
-
-
-const pool = new Pool(dbConfig.config);
 
 function createPostsTable(){
     let command = `CREATE TABLE IF NOT EXISTS ${ds.dataStructure.post.table_name}(${ds.dataStructure.post.id.schema},${ds.dataStructure.post.title.schema},${ds.dataStructure.post.subtitle.schema},${ds.dataStructure.post.author.schema},${ds.dataStructure.post.content.schema},${ds.dataStructure.post.cover_img.schema},${ds.dataStructure.post.create_on.schema}, ${ds.dataStructure.post.latest_modify.schema})`;
-    util.log(command);
 
-    return pool.query(command).then(
-        (resolve) => {
-            util.log(`command: ${resolve.command}, rowCount: ${resolve.rowCount}`)
-            return resolve;
-        }
-    ).catch(
-        (reject) => {
-            util.log(`Error: ${reject}`)
-            return reject;
-        }
-    )
+    return Db.query(command)
 }
 
 function queryPostsCountAll(){
     let command = `SELECT COUNT(*) FROM ${ds.dataStructure.post.table_name};`;
-    util.log(command)
-    return pool.query(command).then(resolve => {
-        // console.log(resolve)
-        util.log(`command: ${resolve.command}, rowCount: ${resolve.rowCount}, post count: ${resolve.rows[0].count}`)
-        return resolve;
-    }).catch(reject => {
-        util.log(`Error: ${reject}`)
-        return reject
-    });
+    
+    return Db.query(command)
 }
 
 function queryPostList(count, offset){
-    if(typeof(count) != "number"){util.log("Error: query_post_list parameter count is not a number");}
-    if(typeof(offset) != "number"){util.log("Error: query_post_list parameter offset is not a number");}
+    util.checkInt(count)
+    util.checkInt(offset)
 
     let row_counts = ""
     let row_offset = ""
@@ -53,42 +30,28 @@ function queryPostList(count, offset){
         row_offset = "OFFSET " + String(offset);
     }
     let command = `SELECT * FROM ${ds.dataStructure.post.table_name} ORDER BY ${ds.dataStructure.post.latest_modify.key} DESC ${row_counts} ${row_offset};`
-    util.log(command)
+    
 
-    return pool.query(command).then(resolve => {
-        util.log(`command: ${resolve.command}, rowCount: ${resolve.rowCount}`)
-        return resolve;
-    }).catch(reject => {
-        util.log(`Error: ${reject}`)
-        return reject
-    });
+    return Db.query(command)
 }
 
 function queryPost(id){
-    if(typeof(id) != "number"){util.log("Error: query_post parameter id is not a number");}
+    util.checkInt(id)
     let command = `SELECT * FROM ${ds.dataStructure.post.table_name} WHERE ${ds.dataStructure.post.id.key} = '${Number(id)}';`
-    util.log(command)
-    return pool.query(command).then(resolve => {
-        util.log(`command: ${resolve.command}, rowCount: ${resolve.rowCount}`)
-        return resolve;
-    }).catch(reject => {
-        util.log(`Error: ${reject}`)
-        return reject;
-    })
+    
+    return Db.query(command)
 }
 
 function insertPost(title, subtitle, author, content, cover_img){
-    if(typeof(title) != 'string' || typeof(title) != 'string' || typeof(subtitle) != 'string' || typeof(author) != 'string' || typeof(content) != 'string' || typeof(cover_img) != 'string'){return -1;}
+    util.checkString(title)
+    util.checkString(subtitle)
+    util.checkString(author)
+    util.checkString(content)
+    util.checkString(cover_img)
     var content_new = content.replace(/'/g, `''`);
     let command = `INSERT INTO ${ds.dataStructure.post.table_name}(${ds.dataStructure.post.title.key}, ${ds.dataStructure.post.subtitle.key}, ${ds.dataStructure.post.author.key}, ${ds.dataStructure.post.content.key}, ${ds.dataStructure.post.cover_img.key}) VALUES('${title}', '${subtitle}', '${author}', '${util.shortStr(content_new)}', '${cover_img}') RETURNING ${ds.dataStructure.post.id.key};`
-    util.log(command);
-    return pool.query(command).then((resolve) => {
-        util.log(`command: ${resolve.command}, rowCount: ${resolve.rowCount}`)
-        return resolve;
-    }).catch((reject) => {
-        util.log(`Error: ${reject}`)
-        return reject;
-    })
+    
+    return Db.query(command)
 }
 
 // query_test();
@@ -103,7 +66,6 @@ function insertPost(title, subtitle, author, content, cover_img){
 
 // pool.end();
 
-exports.pool = pool;
 exports.createPostsTable = createPostsTable;
 exports.queryPostsCountAll = queryPostsCountAll;
 exports.queryPostList = queryPostList;

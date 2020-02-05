@@ -1,5 +1,5 @@
 const Db = require('./Db')
-const ds = require('../dataStructure');
+const ds = require('./dataStructure');
 const Util = require('../util/Util');
 
 function createProducerType(){

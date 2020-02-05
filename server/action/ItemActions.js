@@ -58,11 +58,11 @@ item_action.get('/query_items_count_all', (req, res) => {
 item_action.post('/insert_item', (req, res) => {
     DbItem.insertItem(String(req.body.name), JSON.parse(String(req.body.producer)), Number(req.body.price), String(req.body.unit), String(req.body.description), JSON.parse(util.NaNUndefinedtoNull(req.body.spec)), String(req.body.cover_img), JSON.parse(util.NaNUndefinedtoNull(req.body.imgs))).then(
         (resolve) => {
-            console.log(resolve.rows[0])
+            // console.log(resolve.rows[0])
             util.log(`Sending ${resolve.rowCount} rows to ${req.ip} with ${req.ips}`)
             res.header("Access-Control-Allow-Origin", "*");
             // res.send(resolve.rows[0])
-            console.log(util.makeRes(resolve.rows[0]))
+            // console.log(util.makeRes(resolve.rows[0]))
             res.json(util.makeRes(resolve.rows[0]))
         }
     ).catch(
