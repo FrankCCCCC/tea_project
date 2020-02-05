@@ -34409,3 +34409,178 @@ VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'
 2020-02-05T06:35:32.516Z Local: 2/5/2020, 2:35:32 PM SELECT * FROM posts_table ORDER BY latest_modify DESC LIMIT 2 OFFSET 3; 
 2020-02-05T06:35:32.519Z Local: 2/5/2020, 2:35:32 PM command: SELECT, rowCount: 2 
 2020-02-05T06:35:32.521Z Local: 2/5/2020, 2:35:32 PM Sending 2 rows to ::ffff:127.0.0.1 with  
+2020-02-05T06:39:30.975Z Local: 2/5/2020, 2:39:30 PM CREATE TABLE IF NOT EXISTS posts_table(id serial PRIMARY KEY NOT NULL,title TEXT NOT NULL,subtitle TEXT NOT NULL,author TEXT NOT NULL,content TEXT NOT NULL,cover_img TEXT,create_on TIMESTAMP default current_timestamp, latest_modify TIMESTAMP default current_timestamp) 
+2020-02-05T06:39:30.988Z Local: 2/5/2020, 2:39:30 PM 
+    DO $$ BEGIN
+        CREATE TYPE Producer AS (id INTEGER, name TEXT);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-02-05T06:39:30.989Z Local: 2/5/2020, 2:39:30 PM DO $$ BEGIN
+        CREATE TYPE Good AS (id INTEGER, name TEXT);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-02-05T06:39:30.995Z Local: 2/5/2020, 2:39:30 PM Server is listening on port 8000 
+2020-02-05T06:39:31.049Z Local: 2/5/2020, 2:39:31 PM command: CREATE, rowCount: null 
+2020-02-05T06:39:31.052Z Local: 2/5/2020, 2:39:31 PM Created posts_table 
+2020-02-05T06:39:31.053Z Local: 2/5/2020, 2:39:31 PM post_action is mounted By function(req, res, next) {
+    app.handle(req, res, next);
+  } 
+2020-02-05T06:39:31.072Z Local: 2/5/2020, 2:39:31 PM command: DO, rowCount: null 
+2020-02-05T06:39:31.074Z Local: 2/5/2020, 2:39:31 PM Created Producer type 
+2020-02-05T06:39:31.075Z Local: 2/5/2020, 2:39:31 PM 
+    DO $$ BEGIN
+        CREATE TYPE Spec AS (property TEXT, value TEXT);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-02-05T06:39:31.077Z Local: 2/5/2020, 2:39:31 PM command: DO, rowCount: null 
+2020-02-05T06:39:31.080Z Local: 2/5/2020, 2:39:31 PM Created Spec type 
+2020-02-05T06:39:31.081Z Local: 2/5/2020, 2:39:31 PM 
+    CREATE TABLE IF NOT EXISTS items_table(
+    id serial PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL,
+    producer Producer NOT NULL,
+    price NUMERIC NOT NULL,
+    unit TEXT NOT NULL,
+    description TEXT NOT NULL,
+    spec Spec ARRAY,
+    cover_img TEXT NOT NULL, 
+    imgs TEXT[], 
+    create_on TIMESTAMP default current_timestamp); 
+2020-02-05T06:39:31.083Z Local: 2/5/2020, 2:39:31 PM command: CREATE, rowCount: null 
+2020-02-05T06:39:31.085Z Local: 2/5/2020, 2:39:31 PM Created items_table 
+2020-02-05T06:39:31.085Z Local: 2/5/2020, 2:39:31 PM item_action is mounted By function(req, res, next) {
+    app.handle(req, res, next);
+  } 
+2020-02-05T06:39:31.088Z Local: 2/5/2020, 2:39:31 PM command: DO, rowCount: null 
+2020-02-05T06:39:31.089Z Local: 2/5/2020, 2:39:31 PM Created Good type 
+2020-02-05T06:39:31.090Z Local: 2/5/2020, 2:39:31 PM DO $$ BEGIN
+        CREATE TYPE Section AS (title TEXT, subtitle TEXT, description TEXT, img TEXT);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-02-05T06:39:31.092Z Local: 2/5/2020, 2:39:31 PM command: DO, rowCount: null 
+2020-02-05T06:39:31.093Z Local: 2/5/2020, 2:39:31 PM Created Section type 
+2020-02-05T06:39:31.098Z Local: 2/5/2020, 2:39:31 PM CREATE TABLE IF NOT EXISTS farmers_table(
+    id serial PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL,
+    country TEXT NOT NULL,
+    province TEXT NOT NULL,
+    county TEXT NOT NULL,
+    township TEXT NOT NULL,
+    village TEXT NOT NULL,
+    road TEXT NOT NULL,
+    slogan TEXT,
+    description TEXT NOT NULL,
+    content Section ARRAY NOT NULL,
+    items Good ARRAY,
+    cover_img TEXT NOT NULL,
+    imgs TEXT[],
+    create_on TIMESTAMP default current_timestamp,
+    latest_modify TIMESTAMP default current_timestamp) 
+2020-02-05T06:39:31.101Z Local: 2/5/2020, 2:39:31 PM command: CREATE, rowCount: null 
+2020-02-05T06:39:31.102Z Local: 2/5/2020, 2:39:31 PM Created farmers_table 
+2020-02-05T06:39:31.102Z Local: 2/5/2020, 2:39:31 PM farmer_action is mounted By function(req, res, next) {
+    app.handle(req, res, next);
+  } 
+2020-02-05T06:50:02.857Z Local: 2/5/2020, 2:50:02 PM CREATE TABLE IF NOT EXISTS posts_table(id serial PRIMARY KEY NOT NULL,title TEXT NOT NULL,subtitle TEXT NOT NULL,author TEXT NOT NULL,content TEXT NOT NULL,cover_img TEXT,create_on TIMESTAMP default current_timestamp, latest_modify TIMESTAMP default current_timestamp) 
+2020-02-05T06:50:02.874Z Local: 2/5/2020, 2:50:02 PM DO $$ BEGIN
+        CREATE TYPE Good AS (id INTEGER, name TEXT);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-02-05T06:50:02.872Z Local: 2/5/2020, 2:50:02 PM 
+    DO $$ BEGIN
+        CREATE TYPE Producer AS (id INTEGER, name TEXT);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-02-05T06:50:02.880Z Local: 2/5/2020, 2:50:02 PM Server is listening on port 8000 
+2020-02-05T06:50:02.931Z Local: 2/5/2020, 2:50:02 PM command: CREATE, rowCount: null 
+2020-02-05T06:50:02.934Z Local: 2/5/2020, 2:50:02 PM post_action is mounted By function(req, res, next) {
+    app.handle(req, res, next);
+  } 
+2020-02-05T06:50:02.933Z Local: 2/5/2020, 2:50:02 PM Created posts_table 
+2020-02-05T06:50:02.950Z Local: 2/5/2020, 2:50:02 PM command: DO, rowCount: null 
+2020-02-05T06:50:02.952Z Local: 2/5/2020, 2:50:02 PM Created Producer type 
+2020-02-05T06:50:02.953Z Local: 2/5/2020, 2:50:02 PM 
+    DO $$ BEGIN
+        CREATE TYPE Spec AS (property TEXT, value TEXT);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-02-05T06:50:02.955Z Local: 2/5/2020, 2:50:02 PM command: DO, rowCount: null 
+2020-02-05T06:50:02.957Z Local: 2/5/2020, 2:50:02 PM Created Spec type 
+2020-02-05T06:50:02.958Z Local: 2/5/2020, 2:50:02 PM 
+    CREATE TABLE IF NOT EXISTS items_table(
+    id serial PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL,
+    producer Producer NOT NULL,
+    price NUMERIC NOT NULL,
+    unit TEXT NOT NULL,
+    description TEXT NOT NULL,
+    spec Spec ARRAY,
+    cover_img TEXT NOT NULL, 
+    imgs TEXT[], 
+    create_on TIMESTAMP default current_timestamp); 
+2020-02-05T06:50:02.961Z Local: 2/5/2020, 2:50:02 PM command: CREATE, rowCount: null 
+2020-02-05T06:50:02.962Z Local: 2/5/2020, 2:50:02 PM Created items_table 
+2020-02-05T06:50:02.963Z Local: 2/5/2020, 2:50:02 PM item_action is mounted By function(req, res, next) {
+    app.handle(req, res, next);
+  } 
+2020-02-05T06:50:02.970Z Local: 2/5/2020, 2:50:02 PM command: DO, rowCount: null 
+2020-02-05T06:50:02.971Z Local: 2/5/2020, 2:50:02 PM Created Good type 
+2020-02-05T06:50:02.972Z Local: 2/5/2020, 2:50:02 PM DO $$ BEGIN
+        CREATE TYPE Section AS (title TEXT, subtitle TEXT, description TEXT, img TEXT);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-02-05T06:50:02.974Z Local: 2/5/2020, 2:50:02 PM command: DO, rowCount: null 
+2020-02-05T06:50:02.975Z Local: 2/5/2020, 2:50:02 PM Created Section type 
+2020-02-05T06:50:02.976Z Local: 2/5/2020, 2:50:02 PM CREATE TABLE IF NOT EXISTS farmers_table(
+    id serial PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL,
+    country TEXT NOT NULL,
+    province TEXT NOT NULL,
+    county TEXT NOT NULL,
+    township TEXT NOT NULL,
+    village TEXT NOT NULL,
+    road TEXT NOT NULL,
+    slogan TEXT,
+    description TEXT NOT NULL,
+    content Section ARRAY NOT NULL,
+    items Good ARRAY,
+    cover_img TEXT NOT NULL,
+    imgs TEXT[],
+    create_on TIMESTAMP default current_timestamp,
+    latest_modify TIMESTAMP default current_timestamp) 
+2020-02-05T06:50:02.983Z Local: 2/5/2020, 2:50:02 PM Created farmers_table 
+2020-02-05T06:50:02.979Z Local: 2/5/2020, 2:50:02 PM command: CREATE, rowCount: null 
+2020-02-05T06:50:02.984Z Local: 2/5/2020, 2:50:02 PM farmer_action is mounted By function(req, res, next) {
+    app.handle(req, res, next);
+  } 
+2020-02-05T06:50:13.575Z Local: 2/5/2020, 2:50:13 PM SELECT 
+    id,
+    name,
+    country,
+    province,
+    county,
+    township,
+    village,
+    road,
+    slogan,
+    description,
+    array_to_json(content) AS content,
+    array_to_json(items) AS items,
+    cover_img,
+    array_to_json(imgs) AS imgs,
+    create_on, 
+    latest_modify
+    FROM farmers_table WHERE id IN (
+        SELECT id FROM (
+            SELECT id, unnest(items) AS items_list FROM farmers_table
+            ) AS selected_items_list  WHERE (selected_items_list.items_list).name = 'Oolong Tea' ); 
+2020-02-05T06:50:13.662Z Local: 2/5/2020, 2:50:13 PM command: SELECT, rowCount: 63 
+2020-02-05T06:50:13.696Z Local: 2/5/2020, 2:50:13 PM Sending 63 rows to ::1 with  
