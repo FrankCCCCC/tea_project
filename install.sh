@@ -8,9 +8,9 @@ mkdir tea_files
 cd tea_files
 
 # Install Curl
-sudo apt-get update -y
+apt-get update -y
 
-sudo apt install curl -y
+apt install curl sudo gcc g++ make -y
 
 # Install Node.js
 curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
@@ -49,6 +49,11 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io -y
 
 sudo docker run hello-world
 
+# Install Docker-Compose
+
+sudo curl -L "https://github.com/docker/compose/releases/download/1.25.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+sudo chmod +x /usr/local/bin/docker-compose
 
 # Clone Repository
 git clone https://github.com/FrankCCCCC/tea_project.git
@@ -66,3 +71,16 @@ sudo service postgresql start
 
 sudo -u postgres psql --command '\password tea_psql'
 
+
+# Test Installation
+curl --version
+
+node --version
+
+npm --version
+
+docker --version
+
+docker-compose --version
+
+psql --version
