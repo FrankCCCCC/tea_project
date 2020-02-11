@@ -7,25 +7,30 @@ services:
     build: 
       context: ./server/db_server
     depends_on:
-      - db
-    links:
-      - db
+      # - db
+      - postgres
+    # links:
+      # - db
     ports:
-      - "3000:3000"
+      - "8000:8000"
     environment:
-      DATABASE_URL: db://postgres:0910shc@db:5432/playdb
+      SEQ_DB: playdb
+      SEQ_USER: postgres
+      SEQ_PW: 0910shc
+      DATABASE_URL: postgres://postgres:0910shc@postgres:5432/playdb
+      NODE_ENV: development
+      PORT: 8000
+      # DATABASE_URL: db
       # - DB_HOST=db
 
-  db:
-    container_name: db
+  postgres:
     image: postgres
-    restart: always
+    ports:
+      - "35432:5432"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 0910shc
       POSTGRES_DB: playdb
-    ports:
-      - "5432:5432"
 
   adminer:
     image: adminer

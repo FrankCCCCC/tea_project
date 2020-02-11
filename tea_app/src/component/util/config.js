@@ -1,4 +1,4 @@
-const base_url = "http://leafhopper_service.nctu.me"
+const base_url = "http://localhost"
 const app_server_port = 3000;
 const db_server_port = 8000;
 const db_port = 5432;
@@ -15,7 +15,7 @@ const video_fetch_url = static_server_url + "/video/";
 
 const post_action = "post_action";
 const query_post_list = "query_post_list";
-const query_post = "query_post";
+const query_post = "query_post_by_id";
 const query_posts_count_all = "query_posts_count_all";
 const post_action_url = db_server_url + "/" + post_action;
 const query_post_url = post_action_url + "/" + query_post;

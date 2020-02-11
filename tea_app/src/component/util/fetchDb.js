@@ -6,7 +6,8 @@ function fetchFarmersCountAll(){
   }).then(
     (response) => {
       // console.log(response)
-      return response.json()
+      // return response.json()
+      return response.json().result
     }
   ).catch(
     (reject) => {
@@ -22,6 +23,12 @@ function fetchPostsCountAll(){
     (response) => {
       // console.log(response)
       return response.json()
+      // return response.json().result
+    }
+  ).then(
+    (resolve) => {
+      // console.log(resolve)
+      return resolve.result
     }
   ).catch(
     (reject) => {
@@ -42,7 +49,13 @@ function fetchPost(id){
   }).then(
     (response) => {
       // console.log(response)
+      // return response.json()
       return response.json()
+    }
+  ).then(
+    (resolve) => {
+      // console.log(resolve)
+      return resolve.result
     }
   ).catch(
     (reject) => {
@@ -64,19 +77,18 @@ function fetchPostList(count, offset){
   }).then(
     (response) => {
       // console.log(response)
+      // return response.json()
       return response.json()
     }
   ).then(
     (resolve) => {
-      var completeUrl = resolve.map(
-        (item, index, array) => {
-          var t = item;
-          t.cover_img = config.image_fetch_url + item.cover_img;
-          return t;
-        }
-      )
-      console.log(completeUrl);
-      return completeUrl;
+      // console.log(resolve)
+      return resolve.result
+    }
+  ).then(
+    (resolve) => {
+      console.log(resolve);
+      return resolve
     }
   ).catch(
     (reject) => {

@@ -1,7 +1,7 @@
 const config = require('./config')
 
 function fetchImage(imgName){
-  return fetch(config.image_fetch_url + String(imgName),{
+  return fetch(String(imgName),{
     method: 'GET',
   }).then(
     (response) => {

@@ -1,5 +1,6 @@
 const DbPost = require('../db/DbPost');
 const util = require('../util/Util')
+const actions = require('./actions')
 const express = require('express');
 const { Remarkable } = require('remarkable');
 
@@ -76,6 +77,7 @@ post_action.post('/query_post_by_id', (req, res) => {
             
             // util.log(md.render(resolve.rows[0].content))
             res_post.content = md.render(resolve.rows[0].content)
+            res_post.cover_img = actions.make_img_url(res_post.cover_img)
             // res_post.content = md.render('Some Markdown text with <span style="color:blue">some *blue* text</span>.')
             util.log(`Sending ${resolve.rowCount} rows to ${req.ip} with ${req.ips}`)
             res.header("Access-Control-Allow-Origin", "*");
@@ -98,10 +100,17 @@ post_action.post('/query_post_by_id', (req, res) => {
 post_action.post('/query_post_list', (req, res) => {
     DbPost.queryPostList(Number(req.body.count), Number(req.body.offset)).then(
         (resolve) => {
+            let res_posts = resolve.rows.map(
+                (item, index, array) => {
+                    let new_post = item
+                    new_post.cover_img = actions.make_img_url(item.cover_img)
+                    return new_post
+                }
+            )
             util.log(`Sending ${resolve.rowCount} rows to ${req.ip} with ${req.ips}`)
             res.header("Access-Control-Allow-Origin", "*");
             // res.send(JSON.stringify(resolve.rows));
-            res.json(util.makeRes(resolve.rows))
+            res.json(util.makeRes(res_posts))
     }).catch(
         (reject) => {
         // res.header("Access-Control-Allow-Origin", "*");
