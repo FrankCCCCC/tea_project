@@ -2,8 +2,8 @@ const {Pool} = require('pg');
 const util = require('../util/Util');
 const dbConfig = require('../config/dbConfig')
 
-// const pool = new Pool(dbConfig.config);
-const pool = new Pool({connectionString: process.env.DATABASE_URL})
+const pool = new Pool(dbConfig.config);
+// const pool = new Pool({connectionString: process.env.DATABASE_URL})
 
 function query(command){
     util.log(command)
