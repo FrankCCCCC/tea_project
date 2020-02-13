@@ -2,8 +2,8 @@ import React from 'react';
 import Post from '../post/Post';
 import LoadingPage from '../pages/LoadingPage'
 import {title_style, subtitle_style, paragraph_style} from '../theme/font'
-const fetchDb = require('../util/fetchDb')
-const fetchMedia = require('../util/fetchMedia')
+const fetchPost = require('../fetch/fetchPost')
+const fetchMedia = require('../fetch/fetchMedia')
 
 // @const postInput = {
 //     title: "string",
@@ -42,7 +42,7 @@ class PostPage extends React.Component{
         console.log("Error: PostPage parameter id is not number")
       }
       console.log(this.state.props_id)
-        fetchDb.fetchPost(this.state.props_id).then(
+        fetchPost.fetchPost(this.state.props_id).then(
           (resolve_post) => {
             fetchMedia.fetchImage(resolve_post.cover_img).then(
               (resolve_media) => {

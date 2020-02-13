@@ -22,6 +22,15 @@ const query_post_url = post_action_url + "/" + query_post;
 const query_post_list_url = post_action_url + "/" + query_post_list;
 const query_posts_count_all_url = post_action_url + "/" + query_posts_count_all;
 
+const item_action = "item_action";
+const query_item_list = "query_item_list";
+const query_item_by_id = "query_item_by_id";
+const query_items_count_all = "query_items_count_all";
+const item_action_url = db_server_url + "/" + item_action;
+const query_item_by_id_url = item_action_url + "/" + query_item_by_id;
+const query_item_list_url = item_action_url + "/" + query_item_list;
+const query_items_count_all_url = item_action_url + "/" + query_items_count_all;
+
 exports.base_url = base_url;
 exports.app_server_port = app_server_port;
 exports.db_server_port = db_server_port;
@@ -41,3 +50,8 @@ exports.post_action_url = post_action_url;
 exports.query_post_url = query_post_url;
 exports.query_post_list_url = query_post_list_url;
 exports.query_posts_count_all_url = query_posts_count_all_url;
+
+exports.item_action_url = item_action_url;
+exports.query_item_by_id_url = query_item_by_id_url;
+exports.query_item_list_url = query_item_list_url;
+exports.query_items_count_all_url = query_items_count_all_url;

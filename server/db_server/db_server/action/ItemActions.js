@@ -1,5 +1,6 @@
 const DbItem = require('../db/DbItem');
 const util = require('../util/Util')
+const actions = require('./actions')
 const config = require('../config/serverConfig')
 const express = require('express');
 const { Remarkable } = require('remarkable');
@@ -186,11 +187,18 @@ item_action.post('/query_item_by_producer_name', (req, res) => {
 item_action.post('/query_item_list', (req, res) => {
     DbItem.queryItemList(parseInt(req.body.count, 10), parseInt(req.body.offset, 10)).then(
         (resolve) => {
+            let res_items = resolve.rows.map(
+                (item, index, array) => {
+                    let new_item = item
+                    new_item.cover_img = actions.make_img_url(item.cover_img)
+                    return new_item
+                }
+            )
             util.log(`Sending ${resolve.rowCount} rows to ${req.ip} with ${req.ips}`)
             res.header("Access-Control-Allow-Origin", "*");
             // res.send(JSON.stringify(resolve.rows));
             // res.send(resolve.rows)
-            res.json(util.makeRes(resolve.rows))
+            res.json(util.makeRes(res_items))
     }).catch(
         (reject) => {
         res.header("Access-Control-Allow-Origin", "*");

@@ -24,7 +24,7 @@ function AppNav(){
                   </li>
                   <li class="nav-item">
                       {/* <a class="nav-link" href="/shopping"><strong>{shopping_page_name}</strong></a> */}
-                      <Link class="nav-link" to="/shopping"><strong>{shopping_page_name}</strong></Link>
+                      <Link class="nav-link" to="/item"><strong>{shopping_page_name}</strong></Link>
                   </li>
                   <li class="nav-item">
                   {/* <a class="nav-link" href="/about"><strong>{about_page_name}</strong></a> */}

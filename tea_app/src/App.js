@@ -10,6 +10,8 @@ import CartPage from './component/pages/CartPage'
 import Test from './test'
 import PostPage from './component/pages/PostPage'
 import PostListPage from './component/pages/PostListPage'
+import ItemPage from './component/pages/ItemPage'
+import ItemListPage from './component/pages/ItemListPage'
 import ShoppingPage from './component/pages/ShoppingPage'
 import LoadingPage from './component/pages/LoadingPage'
 
@@ -34,11 +36,12 @@ function App() {
           <Switch>
             <Route path="/" exact component={HomePage}/>
             <Route path="/about" exact component={FarmerPage}/>
-            <Route path="/shopping" exact component={ShoppingPage}/>
+            <Route path="/item" exact component={ItemListPage}/>
             <Route path="/cart" exact component={CartPage}/>
             <Route path="/post" exact component={PostListPage} />
             <Route path={`/farmer/:farmerId`} exact component={FarmerPage}/>
             <Route path={`/post/:postId`} exact component={PostPage}/>
+            <Route path={`/item/:itemId`} exact component={ItemPage}/>
             <Route component={HomePage}/>
           </Switch>
           {/* <LoadingPage/> */}
