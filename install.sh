@@ -47,6 +47,12 @@ sudo apt-get update -y
 
 sudo apt-get install docker-ce docker-ce-cli containerd.io -y
 
+sudo groupadd docker
+
+sudo usermod -aG  doceker $USER
+
+newgrp docker
+
 sudo docker run hello-world
 
 # Install Docker-Compose

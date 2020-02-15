@@ -37,7 +37,7 @@ function VideoSlide(props) {
 
     return (
         <div>
-            <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel">
+            <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel" style={{height: 'auto', minHeight: 'auto'}}>
                 {props.is_show_indicator?
                 <ol class="carousel-indicators">
                     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>

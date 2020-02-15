@@ -3,26 +3,27 @@ import React from 'react';
 import Slider from '../slider/Slider'
 import HeroTitle from '../hero_title/HeroTitle'
 import Gallery from '../gallery/Gallery'
-import Post from '../post/Post'
-import TestSlider from '../slider/testSlider'
+import Banner from '../banner/Banner'
+import Carousel from '../carousel/Carousel'
 
 import {slide1_caption, slide2_caption, slide3_caption, hero_title_home, hero_paragraph_home} from '../theme/text';
 
 const sliderInput = [{
   id: 1,
-  img: "http://192.168.43.203:5000/img/hill1.jpg",
+  media: "http://192.168.43.203:5000/video/tea_farmer.mp4",
+  caption_title: slide2_caption,
+  caption_subtitle: slide2_caption,
+  link: "http://192.168.43.203:5000/video/tea_farmer.mp4"
+},
+{
+  id: 2,
+  media: "http://192.168.43.203:5000/img/hill1.jpg",
   caption_title: slide1_caption,
   caption_subtitle: slide1_caption
 },
 {
-  id: 2,
-  img: "http://192.168.43.203:5000/img/hill2.jpg",
-  caption_title: slide2_caption,
-  caption_subtitle: slide2_caption
-},
-{
   id: 3,
-  img: "http://192.168.43.203:5000/img/tea.jpg",
+  media: "http://192.168.43.203:5000/img/tea.jpg",
   caption_title: slide3_caption,
   caption_subtitle: slide3_caption
 }];
@@ -74,6 +75,8 @@ function HomePage() {
   return (
     <div>
       <Slider sliderInput = {sliderInput} is_show_indicator = {true} is_show_control = {true}/>
+      {/* <Carousel carouselInput = {sliderInput} is_show_indicator = {true} is_show_control = {true}/> */}
+      <Banner/>
       <HeroTitle title={hero_title_home} paragraph={hero_paragraph_home}/>
       <Gallery galleryInput={galleryInput} route="farmer"/>
     </div>
