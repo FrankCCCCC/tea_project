@@ -13,9 +13,9 @@ function PostListPage(props) {
         <div>
           {/* <LoadingPage/> */}
           <HeroTitle title="最新消息" paragraph="各種稀奇古怪的事"/>
-          <GalleryList countAll={fetchPost.fetchPostsCountAll().then((response) => {return response.count})} loadrequest={fetchPost.fetchPostList} route="post"/>
-          
-          {/* <Gallery galleryInput={galleryInput} route=""/> */}
+          <div class="container">
+            <GalleryList countAll={fetchPost.fetchPostsCountAll().then((response) => {return response.count})} loadrequest={fetchPost.fetchPostList} route="post"/>
+          </div>
         </div>
     );
 }

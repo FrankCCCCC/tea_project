@@ -78,7 +78,9 @@ function HomePage() {
       {/* <Carousel carouselInput = {sliderInput} is_show_indicator = {true} is_show_control = {true}/> */}
       <Banner/>
       <HeroTitle title={hero_title_home} paragraph={hero_paragraph_home}/>
-      <Gallery galleryInput={galleryInput} route="farmer"/>
+      <div class="container">
+        <Gallery galleryInput={galleryInput} route="farmer"/>
+      </div>
     </div>
   );
 }

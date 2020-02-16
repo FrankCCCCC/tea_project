@@ -12,7 +12,6 @@ import PostPage from './component/pages/PostPage'
 import PostListPage from './component/pages/PostListPage'
 import ItemPage from './component/pages/ItemPage'
 import ItemListPage from './component/pages/ItemListPage'
-import ShoppingPage from './component/pages/ShoppingPage'
 import LoadingPage from './component/pages/LoadingPage'
 
 import 'bootstrap'

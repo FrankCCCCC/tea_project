@@ -1,6 +1,9 @@
 import React from 'react';
 import {font_style, title_style, subtitle_style, paragraph_style} from '../theme/font';
+import Carousel from '../carousel/Carousel'
+import ButtonPillarBlueDark from '../button/Button'
 import './Section.css';
+const Color = require('../theme/color')
 // const sectionInput = {
 //     title: "林氏傳統凍頂烏龍茶",
 //     subtitle: "在瞬息萬變的現代 傳承百年的好味道",
@@ -24,13 +27,50 @@ import './Section.css';
 function Section(props) {
     console.log(props.sectionInput.is_reverse)
     let classVar = `row ${props.sectionInput.is_reverse? "flex-row-reverse" : "flex-row"} align-items-center`;
+    let button = (
+        <div><ButtonPillarBlueDark text="購買"/></div>
+    )
+    console.log(props.sectionInput.id)
+    let data = (
+        <div style={{color: "grey", fontFamily: font_style.fontFamily, fontWeight: "bold"}}>
+            <div class="d-flex justify-content-around align-content-around flex-wrap mb-3">
+                <div style={{textAlign: "center"}}>
+                    <h4 style={{fontWeight: "bold"}}>發酵溫度</h4>
+                    <h1 style={{color: Color.colorGreenDark, fontSize: '3rem'}}>26.3<span style={{fontSize: '2rem'}}>度</span></h1>
+                </div>
+                <div style={{textAlign: "center" }}>
+                    <h4 style={{fontWeight: "bold"}}>發酵濕度</h4>
+                    <h1 style={{color: Color.colorGreenDark, fontSize: '3rem'}}>63<span style={{fontSize: '2rem'}}>%</span></h1>
+                </div>
+            </div>
+            {/* <h2 style={{color: Color.colorBlueDark, fontSize: '4rem', fontFamily: font_style.fontFamily, fontWeight: "bold"}}>"賺大錢的方法也不是沒有，但是茶葉這東西，生我養我的，我做不到"</h2> */}
+        </div>
+    )
     return(
         <div>
             <div class={classVar} style={{height:"100%"}}>
-                <div class="col-lg-6" style={{textAlign: "center", verticalAlign: "middle", padding: "3rem"}}>
-                    <h1 style={font_style}>{props.sectionInput.title}</h1>
-                    <h3 style={font_style}>{props.sectionInput.subtitle}</h3>
-                    <p style={font_style}>{props.sectionInput.paragraph}</p>
+                <div class="col-lg-6" style={{textAlign: "center", verticalAlign: "middle", padding: ""}}>
+                {/* <div style={{color: "grey", position: "relative", left: "-5rem", zIndex: 10, backgroundColor: "white", padding: "3rem", boxShadow: "2px 2px 5px 1px rgba(0, 0, 0, 0.2)", borderRadius: "5px"}}> */}
+                    {/* <div style={{color: "grey", position: "relative", left: "-3rem", zIndex: 10, backgroundColor: "white", padding: "3rem", boxShadow: "5px 5px 5px 1px rgba(0, 0, 0, 0.2)", borderRadius: "5px"}}> */}
+                    {/* <div style={{textAlign: "center", color: "grey", padding: "3rem"}}>
+                        <h3 style={{marginBottom: "0rem", fontFamily: font_style.fontFamily, fontWeight: "bold"}}>{props.sectionInput.title}</h3>
+                        <div style={{marginBottom: "1rem", marginLeft: "auto", marginRight: "auto", height: "0.2rem", width: "5rem", backgroundColor: Color.colorGreenDark}}></div>
+                        <h5 style={{marginBottom: "0.3rem", fontFamily: font_style.fontFamily}}>{props.sectionInput.subtitle}</h5>
+                        <p style={{fontFamily: font_style.fontFamily, fontSize: "1rem"}}>{props.sectionInput.paragraph}</p>
+                    </div> */}
+                    <div style={{textAlign: "left", color: "grey", padding: "3rem"}}>
+                        <h3 style={{marginBottom: "0rem", fontFamily: font_style.fontFamily, fontWeight: "bold"}}>{props.sectionInput.title}</h3>
+                        <div style={{marginBottom: "1rem", height: "0.2rem", width: "5rem", backgroundColor: Color.colorGreenDark}}></div>
+                            <h5 style={{marginBottom: "0.3rem", fontFamily: font_style.fontFamily}}>{props.sectionInput.subtitle}</h5>
+                            <p style={{fontFamily: font_style.fontFamily, fontSize: "1rem"}}>{props.sectionInput.paragraph}</p>
+                        
+                        <div>
+                            {props.sectionInput.id == 1? button:data}
+                            
+                            {/* <button class="btn" style={{fontFamily: font_style.fontFamily, fontSize: "1rem" , width: "7rem", color: "white",backgroundColor: Color.colorBlueDark, borderRadius: "20px"}}>購買</button> */}
+                        </div>
+                    </div>
+                    
                 </div>
                 <div class="col-lg-6" style={{height: "100%", padding: 0}}>
                     <div class="carousel slide" data-ride="carousel">
