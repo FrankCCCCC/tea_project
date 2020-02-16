@@ -26,7 +26,7 @@ function Banner(){
                             <h1 style={{fontSize: '6rem'}}>10000<span style={{fontSize: '2rem'}}>頓</span></h1>
                         </div>
                     </div> */}
-                    <h2 style={{color: Color.colorBlueDark, fontSize: '4rem', fontFamily: font_style.fontFamily, fontWeight: "bold"}}>"賺大錢的方法也不是沒有，但是茶葉這東西，生我養我的，我做不到"</h2>
+                    <h2 style={{color: Color.colorBlueDark, fontSize: '4rem', fontFamily: font_style.fontFamily, fontWeight: "bold"}}>"賣茶葉賺大錢的方法也不是沒有，但是茶葉這東西，生我養我的，我做不到"</h2>
                 </div>
             </div>
         </div>
