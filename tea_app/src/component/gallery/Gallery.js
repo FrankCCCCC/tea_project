@@ -4,13 +4,15 @@ import {font_style} from '../theme/font';
 import {} from '../util/config'
 const Color = require('../theme/color')
 
-// const galleryInput = [{
-//     id: Integer,
-//     img: String image url,
-//     caption_title: String,
-//     caption_subtitle: String
-// }]
-// const route = String next route path
+/**
+* @param {Object[]} galleryInput[] - The object array of gallery
+* @param {integer} galleryInput[].id - The identification number of items
+* @param {string} galleryInput[].catergory - The categories of items
+* @param {string} galleryInput[].img - The cover image of the item
+* @param {string} galleryInput[].caption_title - The title caption of the item
+* @param {string} galleryInput[].caption_subtitle - The subtitle caption of the item
+* @param {string} route - The URL route that added to current URL and it would direct to the page of link
+*/
 
 class Gallery extends React.Component{
     constructor(props){
@@ -135,9 +137,9 @@ class Gallery extends React.Component{
             <div style={font_style}>
                 <div class="row">
                     <div class="col-md-12 d-flex justify-content-center mb-5">
-                        <button type="button" class="btn btn-outline-black waves-effect filter" data-rel="all">All</button>
-                        <button type="button" class="btn btn-outline-black waves-effect filter" data-rel="1">Mountains</button>
-                        <button type="button" class="btn btn-outline-black waves-effect filter" data-rel="2">Sea</button>
+                        <button type="button" class="btn btn-outline-black waves-effect filter" data-rel="all">鹿谷凍頂烏龍</button>
+                        <button type="button" class="btn btn-outline-black waves-effect filter" data-rel="1">阿里山高山</button>
+                        <button type="button" class="btn btn-outline-black waves-effect filter" data-rel="2">峨嵋東方美人</button>
                     </div>
                 </div>
                 
@@ -149,52 +151,5 @@ class Gallery extends React.Component{
         );
     }
 }
-
-
-// function Gallery(props){
-//     if(!Array.isArray(props.galleryInput)){
-//         console.log("Error GalleryInput is not array")
-//         throw "Error GalleryInput is not array";
-//         return -1;
-//     }
-//     var content = [];
-
-//     let {path, url} = useRouteMatch();
-//     console.log(`${url}`)
-//     for(let i=0; i < props.galleryInput.length; i++){
-//         console.log(`${url}${props.route}/${props.galleryInput[i].id}`)
-//         content.push(
-//             <div key={i} class="mb-3" data-aos={i % 2? "fade-right" : "fade-left"}>
-                
-//                     <div style={{position: "relative", textAlign: "right", color: "white"}}>
-//                         <Link to={`${url}${props.route}/${props.galleryInput[i].id}`}>
-//                             <img class="img-fluid" src={props.galleryInput[i].img} alt="Card image cap" style={{width: "100%"}}/>
-//                         </Link>
-//                         <div style={{position: "absolute", bottom: "0rem", right: "0rem", width: "100%", paddingRight: "0.5rem", paddingLeft: "0.5rem", paddingTop: "0.3rem", backgroundColor: "rgba(0, 0, 0, 0.2)"}}>
-//                             <h4>{props.galleryInput[i].caption_title}</h4>
-//                             <p>{props.galleryInput[i].caption_subtitle}</p>
-//                         </div>
-//                     </div>
-                
-//             </div>
-//         );
-//     }
-
-//     return (
-//         <div style={font_style}>
-//             <div class="row">
-//                 <div class="col-md-12 d-flex justify-content-center mb-5">
-//                     <button type="button" class="btn btn-outline-black waves-effect filter" data-rel="all">All</button>
-//                     <button type="button" class="btn btn-outline-black waves-effect filter" data-rel="1">Mountains</button>
-//                     <button type="button" class="btn btn-outline-black waves-effect filter" data-rel="2">Sea</button>
-//                 </div>
-//             </div>
-            
-//             <div class="gallery" style={{columnCount: "3",columnWidth: "250px"}}>
-//                 {content}
-//             </div>
-//         </div>
-//     );
-// }
 
 export default Gallery;

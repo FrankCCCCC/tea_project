@@ -1,5 +1,8 @@
 import React from 'react';
+import ShoppingList from '../shoppingList/ShoppingList'
 import {font_style} from '../theme/font';
+import {infoSetInfo, infoGetState} from  '../redux/action'
+import {cart_store, info_store} from '../redux/store'
 import {first_name,
         last_name,
         phone_number,
@@ -29,13 +32,27 @@ import {first_name,
 class CartPage extends React.Component{
     constructor(props){
         super(props);
-        this.state ={
-            first_name: "",
-            last_name: "",
-            phone_number: "",
-            county: "",
-            township: "",
-            road: "",
+        // this.state = {
+        //     first_name: "",
+        //     last_name: "",
+        //     phone_number: "",
+        //     county: "",
+        //     township: "",
+        //     road: "",
+        //     agree_receive_notice: true,
+        //     agree_privacy_term: false,
+        //     // isGoing: true,
+        //     // numberOfGuests: 0,
+        //     is_validated: "needs-validation"
+        // }
+        let store_state = infoGetState()
+        this.state = {
+            first_name: store_state.first_name == undefined ? "":store_state.first_name,
+            last_name: store_state.last_name == undefined ? "":store_state.last_name,
+            phone_number: store_state.phone_number == undefined ? "":store_state.phone_number,
+            county: store_state.county == undefined ? "":store_state.county,
+            township: store_state.township == undefined ? "":store_state.township,
+            road: store_state.road == undefined ? "":store_state.road,
             agree_receive_notice: true,
             agree_privacy_term: false,
             // isGoing: true,
@@ -54,6 +71,7 @@ class CartPage extends React.Component{
         this.setState({
             [name]: value
         })
+        infoSetInfo(name, value)
         console.log(name + value)
     }
 
@@ -70,115 +88,121 @@ class CartPage extends React.Component{
 
     render(){
         return (
-            <div class="container mb-3" style={font_style}>
-                <div style={{height: "10rem"}}></div>
+            <div>
+                <div>
+                    <ShoppingList/>
+                </div>
+            
+                <div class="container mb-3" style={font_style}>
+                    <div style={{height: "10rem"}}></div>
 
-                <form class={this.state.is_validated} action={order_receiving_url} novalidate>
-                    <div class="form-row">
-                        <div class="col-md-6 mb-3">
-                            <label for="validation_first_name">{first_name}</label>
-                            <input type="text" name="first_name" class="form-control" id="validation_first_name" onChange={this.handle_input_change} required/>
-                            <div class="invalid-feedback">{first_name_input_error}</div>
+                    <form class={this.state.is_validated} action={order_receiving_url} novalidate>
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label for="validation_first_name">{first_name}</label>
+                                <input type="text" name="first_name" class="form-control" id="validation_first_name" onChange={this.handle_input_change} required/>
+                                <div class="invalid-feedback">{first_name_input_error}</div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="validation_last_name">{last_name}</label>
+                                <input type="text" name="last_name" class="form-control" id="validation_last_name" onChange={this.handle_input_change} required/>
+                                <div class="invalid-feedback">{last_name_input_error}</div>
+                            </div>
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="validation_last_name">{last_name}</label>
-                            <input type="text" name="last_name" class="form-control" id="validation_last_name" onChange={this.handle_input_change} required/>
-                            <div class="invalid-feedback">{last_name_input_error}</div>
+                        <div class="form-row">
+                            {/* <div class="col-md-6 mb-3">
+                                <label for="validation_cellphone">{cellphone_number}</label>
+                                <input type="text" name="cellphone_number" class="form-control" id="validation_cellphone_number" onChange={this.handle_input_change} required/>
+                                <div class="invalid-feedback">{cellphone_number_input_error}</div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="validation_telephone_number">{telephone_number}</label>
+                                <input type="text" name="telephone_number" class="form-control" id="validation_telephone_number" onChange={this.handle_input_change} required/>
+                                <div class="invalid-feedback">{telephone_number_input_error}</div>
+                            </div> */}
+                            <div class="col-md-6 mb-3">
+                                <label for="validation_phone_number">{phone_number}</label>
+                                <input type="text" name="phone_number" pattern="[0-9]{9,}" class="form-control" id="validation_phone_number" onChange={this.handle_input_change} required/>
+                                <div class="invalid-feedback">{phone_number_input_error}</div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="validation_email">{email}</label>
+                                <input type="text" name="email" pattern="[^@\s]+@[^@\s]+" class="form-control" id="validation_email" onChange={this.handle_input_change} required/>
+                                <div class="invalid-feedback">{email_input_error}</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-row">
-                        {/* <div class="col-md-6 mb-3">
-                            <label for="validation_cellphone">{cellphone_number}</label>
-                            <input type="text" name="cellphone_number" class="form-control" id="validation_cellphone_number" onChange={this.handle_input_change} required/>
-                            <div class="invalid-feedback">{cellphone_number_input_error}</div>
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label for="validation_zip">{zip}</label>
+                                <input type="text" name="zip" pattern="[0-9]{5}" class="form-control" id="validation_zip" onChange={this.handle_input_change} required/>
+                                <div class="invalid-feedback">{zip_input_error}</div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="validation_county">{county}</label>
+                                <input type="text" name="county" class="form-control" id="validation_county" onChange={this.handle_input_change} required/>
+                                <div class="invalid-feedback">{county_input_error}</div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="validation_township">{township}</label>
+                                <input type="text" name="township" class="form-control" id="validation_township" onChange={this.handle_input_change} required/>
+                                <div class="invalid-feedback">{township_input_error}</div>
+                            </div>
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="validation_telephone_number">{telephone_number}</label>
-                            <input type="text" name="telephone_number" class="form-control" id="validation_telephone_number" onChange={this.handle_input_change} required/>
-                            <div class="invalid-feedback">{telephone_number_input_error}</div>
-                        </div> */}
-                        <div class="col-md-6 mb-3">
-                            <label for="validation_phone_number">{phone_number}</label>
-                            <input type="text" name="phone_number" pattern="[0-9]{9,}" class="form-control" id="validation_phone_number" onChange={this.handle_input_change} required/>
-                            <div class="invalid-feedback">{phone_number_input_error}</div>
+                        <div class="form-row">
+                            <div class="col mb-3">
+                                <label for="validation_road">{road}</label>
+                                <input type="text" name="road" class="form-control" id="validation_road" onChange={this.handle_input_change} required/>
+                                <div class="invalid-feedback">{road_input_error}</div>
+                            </div>
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="validation_email">{email}</label>
-                            <input type="text" name="email" pattern="[^@\s]+@[^@\s]+" class="form-control" id="validation_email" onChange={this.handle_input_change} required/>
-                            <div class="invalid-feedback">{email_input_error}</div>
+                        <div class="form-row">
+                            <div class="custom-control custom-checkbox  mb-3">
+                                <input class="custom-control-input" type="checkbox" name="agree_receive_notice" value="" id="agree_receive_notice" onChange={this.handle_input_change} checked={this.state.agree_receive_notice}/>
+                                <label class="custom-control-label" for="agree_receive_notice" style={{color: "black"}}>
+                                    {agree_receive_notice}
+                                </label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col-md-4 mb-3">
-                            <label for="validation_zip">{zip}</label>
-                            <input type="text" name="zip" pattern="[0-9]{5}" class="form-control" id="validation_zip" onChange={this.handle_input_change} required/>
-                            <div class="invalid-feedback">{zip_input_error}</div>
+                        <div class="form-row">
+                            <div class="custom-control custom-checkbox mb-3">
+                                <input class="custom-control-input" type="checkbox" name="agree_privacy_term" value="" id="agree_privacy_term"  onChange={this.handle_input_change} required/>
+                                <label class="custom-control-label" for="agree_privacy_term" style={{color: "black"}}>
+                                    {agree_privacy_term1}
+                                    <a href={privacy_term_link}>{agree_privacy_term2}</a>
+                                </label>
+                                <div class="invalid-feedback">{agree_privacy_term_error}</div>
+                            </div>
                         </div>
-                        <div class="col-md-4 mb-3">
-                            <label for="validation_county">{county}</label>
-                            <input type="text" name="county" class="form-control" id="validation_county" onChange={this.handle_input_change} required/>
-                            <div class="invalid-feedback">{county_input_error}</div>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label for="validation_township">{township}</label>
-                            <input type="text" name="township" class="form-control" id="validation_township" onChange={this.handle_input_change} required/>
-                            <div class="invalid-feedback">{township_input_error}</div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col mb-3">
-                            <label for="validation_road">{road}</label>
-                            <input type="text" name="road" class="form-control" id="validation_road" onChange={this.handle_input_change} required/>
-                            <div class="invalid-feedback">{road_input_error}</div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="custom-control custom-checkbox  mb-3">
-                            <input class="custom-control-input" type="checkbox" name="agree_receive_notice" value="" id="agree_receive_notice" onChange={this.handle_input_change} checked={this.state.agree_receive_notice}/>
-                            <label class="custom-control-label" for="agree_receive_notice" style={{color: "black"}}>
-                                {agree_receive_notice}
-                            </label>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="custom-control custom-checkbox mb-3">
-                            <input class="custom-control-input" type="checkbox" name="agree_privacy_term" value="" id="agree_privacy_term"  onChange={this.handle_input_change} required/>
-                            <label class="custom-control-label" for="agree_privacy_term" style={{color: "black"}}>
-                                {agree_privacy_term1}
-                                <a href={privacy_term_link}>{agree_privacy_term2}</a>
-                            </label>
-                            <div class="invalid-feedback">{agree_privacy_term_error}</div>
-                        </div>
-                    </div>
-                    {/* <div style={{textAlign: "center", width: "100%"}}> */}
-                    <button class="btn btn-dark btn-pill" type="submit" onClick={this.handle_submit_click} style={{width: "100%"}}>{submit_order}</button>
-                    {/* </div> */}
+                        {/* <div style={{textAlign: "center", width: "100%"}}> */}
+                        <button class="btn btn-dark btn-pill" type="submit" onClick={this.handle_submit_click} style={{width: "100%"}}>{submit_order}</button>
+                        {/* </div> */}
+                        
+                    </form>
+        
+                    {/* <form>
+                        <label>
+                        Is going:
+                        <input
+                            name="isGoing"
+                            type="checkbox"
+                            checked={this.state.isGoing}
+                            onChange={this.handle_input_change} />
+                        </label>
+                        <br />
+                        <label>
+                        Number of guests:
+                        <input
+                            name="numberOfGuests"
+                            type="number"
+                            value={this.state.numberOfGuests}
+                            onChange={this.handle_input_change} />
+                        </label>
+                    </form>
+                    <p>{this.state.isGoing.toString()}</p>
+                    <p>{this.state.numberOfGuests}</p>
+                    <p>{this.state.first_name}</p> */}
                     
-                </form>
-    
-                {/* <form>
-                    <label>
-                    Is going:
-                    <input
-                        name="isGoing"
-                        type="checkbox"
-                        checked={this.state.isGoing}
-                        onChange={this.handle_input_change} />
-                    </label>
-                    <br />
-                    <label>
-                    Number of guests:
-                    <input
-                        name="numberOfGuests"
-                        type="number"
-                        value={this.state.numberOfGuests}
-                        onChange={this.handle_input_change} />
-                    </label>
-                </form>
-                <p>{this.state.isGoing.toString()}</p>
-                <p>{this.state.numberOfGuests}</p>
-                <p>{this.state.first_name}</p> */}
-                
+                </div>
             </div>
         );
     }

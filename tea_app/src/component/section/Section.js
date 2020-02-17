@@ -1,7 +1,8 @@
 import React from 'react';
 import {font_style, title_style, subtitle_style, paragraph_style} from '../theme/font';
 import Carousel from '../carousel/Carousel'
-import ButtonPillarBlueDark from '../button/Button'
+import {ButtonPillarBlueDark} from '../button/Button'
+import {cartAddItem} from '../redux/action'
 import './Section.css';
 const Color = require('../theme/color')
 // const sectionInput = {
@@ -25,12 +26,15 @@ const Color = require('../theme/color')
 // props['sectionInput'] = sectionInput;
 
 function Section(props) {
-    console.log(props.sectionInput.is_reverse)
+    // console.log(props.sectionInput.is_reverse)
     let classVar = `row ${props.sectionInput.is_reverse? "flex-row-reverse" : "flex-row"} align-items-center`;
+    // cart_store.dispatch({type: action_add_item, id: 1, name: "Test Oolong", quantity: 2}, {type: action_add_item})
+    // console.log("Section", cart_store.getState())
+
     let button = (
-        <div><ButtonPillarBlueDark text="購買"/></div>
+        <div><ButtonPillarBlueDark text="購買" handleClick={cartAddItem(1, "Oolong1", 1)}/></div>
     )
-    console.log(props.sectionInput.id)
+    // console.log(props.sectionInput.id)
     let data = (
         <div style={{color: "grey", fontFamily: font_style.fontFamily, fontWeight: "bold"}}>
             <div class="d-flex justify-content-around align-content-around flex-wrap mb-3">

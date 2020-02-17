@@ -2,6 +2,12 @@ import React from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 import Gallery from '../gallery/Gallery'
 
+/**
+ * @param {promise} countAll - The fetch promise that can count the number of all items
+ * @param {function} loadRequest - The function that can load specific number of items after speific item
+ * @param {string} route - The route would be added to the current URL and the page would be directed to the specified page according to the link
+ */
+
 class GalleryList extends React.Component{
     constructor(props){
         super(props);

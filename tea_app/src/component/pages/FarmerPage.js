@@ -86,7 +86,7 @@ function FarmerPage() {
     content.push(
       <Section sectionInput={sectionList[i]}/>
     )
-    console.log(sectionList[i].is_reverse)
+    // console.log(sectionList[i].is_reverse)
   }
   return (
     <div>
