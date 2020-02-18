@@ -14,7 +14,7 @@ export const cartReducer = (state = cart_init_state, action) => {
     switch(action.type) {
         case(action_add_item): 
             current_list = state.cart
-            current_list.push({id: action.id, img: action.img, name: action.name, quantity: action.quantity})
+            current_list.push({id: action.id, img: action.img, name: action.name, quantity: action.quantity, price: action.price})
             re = {
                 cart: current_list
             }
@@ -22,7 +22,9 @@ export const cartReducer = (state = cart_init_state, action) => {
         case(action_delete_item):
             current_list = state.cart
             for(let i=0; i<current_list.length; i++){
-                if(current_list[i].id === action.id && current_list[i].name === action.name){
+                console.log(i, Number(action.list_id))
+                if(i === Number(action.list_id)){
+                    console.log(i, Number(action.list_id))
                     current_list.splice(i, 1);
                 }
             }
@@ -30,6 +32,7 @@ export const cartReducer = (state = cart_init_state, action) => {
             re = {
                 cart: current_list
             }
+            console.log(current_list)
             return re
         case(action_clear_cart):
             re = {
@@ -39,7 +42,7 @@ export const cartReducer = (state = cart_init_state, action) => {
         case(action_increase_quantity_by_1):
             current_list = state.cart
             for(let i=0; i<current_list.length; i++){
-                if(current_list[i].id === action.id && current_list[i].name === action.name){
+                if(i === action.list_id){
                     current_list[i].quantity+=1
                 }
             }
@@ -51,7 +54,7 @@ export const cartReducer = (state = cart_init_state, action) => {
         case(action_decrease_quantity_by_1):
             current_list = state.cart
             for(let i=0; i<current_list.length; i++){
-                if(current_list[i].id === action.id && current_list[i].name === action.name){
+                if(i === action.list_id){
                     current_list[i].quantity-=1
                 }
             }
@@ -63,7 +66,7 @@ export const cartReducer = (state = cart_init_state, action) => {
         case(action_set_quantity):
             current_list = state.cart
             for(let i=0; i<current_list.length; i++){
-                if(current_list[i].id === action.id && current_list[i].name === action.name){
+                if(i === action.list_id){
                     current_list[i].quantity = action.quantity
                 }
             }

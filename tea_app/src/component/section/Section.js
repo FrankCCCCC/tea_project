@@ -4,7 +4,7 @@ import Carousel from '../carousel/Carousel'
 import {ButtonPillarBlueDark} from '../button/Button'
 import {cartAddItem, cartGetState} from '../redux/action'
 import './Section.css';
-const Color = require('../theme/color')
+import Color from '../theme/color'
 // const sectionInput = {
 //     title: "林氏傳統凍頂烏龍茶",
 //     subtitle: "在瞬息萬變的現代 傳承百年的好味道",
@@ -34,7 +34,7 @@ class Section extends React.Component{
 
     handleBuyClick(){
         console.log(cartGetState())
-        cartAddItem(2, "Black Tea2", 2)
+        cartAddItem(2, "http://localhost:5000/img/hill2.jpg", "綠蟬招牌紅茶", 2, 350)
         console.log(cartGetState())
     }
 
@@ -45,7 +45,7 @@ class Section extends React.Component{
 
         let button = (
             // <div><ButtonPillarBlueDark text="購買"/></div>
-            <button class="btn" onClick={this.handleBuyClick} style={{fontFamily: font_style.fontFamily, fontSize: "1rem" , width: "7rem", color: "white",backgroundColor: Color.colorBlueDark, borderRadius: "20px"}}>加入購物車</button>
+            <button class="btn" onClick={this.handleBuyClick} style={{fontFamily: font_style.fontFamily, fontSize: "1rem" , width: "7rem", color: "white",backgroundColor: Color.blueDark, borderRadius: "20px"}}>加入購物車</button>
         )
         // console.log(this.props.sectionInput.id)
         let data = (
@@ -53,14 +53,14 @@ class Section extends React.Component{
                 <div class="d-flex justify-content-around align-content-around flex-wrap mb-3">
                     <div style={{textAlign: "center"}}>
                         <h4 style={{fontWeight: "bold"}}>發酵溫度</h4>
-                        <h1 style={{color: Color.colorGreenDark, fontSize: '3rem'}}>26.3<span style={{fontSize: '2rem'}}>度</span></h1>
+                        <h1 style={{color: Color.greenDark, fontSize: '3rem'}}>26.3<span style={{fontSize: '2rem'}}>度</span></h1>
                     </div>
                     <div style={{textAlign: "center" }}>
                         <h4 style={{fontWeight: "bold"}}>發酵濕度</h4>
-                        <h1 style={{color: Color.colorGreenDark, fontSize: '3rem'}}>63<span style={{fontSize: '2rem'}}>%</span></h1>
+                        <h1 style={{color: Color.greenDark, fontSize: '3rem'}}>63<span style={{fontSize: '2rem'}}>%</span></h1>
                     </div>
                 </div>
-                {/* <h2 style={{color: Color.colorBlueDark, fontSize: '4rem', fontFamily: font_style.fontFamily, fontWeight: "bold"}}>"賺大錢的方法也不是沒有，但是茶葉這東西，生我養我的，我做不到"</h2> */}
+                {/* <h2 style={{color: Color.blueDark, fontSize: '4rem', fontFamily: font_style.fontFamily, fontWeight: "bold"}}>"賺大錢的方法也不是沒有，但是茶葉這東西，生我養我的，我做不到"</h2> */}
             </div>
         )
 
@@ -72,20 +72,20 @@ class Section extends React.Component{
                         {/* <div style={{color: "grey", position: "relative", left: "-3rem", zIndex: 10, backgroundColor: "white", padding: "3rem", boxShadow: "5px 5px 5px 1px rgba(0, 0, 0, 0.2)", borderRadius: "5px"}}> */}
                         {/* <div style={{textAlign: "center", color: "grey", padding: "3rem"}}>
                             <h3 style={{marginBottom: "0rem", fontFamily: font_style.fontFamily, fontWeight: "bold"}}>{this.props.sectionInput.title}</h3>
-                            <div style={{marginBottom: "1rem", marginLeft: "auto", marginRight: "auto", height: "0.2rem", width: "5rem", backgroundColor: Color.colorGreenDark}}></div>
+                            <div style={{marginBottom: "1rem", marginLeft: "auto", marginRight: "auto", height: "0.2rem", width: "5rem", backgroundColor: Color.greenDark}}></div>
                             <h5 style={{marginBottom: "0.3rem", fontFamily: font_style.fontFamily}}>{this.props.sectionInput.subtitle}</h5>
                             <p style={{fontFamily: font_style.fontFamily, fontSize: "1rem"}}>{this.props.sectionInput.paragraph}</p>
                         </div> */}
                         <div style={{textAlign: "left", color: "grey", padding: "3rem"}}>
                             <h3 style={{marginBottom: "0rem", fontFamily: font_style.fontFamily, fontWeight: "bold"}}>{this.props.sectionInput.title}</h3>
-                            <div style={{marginBottom: "1rem", height: "0.2rem", width: "5rem", backgroundColor: Color.colorGreenDark}}></div>
+                            <div style={{marginBottom: "1rem", height: "0.2rem", width: "5rem", backgroundColor: Color.greenDark}}></div>
                                 <h5 style={{marginBottom: "0.3rem", fontFamily: font_style.fontFamily}}>{this.props.sectionInput.subtitle}</h5>
                                 <p style={{fontFamily: font_style.fontFamily, fontSize: "1rem"}}>{this.props.sectionInput.paragraph}</p>
                             
                             <div>
                                 {this.props.sectionInput.id == 1? button:data}
                                 
-                                {/* <button class="btn" style={{fontFamily: font_style.fontFamily, fontSize: "1rem" , width: "7rem", color: "white",backgroundColor: Color.colorBlueDark, borderRadius: "20px"}}>購買</button> */}
+                                {/* <button class="btn" style={{fontFamily: font_style.fontFamily, fontSize: "1rem" , width: "7rem", color: "white",backgroundColor: Color.blueDark, borderRadius: "20px"}}>購買</button> */}
                             </div>
                         </div>
                         

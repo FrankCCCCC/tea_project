@@ -1,6 +1,6 @@
 import React from 'react'
 import {font_style} from '../theme/font';
-const Color = require('../theme/color')
+import Color from '../theme/color'
 
 export const ButtonPillarBlueDark = (props) => {
     return (

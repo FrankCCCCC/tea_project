@@ -11,28 +11,28 @@ export const cartSubscribe = (funct) => {
     cart_store.subscribe(funct)
 }
 
-export const cartAddItem = (id, img, name, quantity) => {
-    cart_store.dispatch({type: action_add_item, id: id, img: img, name: name, quantity: quantity})
+export const cartAddItem = (id, img, name, quantity, price) => {
+    cart_store.dispatch({type: action_add_item, id: id, img: img, name: name, quantity: quantity, price: price});
 }
 
-export const cartDeleteItem = (id, name) => {
-    cart_store.dispatch({type: action_delete_item, id: id, name: name})
+export const cartDeleteItem = (list_id) => {
+    cart_store.dispatch({type: action_delete_item, list_id: list_id})
 }
 
 export const cartClearCart = () => {
     cart_store.dispatch({type: action_clear_cart})
 }
 
-export const cartIncreaseQuantityBy1 = (id, name) => {
-    cart_store.dispatch({type: action_increase_quantity_by_1, id: id, name: name})
+export const cartIncreaseQuantityBy1 = (list_id) => {
+    cart_store.dispatch({type: action_increase_quantity_by_1, list_id: list_id})
 }
 
-export const cartDecreaseQuantityBy1 = (id, name) => {
-    cart_store.dispatch({type: action_decrease_quantity_by_1, id: id, name: name})
+export const cartDecreaseQuantityBy1 = (list_id) => {
+    cart_store.dispatch({type: action_decrease_quantity_by_1, list_id: list_id})
 }
 
-export const cartSetQuantity = (id, name, quantity) => {
-    cart_store.dispatch({type: action_set_quantity, id: id, name: name, quantity: quantity})
+export const cartSetQuantity = (list_id, quantity) => {
+    cart_store.dispatch({type: action_set_quantity, list_id: list_id, quantity: quantity})
 }
 
 export const cartGetState = () => {
@@ -54,8 +54,8 @@ function test(){
 
 cart_store.subscribe(test)
 
-cartAddItem(1, "http://localhost:5000/img/tea.jpg", "林氏傳統凍頂烏龍茶", 1)
-cartAddItem(2, "http://localhost:5000/img/tea.jpg", "陳氏傳統東方美人茶", 2)
+cartAddItem(1, "http://localhost:5000/img/tea.jpg", "林氏傳統凍頂烏龍茶", 1, 300)
+cartAddItem(2, "http://localhost:5000/img/tea.jpg", "陳氏傳統東方美人茶", 2, 250)
 // cartAddItem(3, "Test Oolong3", 3)
 // cartDeleteItem(2, "Test Oolong2")
 // cartSetQuantity(3, "Test Oolong3", 5)
