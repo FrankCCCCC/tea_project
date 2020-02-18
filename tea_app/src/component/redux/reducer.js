@@ -14,19 +14,16 @@ export const cartReducer = (state = cart_init_state, action) => {
     switch(action.type) {
         case(action_add_item): 
             current_list = state.cart
-            // console.log(current_list)
-            current_list.push({id: action.id, name: action.name, quantity: action.quantity})
+            current_list.push({id: action.id, img: action.img, name: action.name, quantity: action.quantity})
             re = {
                 cart: current_list
             }
             return re
         case(action_delete_item):
             current_list = state.cart
-            // console.log(current_list)
             for(let i=0; i<current_list.length; i++){
                 if(current_list[i].id === action.id && current_list[i].name === action.name){
                     current_list.splice(i, 1);
-                    // console.log(current_list)
                 }
             }
             
@@ -83,8 +80,8 @@ export const cartReducer = (state = cart_init_state, action) => {
 export const infoReducer = (state = info_init_state, action) => {
     let current_info = state.info
     let re = {}
-    console.log(current_info)
-    console.log(action)
+    // console.log(current_info)
+    // console.log(action)
     switch(action.type){
         case(action_set_info):
             current_info[action.key] = action.value

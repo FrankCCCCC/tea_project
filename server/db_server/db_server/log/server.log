@@ -66330,3 +66330,939 @@ VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'
 2020-02-17T19:10:13.735Z Local: 2/18/2020, 3:10:13 AM SELECT * FROM posts_table ORDER BY latest_modify DESC LIMIT 3 OFFSET 102; 
 2020-02-17T19:10:13.737Z Local: 2/18/2020, 3:10:13 AM command: SELECT, rowCount: 1 
 2020-02-17T19:10:13.738Z Local: 2/18/2020, 3:10:13 AM Sending 1 rows to ::1 with  
+2020-02-18T06:55:37.758Z Local: 2/18/2020, 2:55:37 PM INSERT INTO posts_table(title, subtitle, author, content, cover_img) VALUES('Test Title', 'Test Subtile', 'Test Author', '# Remarkable...', 'child.jpg') RETURNING id; 
+2020-02-18T06:55:37.806Z Local: 2/18/2020, 2:55:37 PM INSERT INTO posts_table(title, subtitle, author, content, cover_img) VALUES('Test Title', 'Test Subtile', 'Test Author', '# Remarkable...', 'child.jpg') RETURNING id; 
+2020-02-18T06:55:37.803Z Local: 2/18/2020, 2:55:37 PM INSERT INTO posts_table(title, subtitle, author, content, cover_img) VALUES('Test Title', 'Test Subtile', 'Test Author', '# Remarkable...', 'child.jpg') RETURNING id; 
+2020-02-18T06:55:37.813Z Local: 2/18/2020, 2:55:37 PM INSERT INTO posts_table(title, subtitle, author, content, cover_img) VALUES('Test Title', 'Test Subtile', 'Test Author', '# Remarkable...', 'child.jpg') RETURNING id; 
+2020-02-18T06:55:37.816Z Local: 2/18/2020, 2:55:37 PM INSERT INTO posts_table(title, subtitle, author, content, cover_img) VALUES('Test Title', 'Test Subtile', 'Test Author', '# Remarkable...', 'child.jpg') RETURNING id; 
+2020-02-18T06:55:37.821Z Local: 2/18/2020, 2:55:37 PM INSERT INTO posts_table(title, subtitle, author, content, cover_img) VALUES('Test Title', 'Test Subtile', 'Test Author', '# Remarkable...', 'child.jpg') RETURNING id; 
+2020-02-18T06:55:37.825Z Local: 2/18/2020, 2:55:37 PM INSERT INTO posts_table(title, subtitle, author, content, cover_img) VALUES('Test Title', 'Test Subtile', 'Test Author', '# Remarkable...', 'child.jpg') RETURNING id; 
+2020-02-18T06:55:37.828Z Local: 2/18/2020, 2:55:37 PM INSERT INTO posts_table(title, subtitle, author, content, cover_img) VALUES('Test Title', 'Test Subtile', 'Test Author', '# Remarkable...', 'child.jpg') RETURNING id; 
+2020-02-18T06:55:37.833Z Local: 2/18/2020, 2:55:37 PM INSERT INTO posts_table(title, subtitle, author, content, cover_img) VALUES('Test Title', 'Test Subtile', 'Test Author', '# Remarkable...', 'child.jpg') RETURNING id; 
+2020-02-18T06:55:37.837Z Local: 2/18/2020, 2:55:37 PM INSERT INTO posts_table(title, subtitle, author, content, cover_img) VALUES('Test Title', 'Test Subtile', 'Test Author', '# Remarkable...', 'child.jpg') RETURNING id; 
+2020-02-18T06:55:38.258Z Local: 2/18/2020, 2:55:38 PM 
+INSERT INTO items_table(
+name,
+producer,
+price,
+unit,
+description,
+spec,
+cover_img,
+imgs)
+VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'), '500', 'NTD', '# Traditional Flavor', ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('[{"property":"100g","value":"Heavily Baked","comment":"Strongest"},{"property":"100g","value":"Heavily Baked","comment":"Strongest"}]'))), 'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","tea.jpg","child.jpg"]'))) RETURNING id; 
+2020-02-18T06:55:38.267Z Local: 2/18/2020, 2:55:38 PM 
+INSERT INTO items_table(
+name,
+producer,
+price,
+unit,
+description,
+spec,
+cover_img,
+imgs)
+VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'), '500', 'NTD', '# Traditional Flavor', ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('[{"property":"100g","value":"Heavily Baked","comment":"Strongest"},{"property":"100g","value":"Heavily Baked","comment":"Strongest"}]'))), 'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","tea.jpg","child.jpg"]'))) RETURNING id; 
+2020-02-18T06:55:38.269Z Local: 2/18/2020, 2:55:38 PM 
+INSERT INTO items_table(
+name,
+producer,
+price,
+unit,
+description,
+spec,
+cover_img,
+imgs)
+VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'), '500', 'NTD', '# Traditional Flavor', ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('[{"property":"100g","value":"Heavily Baked","comment":"Strongest"},{"property":"100g","value":"Heavily Baked","comment":"Strongest"}]'))), 'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","tea.jpg","child.jpg"]'))) RETURNING id; 
+2020-02-18T06:55:38.265Z Local: 2/18/2020, 2:55:38 PM 
+INSERT INTO items_table(
+name,
+producer,
+price,
+unit,
+description,
+spec,
+cover_img,
+imgs)
+VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'), '500', 'NTD', '# Traditional Flavor', ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('[{"property":"100g","value":"Heavily Baked","comment":"Strongest"},{"property":"100g","value":"Heavily Baked","comment":"Strongest"}]'))), 'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","tea.jpg","child.jpg"]'))) RETURNING id; 
+2020-02-18T06:55:38.273Z Local: 2/18/2020, 2:55:38 PM 
+INSERT INTO items_table(
+name,
+producer,
+price,
+unit,
+description,
+spec,
+cover_img,
+imgs)
+VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'), '500', 'NTD', '# Traditional Flavor', ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('[{"property":"100g","value":"Heavily Baked","comment":"Strongest"},{"property":"100g","value":"Heavily Baked","comment":"Strongest"}]'))), 'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","tea.jpg","child.jpg"]'))) RETURNING id; 
+2020-02-18T06:55:38.275Z Local: 2/18/2020, 2:55:38 PM 
+INSERT INTO items_table(
+name,
+producer,
+price,
+unit,
+description,
+spec,
+cover_img,
+imgs)
+VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'), '500', 'NTD', '# Traditional Flavor', ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('[{"property":"100g","value":"Heavily Baked","comment":"Strongest"},{"property":"100g","value":"Heavily Baked","comment":"Strongest"}]'))), 'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","tea.jpg","child.jpg"]'))) RETURNING id; 
+2020-02-18T06:55:38.263Z Local: 2/18/2020, 2:55:38 PM 
+INSERT INTO items_table(
+name,
+producer,
+price,
+unit,
+description,
+spec,
+cover_img,
+imgs)
+VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'), '500', 'NTD', '# Traditional Flavor', ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('[{"property":"100g","value":"Heavily Baked","comment":"Strongest"},{"property":"100g","value":"Heavily Baked","comment":"Strongest"}]'))), 'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","tea.jpg","child.jpg"]'))) RETURNING id; 
+2020-02-18T06:55:38.280Z Local: 2/18/2020, 2:55:38 PM 
+INSERT INTO items_table(
+name,
+producer,
+price,
+unit,
+description,
+spec,
+cover_img,
+imgs)
+VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'), '500', 'NTD', '# Traditional Flavor', ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('[{"property":"100g","value":"Heavily Baked","comment":"Strongest"},{"property":"100g","value":"Heavily Baked","comment":"Strongest"}]'))), 'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","tea.jpg","child.jpg"]'))) RETURNING id; 
+2020-02-18T06:55:38.290Z Local: 2/18/2020, 2:55:38 PM INSERT INTO farmers_table(
+        name,
+        country,
+        province,
+        county,
+        township,
+        village,
+        road,
+        slogan,
+        description,
+        content,
+        items,
+        cover_img,
+        imgs)
+        VALUES('Da', 'Taiwan', 'Taiwan', 'Nantou', 'LuGu', 
+        'FongHuang', 'indus.rd', 'Universal Best Tea', '# Best Tea Ever', 
+        ARRAY(SELECT json_populate_record(null::Section, json_array_elements('[{"title":"The Best","subtitle":"Best","description":"Universal Best Better Tea","img":"tea.jpg"},{"title":"The Better","subtitle":"Better","description":"Universal Better Tea","img":"tea_tree.jpg"}]'))), 
+        ARRAY(SELECT json_populate_record(null::Good, json_array_elements('[{"id":2,"name":"Green Tea"},{"id":1,"name":"Oolong Tea"}]'))), 
+        'farmer1.jpg', null
+        ) RETURNING id; 
+2020-02-18T06:55:38.298Z Local: 2/18/2020, 2:55:38 PM INSERT INTO farmers_table(
+        name,
+        country,
+        province,
+        county,
+        township,
+        village,
+        road,
+        slogan,
+        description,
+        content,
+        items,
+        cover_img,
+        imgs)
+        VALUES('Ui', 'Taiwan', 'Taiwan', 'Nantou', 'LuGu', 
+        'FongHuang', 'indus.rd', 'Universal Best Tea', '# Best Tea Ever', 
+        ARRAY(SELECT json_populate_record(null::Section, json_array_elements('[{"title":"The Best","subtitle":"Best","description":"Universal Best Better Tea","img":"tea.jpg"},{"title":"The Better","subtitle":"Better","description":"Universal Better Tea","img":"tea_tree.jpg"}]'))), 
+        ARRAY(SELECT json_populate_record(null::Good, json_array_elements('[{"id":2,"name":"Green Tea"},{"id":1,"name":"Oolong Tea"}]'))), 
+        'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","hill2.jpg","child.jpg"]'))
+        ) RETURNING id; 
+2020-02-18T06:55:38.300Z Local: 2/18/2020, 2:55:38 PM INSERT INTO farmers_table(
+        name,
+        country,
+        province,
+        county,
+        township,
+        village,
+        road,
+        slogan,
+        description,
+        content,
+        items,
+        cover_img,
+        imgs)
+        VALUES('Dai3', 'Taiwan', 'Taiwan', 'Nantou', 'Lu/Gu', 
+        'FongHuang', 'indus.rd', 'Universal Best Tea', '# Best Tea Ever', 
+        ARRAY(SELECT json_populate_record(null::Section, json_array_elements('[{"title":"The Best","subtitle":"Best","description":"Universal Best Better Tea","img":"tea.jpg"},{"title":"The Better","subtitle":"Better","description":"Universal Better Tea","img":"tea_tree.jpg"}]'))), 
+        ARRAY(SELECT json_populate_record(null::Good, json_array_elements('[{"id":2,"name":"Green Tea"},{"id":1,"name":"Oolong Tea"}]'))), 
+        'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","hill2.jpg","child.jpg"]'))
+        ) RETURNING id; 
+2020-02-18T06:55:38.302Z Local: 2/18/2020, 2:55:38 PM INSERT INTO farmers_table(
+        name,
+        country,
+        province,
+        county,
+        township,
+        village,
+        road,
+        slogan,
+        description,
+        content,
+        items,
+        cover_img,
+        imgs)
+        VALUES('Da', 'Taiwan', 'Taiwan', 'Nantou', 'LuGu', 
+        'FongHuang', 'indus.rd', 'Universal Best Tea', '# Best Tea Ever', 
+        ARRAY(SELECT json_populate_record(null::Section, json_array_elements('[{"title":"The Best","subtitle":"Best","description":"Universal Best Better Tea","img":"tea.jpg"},{"title":"The Better","subtitle":"Better","description":"Universal Better Tea","img":"tea_tree.jpg"}]'))), 
+        ARRAY(SELECT json_populate_record(null::Good, json_array_elements('[{"id":2,"name":"Green Tea"},{"id":1,"name":"Oolong Tea"}]'))), 
+        'farmer1.jpg', null
+        ) RETURNING id; 
+2020-02-18T06:55:38.305Z Local: 2/18/2020, 2:55:38 PM INSERT INTO farmers_table(
+        name,
+        country,
+        province,
+        county,
+        township,
+        village,
+        road,
+        slogan,
+        description,
+        content,
+        items,
+        cover_img,
+        imgs)
+        VALUES('Ui', 'Taiwan', 'Taiwan', 'Nantou', 'LuGu', 
+        'FongHuang', 'indus.rd', 'Universal Best Tea', '# Best Tea Ever', 
+        ARRAY(SELECT json_populate_record(null::Section, json_array_elements('[{"title":"The Best","subtitle":"Best","description":"Universal Best Better Tea","img":"tea.jpg"},{"title":"The Better","subtitle":"Better","description":"Universal Better Tea","img":"tea_tree.jpg"}]'))), 
+        ARRAY(SELECT json_populate_record(null::Good, json_array_elements('[{"id":2,"name":"Green Tea"},{"id":1,"name":"Oolong Tea"}]'))), 
+        'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","hill2.jpg","child.jpg"]'))
+        ) RETURNING id; 
+2020-02-18T06:55:38.312Z Local: 2/18/2020, 2:55:38 PM INSERT INTO farmers_table(
+        name,
+        country,
+        province,
+        county,
+        township,
+        village,
+        road,
+        slogan,
+        description,
+        content,
+        items,
+        cover_img,
+        imgs)
+        VALUES('Dai3', 'Taiwan', 'Taiwan', 'Nantou', 'Lu/Gu', 
+        'FongHuang', 'indus.rd', 'Universal Best Tea', '# Best Tea Ever', 
+        ARRAY(SELECT json_populate_record(null::Section, json_array_elements('[{"title":"The Best","subtitle":"Best","description":"Universal Best Better Tea","img":"tea.jpg"},{"title":"The Better","subtitle":"Better","description":"Universal Better Tea","img":"tea_tree.jpg"}]'))), 
+        ARRAY(SELECT json_populate_record(null::Good, json_array_elements('[{"id":2,"name":"Green Tea"},{"id":1,"name":"Oolong Tea"}]'))), 
+        'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","hill2.jpg","child.jpg"]'))
+        ) RETURNING id; 
+2020-02-18T06:55:38.271Z Local: 2/18/2020, 2:55:38 PM 
+INSERT INTO items_table(
+name,
+producer,
+price,
+unit,
+description,
+spec,
+cover_img,
+imgs)
+VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'), '500', 'NTD', '# Traditional Flavor', ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('[{"property":"100g","value":"Heavily Baked","comment":"Strongest"},{"property":"100g","value":"Heavily Baked","comment":"Strongest"}]'))), 'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","tea.jpg","child.jpg"]'))) RETURNING id; 
+2020-02-18T06:55:38.314Z Local: 2/18/2020, 2:55:38 PM INSERT INTO farmers_table(
+        name,
+        country,
+        province,
+        county,
+        township,
+        village,
+        road,
+        slogan,
+        description,
+        content,
+        items,
+        cover_img,
+        imgs)
+        VALUES('Da', 'Taiwan', 'Taiwan', 'Nantou', 'LuGu', 
+        'FongHuang', 'indus.rd', 'Universal Best Tea', '# Best Tea Ever', 
+        ARRAY(SELECT json_populate_record(null::Section, json_array_elements('[{"title":"The Best","subtitle":"Best","description":"Universal Best Better Tea","img":"tea.jpg"},{"title":"The Better","subtitle":"Better","description":"Universal Better Tea","img":"tea_tree.jpg"}]'))), 
+        ARRAY(SELECT json_populate_record(null::Good, json_array_elements('[{"id":2,"name":"Green Tea"},{"id":1,"name":"Oolong Tea"}]'))), 
+        'farmer1.jpg', null
+        ) RETURNING id; 
+2020-02-18T06:55:38.316Z Local: 2/18/2020, 2:55:38 PM INSERT INTO farmers_table(
+        name,
+        country,
+        province,
+        county,
+        township,
+        village,
+        road,
+        slogan,
+        description,
+        content,
+        items,
+        cover_img,
+        imgs)
+        VALUES('Ui', 'Taiwan', 'Taiwan', 'Nantou', 'LuGu', 
+        'FongHuang', 'indus.rd', 'Universal Best Tea', '# Best Tea Ever', 
+        ARRAY(SELECT json_populate_record(null::Section, json_array_elements('[{"title":"The Best","subtitle":"Best","description":"Universal Best Better Tea","img":"tea.jpg"},{"title":"The Better","subtitle":"Better","description":"Universal Better Tea","img":"tea_tree.jpg"}]'))), 
+        ARRAY(SELECT json_populate_record(null::Good, json_array_elements('[{"id":2,"name":"Green Tea"},{"id":1,"name":"Oolong Tea"}]'))), 
+        'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","hill2.jpg","child.jpg"]'))
+        ) RETURNING id; 
+2020-02-18T06:55:38.319Z Local: 2/18/2020, 2:55:38 PM INSERT INTO farmers_table(
+        name,
+        country,
+        province,
+        county,
+        township,
+        village,
+        road,
+        slogan,
+        description,
+        content,
+        items,
+        cover_img,
+        imgs)
+        VALUES('Dai3', 'Taiwan', 'Taiwan', 'Nantou', 'Lu/Gu', 
+        'FongHuang', 'indus.rd', 'Universal Best Tea', '# Best Tea Ever', 
+        ARRAY(SELECT json_populate_record(null::Section, json_array_elements('[{"title":"The Best","subtitle":"Best","description":"Universal Best Better Tea","img":"tea.jpg"},{"title":"The Better","subtitle":"Better","description":"Universal Better Tea","img":"tea_tree.jpg"}]'))), 
+        ARRAY(SELECT json_populate_record(null::Good, json_array_elements('[{"id":2,"name":"Green Tea"},{"id":1,"name":"Oolong Tea"}]'))), 
+        'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","hill2.jpg","child.jpg"]'))
+        ) RETURNING id; 
+2020-02-18T06:55:38.321Z Local: 2/18/2020, 2:55:38 PM INSERT INTO farmers_table(
+        name,
+        country,
+        province,
+        county,
+        township,
+        village,
+        road,
+        slogan,
+        description,
+        content,
+        items,
+        cover_img,
+        imgs)
+        VALUES('Da', 'Taiwan', 'Taiwan', 'Nantou', 'LuGu', 
+        'FongHuang', 'indus.rd', 'Universal Best Tea', '# Best Tea Ever', 
+        ARRAY(SELECT json_populate_record(null::Section, json_array_elements('[{"title":"The Best","subtitle":"Best","description":"Universal Best Better Tea","img":"tea.jpg"},{"title":"The Better","subtitle":"Better","description":"Universal Better Tea","img":"tea_tree.jpg"}]'))), 
+        ARRAY(SELECT json_populate_record(null::Good, json_array_elements('[{"id":2,"name":"Green Tea"},{"id":1,"name":"Oolong Tea"}]'))), 
+        'farmer1.jpg', null
+        ) RETURNING id; 
+2020-02-18T06:55:38.329Z Local: 2/18/2020, 2:55:38 PM INSERT INTO farmers_table(
+        name,
+        country,
+        province,
+        county,
+        township,
+        village,
+        road,
+        slogan,
+        description,
+        content,
+        items,
+        cover_img,
+        imgs)
+        VALUES('Ui', 'Taiwan', 'Taiwan', 'Nantou', 'LuGu', 
+        'FongHuang', 'indus.rd', 'Universal Best Tea', '# Best Tea Ever', 
+        ARRAY(SELECT json_populate_record(null::Section, json_array_elements('[{"title":"The Best","subtitle":"Best","description":"Universal Best Better Tea","img":"tea.jpg"},{"title":"The Better","subtitle":"Better","description":"Universal Better Tea","img":"tea_tree.jpg"}]'))), 
+        ARRAY(SELECT json_populate_record(null::Good, json_array_elements('[{"id":2,"name":"Green Tea"},{"id":1,"name":"Oolong Tea"}]'))), 
+        'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","hill2.jpg","child.jpg"]'))
+        ) RETURNING id; 
+2020-02-18T06:55:38.331Z Local: 2/18/2020, 2:55:38 PM INSERT INTO farmers_table(
+        name,
+        country,
+        province,
+        county,
+        township,
+        village,
+        road,
+        slogan,
+        description,
+        content,
+        items,
+        cover_img,
+        imgs)
+        VALUES('Dai3', 'Taiwan', 'Taiwan', 'Nantou', 'Lu/Gu', 
+        'FongHuang', 'indus.rd', 'Universal Best Tea', '# Best Tea Ever', 
+        ARRAY(SELECT json_populate_record(null::Section, json_array_elements('[{"title":"The Best","subtitle":"Best","description":"Universal Best Better Tea","img":"tea.jpg"},{"title":"The Better","subtitle":"Better","description":"Universal Better Tea","img":"tea_tree.jpg"}]'))), 
+        ARRAY(SELECT json_populate_record(null::Good, json_array_elements('[{"id":2,"name":"Green Tea"},{"id":1,"name":"Oolong Tea"}]'))), 
+        'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","hill2.jpg","child.jpg"]'))
+        ) RETURNING id; 
+2020-02-18T06:55:38.558Z Local: 2/18/2020, 2:55:38 PM CREATE TABLE IF NOT EXISTS posts_table(id serial PRIMARY KEY NOT NULL,title TEXT NOT NULL,subtitle TEXT NOT NULL,author TEXT NOT NULL,content TEXT NOT NULL,cover_img TEXT,create_on TIMESTAMP default current_timestamp, latest_modify TIMESTAMP default current_timestamp) 
+2020-02-18T06:55:38.283Z Local: 2/18/2020, 2:55:38 PM 
+INSERT INTO items_table(
+name,
+producer,
+price,
+unit,
+description,
+spec,
+cover_img,
+imgs)
+VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'), '500', 'NTD', '# Traditional Flavor', ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('[{"property":"100g","value":"Heavily Baked","comment":"Strongest"},{"property":"100g","value":"Heavily Baked","comment":"Strongest"}]'))), 'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","tea.jpg","child.jpg"]'))) RETURNING id; 
+2020-02-18T06:55:38.566Z Local: 2/18/2020, 2:55:38 PM 
+    DO $$ BEGIN
+        CREATE TYPE Producer AS (id INTEGER, name TEXT);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-02-18T06:55:38.569Z Local: 2/18/2020, 2:55:38 PM DO $$ BEGIN
+        CREATE TYPE Good AS (id INTEGER, name TEXT);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-02-18T06:55:38.590Z Local: 2/18/2020, 2:55:38 PM Server is listening on port 8000 
+2020-02-18T06:55:40.631Z Local: 2/18/2020, 2:55:40 PM Error: Error: connect ECONNREFUSED 127.0.0.1:5432 
+2020-02-18T06:55:40.636Z Local: 2/18/2020, 2:55:40 PM Error: Error: connect ECONNREFUSED 127.0.0.1:5432 
+2020-02-18T06:55:40.642Z Local: 2/18/2020, 2:55:40 PM Error: Error: connect ECONNREFUSED 127.0.0.1:5432 
+2020-02-18T06:55:40.649Z Local: 2/18/2020, 2:55:40 PM Error: Error: connect ECONNREFUSED 127.0.0.1:5432 
+2020-02-18T06:55:40.658Z Local: 2/18/2020, 2:55:40 PM Error: Error: connect ECONNREFUSED 127.0.0.1:5432 
+2020-02-18T06:55:40.663Z Local: 2/18/2020, 2:55:40 PM Error: Error: connect ECONNREFUSED 127.0.0.1:5432 
+2020-02-18T06:55:40.675Z Local: 2/18/2020, 2:55:40 PM Error: Error: connect ECONNREFUSED 127.0.0.1:5432 
+2020-02-18T06:55:40.682Z Local: 2/18/2020, 2:55:40 PM Error: Error: connect ECONNREFUSED 127.0.0.1:5432 
+2020-02-18T06:55:40.694Z Local: 2/18/2020, 2:55:40 PM Error: Error: connect ECONNREFUSED 127.0.0.1:5432 
+2020-02-18T06:55:40.697Z Local: 2/18/2020, 2:55:40 PM Error: Error: connect ECONNREFUSED 127.0.0.1:5432 
+2020-02-18T06:55:42.716Z Local: 2/18/2020, 2:55:42 PM Error: Error: connect ECONNREFUSED 127.0.0.1:5432 
+2020-02-18T06:55:42.720Z Local: 2/18/2020, 2:55:42 PM Error: Error: connect ECONNREFUSED 127.0.0.1:5432 
+2020-02-18T06:55:42.724Z Local: 2/18/2020, 2:55:42 PM Error: Error: connect ECONNREFUSED 127.0.0.1:5432 
+2020-02-18T06:55:42.727Z Local: 2/18/2020, 2:55:42 PM Error: Error: connect ECONNREFUSED 127.0.0.1:5432 
+2020-02-18T06:55:42.729Z Local: 2/18/2020, 2:55:42 PM Error: Error: connect ECONNREFUSED 127.0.0.1:5432 
+2020-02-18T06:55:42.735Z Local: 2/18/2020, 2:55:42 PM Error: Error: connect ECONNREFUSED 127.0.0.1:5432 
+2020-02-18T06:55:42.737Z Local: 2/18/2020, 2:55:42 PM Error: Error: connect ECONNREFUSED 127.0.0.1:5432 
+2020-02-18T06:55:42.741Z Local: 2/18/2020, 2:55:42 PM Error: Error: connect ECONNREFUSED 127.0.0.1:5432 
+2020-02-18T06:55:42.744Z Local: 2/18/2020, 2:55:42 PM Error: Error: connect ECONNREFUSED 127.0.0.1:5432 
+2020-02-18T06:55:42.747Z Local: 2/18/2020, 2:55:42 PM Error: Error: connect ECONNREFUSED 127.0.0.1:5432 
+2020-02-18T06:55:44.770Z Local: 2/18/2020, 2:55:44 PM Error: Error: connect ECONNREFUSED 127.0.0.1:5432 
+2020-02-18T06:55:44.776Z Local: 2/18/2020, 2:55:44 PM Error: Error: connect ECONNREFUSED 127.0.0.1:5432 
+2020-02-18T06:55:44.779Z Local: 2/18/2020, 2:55:44 PM Error: Error: connect ECONNREFUSED 127.0.0.1:5432 
+2020-02-18T06:55:44.783Z Local: 2/18/2020, 2:55:44 PM Error: Error: connect ECONNREFUSED 127.0.0.1:5432 
+2020-02-18T06:55:44.787Z Local: 2/18/2020, 2:55:44 PM Error: Error: connect ECONNREFUSED 127.0.0.1:5432 
+2020-02-18T06:55:44.793Z Local: 2/18/2020, 2:55:44 PM Error: Error: connect ECONNREFUSED 127.0.0.1:5432 
+2020-02-18T06:55:44.797Z Local: 2/18/2020, 2:55:44 PM Error: Error: connect ECONNREFUSED 127.0.0.1:5432 
+2020-02-18T06:55:44.803Z Local: 2/18/2020, 2:55:44 PM Error: Error: connect ECONNREFUSED 127.0.0.1:5432 
+2020-02-18T06:55:44.799Z Local: 2/18/2020, 2:55:44 PM Error: Error: connect ECONNREFUSED 127.0.0.1:5432 
+2020-02-18T06:55:44.813Z Local: 2/18/2020, 2:55:44 PM Error: Error: connect ECONNREFUSED 127.0.0.1:5432 
+2020-02-18T06:55:46.831Z Local: 2/18/2020, 2:55:46 PM Error: Error: connect ECONNREFUSED 127.0.0.1:5432 
+2020-02-18T06:55:46.836Z Local: 2/18/2020, 2:55:46 PM Error: Error: connect ECONNREFUSED 127.0.0.1:5432 
+2020-02-18T06:55:46.842Z Local: 2/18/2020, 2:55:46 PM Created posts_table 
+2020-02-18T06:55:46.839Z Local: 2/18/2020, 2:55:46 PM Error: Error: connect ECONNREFUSED 127.0.0.1:5432 
+2020-02-18T06:55:46.845Z Local: 2/18/2020, 2:55:46 PM post_action is mounted By function(req, res, next) {
+    app.handle(req, res, next);
+  } 
+2020-02-18T06:55:46.850Z Local: 2/18/2020, 2:55:46 PM Error: Error: connect ECONNREFUSED 127.0.0.1:5432 
+2020-02-18T06:55:46.853Z Local: 2/18/2020, 2:55:46 PM Created Producer type 
+2020-02-18T06:55:46.856Z Local: 2/18/2020, 2:55:46 PM 
+    DO $$ BEGIN
+        CREATE TYPE Spec AS (property TEXT, value TEXT);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-02-18T06:55:46.862Z Local: 2/18/2020, 2:55:46 PM Error: Error: connect ECONNREFUSED 127.0.0.1:5432 
+2020-02-18T06:55:46.866Z Local: 2/18/2020, 2:55:46 PM Created Good type 
+2020-02-18T06:55:46.869Z Local: 2/18/2020, 2:55:46 PM DO $$ BEGIN
+        CREATE TYPE Section AS (title TEXT, subtitle TEXT, description TEXT, img TEXT);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-02-18T06:55:48.881Z Local: 2/18/2020, 2:55:48 PM Error: Error: connect ECONNREFUSED 127.0.0.1:5432 
+2020-02-18T06:55:48.893Z Local: 2/18/2020, 2:55:48 PM Created Spec type 
+2020-02-18T06:55:48.897Z Local: 2/18/2020, 2:55:48 PM 
+    CREATE TABLE IF NOT EXISTS items_table(
+    id serial PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL,
+    producer Producer NOT NULL,
+    price NUMERIC NOT NULL,
+    unit TEXT NOT NULL,
+    description TEXT NOT NULL,
+    spec Spec ARRAY,
+    cover_img TEXT NOT NULL, 
+    imgs TEXT[], 
+    create_on TIMESTAMP default current_timestamp); 
+2020-02-18T06:55:48.903Z Local: 2/18/2020, 2:55:48 PM Error: Error: connect ECONNREFUSED 127.0.0.1:5432 
+2020-02-18T06:55:48.907Z Local: 2/18/2020, 2:55:48 PM Created Section type 
+2020-02-18T06:55:48.911Z Local: 2/18/2020, 2:55:48 PM CREATE TABLE IF NOT EXISTS farmers_table(
+    id serial PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL,
+    country TEXT NOT NULL,
+    province TEXT NOT NULL,
+    county TEXT NOT NULL,
+    township TEXT NOT NULL,
+    village TEXT NOT NULL,
+    road TEXT NOT NULL,
+    slogan TEXT,
+    description TEXT NOT NULL,
+    content Section ARRAY NOT NULL,
+    items Good ARRAY,
+    cover_img TEXT NOT NULL,
+    imgs TEXT[],
+    create_on TIMESTAMP default current_timestamp,
+    latest_modify TIMESTAMP default current_timestamp) 
+2020-02-18T06:55:50.932Z Local: 2/18/2020, 2:55:50 PM Error: Error: connect ECONNREFUSED 127.0.0.1:5432 
+2020-02-18T06:55:50.936Z Local: 2/18/2020, 2:55:50 PM Created items_table 
+2020-02-18T06:55:50.941Z Local: 2/18/2020, 2:55:50 PM Error: Error: connect ECONNREFUSED 127.0.0.1:5432 
+2020-02-18T06:55:50.937Z Local: 2/18/2020, 2:55:50 PM item_action is mounted By function(req, res, next) {
+    app.handle(req, res, next);
+  } 
+2020-02-18T06:55:50.943Z Local: 2/18/2020, 2:55:50 PM Created farmers_table 
+2020-02-18T06:55:50.947Z Local: 2/18/2020, 2:55:50 PM farmer_action is mounted By function(req, res, next) {
+    app.handle(req, res, next);
+  } 
+2020-02-18T06:56:41.241Z Local: 2/18/2020, 2:56:41 PM INSERT INTO posts_table(title, subtitle, author, content, cover_img) VALUES('Test Title', 'Test Subtile', 'Test Author', '# Remarkable...', 'child.jpg') RETURNING id; 
+2020-02-18T06:56:41.264Z Local: 2/18/2020, 2:56:41 PM INSERT INTO posts_table(title, subtitle, author, content, cover_img) VALUES('Test Title', 'Test Subtile', 'Test Author', '# Remarkable...', 'child.jpg') RETURNING id; 
+2020-02-18T06:56:41.267Z Local: 2/18/2020, 2:56:41 PM INSERT INTO posts_table(title, subtitle, author, content, cover_img) VALUES('Test Title', 'Test Subtile', 'Test Author', '# Remarkable...', 'child.jpg') RETURNING id; 
+2020-02-18T06:56:41.270Z Local: 2/18/2020, 2:56:41 PM INSERT INTO posts_table(title, subtitle, author, content, cover_img) VALUES('Test Title', 'Test Subtile', 'Test Author', '# Remarkable...', 'child.jpg') RETURNING id; 
+2020-02-18T06:56:41.273Z Local: 2/18/2020, 2:56:41 PM INSERT INTO posts_table(title, subtitle, author, content, cover_img) VALUES('Test Title', 'Test Subtile', 'Test Author', '# Remarkable...', 'child.jpg') RETURNING id; 
+2020-02-18T06:56:41.275Z Local: 2/18/2020, 2:56:41 PM INSERT INTO posts_table(title, subtitle, author, content, cover_img) VALUES('Test Title', 'Test Subtile', 'Test Author', '# Remarkable...', 'child.jpg') RETURNING id; 
+2020-02-18T06:56:41.278Z Local: 2/18/2020, 2:56:41 PM INSERT INTO posts_table(title, subtitle, author, content, cover_img) VALUES('Test Title', 'Test Subtile', 'Test Author', '# Remarkable...', 'child.jpg') RETURNING id; 
+2020-02-18T06:56:41.281Z Local: 2/18/2020, 2:56:41 PM INSERT INTO posts_table(title, subtitle, author, content, cover_img) VALUES('Test Title', 'Test Subtile', 'Test Author', '# Remarkable...', 'child.jpg') RETURNING id; 
+2020-02-18T06:56:41.286Z Local: 2/18/2020, 2:56:41 PM INSERT INTO posts_table(title, subtitle, author, content, cover_img) VALUES('Test Title', 'Test Subtile', 'Test Author', '# Remarkable...', 'child.jpg') RETURNING id; 
+2020-02-18T06:56:41.289Z Local: 2/18/2020, 2:56:41 PM INSERT INTO posts_table(title, subtitle, author, content, cover_img) VALUES('Test Title', 'Test Subtile', 'Test Author', '# Remarkable...', 'child.jpg') RETURNING id; 
+2020-02-18T06:56:41.594Z Local: 2/18/2020, 2:56:41 PM 
+INSERT INTO items_table(
+name,
+producer,
+price,
+unit,
+description,
+spec,
+cover_img,
+imgs)
+VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'), '500', 'NTD', '# Traditional Flavor', ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('[{"property":"100g","value":"Heavily Baked","comment":"Strongest"},{"property":"100g","value":"Heavily Baked","comment":"Strongest"}]'))), 'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","tea.jpg","child.jpg"]'))) RETURNING id; 
+2020-02-18T06:56:41.600Z Local: 2/18/2020, 2:56:41 PM 
+INSERT INTO items_table(
+name,
+producer,
+price,
+unit,
+description,
+spec,
+cover_img,
+imgs)
+VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'), '500', 'NTD', '# Traditional Flavor', ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('[{"property":"100g","value":"Heavily Baked","comment":"Strongest"},{"property":"100g","value":"Heavily Baked","comment":"Strongest"}]'))), 'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","tea.jpg","child.jpg"]'))) RETURNING id; 
+2020-02-18T06:56:41.604Z Local: 2/18/2020, 2:56:41 PM 
+INSERT INTO items_table(
+name,
+producer,
+price,
+unit,
+description,
+spec,
+cover_img,
+imgs)
+VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'), '500', 'NTD', '# Traditional Flavor', ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('[{"property":"100g","value":"Heavily Baked","comment":"Strongest"},{"property":"100g","value":"Heavily Baked","comment":"Strongest"}]'))), 'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","tea.jpg","child.jpg"]'))) RETURNING id; 
+2020-02-18T06:56:41.606Z Local: 2/18/2020, 2:56:41 PM 
+INSERT INTO items_table(
+name,
+producer,
+price,
+unit,
+description,
+spec,
+cover_img,
+imgs)
+VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'), '500', 'NTD', '# Traditional Flavor', ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('[{"property":"100g","value":"Heavily Baked","comment":"Strongest"},{"property":"100g","value":"Heavily Baked","comment":"Strongest"}]'))), 'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","tea.jpg","child.jpg"]'))) RETURNING id; 
+2020-02-18T06:56:41.610Z Local: 2/18/2020, 2:56:41 PM 
+INSERT INTO items_table(
+name,
+producer,
+price,
+unit,
+description,
+spec,
+cover_img,
+imgs)
+VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'), '500', 'NTD', '# Traditional Flavor', ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('[{"property":"100g","value":"Heavily Baked","comment":"Strongest"},{"property":"100g","value":"Heavily Baked","comment":"Strongest"}]'))), 'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","tea.jpg","child.jpg"]'))) RETURNING id; 
+2020-02-18T06:56:41.623Z Local: 2/18/2020, 2:56:41 PM 
+INSERT INTO items_table(
+name,
+producer,
+price,
+unit,
+description,
+spec,
+cover_img,
+imgs)
+VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'), '500', 'NTD', '# Traditional Flavor', ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('[{"property":"100g","value":"Heavily Baked","comment":"Strongest"},{"property":"100g","value":"Heavily Baked","comment":"Strongest"}]'))), 'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","tea.jpg","child.jpg"]'))) RETURNING id; 
+2020-02-18T06:56:41.621Z Local: 2/18/2020, 2:56:41 PM 
+INSERT INTO items_table(
+name,
+producer,
+price,
+unit,
+description,
+spec,
+cover_img,
+imgs)
+VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'), '500', 'NTD', '# Traditional Flavor', ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('[{"property":"100g","value":"Heavily Baked","comment":"Strongest"},{"property":"100g","value":"Heavily Baked","comment":"Strongest"}]'))), 'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","tea.jpg","child.jpg"]'))) RETURNING id; 
+2020-02-18T06:56:41.618Z Local: 2/18/2020, 2:56:41 PM 
+INSERT INTO items_table(
+name,
+producer,
+price,
+unit,
+description,
+spec,
+cover_img,
+imgs)
+VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'), '500', 'NTD', '# Traditional Flavor', ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('[{"property":"100g","value":"Heavily Baked","comment":"Strongest"},{"property":"100g","value":"Heavily Baked","comment":"Strongest"}]'))), 'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","tea.jpg","child.jpg"]'))) RETURNING id; 
+2020-02-18T06:56:41.626Z Local: 2/18/2020, 2:56:41 PM 
+INSERT INTO items_table(
+name,
+producer,
+price,
+unit,
+description,
+spec,
+cover_img,
+imgs)
+VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'), '500', 'NTD', '# Traditional Flavor', ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('[{"property":"100g","value":"Heavily Baked","comment":"Strongest"},{"property":"100g","value":"Heavily Baked","comment":"Strongest"}]'))), 'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","tea.jpg","child.jpg"]'))) RETURNING id; 
+2020-02-18T06:56:41.628Z Local: 2/18/2020, 2:56:41 PM 
+INSERT INTO items_table(
+name,
+producer,
+price,
+unit,
+description,
+spec,
+cover_img,
+imgs)
+VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'), '500', 'NTD', '# Traditional Flavor', ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('[{"property":"100g","value":"Heavily Baked","comment":"Strongest"},{"property":"100g","value":"Heavily Baked","comment":"Strongest"}]'))), 'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","tea.jpg","child.jpg"]'))) RETURNING id; 
+2020-02-18T06:56:41.637Z Local: 2/18/2020, 2:56:41 PM INSERT INTO farmers_table(
+        name,
+        country,
+        province,
+        county,
+        township,
+        village,
+        road,
+        slogan,
+        description,
+        content,
+        items,
+        cover_img,
+        imgs)
+        VALUES('Da', 'Taiwan', 'Taiwan', 'Nantou', 'LuGu', 
+        'FongHuang', 'indus.rd', 'Universal Best Tea', '# Best Tea Ever', 
+        ARRAY(SELECT json_populate_record(null::Section, json_array_elements('[{"title":"The Best","subtitle":"Best","description":"Universal Best Better Tea","img":"tea.jpg"},{"title":"The Better","subtitle":"Better","description":"Universal Better Tea","img":"tea_tree.jpg"}]'))), 
+        ARRAY(SELECT json_populate_record(null::Good, json_array_elements('[{"id":2,"name":"Green Tea"},{"id":1,"name":"Oolong Tea"}]'))), 
+        'farmer1.jpg', null
+        ) RETURNING id; 
+2020-02-18T06:56:41.640Z Local: 2/18/2020, 2:56:41 PM INSERT INTO farmers_table(
+        name,
+        country,
+        province,
+        county,
+        township,
+        village,
+        road,
+        slogan,
+        description,
+        content,
+        items,
+        cover_img,
+        imgs)
+        VALUES('Ui', 'Taiwan', 'Taiwan', 'Nantou', 'LuGu', 
+        'FongHuang', 'indus.rd', 'Universal Best Tea', '# Best Tea Ever', 
+        ARRAY(SELECT json_populate_record(null::Section, json_array_elements('[{"title":"The Best","subtitle":"Best","description":"Universal Best Better Tea","img":"tea.jpg"},{"title":"The Better","subtitle":"Better","description":"Universal Better Tea","img":"tea_tree.jpg"}]'))), 
+        ARRAY(SELECT json_populate_record(null::Good, json_array_elements('[{"id":2,"name":"Green Tea"},{"id":1,"name":"Oolong Tea"}]'))), 
+        'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","hill2.jpg","child.jpg"]'))
+        ) RETURNING id; 
+2020-02-18T06:56:41.650Z Local: 2/18/2020, 2:56:41 PM INSERT INTO farmers_table(
+        name,
+        country,
+        province,
+        county,
+        township,
+        village,
+        road,
+        slogan,
+        description,
+        content,
+        items,
+        cover_img,
+        imgs)
+        VALUES('Da', 'Taiwan', 'Taiwan', 'Nantou', 'LuGu', 
+        'FongHuang', 'indus.rd', 'Universal Best Tea', '# Best Tea Ever', 
+        ARRAY(SELECT json_populate_record(null::Section, json_array_elements('[{"title":"The Best","subtitle":"Best","description":"Universal Best Better Tea","img":"tea.jpg"},{"title":"The Better","subtitle":"Better","description":"Universal Better Tea","img":"tea_tree.jpg"}]'))), 
+        ARRAY(SELECT json_populate_record(null::Good, json_array_elements('[{"id":2,"name":"Green Tea"},{"id":1,"name":"Oolong Tea"}]'))), 
+        'farmer1.jpg', null
+        ) RETURNING id; 
+2020-02-18T06:56:41.648Z Local: 2/18/2020, 2:56:41 PM INSERT INTO farmers_table(
+        name,
+        country,
+        province,
+        county,
+        township,
+        village,
+        road,
+        slogan,
+        description,
+        content,
+        items,
+        cover_img,
+        imgs)
+        VALUES('Dai3', 'Taiwan', 'Taiwan', 'Nantou', 'Lu/Gu', 
+        'FongHuang', 'indus.rd', 'Universal Best Tea', '# Best Tea Ever', 
+        ARRAY(SELECT json_populate_record(null::Section, json_array_elements('[{"title":"The Best","subtitle":"Best","description":"Universal Best Better Tea","img":"tea.jpg"},{"title":"The Better","subtitle":"Better","description":"Universal Better Tea","img":"tea_tree.jpg"}]'))), 
+        ARRAY(SELECT json_populate_record(null::Good, json_array_elements('[{"id":2,"name":"Green Tea"},{"id":1,"name":"Oolong Tea"}]'))), 
+        'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","hill2.jpg","child.jpg"]'))
+        ) RETURNING id; 
+2020-02-18T06:56:41.654Z Local: 2/18/2020, 2:56:41 PM INSERT INTO farmers_table(
+        name,
+        country,
+        province,
+        county,
+        township,
+        village,
+        road,
+        slogan,
+        description,
+        content,
+        items,
+        cover_img,
+        imgs)
+        VALUES('Ui', 'Taiwan', 'Taiwan', 'Nantou', 'LuGu', 
+        'FongHuang', 'indus.rd', 'Universal Best Tea', '# Best Tea Ever', 
+        ARRAY(SELECT json_populate_record(null::Section, json_array_elements('[{"title":"The Best","subtitle":"Best","description":"Universal Best Better Tea","img":"tea.jpg"},{"title":"The Better","subtitle":"Better","description":"Universal Better Tea","img":"tea_tree.jpg"}]'))), 
+        ARRAY(SELECT json_populate_record(null::Good, json_array_elements('[{"id":2,"name":"Green Tea"},{"id":1,"name":"Oolong Tea"}]'))), 
+        'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","hill2.jpg","child.jpg"]'))
+        ) RETURNING id; 
+2020-02-18T06:56:41.664Z Local: 2/18/2020, 2:56:41 PM INSERT INTO farmers_table(
+        name,
+        country,
+        province,
+        county,
+        township,
+        village,
+        road,
+        slogan,
+        description,
+        content,
+        items,
+        cover_img,
+        imgs)
+        VALUES('Dai3', 'Taiwan', 'Taiwan', 'Nantou', 'Lu/Gu', 
+        'FongHuang', 'indus.rd', 'Universal Best Tea', '# Best Tea Ever', 
+        ARRAY(SELECT json_populate_record(null::Section, json_array_elements('[{"title":"The Best","subtitle":"Best","description":"Universal Best Better Tea","img":"tea.jpg"},{"title":"The Better","subtitle":"Better","description":"Universal Better Tea","img":"tea_tree.jpg"}]'))), 
+        ARRAY(SELECT json_populate_record(null::Good, json_array_elements('[{"id":2,"name":"Green Tea"},{"id":1,"name":"Oolong Tea"}]'))), 
+        'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","hill2.jpg","child.jpg"]'))
+        ) RETURNING id; 
+2020-02-18T06:56:41.667Z Local: 2/18/2020, 2:56:41 PM INSERT INTO farmers_table(
+        name,
+        country,
+        province,
+        county,
+        township,
+        village,
+        road,
+        slogan,
+        description,
+        content,
+        items,
+        cover_img,
+        imgs)
+        VALUES('Da', 'Taiwan', 'Taiwan', 'Nantou', 'LuGu', 
+        'FongHuang', 'indus.rd', 'Universal Best Tea', '# Best Tea Ever', 
+        ARRAY(SELECT json_populate_record(null::Section, json_array_elements('[{"title":"The Best","subtitle":"Best","description":"Universal Best Better Tea","img":"tea.jpg"},{"title":"The Better","subtitle":"Better","description":"Universal Better Tea","img":"tea_tree.jpg"}]'))), 
+        ARRAY(SELECT json_populate_record(null::Good, json_array_elements('[{"id":2,"name":"Green Tea"},{"id":1,"name":"Oolong Tea"}]'))), 
+        'farmer1.jpg', null
+        ) RETURNING id; 
+2020-02-18T06:56:41.672Z Local: 2/18/2020, 2:56:41 PM INSERT INTO farmers_table(
+        name,
+        country,
+        province,
+        county,
+        township,
+        village,
+        road,
+        slogan,
+        description,
+        content,
+        items,
+        cover_img,
+        imgs)
+        VALUES('Dai3', 'Taiwan', 'Taiwan', 'Nantou', 'Lu/Gu', 
+        'FongHuang', 'indus.rd', 'Universal Best Tea', '# Best Tea Ever', 
+        ARRAY(SELECT json_populate_record(null::Section, json_array_elements('[{"title":"The Best","subtitle":"Best","description":"Universal Best Better Tea","img":"tea.jpg"},{"title":"The Better","subtitle":"Better","description":"Universal Better Tea","img":"tea_tree.jpg"}]'))), 
+        ARRAY(SELECT json_populate_record(null::Good, json_array_elements('[{"id":2,"name":"Green Tea"},{"id":1,"name":"Oolong Tea"}]'))), 
+        'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","hill2.jpg","child.jpg"]'))
+        ) RETURNING id; 
+2020-02-18T06:56:41.669Z Local: 2/18/2020, 2:56:41 PM INSERT INTO farmers_table(
+        name,
+        country,
+        province,
+        county,
+        township,
+        village,
+        road,
+        slogan,
+        description,
+        content,
+        items,
+        cover_img,
+        imgs)
+        VALUES('Ui', 'Taiwan', 'Taiwan', 'Nantou', 'LuGu', 
+        'FongHuang', 'indus.rd', 'Universal Best Tea', '# Best Tea Ever', 
+        ARRAY(SELECT json_populate_record(null::Section, json_array_elements('[{"title":"The Best","subtitle":"Best","description":"Universal Best Better Tea","img":"tea.jpg"},{"title":"The Better","subtitle":"Better","description":"Universal Better Tea","img":"tea_tree.jpg"}]'))), 
+        ARRAY(SELECT json_populate_record(null::Good, json_array_elements('[{"id":2,"name":"Green Tea"},{"id":1,"name":"Oolong Tea"}]'))), 
+        'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","hill2.jpg","child.jpg"]'))
+        ) RETURNING id; 
+2020-02-18T06:56:41.675Z Local: 2/18/2020, 2:56:41 PM INSERT INTO farmers_table(
+        name,
+        country,
+        province,
+        county,
+        township,
+        village,
+        road,
+        slogan,
+        description,
+        content,
+        items,
+        cover_img,
+        imgs)
+        VALUES('Da', 'Taiwan', 'Taiwan', 'Nantou', 'LuGu', 
+        'FongHuang', 'indus.rd', 'Universal Best Tea', '# Best Tea Ever', 
+        ARRAY(SELECT json_populate_record(null::Section, json_array_elements('[{"title":"The Best","subtitle":"Best","description":"Universal Best Better Tea","img":"tea.jpg"},{"title":"The Better","subtitle":"Better","description":"Universal Better Tea","img":"tea_tree.jpg"}]'))), 
+        ARRAY(SELECT json_populate_record(null::Good, json_array_elements('[{"id":2,"name":"Green Tea"},{"id":1,"name":"Oolong Tea"}]'))), 
+        'farmer1.jpg', null
+        ) RETURNING id; 
+2020-02-18T06:56:41.678Z Local: 2/18/2020, 2:56:41 PM INSERT INTO farmers_table(
+        name,
+        country,
+        province,
+        county,
+        township,
+        village,
+        road,
+        slogan,
+        description,
+        content,
+        items,
+        cover_img,
+        imgs)
+        VALUES('Ui', 'Taiwan', 'Taiwan', 'Nantou', 'LuGu', 
+        'FongHuang', 'indus.rd', 'Universal Best Tea', '# Best Tea Ever', 
+        ARRAY(SELECT json_populate_record(null::Section, json_array_elements('[{"title":"The Best","subtitle":"Best","description":"Universal Best Better Tea","img":"tea.jpg"},{"title":"The Better","subtitle":"Better","description":"Universal Better Tea","img":"tea_tree.jpg"}]'))), 
+        ARRAY(SELECT json_populate_record(null::Good, json_array_elements('[{"id":2,"name":"Green Tea"},{"id":1,"name":"Oolong Tea"}]'))), 
+        'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","hill2.jpg","child.jpg"]'))
+        ) RETURNING id; 
+2020-02-18T06:56:41.681Z Local: 2/18/2020, 2:56:41 PM INSERT INTO farmers_table(
+        name,
+        country,
+        province,
+        county,
+        township,
+        village,
+        road,
+        slogan,
+        description,
+        content,
+        items,
+        cover_img,
+        imgs)
+        VALUES('Dai3', 'Taiwan', 'Taiwan', 'Nantou', 'Lu/Gu', 
+        'FongHuang', 'indus.rd', 'Universal Best Tea', '# Best Tea Ever', 
+        ARRAY(SELECT json_populate_record(null::Section, json_array_elements('[{"title":"The Best","subtitle":"Best","description":"Universal Best Better Tea","img":"tea.jpg"},{"title":"The Better","subtitle":"Better","description":"Universal Better Tea","img":"tea_tree.jpg"}]'))), 
+        ARRAY(SELECT json_populate_record(null::Good, json_array_elements('[{"id":2,"name":"Green Tea"},{"id":1,"name":"Oolong Tea"}]'))), 
+        'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","hill2.jpg","child.jpg"]'))
+        ) RETURNING id; 
+2020-02-18T06:56:41.799Z Local: 2/18/2020, 2:56:41 PM CREATE TABLE IF NOT EXISTS posts_table(id serial PRIMARY KEY NOT NULL,title TEXT NOT NULL,subtitle TEXT NOT NULL,author TEXT NOT NULL,content TEXT NOT NULL,cover_img TEXT,create_on TIMESTAMP default current_timestamp, latest_modify TIMESTAMP default current_timestamp) 
+2020-02-18T06:56:41.803Z Local: 2/18/2020, 2:56:41 PM 
+    DO $$ BEGIN
+        CREATE TYPE Producer AS (id INTEGER, name TEXT);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-02-18T06:56:41.807Z Local: 2/18/2020, 2:56:41 PM DO $$ BEGIN
+        CREATE TYPE Good AS (id INTEGER, name TEXT);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-02-18T06:56:41.821Z Local: 2/18/2020, 2:56:41 PM Server is listening on port 8000 
+2020-02-18T06:56:41.904Z Local: 2/18/2020, 2:56:41 PM command: INSERT, rowCount: 1 
+2020-02-18T06:56:41.916Z Local: 2/18/2020, 2:56:41 PM command: INSERT, rowCount: 1 
+2020-02-18T06:56:41.920Z Local: 2/18/2020, 2:56:41 PM command: INSERT, rowCount: 1 
+2020-02-18T06:56:41.923Z Local: 2/18/2020, 2:56:41 PM command: INSERT, rowCount: 1 
+2020-02-18T06:56:41.930Z Local: 2/18/2020, 2:56:41 PM command: INSERT, rowCount: 1 
+2020-02-18T06:56:41.934Z Local: 2/18/2020, 2:56:41 PM command: INSERT, rowCount: 1 
+2020-02-18T06:56:41.938Z Local: 2/18/2020, 2:56:41 PM command: INSERT, rowCount: 1 
+2020-02-18T06:56:41.950Z Local: 2/18/2020, 2:56:41 PM command: INSERT, rowCount: 1 
+2020-02-18T06:56:41.953Z Local: 2/18/2020, 2:56:41 PM command: INSERT, rowCount: 1 
+2020-02-18T06:56:41.957Z Local: 2/18/2020, 2:56:41 PM command: INSERT, rowCount: 1 
+2020-02-18T06:56:41.961Z Local: 2/18/2020, 2:56:41 PM command: INSERT, rowCount: 1 
+2020-02-18T06:56:41.968Z Local: 2/18/2020, 2:56:41 PM command: INSERT, rowCount: 1 
+2020-02-18T06:56:41.973Z Local: 2/18/2020, 2:56:41 PM command: INSERT, rowCount: 1 
+2020-02-18T06:56:41.976Z Local: 2/18/2020, 2:56:41 PM command: INSERT, rowCount: 1 
+2020-02-18T06:56:41.980Z Local: 2/18/2020, 2:56:41 PM command: INSERT, rowCount: 1 
+2020-02-18T06:56:41.984Z Local: 2/18/2020, 2:56:41 PM command: INSERT, rowCount: 1 
+2020-02-18T06:56:41.994Z Local: 2/18/2020, 2:56:41 PM command: INSERT, rowCount: 1 
+2020-02-18T06:56:41.997Z Local: 2/18/2020, 2:56:41 PM command: INSERT, rowCount: 1 
+2020-02-18T06:56:41.990Z Local: 2/18/2020, 2:56:41 PM command: INSERT, rowCount: 1 
+2020-02-18T06:56:42.002Z Local: 2/18/2020, 2:56:42 PM command: INSERT, rowCount: 1 
+2020-02-18T06:56:42.005Z Local: 2/18/2020, 2:56:42 PM command: INSERT, rowCount: 1 
+2020-02-18T06:56:42.009Z Local: 2/18/2020, 2:56:42 PM command: INSERT, rowCount: 1 
+2020-02-18T06:56:42.016Z Local: 2/18/2020, 2:56:42 PM command: INSERT, rowCount: 1 
+2020-02-18T06:56:42.013Z Local: 2/18/2020, 2:56:42 PM command: INSERT, rowCount: 1 
+2020-02-18T06:56:42.023Z Local: 2/18/2020, 2:56:42 PM command: INSERT, rowCount: 1 
+2020-02-18T06:56:42.026Z Local: 2/18/2020, 2:56:42 PM command: INSERT, rowCount: 1 
+2020-02-18T06:56:42.030Z Local: 2/18/2020, 2:56:42 PM command: INSERT, rowCount: 1 
+2020-02-18T06:56:42.033Z Local: 2/18/2020, 2:56:42 PM command: INSERT, rowCount: 1 
+2020-02-18T06:56:42.040Z Local: 2/18/2020, 2:56:42 PM command: CREATE, rowCount: null 
+2020-02-18T06:56:42.045Z Local: 2/18/2020, 2:56:42 PM post_action is mounted By function(req, res, next) {
+    app.handle(req, res, next);
+  } 
+2020-02-18T06:56:42.042Z Local: 2/18/2020, 2:56:42 PM Created posts_table 
+2020-02-18T06:56:42.050Z Local: 2/18/2020, 2:56:42 PM command: DO, rowCount: null 
+2020-02-18T06:56:42.053Z Local: 2/18/2020, 2:56:42 PM Created Producer type 
+2020-02-18T06:56:42.056Z Local: 2/18/2020, 2:56:42 PM 
+    DO $$ BEGIN
+        CREATE TYPE Spec AS (property TEXT, value TEXT);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-02-18T06:56:42.058Z Local: 2/18/2020, 2:56:42 PM command: DO, rowCount: null 
+2020-02-18T06:56:42.060Z Local: 2/18/2020, 2:56:42 PM Created Good type 
+2020-02-18T06:56:42.062Z Local: 2/18/2020, 2:56:42 PM DO $$ BEGIN
+        CREATE TYPE Section AS (title TEXT, subtitle TEXT, description TEXT, img TEXT);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-02-18T06:56:42.066Z Local: 2/18/2020, 2:56:42 PM command: DO, rowCount: null 
+2020-02-18T06:56:42.070Z Local: 2/18/2020, 2:56:42 PM 
+    CREATE TABLE IF NOT EXISTS items_table(
+    id serial PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL,
+    producer Producer NOT NULL,
+    price NUMERIC NOT NULL,
+    unit TEXT NOT NULL,
+    description TEXT NOT NULL,
+    spec Spec ARRAY,
+    cover_img TEXT NOT NULL, 
+    imgs TEXT[], 
+    create_on TIMESTAMP default current_timestamp); 
+2020-02-18T06:56:42.068Z Local: 2/18/2020, 2:56:42 PM Created Spec type 
+2020-02-18T06:56:42.073Z Local: 2/18/2020, 2:56:42 PM command: DO, rowCount: null 
+2020-02-18T06:56:42.074Z Local: 2/18/2020, 2:56:42 PM Created Section type 
+2020-02-18T06:56:42.075Z Local: 2/18/2020, 2:56:42 PM CREATE TABLE IF NOT EXISTS farmers_table(
+    id serial PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL,
+    country TEXT NOT NULL,
+    province TEXT NOT NULL,
+    county TEXT NOT NULL,
+    township TEXT NOT NULL,
+    village TEXT NOT NULL,
+    road TEXT NOT NULL,
+    slogan TEXT,
+    description TEXT NOT NULL,
+    content Section ARRAY NOT NULL,
+    items Good ARRAY,
+    cover_img TEXT NOT NULL,
+    imgs TEXT[],
+    create_on TIMESTAMP default current_timestamp,
+    latest_modify TIMESTAMP default current_timestamp) 
+2020-02-18T06:56:42.078Z Local: 2/18/2020, 2:56:42 PM command: INSERT, rowCount: 1 
+2020-02-18T06:56:42.085Z Local: 2/18/2020, 2:56:42 PM Created items_table 
+2020-02-18T06:56:42.081Z Local: 2/18/2020, 2:56:42 PM command: CREATE, rowCount: null 
+2020-02-18T06:56:42.090Z Local: 2/18/2020, 2:56:42 PM Created farmers_table 
+2020-02-18T06:56:42.089Z Local: 2/18/2020, 2:56:42 PM command: CREATE, rowCount: null 
+2020-02-18T06:56:42.091Z Local: 2/18/2020, 2:56:42 PM farmer_action is mounted By function(req, res, next) {
+    app.handle(req, res, next);
+  } 
+2020-02-18T06:56:42.087Z Local: 2/18/2020, 2:56:42 PM item_action is mounted By function(req, res, next) {
+    app.handle(req, res, next);
+  } 
+2020-02-18T06:56:42.093Z Local: 2/18/2020, 2:56:42 PM command: INSERT, rowCount: 1 
+2020-02-18T06:56:42.094Z Local: 2/18/2020, 2:56:42 PM command: INSERT, rowCount: 1 
+2020-02-18T06:56:42.096Z Local: 2/18/2020, 2:56:42 PM command: INSERT, rowCount: 1 

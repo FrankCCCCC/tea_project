@@ -1,4 +1,4 @@
-import {cart_store, info_store} from './store'
+import cart_store from './store'
 import {action_add_item,
     action_delete_item,
     action_clear_cart,
@@ -11,11 +11,11 @@ export const cartSubscribe = (funct) => {
     cart_store.subscribe(funct)
 }
 
-export const cartAddItem = (id, name, quantity) => {
-    cart_store.dispatch({type: action_add_item, id: id, name: name, quantity: quantity})
+export const cartAddItem = (id, img, name, quantity) => {
+    cart_store.dispatch({type: action_add_item, id: id, img: img, name: name, quantity: quantity})
 }
 
-export const cartDeleteItem = (id, name, quantity) => {
+export const cartDeleteItem = (id, name) => {
     cart_store.dispatch({type: action_delete_item, id: id, name: name})
 }
 
@@ -39,23 +39,23 @@ export const cartGetState = () => {
     return cart_store.getState()
 }
 
-export const infoSetInfo = (key, value) => {
-    info_store.dispatch({type: action_set_info, key: key, value: value})
-}
-
-export const infoGetState = () => {
-    console.log(info_store.getState())
-    return info_store.getState()
-}
-
-// function test(){
-//     console.log(cart_store.getState())
+// export const infoSetInfo = (key, value) => {
+//     info_store.dispatch({type: action_set_info, key: key, value: value})
 // }
 
-// cart_store.subscribe(test)
+// export const infoGetState = () => {
+//     console.log(info_store.getState())
+//     return info_store.getState()
+// }
 
-// cartAddItem(1, "Test Oolong1", 1)
-// cartAddItem(2, "Test Oolong2", 2)
+function test(){
+    console.log(cart_store.getState())
+}
+
+cart_store.subscribe(test)
+
+cartAddItem(1, "http://localhost:5000/img/tea.jpg", "林氏傳統凍頂烏龍茶", 1)
+cartAddItem(2, "http://localhost:5000/img/tea.jpg", "陳氏傳統東方美人茶", 2)
 // cartAddItem(3, "Test Oolong3", 3)
 // cartDeleteItem(2, "Test Oolong2")
 // cartSetQuantity(3, "Test Oolong3", 5)
@@ -67,5 +67,5 @@ export const infoGetState = () => {
 // cart_store.dispatch({type: action_add_item, id: 1, name: "Test Oolong1", quantity: 1})
 // console.log(cart_store.getState())
 
-infoSetInfo('first_name', 'Dai')
-console.log(infoGetState())
+// infoSetInfo('first_name', 'Dai')
+// console.log(infoGetState())

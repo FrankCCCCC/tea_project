@@ -1,8 +1,9 @@
 import React from 'react';
 import ShoppingList from '../shoppingList/ShoppingList'
 import {font_style} from '../theme/font';
-import {infoSetInfo, infoGetState} from  '../redux/action'
-import {cart_store, info_store} from '../redux/store'
+// import {infoSetInfo, infoGetState} from  '../redux/action'
+// import {cart_store, info_store} from '../redux/store'
+// import cart_store from '../redux/store'
 import {first_name,
         last_name,
         phone_number,
@@ -32,33 +33,33 @@ import {first_name,
 class CartPage extends React.Component{
     constructor(props){
         super(props);
-        // this.state = {
-        //     first_name: "",
-        //     last_name: "",
-        //     phone_number: "",
-        //     county: "",
-        //     township: "",
-        //     road: "",
-        //     agree_receive_notice: true,
-        //     agree_privacy_term: false,
-        //     // isGoing: true,
-        //     // numberOfGuests: 0,
-        //     is_validated: "needs-validation"
-        // }
-        let store_state = infoGetState()
         this.state = {
-            first_name: store_state.first_name == undefined ? "":store_state.first_name,
-            last_name: store_state.last_name == undefined ? "":store_state.last_name,
-            phone_number: store_state.phone_number == undefined ? "":store_state.phone_number,
-            county: store_state.county == undefined ? "":store_state.county,
-            township: store_state.township == undefined ? "":store_state.township,
-            road: store_state.road == undefined ? "":store_state.road,
+            first_name: "",
+            last_name: "",
+            phone_number: "",
+            county: "",
+            township: "",
+            road: "",
             agree_receive_notice: true,
             agree_privacy_term: false,
             // isGoing: true,
             // numberOfGuests: 0,
             is_validated: "needs-validation"
         }
+        // let store_state = infoGetState()
+        // this.state = {
+        //     first_name: store_state.first_name == undefined ? "":store_state.first_name,
+        //     last_name: store_state.last_name == undefined ? "":store_state.last_name,
+        //     phone_number: store_state.phone_number == undefined ? "":store_state.phone_number,
+        //     county: store_state.county == undefined ? "":store_state.county,
+        //     township: store_state.township == undefined ? "":store_state.township,
+        //     road: store_state.road == undefined ? "":store_state.road,
+        //     agree_receive_notice: true,
+        //     agree_privacy_term: false,
+        //     // isGoing: true,
+        //     // numberOfGuests: 0,
+        //     is_validated: "needs-validation"
+        // }
 
         this.handle_input_change = this.handle_input_change.bind(this);
         this.handle_submit_click = this.handle_submit_click.bind(this);
@@ -71,8 +72,8 @@ class CartPage extends React.Component{
         this.setState({
             [name]: value
         })
-        infoSetInfo(name, value)
-        console.log(name + value)
+        // infoSetInfo(name, value)
+        // console.log(name + value)
     }
 
     handle_submit_click(event){
@@ -89,12 +90,13 @@ class CartPage extends React.Component{
     render(){
         return (
             <div>
-                <div>
+                <div style={{height: "10rem"}}></div>
+                <div class="container">
                     <ShoppingList/>
                 </div>
-            
+                <div style={{height: "10rem"}}></div>
                 <div class="container mb-3" style={font_style}>
-                    <div style={{height: "10rem"}}></div>
+                    
 
                     <form class={this.state.is_validated} action={order_receiving_url} novalidate>
                         <div class="form-row">
