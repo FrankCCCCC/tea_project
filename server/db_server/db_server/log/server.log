@@ -76831,3 +76831,567 @@ VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'
     FROM items_table AS items_table ORDER BY create_on DESC LIMIT 3 OFFSET 165; 
 2020-02-18T15:38:20.689Z Local: 2/18/2020, 11:38:20 PM command: SELECT, rowCount: 3 
 2020-02-18T15:38:20.690Z Local: 2/18/2020, 11:38:20 PM Sending 3 rows to ::1 with  
+2020-02-19T08:41:27.709Z Local: 2/19/2020, 4:41:27 PM INSERT INTO posts_table(title, subtitle, author, content, cover_img) VALUES('Test Title', 'Test Subtile', 'Test Author', '# Remarkable...', 'child.jpg') RETURNING id; 
+2020-02-19T08:41:27.719Z Local: 2/19/2020, 4:41:27 PM INSERT INTO posts_table(title, subtitle, author, content, cover_img) VALUES('Test Title', 'Test Subtile', 'Test Author', '# Remarkable...', 'child.jpg') RETURNING id; 
+2020-02-19T08:41:27.720Z Local: 2/19/2020, 4:41:27 PM INSERT INTO posts_table(title, subtitle, author, content, cover_img) VALUES('Test Title', 'Test Subtile', 'Test Author', '# Remarkable...', 'child.jpg') RETURNING id; 
+2020-02-19T08:41:27.720Z Local: 2/19/2020, 4:41:27 PM INSERT INTO posts_table(title, subtitle, author, content, cover_img) VALUES('Test Title', 'Test Subtile', 'Test Author', '# Remarkable...', 'child.jpg') RETURNING id; 
+2020-02-19T08:41:27.721Z Local: 2/19/2020, 4:41:27 PM INSERT INTO posts_table(title, subtitle, author, content, cover_img) VALUES('Test Title', 'Test Subtile', 'Test Author', '# Remarkable...', 'child.jpg') RETURNING id; 
+2020-02-19T08:41:27.724Z Local: 2/19/2020, 4:41:27 PM INSERT INTO posts_table(title, subtitle, author, content, cover_img) VALUES('Test Title', 'Test Subtile', 'Test Author', '# Remarkable...', 'child.jpg') RETURNING id; 
+2020-02-19T08:41:27.725Z Local: 2/19/2020, 4:41:27 PM INSERT INTO posts_table(title, subtitle, author, content, cover_img) VALUES('Test Title', 'Test Subtile', 'Test Author', '# Remarkable...', 'child.jpg') RETURNING id; 
+2020-02-19T08:41:27.725Z Local: 2/19/2020, 4:41:27 PM INSERT INTO posts_table(title, subtitle, author, content, cover_img) VALUES('Test Title', 'Test Subtile', 'Test Author', '# Remarkable...', 'child.jpg') RETURNING id; 
+2020-02-19T08:41:27.726Z Local: 2/19/2020, 4:41:27 PM INSERT INTO posts_table(title, subtitle, author, content, cover_img) VALUES('Test Title', 'Test Subtile', 'Test Author', '# Remarkable...', 'child.jpg') RETURNING id; 
+2020-02-19T08:41:27.727Z Local: 2/19/2020, 4:41:27 PM INSERT INTO posts_table(title, subtitle, author, content, cover_img) VALUES('Test Title', 'Test Subtile', 'Test Author', '# Remarkable...', 'child.jpg') RETURNING id; 
+2020-02-19T08:41:27.880Z Local: 2/19/2020, 4:41:27 PM 
+INSERT INTO items_table(
+name,
+producer,
+price,
+unit,
+description,
+spec,
+cover_img,
+imgs)
+VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'), '500', 'NTD', '# Traditional Flavor', ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('[{"property":"100g","value":"Heavily Baked","comment":"Strongest"},{"property":"100g","value":"Heavily Baked","comment":"Strongest"}]'))), 'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","tea.jpg","child.jpg"]'))) RETURNING id; 
+2020-02-19T08:41:27.885Z Local: 2/19/2020, 4:41:27 PM 
+INSERT INTO items_table(
+name,
+producer,
+price,
+unit,
+description,
+spec,
+cover_img,
+imgs)
+VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'), '500', 'NTD', '# Traditional Flavor', ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('[{"property":"100g","value":"Heavily Baked","comment":"Strongest"},{"property":"100g","value":"Heavily Baked","comment":"Strongest"}]'))), 'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","tea.jpg","child.jpg"]'))) RETURNING id; 
+2020-02-19T08:41:27.886Z Local: 2/19/2020, 4:41:27 PM 
+INSERT INTO items_table(
+name,
+producer,
+price,
+unit,
+description,
+spec,
+cover_img,
+imgs)
+VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'), '500', 'NTD', '# Traditional Flavor', ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('[{"property":"100g","value":"Heavily Baked","comment":"Strongest"},{"property":"100g","value":"Heavily Baked","comment":"Strongest"}]'))), 'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","tea.jpg","child.jpg"]'))) RETURNING id; 
+2020-02-19T08:41:27.888Z Local: 2/19/2020, 4:41:27 PM 
+INSERT INTO items_table(
+name,
+producer,
+price,
+unit,
+description,
+spec,
+cover_img,
+imgs)
+VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'), '500', 'NTD', '# Traditional Flavor', ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('[{"property":"100g","value":"Heavily Baked","comment":"Strongest"},{"property":"100g","value":"Heavily Baked","comment":"Strongest"}]'))), 'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","tea.jpg","child.jpg"]'))) RETURNING id; 
+2020-02-19T08:41:27.889Z Local: 2/19/2020, 4:41:27 PM 
+INSERT INTO items_table(
+name,
+producer,
+price,
+unit,
+description,
+spec,
+cover_img,
+imgs)
+VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'), '500', 'NTD', '# Traditional Flavor', ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('[{"property":"100g","value":"Heavily Baked","comment":"Strongest"},{"property":"100g","value":"Heavily Baked","comment":"Strongest"}]'))), 'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","tea.jpg","child.jpg"]'))) RETURNING id; 
+2020-02-19T08:41:27.890Z Local: 2/19/2020, 4:41:27 PM 
+INSERT INTO items_table(
+name,
+producer,
+price,
+unit,
+description,
+spec,
+cover_img,
+imgs)
+VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'), '500', 'NTD', '# Traditional Flavor', ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('[{"property":"100g","value":"Heavily Baked","comment":"Strongest"},{"property":"100g","value":"Heavily Baked","comment":"Strongest"}]'))), 'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","tea.jpg","child.jpg"]'))) RETURNING id; 
+2020-02-19T08:41:27.892Z Local: 2/19/2020, 4:41:27 PM 
+INSERT INTO items_table(
+name,
+producer,
+price,
+unit,
+description,
+spec,
+cover_img,
+imgs)
+VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'), '500', 'NTD', '# Traditional Flavor', ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('[{"property":"100g","value":"Heavily Baked","comment":"Strongest"},{"property":"100g","value":"Heavily Baked","comment":"Strongest"}]'))), 'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","tea.jpg","child.jpg"]'))) RETURNING id; 
+2020-02-19T08:41:27.893Z Local: 2/19/2020, 4:41:27 PM 
+INSERT INTO items_table(
+name,
+producer,
+price,
+unit,
+description,
+spec,
+cover_img,
+imgs)
+VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'), '500', 'NTD', '# Traditional Flavor', ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('[{"property":"100g","value":"Heavily Baked","comment":"Strongest"},{"property":"100g","value":"Heavily Baked","comment":"Strongest"}]'))), 'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","tea.jpg","child.jpg"]'))) RETURNING id; 
+2020-02-19T08:41:27.894Z Local: 2/19/2020, 4:41:27 PM 
+INSERT INTO items_table(
+name,
+producer,
+price,
+unit,
+description,
+spec,
+cover_img,
+imgs)
+VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'), '500', 'NTD', '# Traditional Flavor', ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('[{"property":"100g","value":"Heavily Baked","comment":"Strongest"},{"property":"100g","value":"Heavily Baked","comment":"Strongest"}]'))), 'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","tea.jpg","child.jpg"]'))) RETURNING id; 
+2020-02-19T08:41:27.891Z Local: 2/19/2020, 4:41:27 PM 
+INSERT INTO items_table(
+name,
+producer,
+price,
+unit,
+description,
+spec,
+cover_img,
+imgs)
+VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'), '500', 'NTD', '# Traditional Flavor', ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('[{"property":"100g","value":"Heavily Baked","comment":"Strongest"},{"property":"100g","value":"Heavily Baked","comment":"Strongest"}]'))), 'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","tea.jpg","child.jpg"]'))) RETURNING id; 
+2020-02-19T08:41:27.898Z Local: 2/19/2020, 4:41:27 PM INSERT INTO farmers_table(
+        name,
+        country,
+        province,
+        county,
+        township,
+        village,
+        road,
+        slogan,
+        description,
+        content,
+        items,
+        cover_img,
+        imgs)
+        VALUES('Da', 'Taiwan', 'Taiwan', 'Nantou', 'LuGu', 
+        'FongHuang', 'indus.rd', 'Universal Best Tea', '# Best Tea Ever', 
+        ARRAY(SELECT json_populate_record(null::Section, json_array_elements('[{"title":"The Best","subtitle":"Best","description":"Universal Best Better Tea","img":"tea.jpg"},{"title":"The Better","subtitle":"Better","description":"Universal Better Tea","img":"tea_tree.jpg"}]'))), 
+        ARRAY(SELECT json_populate_record(null::Good, json_array_elements('[{"id":2,"name":"Green Tea"},{"id":1,"name":"Oolong Tea"}]'))), 
+        'farmer1.jpg', null
+        ) RETURNING id; 
+2020-02-19T08:41:27.899Z Local: 2/19/2020, 4:41:27 PM INSERT INTO farmers_table(
+        name,
+        country,
+        province,
+        county,
+        township,
+        village,
+        road,
+        slogan,
+        description,
+        content,
+        items,
+        cover_img,
+        imgs)
+        VALUES('Ui', 'Taiwan', 'Taiwan', 'Nantou', 'LuGu', 
+        'FongHuang', 'indus.rd', 'Universal Best Tea', '# Best Tea Ever', 
+        ARRAY(SELECT json_populate_record(null::Section, json_array_elements('[{"title":"The Best","subtitle":"Best","description":"Universal Best Better Tea","img":"tea.jpg"},{"title":"The Better","subtitle":"Better","description":"Universal Better Tea","img":"tea_tree.jpg"}]'))), 
+        ARRAY(SELECT json_populate_record(null::Good, json_array_elements('[{"id":2,"name":"Green Tea"},{"id":1,"name":"Oolong Tea"}]'))), 
+        'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","hill2.jpg","child.jpg"]'))
+        ) RETURNING id; 
+2020-02-19T08:41:27.900Z Local: 2/19/2020, 4:41:27 PM INSERT INTO farmers_table(
+        name,
+        country,
+        province,
+        county,
+        township,
+        village,
+        road,
+        slogan,
+        description,
+        content,
+        items,
+        cover_img,
+        imgs)
+        VALUES('Dai3', 'Taiwan', 'Taiwan', 'Nantou', 'Lu/Gu', 
+        'FongHuang', 'indus.rd', 'Universal Best Tea', '# Best Tea Ever', 
+        ARRAY(SELECT json_populate_record(null::Section, json_array_elements('[{"title":"The Best","subtitle":"Best","description":"Universal Best Better Tea","img":"tea.jpg"},{"title":"The Better","subtitle":"Better","description":"Universal Better Tea","img":"tea_tree.jpg"}]'))), 
+        ARRAY(SELECT json_populate_record(null::Good, json_array_elements('[{"id":2,"name":"Green Tea"},{"id":1,"name":"Oolong Tea"}]'))), 
+        'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","hill2.jpg","child.jpg"]'))
+        ) RETURNING id; 
+2020-02-19T08:41:27.902Z Local: 2/19/2020, 4:41:27 PM INSERT INTO farmers_table(
+        name,
+        country,
+        province,
+        county,
+        township,
+        village,
+        road,
+        slogan,
+        description,
+        content,
+        items,
+        cover_img,
+        imgs)
+        VALUES('Ui', 'Taiwan', 'Taiwan', 'Nantou', 'LuGu', 
+        'FongHuang', 'indus.rd', 'Universal Best Tea', '# Best Tea Ever', 
+        ARRAY(SELECT json_populate_record(null::Section, json_array_elements('[{"title":"The Best","subtitle":"Best","description":"Universal Best Better Tea","img":"tea.jpg"},{"title":"The Better","subtitle":"Better","description":"Universal Better Tea","img":"tea_tree.jpg"}]'))), 
+        ARRAY(SELECT json_populate_record(null::Good, json_array_elements('[{"id":2,"name":"Green Tea"},{"id":1,"name":"Oolong Tea"}]'))), 
+        'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","hill2.jpg","child.jpg"]'))
+        ) RETURNING id; 
+2020-02-19T08:41:27.904Z Local: 2/19/2020, 4:41:27 PM INSERT INTO farmers_table(
+        name,
+        country,
+        province,
+        county,
+        township,
+        village,
+        road,
+        slogan,
+        description,
+        content,
+        items,
+        cover_img,
+        imgs)
+        VALUES('Da', 'Taiwan', 'Taiwan', 'Nantou', 'LuGu', 
+        'FongHuang', 'indus.rd', 'Universal Best Tea', '# Best Tea Ever', 
+        ARRAY(SELECT json_populate_record(null::Section, json_array_elements('[{"title":"The Best","subtitle":"Best","description":"Universal Best Better Tea","img":"tea.jpg"},{"title":"The Better","subtitle":"Better","description":"Universal Better Tea","img":"tea_tree.jpg"}]'))), 
+        ARRAY(SELECT json_populate_record(null::Good, json_array_elements('[{"id":2,"name":"Green Tea"},{"id":1,"name":"Oolong Tea"}]'))), 
+        'farmer1.jpg', null
+        ) RETURNING id; 
+2020-02-19T08:41:27.906Z Local: 2/19/2020, 4:41:27 PM INSERT INTO farmers_table(
+        name,
+        country,
+        province,
+        county,
+        township,
+        village,
+        road,
+        slogan,
+        description,
+        content,
+        items,
+        cover_img,
+        imgs)
+        VALUES('Ui', 'Taiwan', 'Taiwan', 'Nantou', 'LuGu', 
+        'FongHuang', 'indus.rd', 'Universal Best Tea', '# Best Tea Ever', 
+        ARRAY(SELECT json_populate_record(null::Section, json_array_elements('[{"title":"The Best","subtitle":"Best","description":"Universal Best Better Tea","img":"tea.jpg"},{"title":"The Better","subtitle":"Better","description":"Universal Better Tea","img":"tea_tree.jpg"}]'))), 
+        ARRAY(SELECT json_populate_record(null::Good, json_array_elements('[{"id":2,"name":"Green Tea"},{"id":1,"name":"Oolong Tea"}]'))), 
+        'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","hill2.jpg","child.jpg"]'))
+        ) RETURNING id; 
+2020-02-19T08:41:27.903Z Local: 2/19/2020, 4:41:27 PM INSERT INTO farmers_table(
+        name,
+        country,
+        province,
+        county,
+        township,
+        village,
+        road,
+        slogan,
+        description,
+        content,
+        items,
+        cover_img,
+        imgs)
+        VALUES('Dai3', 'Taiwan', 'Taiwan', 'Nantou', 'Lu/Gu', 
+        'FongHuang', 'indus.rd', 'Universal Best Tea', '# Best Tea Ever', 
+        ARRAY(SELECT json_populate_record(null::Section, json_array_elements('[{"title":"The Best","subtitle":"Best","description":"Universal Best Better Tea","img":"tea.jpg"},{"title":"The Better","subtitle":"Better","description":"Universal Better Tea","img":"tea_tree.jpg"}]'))), 
+        ARRAY(SELECT json_populate_record(null::Good, json_array_elements('[{"id":2,"name":"Green Tea"},{"id":1,"name":"Oolong Tea"}]'))), 
+        'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","hill2.jpg","child.jpg"]'))
+        ) RETURNING id; 
+2020-02-19T08:41:27.907Z Local: 2/19/2020, 4:41:27 PM INSERT INTO farmers_table(
+        name,
+        country,
+        province,
+        county,
+        township,
+        village,
+        road,
+        slogan,
+        description,
+        content,
+        items,
+        cover_img,
+        imgs)
+        VALUES('Dai3', 'Taiwan', 'Taiwan', 'Nantou', 'Lu/Gu', 
+        'FongHuang', 'indus.rd', 'Universal Best Tea', '# Best Tea Ever', 
+        ARRAY(SELECT json_populate_record(null::Section, json_array_elements('[{"title":"The Best","subtitle":"Best","description":"Universal Best Better Tea","img":"tea.jpg"},{"title":"The Better","subtitle":"Better","description":"Universal Better Tea","img":"tea_tree.jpg"}]'))), 
+        ARRAY(SELECT json_populate_record(null::Good, json_array_elements('[{"id":2,"name":"Green Tea"},{"id":1,"name":"Oolong Tea"}]'))), 
+        'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","hill2.jpg","child.jpg"]'))
+        ) RETURNING id; 
+2020-02-19T08:41:27.912Z Local: 2/19/2020, 4:41:27 PM INSERT INTO farmers_table(
+        name,
+        country,
+        province,
+        county,
+        township,
+        village,
+        road,
+        slogan,
+        description,
+        content,
+        items,
+        cover_img,
+        imgs)
+        VALUES('Ui', 'Taiwan', 'Taiwan', 'Nantou', 'LuGu', 
+        'FongHuang', 'indus.rd', 'Universal Best Tea', '# Best Tea Ever', 
+        ARRAY(SELECT json_populate_record(null::Section, json_array_elements('[{"title":"The Best","subtitle":"Best","description":"Universal Best Better Tea","img":"tea.jpg"},{"title":"The Better","subtitle":"Better","description":"Universal Better Tea","img":"tea_tree.jpg"}]'))), 
+        ARRAY(SELECT json_populate_record(null::Good, json_array_elements('[{"id":2,"name":"Green Tea"},{"id":1,"name":"Oolong Tea"}]'))), 
+        'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","hill2.jpg","child.jpg"]'))
+        ) RETURNING id; 
+2020-02-19T08:41:27.976Z Local: 2/19/2020, 4:41:27 PM CREATE TABLE IF NOT EXISTS posts_table(id serial PRIMARY KEY NOT NULL,title TEXT NOT NULL,subtitle TEXT NOT NULL,author TEXT NOT NULL,content TEXT NOT NULL,cover_img TEXT,create_on TIMESTAMP default current_timestamp, latest_modify TIMESTAMP default current_timestamp) 
+2020-02-19T08:41:27.910Z Local: 2/19/2020, 4:41:27 PM INSERT INTO farmers_table(
+        name,
+        country,
+        province,
+        county,
+        township,
+        village,
+        road,
+        slogan,
+        description,
+        content,
+        items,
+        cover_img,
+        imgs)
+        VALUES('Da', 'Taiwan', 'Taiwan', 'Nantou', 'LuGu', 
+        'FongHuang', 'indus.rd', 'Universal Best Tea', '# Best Tea Ever', 
+        ARRAY(SELECT json_populate_record(null::Section, json_array_elements('[{"title":"The Best","subtitle":"Best","description":"Universal Best Better Tea","img":"tea.jpg"},{"title":"The Better","subtitle":"Better","description":"Universal Better Tea","img":"tea_tree.jpg"}]'))), 
+        ARRAY(SELECT json_populate_record(null::Good, json_array_elements('[{"id":2,"name":"Green Tea"},{"id":1,"name":"Oolong Tea"}]'))), 
+        'farmer1.jpg', null
+        ) RETURNING id; 
+2020-02-19T08:41:27.913Z Local: 2/19/2020, 4:41:27 PM INSERT INTO farmers_table(
+        name,
+        country,
+        province,
+        county,
+        township,
+        village,
+        road,
+        slogan,
+        description,
+        content,
+        items,
+        cover_img,
+        imgs)
+        VALUES('Dai3', 'Taiwan', 'Taiwan', 'Nantou', 'Lu/Gu', 
+        'FongHuang', 'indus.rd', 'Universal Best Tea', '# Best Tea Ever', 
+        ARRAY(SELECT json_populate_record(null::Section, json_array_elements('[{"title":"The Best","subtitle":"Best","description":"Universal Best Better Tea","img":"tea.jpg"},{"title":"The Better","subtitle":"Better","description":"Universal Better Tea","img":"tea_tree.jpg"}]'))), 
+        ARRAY(SELECT json_populate_record(null::Good, json_array_elements('[{"id":2,"name":"Green Tea"},{"id":1,"name":"Oolong Tea"}]'))), 
+        'farmer1.jpg', ARRAY(SELECT json_array_elements_text('["hill1.jpg","hill2.jpg","child.jpg"]'))
+        ) RETURNING id; 
+2020-02-19T08:41:27.987Z Local: 2/19/2020, 4:41:27 PM Server is listening on port 8000 
+2020-02-19T08:41:27.901Z Local: 2/19/2020, 4:41:27 PM INSERT INTO farmers_table(
+        name,
+        country,
+        province,
+        county,
+        township,
+        village,
+        road,
+        slogan,
+        description,
+        content,
+        items,
+        cover_img,
+        imgs)
+        VALUES('Da', 'Taiwan', 'Taiwan', 'Nantou', 'LuGu', 
+        'FongHuang', 'indus.rd', 'Universal Best Tea', '# Best Tea Ever', 
+        ARRAY(SELECT json_populate_record(null::Section, json_array_elements('[{"title":"The Best","subtitle":"Best","description":"Universal Best Better Tea","img":"tea.jpg"},{"title":"The Better","subtitle":"Better","description":"Universal Better Tea","img":"tea_tree.jpg"}]'))), 
+        ARRAY(SELECT json_populate_record(null::Good, json_array_elements('[{"id":2,"name":"Green Tea"},{"id":1,"name":"Oolong Tea"}]'))), 
+        'farmer1.jpg', null
+        ) RETURNING id; 
+2020-02-19T08:41:27.979Z Local: 2/19/2020, 4:41:27 PM 
+    DO $$ BEGIN
+        CREATE TYPE Producer AS (id INTEGER, name TEXT);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-02-19T08:41:27.982Z Local: 2/19/2020, 4:41:27 PM DO $$ BEGIN
+        CREATE TYPE Good AS (id INTEGER, name TEXT);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-02-19T08:41:28.031Z Local: 2/19/2020, 4:41:28 PM command: INSERT, rowCount: 1 
+2020-02-19T08:41:28.038Z Local: 2/19/2020, 4:41:28 PM command: INSERT, rowCount: 1 
+2020-02-19T08:41:28.048Z Local: 2/19/2020, 4:41:28 PM command: INSERT, rowCount: 1 
+2020-02-19T08:41:28.047Z Local: 2/19/2020, 4:41:28 PM command: INSERT, rowCount: 1 
+2020-02-19T08:41:28.055Z Local: 2/19/2020, 4:41:28 PM command: INSERT, rowCount: 1 
+2020-02-19T08:41:28.057Z Local: 2/19/2020, 4:41:28 PM command: INSERT, rowCount: 1 
+2020-02-19T08:41:28.058Z Local: 2/19/2020, 4:41:28 PM command: INSERT, rowCount: 1 
+2020-02-19T08:41:28.060Z Local: 2/19/2020, 4:41:28 PM command: INSERT, rowCount: 1 
+2020-02-19T08:41:28.061Z Local: 2/19/2020, 4:41:28 PM command: INSERT, rowCount: 1 
+2020-02-19T08:41:28.062Z Local: 2/19/2020, 4:41:28 PM command: INSERT, rowCount: 1 
+2020-02-19T08:41:28.064Z Local: 2/19/2020, 4:41:28 PM command: INSERT, rowCount: 1 
+2020-02-19T08:41:28.067Z Local: 2/19/2020, 4:41:28 PM command: INSERT, rowCount: 1 
+2020-02-19T08:41:28.070Z Local: 2/19/2020, 4:41:28 PM command: INSERT, rowCount: 1 
+2020-02-19T08:41:28.071Z Local: 2/19/2020, 4:41:28 PM command: INSERT, rowCount: 1 
+2020-02-19T08:41:28.073Z Local: 2/19/2020, 4:41:28 PM command: INSERT, rowCount: 1 
+2020-02-19T08:41:28.074Z Local: 2/19/2020, 4:41:28 PM command: INSERT, rowCount: 1 
+2020-02-19T08:41:28.077Z Local: 2/19/2020, 4:41:28 PM command: INSERT, rowCount: 1 
+2020-02-19T08:41:28.080Z Local: 2/19/2020, 4:41:28 PM command: INSERT, rowCount: 1 
+2020-02-19T08:41:28.078Z Local: 2/19/2020, 4:41:28 PM command: INSERT, rowCount: 1 
+2020-02-19T08:41:28.082Z Local: 2/19/2020, 4:41:28 PM command: INSERT, rowCount: 1 
+2020-02-19T08:41:28.079Z Local: 2/19/2020, 4:41:28 PM command: INSERT, rowCount: 1 
+2020-02-19T08:41:28.084Z Local: 2/19/2020, 4:41:28 PM command: INSERT, rowCount: 1 
+2020-02-19T08:41:28.087Z Local: 2/19/2020, 4:41:28 PM command: INSERT, rowCount: 1 
+2020-02-19T08:41:28.092Z Local: 2/19/2020, 4:41:28 PM command: INSERT, rowCount: 1 
+2020-02-19T08:41:28.093Z Local: 2/19/2020, 4:41:28 PM command: INSERT, rowCount: 1 
+2020-02-19T08:41:28.094Z Local: 2/19/2020, 4:41:28 PM command: INSERT, rowCount: 1 
+2020-02-19T08:41:28.095Z Local: 2/19/2020, 4:41:28 PM command: INSERT, rowCount: 1 
+2020-02-19T08:41:28.095Z Local: 2/19/2020, 4:41:28 PM command: INSERT, rowCount: 1 
+2020-02-19T08:41:28.096Z Local: 2/19/2020, 4:41:28 PM command: INSERT, rowCount: 1 
+2020-02-19T08:41:28.098Z Local: 2/19/2020, 4:41:28 PM command: CREATE, rowCount: null 
+2020-02-19T08:41:28.099Z Local: 2/19/2020, 4:41:28 PM Created posts_table 
+2020-02-19T08:41:28.100Z Local: 2/19/2020, 4:41:28 PM post_action is mounted By function(req, res, next) {
+    app.handle(req, res, next);
+  } 
+2020-02-19T08:41:28.102Z Local: 2/19/2020, 4:41:28 PM command: INSERT, rowCount: 1 
+2020-02-19T08:41:28.104Z Local: 2/19/2020, 4:41:28 PM command: DO, rowCount: null 
+2020-02-19T08:41:28.106Z Local: 2/19/2020, 4:41:28 PM Created Producer type 
+2020-02-19T08:41:28.107Z Local: 2/19/2020, 4:41:28 PM 
+    DO $$ BEGIN
+        CREATE TYPE Spec AS (property TEXT, value TEXT);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-02-19T08:41:28.109Z Local: 2/19/2020, 4:41:28 PM command: DO, rowCount: null 
+2020-02-19T08:41:28.110Z Local: 2/19/2020, 4:41:28 PM Created Good type 
+2020-02-19T08:41:28.110Z Local: 2/19/2020, 4:41:28 PM DO $$ BEGIN
+        CREATE TYPE Section AS (title TEXT, subtitle TEXT, description TEXT, img TEXT);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-02-19T08:41:28.112Z Local: 2/19/2020, 4:41:28 PM command: DO, rowCount: null 
+2020-02-19T08:41:28.113Z Local: 2/19/2020, 4:41:28 PM Created Spec type 
+2020-02-19T08:41:28.113Z Local: 2/19/2020, 4:41:28 PM 
+    CREATE TABLE IF NOT EXISTS items_table(
+    id serial PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL,
+    producer Producer NOT NULL,
+    price NUMERIC NOT NULL,
+    unit TEXT NOT NULL,
+    description TEXT NOT NULL,
+    spec Spec ARRAY,
+    cover_img TEXT NOT NULL, 
+    imgs TEXT[], 
+    create_on TIMESTAMP default current_timestamp); 
+2020-02-19T08:41:28.115Z Local: 2/19/2020, 4:41:28 PM command: INSERT, rowCount: 1 
+2020-02-19T08:41:28.116Z Local: 2/19/2020, 4:41:28 PM command: DO, rowCount: null 
+2020-02-19T08:41:28.116Z Local: 2/19/2020, 4:41:28 PM Created Section type 
+2020-02-19T08:41:28.120Z Local: 2/19/2020, 4:41:28 PM CREATE TABLE IF NOT EXISTS farmers_table(
+    id serial PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL,
+    country TEXT NOT NULL,
+    province TEXT NOT NULL,
+    county TEXT NOT NULL,
+    township TEXT NOT NULL,
+    village TEXT NOT NULL,
+    road TEXT NOT NULL,
+    slogan TEXT,
+    description TEXT NOT NULL,
+    content Section ARRAY NOT NULL,
+    items Good ARRAY,
+    cover_img TEXT NOT NULL,
+    imgs TEXT[],
+    create_on TIMESTAMP default current_timestamp,
+    latest_modify TIMESTAMP default current_timestamp) 
+2020-02-19T08:41:28.121Z Local: 2/19/2020, 4:41:28 PM command: CREATE, rowCount: null 
+2020-02-19T08:41:28.123Z Local: 2/19/2020, 4:41:28 PM item_action is mounted By function(req, res, next) {
+    app.handle(req, res, next);
+  } 
+2020-02-19T08:41:28.122Z Local: 2/19/2020, 4:41:28 PM Created items_table 
+2020-02-19T08:41:28.125Z Local: 2/19/2020, 4:41:28 PM command: INSERT, rowCount: 1 
+2020-02-19T08:41:28.126Z Local: 2/19/2020, 4:41:28 PM command: CREATE, rowCount: null 
+2020-02-19T08:41:28.127Z Local: 2/19/2020, 4:41:28 PM farmer_action is mounted By function(req, res, next) {
+    app.handle(req, res, next);
+  } 
+2020-02-19T08:41:28.127Z Local: 2/19/2020, 4:41:28 PM Created farmers_table 
+2020-02-19T14:38:56.452Z Local: 2/19/2020, 10:38:56 PM SELECT COUNT(*) FROM posts_table; 
+2020-02-19T14:38:56.531Z Local: 2/19/2020, 10:38:56 PM command: SELECT, rowCount: 1 
+2020-02-19T14:38:56.533Z Local: 2/19/2020, 10:38:56 PM Sending 1 rows to ::1 with  
+2020-02-19T14:38:56.573Z Local: 2/19/2020, 10:38:56 PM SELECT * FROM posts_table ORDER BY latest_modify DESC LIMIT 3 OFFSET 0; 
+2020-02-19T14:38:56.626Z Local: 2/19/2020, 10:38:56 PM command: SELECT, rowCount: 3 
+2020-02-19T14:38:56.628Z Local: 2/19/2020, 10:38:56 PM Sending 3 rows to ::1 with  
+2020-02-19T14:38:56.644Z Local: 2/19/2020, 10:38:56 PM SELECT * FROM posts_table ORDER BY latest_modify DESC LIMIT 3 OFFSET 3; 
+2020-02-19T14:38:56.646Z Local: 2/19/2020, 10:38:56 PM command: SELECT, rowCount: 3 
+2020-02-19T14:38:56.648Z Local: 2/19/2020, 10:38:56 PM Sending 3 rows to ::1 with  
+2020-02-19T14:38:56.671Z Local: 2/19/2020, 10:38:56 PM SELECT * FROM posts_table ORDER BY latest_modify DESC LIMIT 3 OFFSET 6; 
+2020-02-19T14:38:56.674Z Local: 2/19/2020, 10:38:56 PM command: SELECT, rowCount: 3 
+2020-02-19T14:38:56.677Z Local: 2/19/2020, 10:38:56 PM Sending 3 rows to ::1 with  
+2020-02-19T14:38:56.704Z Local: 2/19/2020, 10:38:56 PM SELECT * FROM posts_table ORDER BY latest_modify DESC LIMIT 3 OFFSET 9; 
+2020-02-19T14:38:56.707Z Local: 2/19/2020, 10:38:56 PM command: SELECT, rowCount: 3 
+2020-02-19T14:38:56.710Z Local: 2/19/2020, 10:38:56 PM Sending 3 rows to ::1 with  
+2020-02-19T14:38:56.733Z Local: 2/19/2020, 10:38:56 PM SELECT * FROM posts_table ORDER BY latest_modify DESC LIMIT 3 OFFSET 12; 
+2020-02-19T14:38:56.736Z Local: 2/19/2020, 10:38:56 PM command: SELECT, rowCount: 3 
+2020-02-19T14:38:56.736Z Local: 2/19/2020, 10:38:56 PM Sending 3 rows to ::1 with  
+2020-02-19T14:38:56.761Z Local: 2/19/2020, 10:38:56 PM SELECT * FROM posts_table ORDER BY latest_modify DESC LIMIT 3 OFFSET 15; 
+2020-02-19T14:38:56.763Z Local: 2/19/2020, 10:38:56 PM command: SELECT, rowCount: 3 
+2020-02-19T14:38:56.767Z Local: 2/19/2020, 10:38:56 PM Sending 3 rows to ::1 with  
+2020-02-19T14:38:56.799Z Local: 2/19/2020, 10:38:56 PM SELECT * FROM posts_table ORDER BY latest_modify DESC LIMIT 3 OFFSET 18; 
+2020-02-19T14:38:56.803Z Local: 2/19/2020, 10:38:56 PM command: SELECT, rowCount: 3 
+2020-02-19T14:38:56.806Z Local: 2/19/2020, 10:38:56 PM Sending 3 rows to ::1 with  
+2020-02-19T14:38:56.846Z Local: 2/19/2020, 10:38:56 PM SELECT * FROM posts_table ORDER BY latest_modify DESC LIMIT 3 OFFSET 21; 
+2020-02-19T14:38:56.851Z Local: 2/19/2020, 10:38:56 PM command: SELECT, rowCount: 3 
+2020-02-19T14:38:56.854Z Local: 2/19/2020, 10:38:56 PM Sending 3 rows to ::1 with  
+2020-02-19T14:38:56.878Z Local: 2/19/2020, 10:38:56 PM SELECT * FROM posts_table ORDER BY latest_modify DESC LIMIT 3 OFFSET 24; 
+2020-02-19T14:38:56.887Z Local: 2/19/2020, 10:38:56 PM command: SELECT, rowCount: 3 
+2020-02-19T14:38:56.888Z Local: 2/19/2020, 10:38:56 PM Sending 3 rows to ::1 with  
+2020-02-19T14:38:56.916Z Local: 2/19/2020, 10:38:56 PM SELECT * FROM posts_table ORDER BY latest_modify DESC LIMIT 3 OFFSET 27; 
+2020-02-19T14:38:56.919Z Local: 2/19/2020, 10:38:56 PM command: SELECT, rowCount: 3 
+2020-02-19T14:38:56.924Z Local: 2/19/2020, 10:38:56 PM Sending 3 rows to ::1 with  
+2020-02-19T14:38:56.959Z Local: 2/19/2020, 10:38:56 PM SELECT * FROM posts_table ORDER BY latest_modify DESC LIMIT 3 OFFSET 30; 
+2020-02-19T14:38:56.961Z Local: 2/19/2020, 10:38:56 PM command: SELECT, rowCount: 3 
+2020-02-19T14:38:56.963Z Local: 2/19/2020, 10:38:56 PM Sending 3 rows to ::1 with  
+2020-02-19T14:38:57.005Z Local: 2/19/2020, 10:38:57 PM SELECT * FROM posts_table ORDER BY latest_modify DESC LIMIT 3 OFFSET 33; 
+2020-02-19T14:38:57.010Z Local: 2/19/2020, 10:38:57 PM command: SELECT, rowCount: 3 
+2020-02-19T14:38:57.011Z Local: 2/19/2020, 10:38:57 PM Sending 3 rows to ::1 with  
+2020-02-19T14:38:57.042Z Local: 2/19/2020, 10:38:57 PM SELECT * FROM posts_table ORDER BY latest_modify DESC LIMIT 3 OFFSET 36; 
+2020-02-19T14:38:57.046Z Local: 2/19/2020, 10:38:57 PM command: SELECT, rowCount: 3 
+2020-02-19T14:38:57.051Z Local: 2/19/2020, 10:38:57 PM Sending 3 rows to ::1 with  
+2020-02-19T14:38:57.088Z Local: 2/19/2020, 10:38:57 PM SELECT * FROM posts_table ORDER BY latest_modify DESC LIMIT 3 OFFSET 39; 
+2020-02-19T14:38:57.091Z Local: 2/19/2020, 10:38:57 PM command: SELECT, rowCount: 3 
+2020-02-19T14:38:57.094Z Local: 2/19/2020, 10:38:57 PM Sending 3 rows to ::1 with  
+2020-02-19T14:38:57.138Z Local: 2/19/2020, 10:38:57 PM SELECT * FROM posts_table ORDER BY latest_modify DESC LIMIT 3 OFFSET 42; 
+2020-02-19T14:38:57.141Z Local: 2/19/2020, 10:38:57 PM command: SELECT, rowCount: 3 
+2020-02-19T14:38:57.144Z Local: 2/19/2020, 10:38:57 PM Sending 3 rows to ::1 with  
+2020-02-19T14:38:57.176Z Local: 2/19/2020, 10:38:57 PM SELECT * FROM posts_table ORDER BY latest_modify DESC LIMIT 3 OFFSET 45; 
+2020-02-19T14:38:57.178Z Local: 2/19/2020, 10:38:57 PM command: SELECT, rowCount: 3 
+2020-02-19T14:38:57.181Z Local: 2/19/2020, 10:38:57 PM Sending 3 rows to ::1 with  
+2020-02-19T14:38:57.214Z Local: 2/19/2020, 10:38:57 PM SELECT * FROM posts_table ORDER BY latest_modify DESC LIMIT 3 OFFSET 48; 
+2020-02-19T14:38:57.219Z Local: 2/19/2020, 10:38:57 PM command: SELECT, rowCount: 3 
+2020-02-19T14:38:57.223Z Local: 2/19/2020, 10:38:57 PM Sending 3 rows to ::1 with  
+2020-02-19T14:38:57.247Z Local: 2/19/2020, 10:38:57 PM SELECT * FROM posts_table ORDER BY latest_modify DESC LIMIT 3 OFFSET 51; 
+2020-02-19T14:38:57.250Z Local: 2/19/2020, 10:38:57 PM command: SELECT, rowCount: 3 
+2020-02-19T14:38:57.252Z Local: 2/19/2020, 10:38:57 PM Sending 3 rows to ::1 with  
+2020-02-19T14:38:57.285Z Local: 2/19/2020, 10:38:57 PM SELECT * FROM posts_table ORDER BY latest_modify DESC LIMIT 3 OFFSET 54; 
+2020-02-19T14:38:57.288Z Local: 2/19/2020, 10:38:57 PM command: SELECT, rowCount: 3 
+2020-02-19T14:38:57.290Z Local: 2/19/2020, 10:38:57 PM Sending 3 rows to ::1 with  
+2020-02-19T14:38:57.322Z Local: 2/19/2020, 10:38:57 PM SELECT * FROM posts_table ORDER BY latest_modify DESC LIMIT 3 OFFSET 57; 
+2020-02-19T14:38:57.325Z Local: 2/19/2020, 10:38:57 PM command: SELECT, rowCount: 3 
+2020-02-19T14:38:57.327Z Local: 2/19/2020, 10:38:57 PM Sending 3 rows to ::1 with  
+2020-02-19T14:38:57.364Z Local: 2/19/2020, 10:38:57 PM SELECT * FROM posts_table ORDER BY latest_modify DESC LIMIT 3 OFFSET 60; 
+2020-02-19T14:38:57.369Z Local: 2/19/2020, 10:38:57 PM command: SELECT, rowCount: 3 
+2020-02-19T14:38:57.372Z Local: 2/19/2020, 10:38:57 PM Sending 3 rows to ::1 with  
+2020-02-19T14:38:57.408Z Local: 2/19/2020, 10:38:57 PM SELECT * FROM posts_table ORDER BY latest_modify DESC LIMIT 3 OFFSET 63; 
+2020-02-19T14:38:57.413Z Local: 2/19/2020, 10:38:57 PM Sending 3 rows to ::1 with  
+2020-02-19T14:38:57.410Z Local: 2/19/2020, 10:38:57 PM command: SELECT, rowCount: 3 
+2020-02-19T14:38:57.437Z Local: 2/19/2020, 10:38:57 PM SELECT * FROM posts_table ORDER BY latest_modify DESC LIMIT 3 OFFSET 66; 
+2020-02-19T14:38:57.439Z Local: 2/19/2020, 10:38:57 PM command: SELECT, rowCount: 3 
+2020-02-19T14:38:57.442Z Local: 2/19/2020, 10:38:57 PM Sending 3 rows to ::1 with  
+2020-02-19T14:38:57.481Z Local: 2/19/2020, 10:38:57 PM SELECT * FROM posts_table ORDER BY latest_modify DESC LIMIT 3 OFFSET 69; 
+2020-02-19T14:38:57.485Z Local: 2/19/2020, 10:38:57 PM command: SELECT, rowCount: 3 
+2020-02-19T14:38:57.488Z Local: 2/19/2020, 10:38:57 PM Sending 3 rows to ::1 with  
+2020-02-19T14:38:57.524Z Local: 2/19/2020, 10:38:57 PM SELECT * FROM posts_table ORDER BY latest_modify DESC LIMIT 3 OFFSET 72; 
+2020-02-19T14:38:57.527Z Local: 2/19/2020, 10:38:57 PM command: SELECT, rowCount: 3 
+2020-02-19T14:38:57.528Z Local: 2/19/2020, 10:38:57 PM Sending 3 rows to ::1 with  
+2020-02-19T14:38:57.570Z Local: 2/19/2020, 10:38:57 PM SELECT * FROM posts_table ORDER BY latest_modify DESC LIMIT 3 OFFSET 75; 
+2020-02-19T14:38:57.573Z Local: 2/19/2020, 10:38:57 PM command: SELECT, rowCount: 3 
+2020-02-19T14:38:57.575Z Local: 2/19/2020, 10:38:57 PM Sending 3 rows to ::1 with  
+2020-02-19T14:38:57.630Z Local: 2/19/2020, 10:38:57 PM SELECT * FROM posts_table ORDER BY latest_modify DESC LIMIT 3 OFFSET 78; 
+2020-02-19T14:38:57.635Z Local: 2/19/2020, 10:38:57 PM command: SELECT, rowCount: 3 
+2020-02-19T14:38:57.638Z Local: 2/19/2020, 10:38:57 PM Sending 3 rows to ::1 with  
+2020-02-19T14:38:57.681Z Local: 2/19/2020, 10:38:57 PM SELECT * FROM posts_table ORDER BY latest_modify DESC LIMIT 3 OFFSET 81; 
+2020-02-19T14:38:57.684Z Local: 2/19/2020, 10:38:57 PM command: SELECT, rowCount: 3 
+2020-02-19T14:38:57.689Z Local: 2/19/2020, 10:38:57 PM Sending 3 rows to ::1 with  
+2020-02-19T14:38:57.733Z Local: 2/19/2020, 10:38:57 PM SELECT * FROM posts_table ORDER BY latest_modify DESC LIMIT 3 OFFSET 84; 
+2020-02-19T14:38:57.737Z Local: 2/19/2020, 10:38:57 PM command: SELECT, rowCount: 3 
+2020-02-19T14:38:57.739Z Local: 2/19/2020, 10:38:57 PM Sending 3 rows to ::1 with  
+2020-02-19T14:38:57.778Z Local: 2/19/2020, 10:38:57 PM SELECT * FROM posts_table ORDER BY latest_modify DESC LIMIT 3 OFFSET 87; 
+2020-02-19T14:38:57.781Z Local: 2/19/2020, 10:38:57 PM command: SELECT, rowCount: 3 
+2020-02-19T14:38:57.787Z Local: 2/19/2020, 10:38:57 PM Sending 3 rows to ::1 with  
+2020-02-19T14:38:57.831Z Local: 2/19/2020, 10:38:57 PM SELECT * FROM posts_table WHERE id = '133'; 
+2020-02-19T14:38:57.861Z Local: 2/19/2020, 10:38:57 PM command: SELECT, rowCount: 1 
+2020-02-19T14:38:57.867Z Local: 2/19/2020, 10:38:57 PM Sending 1 rows to ::1 with  

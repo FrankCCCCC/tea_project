@@ -26,9 +26,9 @@ const config = {
         is_paid: {key: "is_paid", schema: "is_paid BOOLEAN NOT NULL"},
         is_send: {key: "is_send", schema: "is_send BOOLEAN NOT NULL"},
         is_recieved: {key: "is_recieved", schema: "is_recieved BOOLEAN NOT NULL"},
-        comment: {key: "comment", schema: "comment JSON"},
+        comment: {key: "comment", schema: "comment Comment"},
         create_on: {key: "create_on", schema: "create_on TIMESTAMP default current_timestamp"},
-        latest_modify: {key: "latest_modify", schema: "latest_modify TIMESTAMP default current_timestamp"}
+        latest_modify: {key: "latest_modify", schema: "latest_modify TIMESTAMP default current_timestamp"},
     },
     post: {
         table_name: "posts_table",
@@ -45,18 +45,7 @@ const config = {
         table_name: "farmers_table",
         id: {key: "id", schema: "id serial PRIMARY KEY NOT NULL"},
         name: {key: "name", schema: "name TEXT NOT NULL"},
-        country: {key: "country", schema: "country TEXT NOT NULL"},
-        province: {key: "province", schema: "province TEXT NOT NULL"},
-        county: {key: "county", schema: "county TEXT NOT NULL"},
-        township: {key: "township", schema: "township TEXT NOT NULL"},
-        village: {key: "village", schema: "village TEXT NOT NULL"},
-        road: {key: "road", schema: "road TEXT NOT NULL"},
-        slogan: {key: "slogan", schema: "slogan TEXT"},
-        description: {key: "description", schema: "description TEXT NOT NULL"}, // Markdown Format
-        content: {key: "content", schema: "content Section ARRAY NOT NULL"},
-        items: {key: "items", schema: "items Good ARRAY"}, // id, name Array
-        cover_img: {key: "cover_img", schema: "cover_img TEXT NOT NULL"},
-        imgs: {key: "imgs", schema: "imgs TEXT[]"},
+        comment: {key: "comment", schema: "comment Comment"},
         create_on: {key: "create_on", schema: "create_on TIMESTAMP default current_timestamp"},
         latest_modify: {key: "latest_modify", schema: "latest_modify TIMESTAMP default current_timestamp"},
     },
@@ -64,16 +53,27 @@ const config = {
         table_name: "items_table",
         type_name: "Item",
         id: {key: "id", schema: "id serial PRIMARY KEY NOT NULL"},
+        enable: {key: "enable", schema: "enable BOOLEAN NOT NULL"},
         name: {key: "name", schema: "name TEXT NOT NULL"},
-        // producer: {key: "producer", schema: "producer INTEGER REFERENCE farmers_table(id) ON  DELETE CASCADE"},
+        producer_id: {key: "producer_id", schema: "producer_id INTEGER REFERENCE farmers_table(id) ON  DELETE CASCADE"},
         producer: {key: "producer", schema: "producer Producer NOT NULL"}, // id Array
+        sell_type: {key: "sell_type", schema: "sell_type SellType NOT NULL", options: ["pre_sale", "in_stock"]}, 
         price: {key: "price", schema: "price NUMERIC NOT NULL"},
-        unit: {key: "unit", schema: "unit TEXT NOT NULL"},
+        unit: {key: "unit", schema: "unit TEXT NOT NULL", options: ["NTD"]},
+        amount: {key: "amount", schema: "amount INTEGER NOT NULL"},
+        sold: {key: "sold", schema: "sold INTEGER NOT NULL"},
+        slogan: {key: "slogan", schema: "slogan TEXT"},
         description: {key: "description", schema: "description TEXT NOT NULL"}, // Markdown Format
+        content: {key: "content", schema: "content Section ARRAY NOT NULL"},
         spec: {key: "spec", schema: "spec Spec ARRAY"}, // 
         cover_img: {key: "cover_img", schema: "cover_img TEXT NOT NULL"},
         imgs: {key: "imgs", schema: "imgs TEXT[]"}, // String Array
-        create_on: {key: "create_on", schema: "create_on TIMESTAMP default current_timestamp"}
+        comment: {key: "comment", schema: "comment Comment"},
+        create_on: {key: "create_on", schema: "create_on TIMESTAMP default current_timestamp"},
+        expire_on: {key: "expire_on", schema: "expire_on TIMESTAMP"},
+        is_limited: {key: "is_limited", schema: "is_limited BOOLEAN NOT NULL"},
+        has_expiration: {key: "has_expiration", schema: "has_expiration BOOLEAN NOT NULL"},
+        constraint: {schema: "CONSTRAINT is_in_stock CHECK((amount >= sold AND sell_type = 'in_stock' AND is_limited) OR (create_on <= expire_on AND sell_type = 'pre_sale' AND has_expiration))"}
     },
     Section: {
         type_name: "Section",
@@ -103,8 +103,20 @@ const config = {
         id: {key: "id", schema: "id INTEGER"},
         name: {key: "name", schema: "name TEXT"},
         quantity: {key: "quantity", schema: "quantity INTEGER"},
-        price: {key: "price", schema: "price NUMERIC NOT NULL"},
-        unit: {key: "unit", schema: "unit TEXT NOT NULL"},
+        price: {key: "price", schema: "price NUMERIC"},
+        unit: {key: "unit", schema: "unit TEXT"},
+    },
+    Comment: {
+        type_name: "Comment",
+        note: {key: "note", schema: "note TEXT"},
+        ext: {key: "ext", schema: "ext JSON"}
+    },
+    SellType: { // Enum Type
+        type_name: "SellType",
+        schema: "pre_sale, in_stock"
+    },
+    watch: {
+        schema: `UPDATE items_table enable = 'false' WHERE (amount <= sold AND sell_type = 'in_stock' AND is_limited = 'true') OR (create_on <= expire_on AND sell_type = 'pre_sale' AND has_expiration = 'true') \watch 3`
     }
 }
 
