@@ -64,6 +64,19 @@ function checkNumber(i, paramName, isRequired=true){
     }
 }
 
+function checkBool(i, paramName, isRequired=true){
+    if(typeof(i) !== 'boolean' || i === null || i === undefined || Number.isNaN(i)){
+        if(isRequired){
+            log(`Warning: ${paramName} = ${i} is not a Number`)
+            throw `Warning: ${paramName} = ${i} is not a Number`
+        }else{
+            return null
+        }
+    }else{
+        return Boolean(i)
+    }
+}
+
 function checkString(i, paramName, isRequired=true){
     if(typeof(i) !== 'string' || i === "" || i === null || i === undefined || Number.isNaN(i)){
         if(isRequired){
@@ -136,6 +149,7 @@ exports.shortStr = shortStr
 exports.makeRes = makeRes
 exports.checkInt = checkInt
 exports.checkNumber = checkNumber
+exports.checkBool = checkBool
 exports.checkString = checkString
 exports.checkObject = checkObject
 exports.checkArray = checkArray

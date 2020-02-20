@@ -77395,3 +77395,696 @@ VALUES('Green Tea', json_populate_record(null::Producer, '{"id":3,"name":"Lin"}'
 2020-02-19T14:38:57.831Z Local: 2/19/2020, 10:38:57 PM SELECT * FROM posts_table WHERE id = '133'; 
 2020-02-19T14:38:57.861Z Local: 2/19/2020, 10:38:57 PM command: SELECT, rowCount: 1 
 2020-02-19T14:38:57.867Z Local: 2/19/2020, 10:38:57 PM Sending 1 rows to ::1 with  
+2020-02-20T11:23:36.942Z Local: 2/20/2020, 7:23:36 PM DO $$ BEGIN
+        CREATE TYPE Comment AS (note TEXT, ext JSONB);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-02-20T11:23:36.956Z Local: 2/20/2020, 7:23:36 PM CREATE TABLE IF NOT EXISTS app_datas_table(
+    id serial PRIMARY KEY NOT NULL,
+    property TEXT PRIMARY KEY NOT NULL,
+    data JSONB,
+    comment Comment,
+    create_on TIMESTAMP default current_timestamp,
+    latest_modify TIMESTAMP default current_timestamp) 
+2020-02-20T11:23:36.962Z Local: 2/20/2020, 7:23:36 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment
+        VALUES('app_name', 'null', 'null
+        ) RETURNING id; 
+2020-02-20T11:23:36.963Z Local: 2/20/2020, 7:23:36 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment
+        VALUES('app_name', 'null', 'null
+        ) RETURNING id; 
+2020-02-20T11:23:36.960Z Local: 2/20/2020, 7:23:36 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment
+        VALUES('app_name', 'null', 'null
+        ) RETURNING id; 
+2020-02-20T11:23:36.968Z Local: 2/20/2020, 7:23:36 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment
+        VALUES('app_name', 'null', 'null
+        ) RETURNING id; 
+2020-02-20T11:23:37.061Z Local: 2/20/2020, 7:23:37 PM Error: error: type "comment" does not exist 
+2020-02-20T11:23:37.078Z Local: 2/20/2020, 7:23:37 PM Error: error: syntax error at or near "VALUES" 
+2020-02-20T11:23:37.100Z Local: 2/20/2020, 7:23:37 PM Error: error: syntax error at or near "VALUES" 
+2020-02-20T11:23:37.125Z Local: 2/20/2020, 7:23:37 PM Error: error: syntax error at or near "VALUES" 
+2020-02-20T11:23:37.158Z Local: 2/20/2020, 7:23:37 PM Error: error: syntax error at or near "VALUES" 
+2020-02-20T11:23:37.345Z Local: 2/20/2020, 7:23:37 PM command: DO, rowCount: null 
+2020-02-20T11:24:50.919Z Local: 2/20/2020, 7:24:50 PM DO $$ BEGIN
+        CREATE TYPE Comment AS (note TEXT, ext JSONB);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-02-20T11:24:50.931Z Local: 2/20/2020, 7:24:50 PM CREATE TABLE IF NOT EXISTS app_datas_table(
+    id serial PRIMARY KEY NOT NULL,
+    property TEXT PRIMARY KEY NOT NULL,
+    data JSONB,
+    comment Comment,
+    create_on TIMESTAMP default current_timestamp,
+    latest_modify TIMESTAMP default current_timestamp) 
+2020-02-20T11:24:50.934Z Local: 2/20/2020, 7:24:50 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment
+        VALUES('app_name', 'null', 'null
+        ) RETURNING id; 
+2020-02-20T11:24:50.937Z Local: 2/20/2020, 7:24:50 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment
+        VALUES('app_name', 'null', 'null
+        ) RETURNING id; 
+2020-02-20T11:24:50.939Z Local: 2/20/2020, 7:24:50 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment
+        VALUES('app_name', 'null', 'null
+        ) RETURNING id; 
+2020-02-20T11:24:50.944Z Local: 2/20/2020, 7:24:50 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment
+        VALUES('app_name', 'null', 'null
+        ) RETURNING id; 
+2020-02-20T11:24:51.007Z Local: 2/20/2020, 7:24:51 PM command: DO, rowCount: null 
+2020-02-20T11:24:51.017Z Local: 2/20/2020, 7:24:51 PM Error: error: multiple primary keys for table "app_datas_table" are not allowed 
+2020-02-20T11:24:51.034Z Local: 2/20/2020, 7:24:51 PM Error: error: syntax error at or near "VALUES" 
+2020-02-20T11:24:51.054Z Local: 2/20/2020, 7:24:51 PM Error: error: syntax error at or near "VALUES" 
+2020-02-20T11:24:51.074Z Local: 2/20/2020, 7:24:51 PM Error: error: syntax error at or near "VALUES" 
+2020-02-20T11:24:51.095Z Local: 2/20/2020, 7:24:51 PM Error: error: syntax error at or near "VALUES" 
+2020-02-20T11:27:37.328Z Local: 2/20/2020, 7:27:37 PM DO $$ BEGIN
+        CREATE TYPE Comment AS (note TEXT, ext JSONB);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-02-20T11:27:37.368Z Local: 2/20/2020, 7:27:37 PM CREATE TABLE IF NOT EXISTS app_datas_table(
+    id serial UNIQUE NOT NULL,
+    property TEXT UNIQUE NOT NULL,
+    data JSONB,
+    comment Comment,
+    create_on TIMESTAMP default current_timestamp,
+    latest_modify TIMESTAMP default current_timestamp) 
+2020-02-20T11:27:37.375Z Local: 2/20/2020, 7:27:37 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment
+        VALUES('app_name', 'null', 'null
+        ) RETURNING id; 
+2020-02-20T11:27:37.383Z Local: 2/20/2020, 7:27:37 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment
+        VALUES('app_name', 'null', 'null
+        ) RETURNING id; 
+2020-02-20T11:27:37.388Z Local: 2/20/2020, 7:27:37 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment
+        VALUES('app_name', 'null', 'null
+        ) RETURNING id; 
+2020-02-20T11:27:37.393Z Local: 2/20/2020, 7:27:37 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment
+        VALUES('app_name', 'null', 'null
+        ) RETURNING id; 
+2020-02-20T11:27:37.529Z Local: 2/20/2020, 7:27:37 PM command: DO, rowCount: null 
+2020-02-20T11:27:37.584Z Local: 2/20/2020, 7:27:37 PM Error: error: syntax error at or near "VALUES" 
+2020-02-20T11:27:37.610Z Local: 2/20/2020, 7:27:37 PM Error: error: syntax error at or near "VALUES" 
+2020-02-20T11:27:37.633Z Local: 2/20/2020, 7:27:37 PM Error: error: syntax error at or near "VALUES" 
+2020-02-20T11:27:37.654Z Local: 2/20/2020, 7:27:37 PM Error: error: syntax error at or near "VALUES" 
+2020-02-20T11:27:37.853Z Local: 2/20/2020, 7:27:37 PM command: CREATE, rowCount: null 
+2020-02-20T11:28:18.557Z Local: 2/20/2020, 7:28:18 PM DO $$ BEGIN
+        CREATE TYPE Comment AS (note TEXT, ext JSONB);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-02-20T11:28:18.579Z Local: 2/20/2020, 7:28:18 PM CREATE TABLE IF NOT EXISTS app_datas_table(
+    id serial UNIQUE NOT NULL,
+    property TEXT UNIQUE NOT NULL,
+    data JSONB,
+    comment Comment,
+    create_on TIMESTAMP default current_timestamp,
+    latest_modify TIMESTAMP default current_timestamp) 
+2020-02-20T11:28:18.583Z Local: 2/20/2020, 7:28:18 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment
+        VALUES('app_name', 'null', 'null
+        ) RETURNING id; 
+2020-02-20T11:28:18.587Z Local: 2/20/2020, 7:28:18 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment
+        VALUES('app_name', 'null', 'null
+        ) RETURNING id; 
+2020-02-20T11:28:18.589Z Local: 2/20/2020, 7:28:18 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment
+        VALUES('app_name', 'null', 'null
+        ) RETURNING id; 
+2020-02-20T11:28:18.592Z Local: 2/20/2020, 7:28:18 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment
+        VALUES('app_name', 'null', 'null
+        ) RETURNING id; 
+2020-02-20T11:28:18.662Z Local: 2/20/2020, 7:28:18 PM command: DO, rowCount: null 
+2020-02-20T11:28:18.671Z Local: 2/20/2020, 7:28:18 PM command: CREATE, rowCount: null 
+2020-02-20T11:28:18.693Z Local: 2/20/2020, 7:28:18 PM Error: error: syntax error at or near "VALUES" 
+2020-02-20T11:28:18.717Z Local: 2/20/2020, 7:28:18 PM Error: error: syntax error at or near "VALUES" 
+2020-02-20T11:28:18.741Z Local: 2/20/2020, 7:28:18 PM Error: error: syntax error at or near "VALUES" 
+2020-02-20T11:28:18.766Z Local: 2/20/2020, 7:28:18 PM Error: error: syntax error at or near "VALUES" 
+2020-02-20T11:29:23.794Z Local: 2/20/2020, 7:29:23 PM DO $$ BEGIN
+        CREATE TYPE Comment AS (note TEXT, ext JSONB);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-02-20T11:29:23.816Z Local: 2/20/2020, 7:29:23 PM CREATE TABLE IF NOT EXISTS app_datas_table(
+    id serial UNIQUE NOT NULL,
+    property TEXT UNIQUE NOT NULL,
+    data JSONB,
+    comment Comment,
+    create_on TIMESTAMP default current_timestamp,
+    latest_modify TIMESTAMP default current_timestamp) 
+2020-02-20T11:29:23.820Z Local: 2/20/2020, 7:29:23 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment
+        VALUES('app_name', null, null
+        ) RETURNING id; 
+2020-02-20T11:29:23.823Z Local: 2/20/2020, 7:29:23 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment
+        VALUES('app_name', null, null
+        ) RETURNING id; 
+2020-02-20T11:29:23.826Z Local: 2/20/2020, 7:29:23 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment
+        VALUES('app_name', null, null
+        ) RETURNING id; 
+2020-02-20T11:29:23.832Z Local: 2/20/2020, 7:29:23 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment
+        VALUES('app_name', null, null
+        ) RETURNING id; 
+2020-02-20T11:29:23.898Z Local: 2/20/2020, 7:29:23 PM command: CREATE, rowCount: null 
+2020-02-20T11:29:23.942Z Local: 2/20/2020, 7:29:23 PM command: DO, rowCount: null 
+2020-02-20T11:29:23.968Z Local: 2/20/2020, 7:29:23 PM Error: error: syntax error at or near "VALUES" 
+2020-02-20T11:29:23.995Z Local: 2/20/2020, 7:29:23 PM Error: error: syntax error at or near "VALUES" 
+2020-02-20T11:29:24.025Z Local: 2/20/2020, 7:29:24 PM Error: error: syntax error at or near "VALUES" 
+2020-02-20T11:29:24.048Z Local: 2/20/2020, 7:29:24 PM Error: error: syntax error at or near "VALUES" 
+2020-02-20T11:30:32.564Z Local: 2/20/2020, 7:30:32 PM DO $$ BEGIN
+        CREATE TYPE Comment AS (note TEXT, ext JSONB);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-02-20T11:30:32.607Z Local: 2/20/2020, 7:30:32 PM CREATE TABLE IF NOT EXISTS app_datas_table(
+    id serial UNIQUE NOT NULL,
+    property TEXT UNIQUE NOT NULL,
+    data JSONB,
+    comment Comment,
+    create_on TIMESTAMP default current_timestamp,
+    latest_modify TIMESTAMP default current_timestamp) 
+2020-02-20T11:30:32.618Z Local: 2/20/2020, 7:30:32 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment
+        VALUES('app_name', {"data":"直接跟茶農買"}, null
+        ) RETURNING id; 
+2020-02-20T11:30:32.623Z Local: 2/20/2020, 7:30:32 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment
+        VALUES('app_name', {"data":"直接跟茶農買"}, null
+        ) RETURNING id; 
+2020-02-20T11:30:32.631Z Local: 2/20/2020, 7:30:32 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment
+        VALUES('app_name', {"data":"直接跟茶農買"}, null
+        ) RETURNING id; 
+2020-02-20T11:30:32.639Z Local: 2/20/2020, 7:30:32 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment
+        VALUES('app_name', {"data":"直接跟茶農買"}, null
+        ) RETURNING id; 
+2020-02-20T11:30:32.783Z Local: 2/20/2020, 7:30:32 PM command: DO, rowCount: null 
+2020-02-20T11:30:32.803Z Local: 2/20/2020, 7:30:32 PM command: CREATE, rowCount: null 
+2020-02-20T11:30:32.835Z Local: 2/20/2020, 7:30:32 PM Error: error: syntax error at or near "VALUES" 
+2020-02-20T11:30:32.859Z Local: 2/20/2020, 7:30:32 PM Error: error: syntax error at or near "VALUES" 
+2020-02-20T11:30:32.879Z Local: 2/20/2020, 7:30:32 PM Error: error: syntax error at or near "VALUES" 
+2020-02-20T11:30:32.895Z Local: 2/20/2020, 7:30:32 PM Error: error: syntax error at or near "VALUES" 
+2020-02-20T11:31:34.952Z Local: 2/20/2020, 7:31:34 PM DO $$ BEGIN
+        CREATE TYPE Comment AS (note TEXT, ext JSONB);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-02-20T11:31:34.981Z Local: 2/20/2020, 7:31:34 PM CREATE TABLE IF NOT EXISTS app_datas_table(
+    id serial UNIQUE NOT NULL,
+    property TEXT UNIQUE NOT NULL,
+    data JSONB,
+    comment Comment,
+    create_on TIMESTAMP default current_timestamp,
+    latest_modify TIMESTAMP default current_timestamp) 
+2020-02-20T11:31:34.984Z Local: 2/20/2020, 7:31:34 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment
+        VALUES('app_name', {"data":"直接跟茶農買"}, json_populate_record(null::Comment, '{"note":"first element","ext":{}}')
+        ) RETURNING id; 
+2020-02-20T11:31:34.987Z Local: 2/20/2020, 7:31:34 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment
+        VALUES('app_name', {"data":"直接跟茶農買"}, json_populate_record(null::Comment, '{"note":"first element","ext":{}}')
+        ) RETURNING id; 
+2020-02-20T11:31:34.991Z Local: 2/20/2020, 7:31:34 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment
+        VALUES('app_name', {"data":"直接跟茶農買"}, json_populate_record(null::Comment, '{"note":"first element","ext":{}}')
+        ) RETURNING id; 
+2020-02-20T11:31:34.994Z Local: 2/20/2020, 7:31:34 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment
+        VALUES('app_name', {"data":"直接跟茶農買"}, json_populate_record(null::Comment, '{"note":"first element","ext":{}}')
+        ) RETURNING id; 
+2020-02-20T11:31:35.051Z Local: 2/20/2020, 7:31:35 PM command: CREATE, rowCount: null 
+2020-02-20T11:31:35.069Z Local: 2/20/2020, 7:31:35 PM command: DO, rowCount: null 
+2020-02-20T11:31:35.078Z Local: 2/20/2020, 7:31:35 PM Error: error: syntax error at or near "VALUES" 
+2020-02-20T11:31:35.098Z Local: 2/20/2020, 7:31:35 PM Error: error: syntax error at or near "VALUES" 
+2020-02-20T11:31:35.124Z Local: 2/20/2020, 7:31:35 PM Error: error: syntax error at or near "VALUES" 
+2020-02-20T11:31:35.161Z Local: 2/20/2020, 7:31:35 PM Error: error: syntax error at or near "VALUES" 
+2020-02-20T11:32:36.835Z Local: 2/20/2020, 7:32:36 PM DO $$ BEGIN
+        CREATE TYPE Comment AS (note TEXT, ext JSONB);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-02-20T11:32:36.863Z Local: 2/20/2020, 7:32:36 PM CREATE TABLE IF NOT EXISTS app_datas_table(
+    id serial UNIQUE NOT NULL,
+    property TEXT UNIQUE NOT NULL,
+    data JSONB,
+    comment Comment,
+    create_on TIMESTAMP default current_timestamp,
+    latest_modify TIMESTAMP default current_timestamp) 
+2020-02-20T11:32:36.868Z Local: 2/20/2020, 7:32:36 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment)
+        VALUES('app_name', {"data":"直接跟茶農買"}, json_populate_record(null::Comment, '{"note":"first element","ext":{}}')
+        ) RETURNING id; 
+2020-02-20T11:32:36.872Z Local: 2/20/2020, 7:32:36 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment)
+        VALUES('app_name', {"data":"直接跟茶農買"}, json_populate_record(null::Comment, '{"note":"first element","ext":{}}')
+        ) RETURNING id; 
+2020-02-20T11:32:36.875Z Local: 2/20/2020, 7:32:36 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment)
+        VALUES('app_name', {"data":"直接跟茶農買"}, json_populate_record(null::Comment, '{"note":"first element","ext":{}}')
+        ) RETURNING id; 
+2020-02-20T11:32:36.886Z Local: 2/20/2020, 7:32:36 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment)
+        VALUES('app_name', {"data":"直接跟茶農買"}, json_populate_record(null::Comment, '{"note":"first element","ext":{}}')
+        ) RETURNING id; 
+2020-02-20T11:32:36.968Z Local: 2/20/2020, 7:32:36 PM command: CREATE, rowCount: null 
+2020-02-20T11:32:37.002Z Local: 2/20/2020, 7:32:37 PM command: DO, rowCount: null 
+2020-02-20T11:32:37.021Z Local: 2/20/2020, 7:32:37 PM Error: error: syntax error at or near "{" 
+2020-02-20T11:32:37.050Z Local: 2/20/2020, 7:32:37 PM Error: error: syntax error at or near "{" 
+2020-02-20T11:32:37.081Z Local: 2/20/2020, 7:32:37 PM Error: error: syntax error at or near "{" 
+2020-02-20T11:32:37.111Z Local: 2/20/2020, 7:32:37 PM Error: error: syntax error at or near "{" 
+2020-02-20T11:34:29.106Z Local: 2/20/2020, 7:34:29 PM DO $$ BEGIN
+        CREATE TYPE Comment AS (note TEXT, ext JSONB);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-02-20T11:34:29.120Z Local: 2/20/2020, 7:34:29 PM CREATE TABLE IF NOT EXISTS app_datas_table(
+    id serial UNIQUE NOT NULL,
+    property TEXT UNIQUE NOT NULL,
+    data JSONB,
+    comment Comment,
+    create_on TIMESTAMP default current_timestamp,
+    latest_modify TIMESTAMP default current_timestamp) 
+2020-02-20T11:34:29.122Z Local: 2/20/2020, 7:34:29 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment)
+        VALUES('app_name', {"data":"直接跟茶農買"}, null
+        ) RETURNING id; 
+2020-02-20T11:34:29.124Z Local: 2/20/2020, 7:34:29 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment)
+        VALUES('app_name', {"data":"直接跟茶農買"}, null
+        ) RETURNING id; 
+2020-02-20T11:34:29.126Z Local: 2/20/2020, 7:34:29 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment)
+        VALUES('app_name', {"data":"直接跟茶農買"}, null
+        ) RETURNING id; 
+2020-02-20T11:34:29.129Z Local: 2/20/2020, 7:34:29 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment)
+        VALUES('app_name', {"data":"直接跟茶農買"}, null
+        ) RETURNING id; 
+2020-02-20T11:34:29.160Z Local: 2/20/2020, 7:34:29 PM command: DO, rowCount: null 
+2020-02-20T11:34:29.163Z Local: 2/20/2020, 7:34:29 PM command: CREATE, rowCount: null 
+2020-02-20T11:34:29.174Z Local: 2/20/2020, 7:34:29 PM Error: error: syntax error at or near "{" 
+2020-02-20T11:34:29.185Z Local: 2/20/2020, 7:34:29 PM Error: error: syntax error at or near "{" 
+2020-02-20T11:34:29.195Z Local: 2/20/2020, 7:34:29 PM Error: error: syntax error at or near "{" 
+2020-02-20T11:34:29.205Z Local: 2/20/2020, 7:34:29 PM Error: error: syntax error at or near "{" 
+2020-02-20T11:35:43.959Z Local: 2/20/2020, 7:35:43 PM DO $$ BEGIN
+        CREATE TYPE Comment AS (note TEXT, ext JSONB);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-02-20T11:35:43.969Z Local: 2/20/2020, 7:35:43 PM CREATE TABLE IF NOT EXISTS app_datas_table(
+    id serial UNIQUE NOT NULL,
+    property TEXT UNIQUE NOT NULL,
+    data JSONB,
+    comment Comment,
+    create_on TIMESTAMP default current_timestamp,
+    latest_modify TIMESTAMP default current_timestamp) 
+2020-02-20T11:35:43.971Z Local: 2/20/2020, 7:35:43 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment)
+        VALUES('app_name', '{"data":"直接跟茶農買"}', null
+        ) RETURNING id; 
+2020-02-20T11:35:43.971Z Local: 2/20/2020, 7:35:43 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment)
+        VALUES('app_name', '{"data":"直接跟茶農買"}', null
+        ) RETURNING id; 
+2020-02-20T11:35:43.973Z Local: 2/20/2020, 7:35:43 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment)
+        VALUES('app_name', '{"data":"直接跟茶農買"}', null
+        ) RETURNING id; 
+2020-02-20T11:35:43.974Z Local: 2/20/2020, 7:35:43 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment)
+        VALUES('app_name', '{"data":"直接跟茶農買"}', null
+        ) RETURNING id; 
+2020-02-20T11:35:44.007Z Local: 2/20/2020, 7:35:44 PM command: DO, rowCount: null 
+2020-02-20T11:35:44.011Z Local: 2/20/2020, 7:35:44 PM command: CREATE, rowCount: null 
+2020-02-20T11:35:44.038Z Local: 2/20/2020, 7:35:44 PM command: INSERT, rowCount: 1 
+2020-02-20T11:35:44.041Z Local: 2/20/2020, 7:35:44 PM Error: error: duplicate key value violates unique constraint "app_datas_table_property_key" 
+2020-02-20T11:35:44.048Z Local: 2/20/2020, 7:35:44 PM Error: error: duplicate key value violates unique constraint "app_datas_table_property_key" 
+2020-02-20T11:35:44.057Z Local: 2/20/2020, 7:35:44 PM Error: error: duplicate key value violates unique constraint "app_datas_table_property_key" 
+2020-02-20T11:38:48.039Z Local: 2/20/2020, 7:38:48 PM DO $$ BEGIN
+        CREATE TYPE Comment AS (note TEXT, ext JSONB);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-02-20T11:38:48.049Z Local: 2/20/2020, 7:38:48 PM CREATE TABLE IF NOT EXISTS app_datas_table(
+    id serial UNIQUE NOT NULL,
+    property TEXT UNIQUE NOT NULL,
+    data JSONB,
+    comment Comment,
+    create_on TIMESTAMP default current_timestamp,
+    latest_modify TIMESTAMP default current_timestamp) 
+2020-02-20T11:38:48.051Z Local: 2/20/2020, 7:38:48 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment)
+        VALUES('test', null, null
+        ) RETURNING id; 
+2020-02-20T11:38:48.052Z Local: 2/20/2020, 7:38:48 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment)
+        VALUES('test', null, null
+        ) RETURNING id; 
+2020-02-20T11:38:48.053Z Local: 2/20/2020, 7:38:48 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment)
+        VALUES('test', null, null
+        ) RETURNING id; 
+2020-02-20T11:38:48.057Z Local: 2/20/2020, 7:38:48 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment)
+        VALUES('test', null, null
+        ) RETURNING id; 
+2020-02-20T11:38:48.085Z Local: 2/20/2020, 7:38:48 PM command: DO, rowCount: null 
+2020-02-20T11:38:48.089Z Local: 2/20/2020, 7:38:48 PM command: CREATE, rowCount: null 
+2020-02-20T11:38:48.115Z Local: 2/20/2020, 7:38:48 PM command: INSERT, rowCount: 1 
+2020-02-20T11:38:48.118Z Local: 2/20/2020, 7:38:48 PM Error: error: duplicate key value violates unique constraint "app_datas_table_property_key" 
+2020-02-20T11:38:48.122Z Local: 2/20/2020, 7:38:48 PM Error: error: duplicate key value violates unique constraint "app_datas_table_property_key" 
+2020-02-20T11:38:48.129Z Local: 2/20/2020, 7:38:48 PM Error: error: duplicate key value violates unique constraint "app_datas_table_property_key" 
+2020-02-20T11:39:30.657Z Local: 2/20/2020, 7:39:30 PM CREATE TABLE IF NOT EXISTS app_datas_table(
+    id serial UNIQUE NOT NULL,
+    property TEXT UNIQUE NOT NULL,
+    data JSONB,
+    comment Comment,
+    create_on TIMESTAMP default current_timestamp,
+    latest_modify TIMESTAMP default current_timestamp) 
+2020-02-20T11:39:30.659Z Local: 2/20/2020, 7:39:30 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment)
+        VALUES('test', null, json_populate_record(null::Comment, '{"note":"","ext":{}}')
+        ) RETURNING id; 
+2020-02-20T11:39:30.647Z Local: 2/20/2020, 7:39:30 PM DO $$ BEGIN
+        CREATE TYPE Comment AS (note TEXT, ext JSONB);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-02-20T11:39:30.660Z Local: 2/20/2020, 7:39:30 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment)
+        VALUES('test', null, json_populate_record(null::Comment, '{"note":"","ext":{}}')
+        ) RETURNING id; 
+2020-02-20T11:39:30.661Z Local: 2/20/2020, 7:39:30 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment)
+        VALUES('test', null, json_populate_record(null::Comment, '{"note":"","ext":{}}')
+        ) RETURNING id; 
+2020-02-20T11:39:30.662Z Local: 2/20/2020, 7:39:30 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment)
+        VALUES('test', null, json_populate_record(null::Comment, '{"note":"","ext":{}}')
+        ) RETURNING id; 
+2020-02-20T11:39:30.696Z Local: 2/20/2020, 7:39:30 PM command: DO, rowCount: null 
+2020-02-20T11:39:30.700Z Local: 2/20/2020, 7:39:30 PM command: CREATE, rowCount: null 
+2020-02-20T11:39:30.714Z Local: 2/20/2020, 7:39:30 PM Error: error: duplicate key value violates unique constraint "app_datas_table_property_key" 
+2020-02-20T11:39:30.722Z Local: 2/20/2020, 7:39:30 PM Error: error: duplicate key value violates unique constraint "app_datas_table_property_key" 
+2020-02-20T11:39:30.734Z Local: 2/20/2020, 7:39:30 PM Error: error: duplicate key value violates unique constraint "app_datas_table_property_key" 
+2020-02-20T11:39:30.746Z Local: 2/20/2020, 7:39:30 PM Error: error: duplicate key value violates unique constraint "app_datas_table_property_key" 
+2020-02-20T11:40:13.166Z Local: 2/20/2020, 7:40:13 PM DO $$ BEGIN
+        CREATE TYPE Comment AS (note TEXT, ext JSONB);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-02-20T11:40:13.176Z Local: 2/20/2020, 7:40:13 PM CREATE TABLE IF NOT EXISTS app_datas_table(
+    id serial UNIQUE NOT NULL,
+    property TEXT UNIQUE NOT NULL,
+    data JSONB,
+    comment Comment,
+    create_on TIMESTAMP default current_timestamp,
+    latest_modify TIMESTAMP default current_timestamp) 
+2020-02-20T11:40:13.180Z Local: 2/20/2020, 7:40:13 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment)
+        VALUES('test1', null, json_populate_record(null::Comment, '{"note":"","ext":{}}')
+        ) RETURNING id; 
+2020-02-20T11:40:13.182Z Local: 2/20/2020, 7:40:13 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment)
+        VALUES('test1', null, json_populate_record(null::Comment, '{"note":"","ext":{}}')
+        ) RETURNING id; 
+2020-02-20T11:40:13.184Z Local: 2/20/2020, 7:40:13 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment)
+        VALUES('test1', null, json_populate_record(null::Comment, '{"note":"","ext":{}}')
+        ) RETURNING id; 
+2020-02-20T11:40:13.185Z Local: 2/20/2020, 7:40:13 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment)
+        VALUES('test1', null, json_populate_record(null::Comment, '{"note":"","ext":{}}')
+        ) RETURNING id; 
+2020-02-20T11:40:13.217Z Local: 2/20/2020, 7:40:13 PM command: DO, rowCount: null 
+2020-02-20T11:40:13.221Z Local: 2/20/2020, 7:40:13 PM command: CREATE, rowCount: null 
+2020-02-20T11:40:13.245Z Local: 2/20/2020, 7:40:13 PM command: INSERT, rowCount: 1 
+2020-02-20T11:40:13.249Z Local: 2/20/2020, 7:40:13 PM Error: error: duplicate key value violates unique constraint "app_datas_table_property_key" 
+2020-02-20T11:40:13.256Z Local: 2/20/2020, 7:40:13 PM Error: error: duplicate key value violates unique constraint "app_datas_table_property_key" 
+2020-02-20T11:40:13.263Z Local: 2/20/2020, 7:40:13 PM Error: error: duplicate key value violates unique constraint "app_datas_table_property_key" 
+2020-02-20T11:41:50.644Z Local: 2/20/2020, 7:41:50 PM DO $$ BEGIN
+        CREATE TYPE Comment AS (note TEXT, ext JSONB);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-02-20T11:41:50.654Z Local: 2/20/2020, 7:41:50 PM CREATE TABLE IF NOT EXISTS app_datas_table(
+    id serial UNIQUE NOT NULL,
+    property TEXT UNIQUE NOT NULL,
+    data JSONB,
+    comment Comment,
+    create_on TIMESTAMP default current_timestamp,
+    latest_modify TIMESTAMP default current_timestamp) 
+2020-02-20T11:41:50.655Z Local: 2/20/2020, 7:41:50 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment)
+        VALUES('test2', null, json_populate_record(null::Comment, '{"note":"","ext":null}')
+        ) RETURNING id; 
+2020-02-20T11:41:50.657Z Local: 2/20/2020, 7:41:50 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment)
+        VALUES('test2', null, json_populate_record(null::Comment, '{"note":"","ext":null}')
+        ) RETURNING id; 
+2020-02-20T11:41:50.661Z Local: 2/20/2020, 7:41:50 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment)
+        VALUES('test2', null, json_populate_record(null::Comment, '{"note":"","ext":null}')
+        ) RETURNING id; 
+2020-02-20T11:41:50.662Z Local: 2/20/2020, 7:41:50 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment)
+        VALUES('test2', null, json_populate_record(null::Comment, '{"note":"","ext":null}')
+        ) RETURNING id; 
+2020-02-20T11:41:50.690Z Local: 2/20/2020, 7:41:50 PM command: CREATE, rowCount: null 
+2020-02-20T11:41:50.702Z Local: 2/20/2020, 7:41:50 PM command: DO, rowCount: null 
+2020-02-20T11:41:50.724Z Local: 2/20/2020, 7:41:50 PM command: INSERT, rowCount: 1 
+2020-02-20T11:41:50.730Z Local: 2/20/2020, 7:41:50 PM Error: error: duplicate key value violates unique constraint "app_datas_table_property_key" 
+2020-02-20T11:41:50.734Z Local: 2/20/2020, 7:41:50 PM Error: error: duplicate key value violates unique constraint "app_datas_table_property_key" 
+2020-02-20T11:41:50.740Z Local: 2/20/2020, 7:41:50 PM Error: error: duplicate key value violates unique constraint "app_datas_table_property_key" 
+2020-02-20T11:51:00.580Z Local: 2/20/2020, 7:51:00 PM SELECT COUNT(*) FROM app_datas_table; 
+2020-02-20T11:51:00.590Z Local: 2/20/2020, 7:51:00 PM SELECT 
+    id,
+    property,
+    data,
+    row_to_json(comment) AS comment,
+    create_on, 
+    latest_modify
+    FROM app_datas_table WHERE id = '1'; 
+2020-02-20T11:51:00.593Z Local: 2/20/2020, 7:51:00 PM SELECT 
+    id,
+    property,
+    data,
+    row_to_json(comment) AS comment,
+    create_on, 
+    latest_modify
+    FROM app_datas_table WHERE property = 'test'; 
+2020-02-20T11:51:00.594Z Local: 2/20/2020, 7:51:00 PM SELECT 
+    id,
+    property,
+    data,
+    row_to_json(comment) AS comment,
+    create_on, 
+    latest_modify
+    FROM app_datas_table ORDER BY latest_modify DESC  OFFSET 1; 
+2020-02-20T11:51:00.644Z Local: 2/20/2020, 7:51:00 PM command: SELECT, rowCount: 1 
+2020-02-20T11:51:00.651Z Local: 2/20/2020, 7:51:00 PM command: SELECT, rowCount: 1 
+2020-02-20T11:51:00.652Z Local: 2/20/2020, 7:51:00 PM command: SELECT, rowCount: 1 
+2020-02-20T11:51:00.653Z Local: 2/20/2020, 7:51:00 PM command: SELECT, rowCount: 3 
+2020-02-20T11:51:36.313Z Local: 2/20/2020, 7:51:36 PM SELECT COUNT(*) FROM app_datas_table; 
+2020-02-20T11:51:36.324Z Local: 2/20/2020, 7:51:36 PM SELECT 
+    id,
+    property,
+    data,
+    row_to_json(comment) AS comment,
+    create_on, 
+    latest_modify
+    FROM app_datas_table WHERE id = '1'; 
+2020-02-20T11:51:36.325Z Local: 2/20/2020, 7:51:36 PM SELECT 
+    id,
+    property,
+    data,
+    row_to_json(comment) AS comment,
+    create_on, 
+    latest_modify
+    FROM app_datas_table WHERE property = 'test'; 
+2020-02-20T11:51:36.332Z Local: 2/20/2020, 7:51:36 PM SELECT 
+    id,
+    property,
+    data,
+    row_to_json(comment) AS comment,
+    create_on, 
+    latest_modify
+    FROM app_datas_table ORDER BY latest_modify DESC  OFFSET 1; 
+2020-02-20T11:51:36.365Z Local: 2/20/2020, 7:51:36 PM command: SELECT, rowCount: 1 
+2020-02-20T11:51:36.371Z Local: 2/20/2020, 7:51:36 PM command: SELECT, rowCount: 1 
+2020-02-20T11:51:36.379Z Local: 2/20/2020, 7:51:36 PM command: SELECT, rowCount: 1 
+2020-02-20T11:51:36.389Z Local: 2/20/2020, 7:51:36 PM command: SELECT, rowCount: 3 
+2020-02-20T11:52:14.287Z Local: 2/20/2020, 7:52:14 PM SELECT COUNT(*) FROM app_datas_table; 
+2020-02-20T11:52:14.298Z Local: 2/20/2020, 7:52:14 PM SELECT 
+    id,
+    property,
+    data,
+    row_to_json(comment) AS comment,
+    create_on, 
+    latest_modify
+    FROM app_datas_table WHERE id = '1'; 
+2020-02-20T11:52:14.299Z Local: 2/20/2020, 7:52:14 PM SELECT 
+    id,
+    property,
+    data,
+    row_to_json(comment) AS comment,
+    create_on, 
+    latest_modify
+    FROM app_datas_table WHERE property = 'test'; 
+2020-02-20T11:52:14.304Z Local: 2/20/2020, 7:52:14 PM SELECT 
+    id,
+    property,
+    data,
+    row_to_json(comment) AS comment,
+    create_on, 
+    latest_modify
+    FROM app_datas_table ORDER BY latest_modify DESC  OFFSET 1; 
+2020-02-20T11:52:14.343Z Local: 2/20/2020, 7:52:14 PM command: SELECT, rowCount: 1 
+2020-02-20T11:52:14.355Z Local: 2/20/2020, 7:52:14 PM command: SELECT, rowCount: 1 
+2020-02-20T11:52:14.361Z Local: 2/20/2020, 7:52:14 PM command: SELECT, rowCount: 1 
+2020-02-20T11:52:14.370Z Local: 2/20/2020, 7:52:14 PM command: SELECT, rowCount: 3 
+2020-02-20T11:54:49.197Z Local: 2/20/2020, 7:54:49 PM SELECT 
+    id,
+    property,
+    data,
+    row_to_json(comment) AS comment,
+    create_on, 
+    latest_modify
+    FROM app_datas_table ORDER BY latest_modify DESC  OFFSET 1; 
+2020-02-20T11:54:49.241Z Local: 2/20/2020, 7:54:49 PM command: SELECT, rowCount: 3 
+2020-02-20T11:55:08.393Z Local: 2/20/2020, 7:55:08 PM SELECT 
+    id,
+    property,
+    data,
+    row_to_json(comment) AS comment,
+    create_on, 
+    latest_modify
+    FROM app_datas_table ORDER BY latest_modify DESC  OFFSET 0; 
+2020-02-20T11:55:08.438Z Local: 2/20/2020, 7:55:08 PM command: SELECT, rowCount: 4 
