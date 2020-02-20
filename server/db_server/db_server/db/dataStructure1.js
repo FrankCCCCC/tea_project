@@ -80,6 +80,7 @@ const config = {
         slogan: {key: "slogan", schema: "slogan TEXT"},
         description: {key: "description", schema: "description TEXT NOT NULL"}, // Markdown Format
         content: {key: "content", schema: "content Section ARRAY NOT NULL"},
+        certification: {key: "certification", schema: "certification Certification"},
         spec: {key: "spec", schema: "spec Spec ARRAY"}, // 
         cover_img: {key: "cover_img", schema: "cover_img TEXT NOT NULL"},
         imgs: {key: "imgs", schema: "imgs TEXT[]"}, // String Array
@@ -94,10 +95,13 @@ const config = {
     },
     Section: {
         type_name: "Section",
+        display: {key: "display", schema: "display DisplayType"},
+        img: {key: "img", schema: "img TEXT"},
+        backgroundColor: {key: "backgroundColor", schema: "backgroundColor TEXT"},
         title: {key: "title", schema: "title TEXT"},
         subtitle: {key: "subtitle", schema: "subtitle TEXT"},
         description: {key: "description", schema: "description TEXT"}, // Markdown Format
-        img: {key: "img", schema: "img TEXT"},
+        data: {key: "data", schema: "data JSONB"}
     },
     // Producer: {
     //     type_name: "Producer",
@@ -108,7 +112,6 @@ const config = {
         type_name: "Spec",
         property: {key: "property", schema: "property TEXT"},
         value: {key: "value", schema: "value TEXT"},
-        data: {key: "data", schema: "data JSONB"},
         comment: {key: "comment", schema: "comment TEXT"},
     },
     Good: {
@@ -129,9 +132,18 @@ const config = {
         note: {key: "note", schema: "note TEXT"},
         ext: {key: "ext", schema: "ext JSONB"}
     },
+    Certification: {
+        type_name: "Certification",
+        name: {key: "name", schema: "name TEXT"},
+        link: {key: "link", schema: "link TEXT"}
+    },
     SellType: { // Enum Type
         type_name: "SellType",
         schema: "ENUM(pre_sale, in_stock)"
+    },
+    DisplayType: { // Enum Type
+        type_name: "DisplayType",
+        schema: "ENUM(banner, section)"
     },
     watch: {
         schema: `UPDATE items_table enable = 'false' WHERE (amount <= sold AND sell_type = 'in_stock' AND is_limited = 'true') OR (create_on <= expire_on AND sell_type = 'pre_sale' AND has_expiration = 'true') \watch 3`
