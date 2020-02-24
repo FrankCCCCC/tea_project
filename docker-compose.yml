@@ -1,6 +1,26 @@
 version: '3.1'
-
 services:
+  static:
+    container_name: static
+    build:
+      context: ./server/static_server
+    ports:
+      - "5000:5000"
+    environment: 
+      port: 5000
+    networks:
+      - tea-network
+  
+  nginx:
+    container_name: nginx
+    build:
+      context: ./server/static_server/nginx
+    depends_on:
+      - static
+    ports:
+      - 9080:80
+    networks:
+      - tea-network
   
   server:
     container_name: server
@@ -37,3 +57,6 @@ services:
     restart: always
     ports:
       - 8080:8080
+
+networks:
+  tea-network:

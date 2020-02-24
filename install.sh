@@ -61,6 +61,10 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.25.3/docker-
 
 sudo chmod +x /usr/local/bin/docker-compose
 
+# Install NGINX
+
+sudo apt-get install nginx
+
 # Clone Repository
 git clone https://github.com/FrankCCCCC/tea_project.git
 
