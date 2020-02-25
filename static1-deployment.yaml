@@ -24,7 +24,7 @@ spec:
       - env:
         - name: port
           value: "5001"
-        image: static1
+        image: shcsdocker/static1
         name: static1
         ports:
         - containerPort: 5000

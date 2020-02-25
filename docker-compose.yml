@@ -8,7 +8,7 @@ services:
     ports:
       - "5001:5000"
     environment: 
-      port: 5001
+      port: 5000
     networks:
       - tea-network
 
@@ -19,7 +19,7 @@ services:
     ports:
       - "5002:5000"
     environment: 
-      port: 5002
+      port: 5000
     networks:
       - tea-network
   
