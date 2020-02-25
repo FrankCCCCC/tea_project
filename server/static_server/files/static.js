@@ -8,6 +8,7 @@ app.use(helmet())
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', (req, res) => {
+    console.log('process pid =>', process.pid); // 觀察 load balance 用
     res.send('Hello World')
 })
 
