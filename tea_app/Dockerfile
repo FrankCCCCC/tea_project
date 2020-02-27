@@ -1,14 +1,12 @@
 # TAG: db_server
-FROM ubuntu
+FROM nginx
 RUN apt-get update
 RUN apt-get install curl sudo -y
-RUN curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
-RUN sudo apt install nodejs -y
 
-COPY ./files /app_server
-WORKDIR /app_server
-RUN npm install
-RUN npm install mocha -g
+RUN rm /etc/nginx/conf.d/default.conf
+COPY ./nginx/nginx.conf /etc/nginx/conf.d/nginx.conf
+COPY ./files /tea_app
+WORKDIR /tea_app
 
-EXPOSE 3000
-ENTRYPOINT ["npm", "run", "start"]
+EXPOSE 80
+# ENTRYPOINT ["service", "nginx", "start"]

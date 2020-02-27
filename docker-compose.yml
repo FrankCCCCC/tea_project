@@ -35,6 +35,23 @@ services:
     networks:
       - tea-network
   
+  app_server:
+    container_name: app_server
+    build:
+      context: ./tea_app
+    restart: always
+    ports:
+      - 3000:80
+    networks:
+      - tea-network
+    deploy:
+      replicas: 6
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+  
   # server:
   #   container_name: server
   #   build: 
