@@ -14,7 +14,7 @@ import PostListPage from './component/pages/PostListPage'
 import ItemPage from './component/pages/ItemPage'
 import ItemListPage from './component/pages/ItemListPage'
 import LoadingPage from './component/pages/LoadingPage'
-import cart_store from './component/redux/store'
+import {cart_store, info_store, combine_store} from './component/redux/store'
 
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -32,7 +32,7 @@ function App() {
   // let {path, url} = useRouteMatch();
   return (
     <div className="App">
-      <Provider store={cart_store}>
+      <Provider store={combine_store}>
         <Router>
             <AppNav/>          
             <Switch>

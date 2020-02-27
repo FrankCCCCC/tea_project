@@ -1,9 +1,10 @@
 import React from 'react';
 import ShoppingList from '../shoppingList/ShoppingList'
 import {font_style} from '../theme/font';
-// import {infoSetInfo, infoGetState} from  '../redux/action'
+import TextInput from '../form/textInput'
+import {infoSetInfo, infoGetState} from  '../redux/action'
+import {cart_store, info_store} from '../redux/store'
 // import {cart_store, info_store} from '../redux/store'
-// import cart_store from '../redux/store'
 import {first_name,
         last_name,
         phone_number,
@@ -72,8 +73,8 @@ class CartPage extends React.Component{
         this.setState({
             [name]: value
         })
-        // infoSetInfo(name, value)
-        // console.log(name + value)
+        infoSetInfo(name, value)
+        console.log(name + value)
     }
 
     handle_submit_click(event){
@@ -86,6 +87,8 @@ class CartPage extends React.Component{
             is_validated: "needs-validation was-validated"
         })
     }
+
+
 
     render(){
         return (
@@ -101,9 +104,7 @@ class CartPage extends React.Component{
                     <form class={this.state.is_validated} action={order_receiving_url} novalidate>
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
-                                <label for="validation_first_name">{first_name}</label>
-                                <input type="text" name="first_name" class="form-control" id="validation_first_name" onChange={this.handle_input_change} required/>
-                                <div class="invalid-feedback">{first_name_input_error}</div>
+                                <TextInput input_name = "first_name" label={first_name} handle_on_change={this.handle_input_change} invalid_feedback = {first_name_input_error}/>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="validation_last_name">{last_name}</label>
@@ -180,30 +181,6 @@ class CartPage extends React.Component{
                         {/* </div> */}
                         
                     </form>
-        
-                    {/* <form>
-                        <label>
-                        Is going:
-                        <input
-                            name="isGoing"
-                            type="checkbox"
-                            checked={this.state.isGoing}
-                            onChange={this.handle_input_change} />
-                        </label>
-                        <br />
-                        <label>
-                        Number of guests:
-                        <input
-                            name="numberOfGuests"
-                            type="number"
-                            value={this.state.numberOfGuests}
-                            onChange={this.handle_input_change} />
-                        </label>
-                    </form>
-                    <p>{this.state.isGoing.toString()}</p>
-                    <p>{this.state.numberOfGuests}</p>
-                    <p>{this.state.first_name}</p> */}
-                    
                 </div>
             </div>
         );

@@ -64,6 +64,7 @@ function createOrdersTable(){
     ${ds.dataStructure.order.road.schema},
     ${ds.dataStructure.order.items.schema},
     ${ds.dataStructure.order.total_price.schema},
+    ${ds.dataStructure.order.unit.schema},
     ${ds.dataStructure.order.total_quantity.schema},
     ${ds.dataStructure.order.block_id.schema},
     ${ds.dataStructure.order.block_link.schema},
@@ -105,6 +106,7 @@ function queryOrderById(id){
     ${ds.dataStructure.order.road.key},
     array_to_json(${ds.dataStructure.order.items.key}) AS ${ds.dataStructure.order.items.key},
     ${ds.dataStructure.order.total_price.key},
+    ${ds.dataStructure.order.unit.key},
     ${ds.dataStructure.order.total_quantity.key},
     ${ds.dataStructure.order.block_id.key},
     ${ds.dataStructure.order.block_link.key},
@@ -142,6 +144,7 @@ function queryOrderByOrderId(orderId){
     ${ds.dataStructure.order.road.key},
     array_to_json(${ds.dataStructure.order.items.key}) AS ${ds.dataStructure.order.items.key},
     ${ds.dataStructure.order.total_price.key},
+    ${ds.dataStructure.order.unit.key},
     ${ds.dataStructure.order.total_quantity.key},
     ${ds.dataStructure.order.block_id.key},
     ${ds.dataStructure.order.block_link.key},
@@ -179,6 +182,7 @@ function queryOrderByBuyerName(buyerName){
     ${ds.dataStructure.order.road.key},
     array_to_json(${ds.dataStructure.order.items.key}) AS ${ds.dataStructure.order.items.key},
     ${ds.dataStructure.order.total_price.key},
+    ${ds.dataStructure.order.unit.key},
     ${ds.dataStructure.order.total_quantity.key},
     ${ds.dataStructure.order.block_id.key},
     ${ds.dataStructure.order.block_link.key},
@@ -216,6 +220,7 @@ function queryOrderByItemId(itemId){
     ${ds.dataStructure.order.road.key},
     array_to_json(${ds.dataStructure.order.items.key}) AS ${ds.dataStructure.order.items.key},
     ${ds.dataStructure.order.total_price.key},
+    ${ds.dataStructure.order.unit.key},
     ${ds.dataStructure.order.total_quantity.key},
     ${ds.dataStructure.order.block_id.key},
     ${ds.dataStructure.order.block_link.key},
@@ -256,6 +261,7 @@ function queryOrderByItemName(itemName){
     ${ds.dataStructure.order.road.key},
     array_to_json(${ds.dataStructure.order.items.key}) AS ${ds.dataStructure.order.items.key},
     ${ds.dataStructure.order.total_price.key},
+    ${ds.dataStructure.order.unit.key},
     ${ds.dataStructure.order.total_quantity.key},
     ${ds.dataStructure.order.block_id.key},
     ${ds.dataStructure.order.block_link.key},
@@ -309,6 +315,7 @@ function queryOrderList(count, offset){
     ${ds.dataStructure.order.road.key},
     array_to_json(${ds.dataStructure.order.items.key}) AS ${ds.dataStructure.order.items.key},
     ${ds.dataStructure.order.total_price.key},
+    ${ds.dataStructure.order.unit.key},
     ${ds.dataStructure.order.total_quantity.key},
     ${ds.dataStructure.order.block_id.key},
     ${ds.dataStructure.order.block_link.key},
@@ -326,7 +333,7 @@ function queryOrderList(count, offset){
     return Db.query(command)
 }
 
-function insertOrder(buyer_name, phone, email, bank_code, bank_account, country, zip, province, county, township, village, road, items, total_price, total_quantity, block_id, block_link, transaction_id, agree_policy, agree_promotion, is_paid, is_send, is_recieved, comment) {
+function insertOrder(buyer_name, phone, email, bank_code, bank_account, country, zip, province, county, township, village, road, items, total_price, unit, total_quantity, block_id, block_link, transaction_id, agree_policy, agree_promotion, is_paid, is_send, is_recieved, comment) {
     Util.checkString(buyer_name, 'DbOrder.insertOrder buyer_name')
     Util.checkString(phone, 'DbOrder.insertOrder phone')
     Util.checkString(email, 'DbOrder.insertOrder email')
@@ -341,6 +348,7 @@ function insertOrder(buyer_name, phone, email, bank_code, bank_account, country,
     Util.checkString(road, 'DbOrder.insertOrder road')
     Util.checkArray(items, 'DbOrder.insertOrder items')
     Util.checkNumber(total_price, 'DbOrder.insertOrder total_price')
+    Util.checkString(unit, 'DbOrder.insertOrder unit')
     Util.checkInt(total_quantity, 'DbOrder.insertOrder total_quantity')
     let re_block_id = Util.checkString(block_id, 'DbOrder.insertOrder block_id', false)
     let re_block_link = Util.checkString(block_link, 'DbOrder.insertOrder block_link', false)
@@ -391,6 +399,7 @@ function insertOrder(buyer_name, phone, email, bank_code, bank_account, country,
         ${ds.dataStructure.order.road.key},
         ${ds.dataStructure.order.items.key},
         ${ds.dataStructure.order.total_price.key},
+        ${ds.dataStructure.order.unit.key},
         ${ds.dataStructure.order.total_quantity.key},
         ${ds.dataStructure.order.block_id.key},
         ${ds.dataStructure.order.block_link.key},
@@ -403,7 +412,7 @@ function insertOrder(buyer_name, phone, email, bank_code, bank_account, country,
         ${ds.dataStructure.order.comment.key})
         VALUES('${buyer_name}', '${phone}', '${email}', '${bank_code}', '${bank_account}', '${country}', '${zip}', '${province}', '${county}', '${township}', 
         '${village}', '${road}', ARRAY(SELECT json_populate_record(null::OrderItem, json_array_elements('${JSON.stringify(items)}'))), 
-        '${total_price}', '${total_quantity}', ${re_block_id}, ${re_block_link}, ${re_transaction_id}, '${agree_policy}', '${agree_promotion}', '${is_paid}', '${is_send}', '${is_recieved}', ${re_comment}
+        '${total_price}', '${total_price}', '${total_quantity}', ${re_block_id}, ${re_block_link}, ${re_transaction_id}, '${agree_policy}', '${agree_promotion}', '${is_paid}', '${is_send}', '${is_recieved}', ${re_comment}
         ) RETURNING ${ds.dataStructure.order.id.key};`;
     return Db.query(command)
 }
@@ -413,18 +422,15 @@ function insertOrder(buyer_name, phone, email, bank_code, bank_account, country,
 // creatOrderItemType()
 // createOrdersTable()
 
-
-let items = [
-    {id: 1, name: "Green Tea", quantity: 1, price: 300, unit: "NTD"},
-    {id: 2, name: "Oolong Tea", quantity: 2, price: 200, unit: "NTD"}
-]
-
-let comment = {note: "First", ext: {}}
-
+// let comment = {note: "First", ext: {}}
+// let items = [
+//     {id: 1, name: "Green Tea", quantity: 1, price: 300, unit: "NTD"},
+//     {id: 2, name: "Oolong Tea", quantity: 2, price: 200, unit: "NTD"}
+// ]
 // queryOrdersCountAll()
-for(let i=0; i<4; i++){
-    // insertOrder("Da", "0908293456", "example@gmail.com", "301", "88882222444", "Taiwan", "50010", "Taiwan", "Nantou", "LuGu", "FongHuang", "indus.rd", items, 700, 3, undefined, undefined, undefined, true, true, true, true, false, comment)
-}
+// for(let i=0; i<4; i++){
+    // insertOrder("Da", "0908293456", "example@gmail.com", "301", "88882222444", "Taiwan", "50010", "Taiwan", "Nantou", "LuGu", "FongHuang", "indus.rd", items, 700, "NTD", 3, undefined, undefined, undefined, true, true, true, true, false, comment)
+// }
 // queryOrderById(1)
 // queryOrderByItemId(1)
 // queryOrderByItemName('Oolong Tea')

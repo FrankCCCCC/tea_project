@@ -2,6 +2,7 @@ const PostActions = require('./action/PostActions.js')
 const ItemActions = require('./action/ItemActions')
 const FarmerActions = require('./action/FarmerActions')
 const OrderActions = require('./action/OrderActions')
+const AppDataActions = require('./action/appDataActions')
 const serverConfig = require('./config/serverConfig')
 const util = require('./util/Util')
 const express = require('express');
@@ -20,6 +21,7 @@ app.use(serverConfig.post_action, PostActions.actions)
 app.use(serverConfig.item_action, ItemActions.actions)
 app.use(serverConfig.farmer_action, FarmerActions.actions)
 app.use(serverConfig.order_action, OrderActions.actions)
+app.use(serverConfig.app_data_action, AppDataActions.actions)
 
 app.listen(serverConfig.port, () => {
     util.log(`Server is listening on port ${serverConfig.port}`)

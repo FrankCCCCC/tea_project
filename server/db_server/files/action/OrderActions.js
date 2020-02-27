@@ -67,10 +67,34 @@ order_action.get('/query_orders_count_all', (req, res) => {
 })
 
 order_action.post('/insert_order', (req, res) => {
+    console.log(req.body)
     DbOrder.insertOrder(
-        String(req.body.name), 
+        String(req.body.buyer_name), 
         String(req.body.phone), 
-        JSON.parse(String(req.body.producer)), Number(req.body.price), String(req.body.unit), String(req.body.description), JSON.parse(Util.NaNUndefinedtoNull(req.body.spec)), String(req.body.cover_img), JSON.parse(Util.NaNUndefinedtoNull(req.body.imgs))).then(
+        String(req.body.email), 
+        String(req.body.bank_code), 
+        String(req.body.bank_account), 
+        String(req.body.country), 
+        String(req.body.zip), 
+        String(req.body.province), 
+        String(req.body.county), 
+        String(req.body.township), 
+        String(req.body.village), 
+        String(req.body.road), 
+        JSON.parse(String(req.body.items)),
+        Number(req.body.total_price), 
+        String(req.body.unit), 
+        parseInt(req.body.total_quantity, 10), 
+        undefined, 
+        undefined, 
+        undefined, 
+        Util.string2bool(req.body.agree_policy), 
+        Util.string2bool(req.body.agree_promotion), 
+        false, 
+        false, 
+        false, 
+        JSON.parse(String(req.body.comment)),
+        ).then(
         (resolve) => {
             // console.log(resolve.rows[0])
             Util.log(`Sending ${resolve.rowCount} rows to ${req.ip} with ${req.ips}`)

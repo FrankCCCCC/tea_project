@@ -32,6 +32,7 @@ const config = {
         road: {key: "road", schema: "road TEXT NOT NULL"},
         items: {key: "items", schema: "items OrderItem[] NOT NULL"},
         total_price: {key: "total_price", schema: "total_price NUMERIC NOT NULL"},
+        unit: {key: "unit", schema: "unit TEXT NOT NULL", options: ["NTD"]},
         total_quantity: {key: "total_quantity", schema: "total_quantity INTEGER NOT NULL"},
         block_id: {key: "block_id", schema: "block_id TEXT"},
         block_link: {key: "block_link", schema: "block_link TEXT"},

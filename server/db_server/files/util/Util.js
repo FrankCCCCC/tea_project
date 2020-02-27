@@ -144,6 +144,12 @@ function NaNUndefinedtoNull(i){
 
 // console.log(checkString(undefined, "", false));
 
+function string2bool(str){
+    if(str === "true"){return true}
+    else if(str === "false"){return false}
+    else{return undefined}
+}
+
 exports.log = log
 exports.shortStr = shortStr
 exports.makeRes = makeRes
@@ -154,3 +160,4 @@ exports.checkString = checkString
 exports.checkObject = checkObject
 exports.checkArray = checkArray
 exports.NaNUndefinedtoNull = NaNUndefinedtoNull
+exports.string2bool = string2bool

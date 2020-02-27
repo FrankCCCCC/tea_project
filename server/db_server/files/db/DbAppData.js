@@ -207,7 +207,8 @@ function insertAppData(property, data, comment) {
 
 // console.log(queryAppDatasCountAll())
 // for(let i=0; i<4; i++){
-//     insertAppData("test2", undefined, comment)
+//     let now = new Date
+//     insertAppData(`Test ${now.toISOString()}`, undefined, comment)
 // }
 // console.log(queryAppDataById(1))
 // console.log(queryAppDataByProperty("test"))

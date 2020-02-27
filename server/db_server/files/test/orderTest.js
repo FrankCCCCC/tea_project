@@ -75,6 +75,7 @@ describe('DbOrder.insertOrder', () => {
             "indus.rd", 
             items, 
             700, 
+            "NTD", 
             3, 
             undefined, 
             undefined, 
@@ -133,12 +134,12 @@ describe('DbOrder.queryOrderById', () => {
 })
 
 describe('DbOrder.queryOrderByBuyerName', () => {
-    it(`should query order in orders_table by name='Da'`, done => {
+    it(`should query order in orders_table by buyer_name='Da'`, done => {
         DbOrder.queryOrderByBuyerName('Da').then((resolve) => {
             resolve.command.should.equal('SELECT')
             let rows = parseInt(resolve.rowCount)
             for(let i = 0; i < rows; i++){
-                resolve.rows[i].name.should.equal('Da')
+                resolve.rows[i].buyer_name.should.equal('Da')
             }
             done()
         })
@@ -151,7 +152,12 @@ describe('DbOrder.queryOrderByItemId', () => {
             resolve.command.should.equal('SELECT')
             let rows = parseInt(resolve.rowCount)
             for(let i = 0; i < rows; i++){
-                resolve.rows[i].producer.id.should.equal(2)
+                let item_number = resolve.rows[i].items.length
+                let flag = false
+                for(let j = 0; j < item_number; j++){
+                    if(resolve.rows[i].items[j].id === 2){flag = true}
+                }
+                flag.should.equal(true)
             }
             done()
         })
@@ -164,7 +170,12 @@ describe('DbOrder.queryOrderByItemName', () => {
             resolve.command.should.equal('SELECT')
             let rows = parseInt(resolve.rowCount)
             for(let i = 0; i < rows; i++){
-                resolve.rows[i].producer.name.should.equal('Green Tea')
+                let item_number = resolve.rows[i].items.length
+                let flag = false
+                for(let j = 0; j < item_number; j++){
+                    if(resolve.rows[i].items[j].name === 'Green Tea'){flag = true}
+                }
+                flag.should.equal(true)
             }
             done()
         })
@@ -179,7 +190,7 @@ describe('OrderAction.queryOrdersCountAll', () => {
         }).then((response) => {
             return response.json()
         }).then((response) => {
-              console.log(response.result)
+            console.log(response.result)
             response.status.should.equal(config.success)
             orderCountActions = response.result.count
             done()
@@ -194,22 +205,47 @@ describe('OrderAction.queryOrdersCountAll', () => {
 
 describe('OrderAction.insertOrder', () => {
     it(`should send the id of inserted orders in orders_table`, done => {
+        let comment = {note: "First", ext: {}}
+        let items = [
+            {id: 1, name: "Green Tea", quantity: 1, price: 300, unit: "NTD"},
+            {id: 2, name: "Oolong Tea", quantity: 2, price: 200, unit: "NTD"}
+        ]
         fetch(config.order_action_url + '/insert_order',{
             method: 'POST',
             body: new URLSearchParams({
-                name: "Green Tea", 
-                producer: JSON.stringify({id: 3, name: "Lin"}),
-                price: 500,
-                unit: "NTD",
-                description: "# Traditional Flavor",
-                spec: JSON.stringify([{property: "100g", value: "Heavily Baked", comment: "Strongest"}, {property: "100g", value: "Heavily Baked", comment: "Strongest"}]),
-                cover_img: "farmer1.jpg",
-                imgs: JSON.stringify(["hill1.jpg", "tea.jpg", "child.jpg"])
+                buyer_name: "Da", 
+                phone: "0908293456", 
+                email: "example@gmail.com", 
+                bank_code: "301", 
+                bank_account: "88882222444", 
+                country: "Taiwan", 
+                zip: "50010", 
+                province: "Taiwan", 
+                county: "Nantou", 
+                township: "LuGu", 
+                village: "FongHuang", 
+                road: "indus.rd", 
+                items: JSON.stringify([
+                    {id: 1, name: "Green Tea", quantity: 1, price: 300, unit: "NTD"},
+                    {id: 2, name: "Oolong Tea", quantity: 2, price: 200, unit: "NTD"}]), 
+                total_price: 700, 
+                unit: "NTD", 
+                total_quantity: 3, 
+                block_id: undefined, 
+                block_link: undefined, 
+                transaction_id: undefined, 
+                agree_policy: true, 
+                agree_promotion: true, 
+                is_paid: true, 
+                is_send: true, 
+                is_recieved: false, 
+                comment: JSON.stringify({note: "First", ext: {}})
             }),
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded'
             }
         }).then((response) => {
+            console.log(response)
             return response.json()
         }).then((response) => {
             console.log(response.result.id)
@@ -249,12 +285,12 @@ describe('OrderAction.queryOrderById', () => {
     })
 })
 
-describe('OrderAction.queryOrderByName', () => {
-    it(`should send the order of queryed name='Oolong Tea' in orders_table`, done => {
-        fetch(config.order_action_url + '/query_order_by_name',{
+describe('OrderAction.queryOrderByBuyerName', () => {
+    it(`should send the order of queryed buyer_name='Da' in orders_table`, done => {
+        fetch(config.order_action_url + '/query_order_by_buyer_name',{
             method: 'POST',
             body: new URLSearchParams({
-                name: "Oolong Tea"
+                name: "Da"
             }),
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded'
@@ -265,7 +301,7 @@ describe('OrderAction.queryOrderByName', () => {
             //   console.log(response)
             response.status.should.equal(config.success)
             response.result.forEach((order, index, array) => {
-                order.name.should.equal('Oolong Tea')
+                order.buyer_name.should.equal('Da')
             })
             
               done()
@@ -276,9 +312,9 @@ describe('OrderAction.queryOrderByName', () => {
     })
 })
 
-describe('OrderAction.queryOrderByProducerId', () => {
+describe('OrderAction.queryOrderByItemId', () => {
     it(`should send the order of queryed producer id=2 in orders_table`, done => {
-        fetch(config.order_action_url + '/query_order_by_producer_id',{
+        fetch(config.order_action_url + '/query_order_by_item_id',{
             method: 'POST',
             body: new URLSearchParams({
                 id: 2
@@ -290,10 +326,19 @@ describe('OrderAction.queryOrderByProducerId', () => {
             return response.json()
         }).then((response) => {
             //   console.log(response)
-            response.status.should.equal(config.success)
-            response.result.forEach((order, index, array) => {
-                order.producer.id.should.equal(2)
-            })
+            // response.status.should.equal(config.success)
+            // response.result.forEach((order, index, array) => {
+            //     order.item.id.should.equal(2)
+            // })
+            let rows = response.result.length
+            for(let i = 0; i < rows; i++){
+                let item_number = response.result[i].items.length
+                let flag = false
+                for(let j = 0; j < item_number; j++){
+                    if(response.result[i].items[j].id === 2){flag = true}
+                }
+                flag.should.equal(true)
+            }
               done()
               return response
         }).catch((reject) => {
@@ -302,12 +347,12 @@ describe('OrderAction.queryOrderByProducerId', () => {
     })
 })
 
-describe('OrderAction.queryOrderByProducerName', () => {
-    it(`should send the order of queryed producer name='Dai' in orders_table`, done => {
-        fetch(config.order_action_url + '/query_order_by_producer_name',{
+describe('OrderAction.queryOrderByItemName', () => {
+    it(`should send the order of queryed item name='Green Tea' in orders_table`, done => {
+        fetch(config.order_action_url + '/query_order_by_item_name',{
             method: 'POST',
             body: new URLSearchParams({
-                name: "Dai"
+                name: "Green Tea"
             }),
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded'
@@ -316,10 +361,20 @@ describe('OrderAction.queryOrderByProducerName', () => {
             return response.json()
         }).then((response) => {
             //   console.log(response)
-            response.status.should.equal(config.success)
-            response.result.forEach((order, index, array) => {
-                order.producer.name.should.equal('Dai')
-            })
+            // response.status.should.equal(config.success)
+            // response.result.forEach((order, index, array) => {
+            //     order.producer.name.should.equal('Dai')
+            // })
+
+            let rows = response.result.length
+            for(let i = 0; i < rows; i++){
+                let item_number = response.result[i].items.length
+                let flag = false
+                for(let j = 0; j < item_number; j++){
+                    if(response.result[i].items[j].name === "Green Tea"){flag = true}
+                }
+                flag.should.equal(true)
+            }
               done()
               return response
         }).catch((reject) => {

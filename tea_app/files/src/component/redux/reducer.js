@@ -7,6 +7,7 @@ import {cart_init_state,
         action_decrease_quantity_by_1,
         action_set_quantity,
         action_set_info} from './init'
+import { combineReducers } from 'redux'
 
 export const cartReducer = (state = cart_init_state, action) => {
     let current_list = []
@@ -83,8 +84,8 @@ export const cartReducer = (state = cart_init_state, action) => {
 export const infoReducer = (state = info_init_state, action) => {
     let current_info = state.info
     let re = {}
-    // console.log(current_info)
-    // console.log(action)
+    console.log(current_info)
+    console.log(action)
     switch(action.type){
         case(action_set_info):
             current_info[action.key] = action.value
@@ -96,3 +97,5 @@ export const infoReducer = (state = info_init_state, action) => {
             return state
     }
 }
+
+export const combineReducer = combineReducers({cart: cartReducer, info: infoReducer})

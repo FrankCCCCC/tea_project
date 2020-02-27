@@ -1,4 +1,4 @@
-import cart_store from './store'
+import {cart_store, info_store} from './store'
 import {action_add_item,
     action_delete_item,
     action_clear_cart,
@@ -39,14 +39,14 @@ export const cartGetState = () => {
     return cart_store.getState()
 }
 
-// export const infoSetInfo = (key, value) => {
-//     info_store.dispatch({type: action_set_info, key: key, value: value})
-// }
+export const infoSetInfo = (key, value) => {
+    info_store.dispatch({type: action_set_info, key: key, value: value})
+}
 
-// export const infoGetState = () => {
-//     console.log(info_store.getState())
-//     return info_store.getState()
-// }
+export const infoGetState = () => {
+    console.log(info_store.getState())
+    return info_store.getState()
+}
 
 function test(){
     console.log(cart_store.getState())
