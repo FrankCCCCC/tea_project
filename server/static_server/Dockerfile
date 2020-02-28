@@ -25,4 +25,4 @@ COPY ./files/public /static_server/public
 WORKDIR /static_server
 
 EXPOSE 80
-# ENTRYPOINT ["service", "nginx", "start"]
+ENTRYPOINT ["nginx", "-g", "daemon off;"]

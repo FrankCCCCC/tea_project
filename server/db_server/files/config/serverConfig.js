@@ -3,7 +3,7 @@ const item_action = '/item_action'
 const farmer_action = '/farmer_action'
 const order_action = '/order_action'
 const app_data_action = '/app_data_action'
-const local_url = 'http://localhost'
+const local_url = 'http://140.114.218.111'
 const port = 8000
 
 const success = 'SUCCESS'

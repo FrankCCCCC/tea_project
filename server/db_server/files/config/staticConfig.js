@@ -1,6 +1,6 @@
 const image_route = '/img/'
 const video_route = '/video/'
-const static_server_base_url = 'http://localhost'
+const static_server_base_url = 'http://140.114.218.111'
 const port = 5000
 
 const img_url = static_server_base_url + ':' + String(port) + image_route

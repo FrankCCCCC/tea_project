@@ -1,4 +1,4 @@
-const base_url = "http://localhost"
+const base_url = "http://140.114.218.111"
 const app_server_port = 3000;
 const db_server_port = 8000;
 const db_port = 5432;
@@ -31,6 +31,19 @@ const query_item_by_id_url = item_action_url + "/" + query_item_by_id;
 const query_item_list_url = item_action_url + "/" + query_item_list;
 const query_items_count_all_url = item_action_url + "/" + query_items_count_all;
 
+const order_action = "order_action";
+const query_order_list = "query_order_list";
+const query_order_by_id = "query_order_by_id";
+const query_order_by_buyer_name = "query_order_by_buyer_name";
+const query_orders_count_all = "query_orders_count_all";
+const insert_order = "insert_order";
+const order_action_url = db_server_url + "/" + order_action;
+const query_order_by_id_url = order_action_url + "/" + query_order_by_id;
+const query_order_by_buyer_name_url = order_action_url + "/" + query_order_by_buyer_name;
+const query_order_list_url = order_action_url + "/" + query_order_list;
+const query_orders_count_all_url = order_action_url + "/" + query_orders_count_all;
+const insert_order_url = order_action_url + "/" + insert_order;
+
 // exports.base_url = base_url;
 // exports.app_server_port = app_server_port;
 // exports.db_server_port = db_server_port;
@@ -61,4 +74,5 @@ export {base_url, app_server_port, db_server_port, db_port, static_server_port, 
         app_server_url, static_server_url, db_server_url,
         image_fetch_url, video_fetch_url,
         post_action_url, query_post_url, query_post_list_url, query_posts_count_all_url,
-        item_action_url, query_item_by_id_url, query_item_list_url, query_items_count_all_url}
+        item_action_url, query_item_by_id_url, query_item_list_url, query_items_count_all_url,
+        query_order_by_id_url, query_order_by_buyer_name_url, query_order_list_url, query_orders_count_all_url, insert_order_url}

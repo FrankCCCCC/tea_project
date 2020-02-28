@@ -231,14 +231,8 @@ describe('OrderAction.insertOrder', () => {
                 total_price: 700, 
                 unit: "NTD", 
                 total_quantity: 3, 
-                block_id: undefined, 
-                block_link: undefined, 
-                transaction_id: undefined, 
                 agree_policy: true, 
                 agree_promotion: true, 
-                is_paid: true, 
-                is_send: true, 
-                is_recieved: false, 
                 comment: JSON.stringify({note: "First", ext: {}})
             }),
             headers: {
