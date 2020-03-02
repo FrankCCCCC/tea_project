@@ -65,6 +65,18 @@ sudo chmod +x /usr/local/bin/docker-compose
 
 sudo apt-get install nginx
 
+# Install Jenkins
+
+sudo apt-get install openjdk-8-jdk
+
+wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+
+echo "deb https://pkg.jenkins.io/debian-stable binary/"  >> /etc/apt/sources.list
+
+sudo apt-get update -y
+
+sudo apt-get install jenkins -y
+
 # Clone Repository
 git clone https://github.com/FrankCCCCC/tea_project.git
 

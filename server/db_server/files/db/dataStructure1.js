@@ -62,9 +62,11 @@ const config = {
         table_name: "farmers_table",
         id: {key: "id", schema: "id serial PRIMARY KEY NOT NULL"},
         name: {key: "name", schema: "name TEXT PRIMARY KEY NOT NULL"},
+        cover_img: {key: "cover_img", schema: "cover_img TEXT NOT NULL"},
+        items: {key: "items", schema: "items Good ARRAY"}, // id, name Array
         comment: {key: "comment", schema: "comment Comment"},
         create_on: {key: "create_on", schema: "create_on TIMESTAMP default current_timestamp"},
-        latest_modify: {key: "latest_modify", schema: "latest_modify TIMESTAMP default current_timestamp"},
+        latest_modify: {key: "latest_modify", schema: "latest_modify TIMESTAMP default current_timestamp"}
     },
     item: {
         table_name: "items_table",
@@ -84,12 +86,12 @@ const config = {
         sell_type: {key: "sell_type", schema: "sell_type SellType NOT NULL", options: ["pre_sale", "in_stock"]}, 
         price: {key: "price", schema: "price NUMERIC NOT NULL"},
         unit: {key: "unit", schema: "unit TEXT NOT NULL", options: ["NTD"]},
-        amount: {key: "amount", schema: "amount INTEGER NOT NULL"},
+        amount: {key: "amount", schema: "amount INTEGER"},
         sold: {key: "sold", schema: "sold INTEGER NOT NULL"},
         slogan: {key: "slogan", schema: "slogan TEXT"},
         description: {key: "description", schema: "description TEXT NOT NULL"}, // Markdown Format
         content: {key: "content", schema: "content Section ARRAY NOT NULL"},
-        certification: {key: "certification", schema: "certification Certification"},
+        certification: {key: "certification", schema: "certification Certification[]"},
         spec: {key: "spec", schema: "spec Spec ARRAY"}, // 
         cover_img: {key: "cover_img", schema: "cover_img TEXT NOT NULL"},
         imgs: {key: "imgs", schema: "imgs TEXT[]"}, // String Array
@@ -99,6 +101,7 @@ const config = {
         traceability_link :{key: "traceability_link", schema: "traceability_link TEXT"},
         comment: {key: "comment", schema: "comment Comment"},
         create_on: {key: "create_on", schema: "create_on TIMESTAMP default current_timestamp"},
+        latest_modify: {key: "latest_modify", schema: "latest_modify TIMESTAMP default current_timestamp"},
         expire_on: {key: "expire_on", schema: "expire_on TIMESTAMP"},
         is_limited: {key: "is_limited", schema: "is_limited BOOLEAN NOT NULL"},
         has_expiration: {key: "has_expiration", schema: "has_expiration BOOLEAN NOT NULL"},
