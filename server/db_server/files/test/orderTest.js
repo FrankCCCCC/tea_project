@@ -32,6 +32,15 @@ describe('DbOrder.createOrderItemType', () => {
     })
 })
 
+describe('DbOrder.createExtensionUuid', () => {
+    it('should create uuid-ossp extension', done => {
+        DbOrder.createExtensionUuid().then((resolve) => {
+            resolve.command.should.equal('DO')
+            done()
+        })
+    })
+})
+
 describe('DbOrder.createOrdersTable', () => {
     it('should create orders_table', done => {
         DbOrder.createOrdersTable().then((resolve) => {

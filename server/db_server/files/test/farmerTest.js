@@ -1,12 +1,12 @@
 const should = require('should')
-const DbFarmer = require('../db/DbFarmer');
+const DbFarmer = require('../db/DbFarmer1');
 const config = require('../config/serverConfig')
 const fetch = require('node-fetch')
 
 var allFarmerCount = 0;
 
-describe('DbFarmer.createProducerType', () => {
-    it('should create Producer type', done => {
+describe('DbFarmer.createGoodType', () => {
+    it('should create Good type', done => {
         DbFarmer.createGoodType().then((resolve) => {
             resolve.command.should.equal('DO')
             done()
@@ -14,9 +14,9 @@ describe('DbFarmer.createProducerType', () => {
     })
 })
 
-describe('DbFarmer.createSpecType', () => {
-    it('should create Spec type', done => {
-        DbFarmer.createSectionType().then((resolve) => {
+describe('DbFarmer.createCommentType', () => {
+    it('should create Comment type', done => {
+        DbFarmer.createCommentType().then((resolve) => {
             resolve.command.should.equal('DO')
             done()
         })
@@ -44,17 +44,17 @@ describe('DbFarmer.queryFarmersCountAll', () => {
 })
 
 describe('DbFarmer.insertFarmer', () => {
-    let sections = [
-        {title: "The Best", subtitle: "Best", description: "Universal Best Better Tea", img: "tea.jpg"},
-        {title: "The Better", subtitle: "Better", description: "Universal Better Tea", img: "tea_tree.jpg"},
-    ]
+    // let sections = [
+    //     {title: "The Best", subtitle: "Best", description: "Universal Best Better Tea", img: "tea.jpg"},
+    //     {title: "The Better", subtitle: "Better", description: "Universal Better Tea", img: "tea_tree.jpg"},
+    // ]
     let items = [
         {id: 1, name: "Oolong Tea",},
         {id: 3, name: "Black Tea"}
     ]
-    let imgs = ["hill1.jpg", "hill2.jpg", "child.jpg"]
-    it(`should insert farmer into farmers_table with values "Green Tea", {id: 3, name: "Lin"}, 500, "NTD", "# Traditional Flavor", {property: "100g", value: "Heavily Baked", comment: "Strongest"}, "farmer1.jpg", ['hill1.jpg', 'tea.jpg', 'child.jpg']`, done => {
-        DbFarmer.insertFarmer("Dai", "Taiwan", "Taiwan", "Nantou", "LuGu", "FongHuang", "indus.rd", "Universal Best Tea", "# Best Tea Ever", sections, items, "farmer1.jpg", imgs).then((resolve) => {
+    let comment = {note: "First", ext: {}}
+    it(`should insert farmer into farmers_table with values "Dai", "farmer1.jpg", [{id: 1, name: "Oolong Tea",}, {id: 3, name: "Black Tea"}], {note: "First", ext: {}}`, done => {
+        DbFarmer.insertFarmer("Dai", "farmer1.jpg", items, comment).then((resolve) => {
             resolve.command.should.equal('INSERT')
             resolve.rows[0].id.should.equal(allFarmerCount + 1)
             allFarmerCount = allFarmerCount + 1;
@@ -62,8 +62,8 @@ describe('DbFarmer.insertFarmer', () => {
         })
     })
 
-    it(`should insert farmer into farmers_table with values "Green Tea", {id: 3, name: "Lin"}, 500, "NTD", "# Traditional Flavor", {property: "100g", value: "Heavily Baked", comment: "Strongest"}, "farmer1.jpg", ['hill1.jpg', 'tea.jpg', 'child.jpg']`, done => {
-        DbFarmer.insertFarmer("Dai", "Taiwan", "Taiwan", "Nantou", "LuGu", "FongHuang", "indus.rd", undefined, "# Best Tea Ever", sections, undefined, "farmer1.jpg", undefined).then((resolve) => {
+    it(`should insert farmer into farmers_table with values "Dai", "farmer1.jpg", undefined, undefined`, done => {
+        DbFarmer.insertFarmer("Dai", "farmer1.jpg", undefined, undefined).then((resolve) => {
             resolve.command.should.equal('INSERT')
             resolve.rows[0].id.should.equal(allFarmerCount + 1)
             allFarmerCount = allFarmerCount + 1;
@@ -184,22 +184,14 @@ describe('FarmerAction.queryFarmersCountAll', () => {
 
 describe('FarmerAction.insertFarmer', () => {
     it(`should send the id of inserted farmers in farmers_table`, done => {
+        let comment = {note: "First", ext: {}}
         fetch(config.farmer_action_url + '/insert_farmer',{
             method: 'POST',
             body: new URLSearchParams({
                 name: "Dai3",
-                country: "Taiwan",
-                province: "Taiwan",
-                county: "Nantou",
-                township: "Lu Gu",
-                village: "FongHuang",
-                road: "indus.rd",
-                slogan: "Universal Best Tea",
-                description: "# Best Tea Ever",
-                content: JSON.stringify([{title: "The Best", subtitle: "Best", description: "Universal Best Better Tea", img: "tea.jpg"},{title: "The Better", subtitle: "Better", description: "Universal Better Tea", img: "tea_tree.jpg"}]),
-                items: JSON.stringify([{id: 2, name: "Green Tea"},{id: 1, name: "Oolong Tea"}]),
                 cover_img: "farmer1.jpg",
-                imgs: JSON.stringify(["hill1.jpg", "hill2.jpg", "child.jpg"])
+                items: JSON.stringify([{id: 2, name: "Green Tea"},{id: 1, name: "Oolong Tea"}]),
+                comment: JSON.stringify(comment)
             }),
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded'

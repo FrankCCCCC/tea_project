@@ -150,6 +150,14 @@ function string2bool(str){
     else{return undefined}
 }
 
+function nullhandler(variable, output){
+    if(variable === null) {
+        return `null`
+    }else{
+        return output
+    }
+}
+
 exports.log = log
 exports.shortStr = shortStr
 exports.makeRes = makeRes
@@ -161,3 +169,4 @@ exports.checkObject = checkObject
 exports.checkArray = checkArray
 exports.NaNUndefinedtoNull = NaNUndefinedtoNull
 exports.string2bool = string2bool
+exports.nullhandler = nullhandler

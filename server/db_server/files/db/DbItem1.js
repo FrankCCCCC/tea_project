@@ -24,8 +24,8 @@ function createCommentType(){
 
 function createSellTypeType(){
     let command = `DO $$ BEGIN
-        CREATE TYPE ${ds.dataStructure.Comment.type_name} AS (
-            ${ds.dataStructure.SellType.schema});
+        CREATE TYPE ${ds.dataStructure.SellType.type_name} AS 
+            ${ds.dataStructure.SellType.schema};
     EXCEPTION
         WHEN duplicate_object THEN null;
     END $$;`;
@@ -105,8 +105,8 @@ function createItemsTable(){
     
 }
 
-function insertItem(name, producer_id, producer_name, country, zip, province, county, township, village, road, sell_type, price, unit, amount, slogan, description, content, certification, spec, cover_img, imgs, comment, expire_on, is_limited, has_expiration){
-    Util.checkBoolean(enable, `DbItem.insertItem enable`)
+function insertItem(name, producer_id, producer_name, country, zip, province, county, township, village, road, sell_type, price, unit, amount, slogan, description, content, certification, spec, cover_img, imgs, block_id, block_link, transaction_id, traceability_link, comment, expire_on, is_limited, has_expiration){
+    // Util.checkBoolean(enable, `DbItem.insertItem enable`)
     Util.checkString(name, `DbItem.insertItem name`)
     Util.checkInt(producer_id, `DbItem.insertItem producer_id`)
     Util.checkString(producer_name, `DbItem.insertItem producer_name`)
@@ -120,62 +120,79 @@ function insertItem(name, producer_id, producer_name, country, zip, province, co
     Util.checkString(sell_type, `DbItem.insertItem sell_type`)
     Util.checkNumber(price, `DbItem.insertItem price`)
     Util.checkString(unit, `DbItem.insertItem unit`)
-    let re_amount = Util.checkInt(amount, `DbItem.insertItem amount`)
-    let re_slogan = Util.checkString(slogan, `DbItem.insertItem slogan`)
+    let re_amount = Util.checkInt(amount, `DbItem.insertItem amount`, false)
+    let re_slogan = Util.checkString(slogan, `DbItem.insertItem slogan`, false)
     Util.checkString(description, `DbItem.insertItem description`)
     Util.checkArray(content, 'DbFarmer.insertFarmer content')
-    let re_certification = Util.checkObject(certification, 'DbFarmer.insertFarmer certification')
+    let re_certification = Util.checkObject(certification, 'DbFarmer.insertFarmer certification', false)
     let re_spec = Util.checkArray(spec, `DbItem.insertItem spec`, false)
     Util.checkString(cover_img, `DbItem.insertItem cover_img`)
     let re_imgs =  Util.checkArray(imgs, `DbItem.insertItem imgs`, false)
-    let re_comment =  Util.checkObject(comment, 'DbFarmer.insertFarmer certification')
-    let re_expire_on =  Util.checkString(expire_on, 'DbFarmer.insertFarmer expire_on')
+    let re_block_id = Util.checkString(block_id, `DbItem.insertItem block_id`, false)
+    let re_block_link = Util.checkString(block_link, `DbItem.insertItem block_link`, false)
+    let re_transaction_id = Util.checkString(transaction_id, `DbItem.insertItem transaction_id`, false)
+    let re_traceability_link = Util.checkString(traceability_link, `DbItem.insertItem traceability_link`, false)
+    let re_comment =  Util.checkObject(comment, 'DbFarmer.insertFarmer comment', false)
+    let re_expire_on =  Util.checkString(expire_on, 'DbFarmer.insertFarmer expire_on', false)
     Util.checkBool(is_limited, 'DbFarmer.insertFarmer is_limited')
     Util.checkBool(has_expiration, 'DbFarmer.insertFarmer has_expiration')
 
     var description_new = description.replace(/'/g, `''`);
 
-    if(re_amount === null) {
-        re_amount = `null`
-    }else{
-        re_amount = `'${re_amount}'`
-    }
+    re_amount = Util.nullhandler(re_amount, `'${re_amount}'`)
+    re_slogan = Util.nullhandler(re_slogan, `'${re_slogan}'`)
+    re_certification = Util.nullhandler(re_certification, `ARRAY( SELECT json_populate_record(null::Certification, json_array_elements('${JSON.stringify(re_certification)}')))`)
+    re_spec = Util.nullhandler(re_spec, `ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('${JSON.stringify(re_spec)}')))`)
+    re_imgs = Util.nullhandler(re_imgs, `ARRAY(SELECT json_array_elements_text('${JSON.stringify(re_imgs)}'))`)
+    re_block_id = Util.nullhandler(re_block_id, `'${re_block_id}'`)
+    re_block_link = Util.nullhandler(re_block_link, `'${re_block_link}'`)
+    re_transaction_id = Util.nullhandler(re_transaction_id, `'${re_transaction_id}'`)
+    re_traceability_link = Util.nullhandler(re_traceability_link, `'${re_traceability_link}'`)
+    re_comment = Util.nullhandler(re_comment, `json_populate_record(null::Comment, '${JSON.stringify(re_comment)}')`)
+    re_expire_on = Util.nullhandler(re_expire_on, `'${re_expire_on}'`)
+    
 
-    if(re_slogan === null) {
-        re_slogan = `null`
-    }else{
-        re_slogan = `'${re_slogan}'`
-    }
+    // if(re_amount === null) {
+    //     re_amount = `null`
+    // }else{
+    //     re_amount = `'${re_amount}'`
+    // }
 
-    if(re_certification === null) {
-        re_certification = `null`
-    }else{
-        re_certification = `ARRAY( SELECT json_populate_record(null::Certification, json_array_elements('${JSON.stringify(re_certification)}')))`
-    }
+    // if(re_slogan === null) {
+    //     re_slogan = `null`
+    // }else{
+    //     re_slogan = `'${re_slogan}'`
+    // }
 
-    if(re_spec === null) {
-        re_spec = `null`
-    }else{
-        re_spec = `ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('${JSON.stringify(re_spec)}')))`
-    }
+    // if(re_certification === null) {
+    //     re_certification = `null`
+    // }else{
+    //     re_certification = `ARRAY( SELECT json_populate_record(null::Certification, json_array_elements('${JSON.stringify(re_certification)}')))`
+    // }
 
-    if(re_imgs === null){
-        re_imgs = `null`
-    }else{
-        re_imgs = `ARRAY(SELECT json_array_elements_text('${JSON.stringify(re_imgs)}'))`
-    }
+    // if(re_spec === null) {
+    //     re_spec = `null`
+    // }else{
+    //     re_spec = `ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('${JSON.stringify(re_spec)}')))`
+    // }
 
-    if(re_comment === null){
-        re_comment = `null`
-    }else{
-        re_comment = `json_populate_record(null::Comment, '${JSON.stringify(re_comment)}')`
-    }
+    // if(re_imgs === null){
+    //     re_imgs = `null`
+    // }else{
+    //     re_imgs = `ARRAY(SELECT json_array_elements_text('${JSON.stringify(re_imgs)}'))`
+    // }
 
-    if(re_expire_on === null) {
-        re_expire_on = `null`
-    }else{
-        re_expire_on = `'${re_expire_on}'`
-    }
+    // if(re_comment === null){
+    //     re_comment = `null`
+    // }else{
+    //     re_comment = `json_populate_record(null::Comment, '${JSON.stringify(re_comment)}')`
+    // }
+
+    // if(re_expire_on === null) {
+    //     re_expire_on = `null`
+    // }else{
+    //     re_expire_on = `'${re_expire_on}'`
+    // }
 
     let command = `
         INSERT INTO ${ds.dataStructure.item.table_name}(
@@ -211,7 +228,8 @@ function insertItem(name, producer_id, producer_name, country, zip, province, co
             ${ds.dataStructure.item.is_limited.key},
             ${ds.dataStructure.item.has_expiration.key})
         VALUES('false', '${name}', '${producer_id}', '${producer_name}', '${country}', '${zip}', '${province}', '${county}', '${township}', '${village}', '${road}', '${sell_type}',
-        '${price}', '${unit}', ${re_amount}, ${sold}, ${re_slogan}, '${description_new}', '${content}', ${re_certification}, ${re_spec}, '${cover_img}', ${re_imgs}, null, null, null, null, 
+        '${price}', '${unit}', ${re_amount}, '0', ${re_slogan}, '${description_new}', ARRAY( SELECT json_populate_record(null::Section, json_array_elements('${JSON.stringify(content)}'))), ${re_certification}, ${re_spec}, '${cover_img}', ${re_imgs}, 
+        ${re_block_id}, ${re_block_link}, ${re_transaction_id}, ${re_traceability_link}, 
         ${re_comment}, ${re_expire_on}, ${is_limited}, ${has_expiration}
         ) RETURNING id;`;
     return Db.query(command)
@@ -445,9 +463,9 @@ function queryItemList(count, offset){
 // createProducerType();
 // createSpecType();
 // createItemsTable();
-for(let i=0; i<10; i++){
-    insertItem("Green Tea", {id: 3, name: "Lin"}, 500, "NTD", "# Traditional Flavor", [{property: "100g", value: "Heavily Baked", comment: "Strongest"}, {property: "100g", value: "Heavily Baked", comment: "Strongest"}], "farmer1.jpg", ['hill1.jpg', 'tea.jpg', 'child.jpg'])
-}
+// for(let i=0; i<10; i++){
+    // insertItem("Green Tea", {id: 3, name: "Lin"}, 500, "NTD", "# Traditional Flavor", [{property: "100g", value: "Heavily Baked", comment: "Strongest"}, {property: "100g", value: "Heavily Baked", comment: "Strongest"}], "farmer1.jpg", ['hill1.jpg', 'tea.jpg', 'child.jpg'])
+// }
 // queryItemsCountAll();
 // queryItemById(1);
 // queryItemByName(`1=1`);
@@ -457,8 +475,12 @@ for(let i=0; i<10; i++){
 
 // pool.end()
 
-exports.createProducerType = createProducerType;
+// exports.createProducerType = createProducerType;
+exports.createSellTypeType = createSellTypeType;
 exports.createSpecType = createSpecType;
+exports.createSectionType = createSectionType;
+exports.createCertificationType = createCertificationType;
+exports.createCommentType = createCommentType;
 exports.createItemsTable = createItemsTable;
 exports.insertItem = insertItem;
 exports.queryItemsCountAll = queryItemsCountAll;

@@ -167,8 +167,8 @@ function insertFarmer(name, cover_img, items, comment) {
     let command = `INSERT INTO ${ds.dataStructure.farmer.table_name}(
         ${ds.dataStructure.farmer.name.key},
         ${ds.dataStructure.farmer.cover_img.key},
-        array_to_json(${ds.dataStructure.farmer.items.key}) AS ${ds.dataStructure.farmer.items.key},
-        row_to_json(${ds.dataStructure.farmer.comment.key}) AS ${ds.dataStructure.farmer.comment.key})
+        ${ds.dataStructure.farmer.items.key},
+        ${ds.dataStructure.farmer.comment.key})
         VALUES('${name}', '${cover_img}', ${re_items}, ${re_comment}) RETURNING ${ds.dataStructure.farmer.id.key};`;
         
     return Db.query(command)
@@ -200,7 +200,6 @@ for(let i=0; i<4; i++){
 
 exports.createGoodType = createGoodType;
 exports.createCommentType = createCommentType;
-exports.createSectionType = createSectionType;
 exports.createFarmersTable = createFarmersTable;
 exports.queryFarmersCountAll = queryFarmersCountAll;
 exports.insertFarmer = insertFarmer;

@@ -16,16 +16,27 @@ order_action.on('mount', function (parent) {
                     DbOrder.createOrderItemType().then(
                         (resolve) => {
                             Util.log(`Created OrderItem type`)
-                            DbOrder.createOrdersTable().then(
+                            DbOrder.createExtensionUuid().then(
                                 (resolve) => {
-                                    Util.log(`Created orders_table`)
-                                    Util.log(`order_action is mounted By ${parent}`)
+                                    Util.log(`Created uuid-ossp extension`)
+                                    DbOrder.createOrdersTable().then(
+                                        (resolve) => {
+                                            Util.log(`Created orders_table`)
+                                            Util.log(`order_action is mounted By ${parent}`)
+                                            return resolve
+                                    }).catch(
+                                        (reject) => {
+                                            Util.log(`Error: ${reject}`)
+                                            return reject;
+                                    })
                                     return resolve
-                            }).catch(
+                                }
+                            ).catch(
                                 (reject) => {
                                     Util.log(`Error: ${reject}`)
                                     return reject;
-                            })
+                                }
+                            )
                             return resolve
                         }
                     ).catch(

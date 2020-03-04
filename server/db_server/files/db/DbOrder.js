@@ -46,6 +46,17 @@ function createOrderItemType(){
     return Db.query(command)
 }
 
+function createExtensionUuid(){
+    let command = `
+    DO $$ BEGIN
+        CREATE EXTENSION "uuid-ossp";
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$;`
+
+    return Db.query(command)
+}
+
 function createOrdersTable(){
     let command = `CREATE TABLE IF NOT EXISTS ${ds.dataStructure.order.table_name}(
     ${ds.dataStructure.order.id.schema},
@@ -441,6 +452,7 @@ function insertOrder(buyer_name, phone, email, bank_code, bank_account, country,
 exports.createCommentType = createCommentType;
 exports.createSellTypeType = createSellTypeType;
 exports.createOrderItemType = createOrderItemType;
+exports.createExtensionUuid = createExtensionUuid;
 exports.createOrdersTable = createOrdersTable;
 exports.queryOrdersCountAll = queryOrdersCountAll;
 exports.insertOrder = insertOrder;

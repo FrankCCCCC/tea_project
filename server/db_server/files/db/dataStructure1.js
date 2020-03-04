@@ -61,7 +61,7 @@ const config = {
     farmer: {
         table_name: "farmers_table",
         id: {key: "id", schema: "id serial PRIMARY KEY NOT NULL"},
-        name: {key: "name", schema: "name TEXT PRIMARY KEY NOT NULL"},
+        name: {key: "name", schema: "name TEXT NOT NULL"},
         cover_img: {key: "cover_img", schema: "cover_img TEXT NOT NULL"},
         items: {key: "items", schema: "items Good ARRAY"}, // id, name Array
         comment: {key: "comment", schema: "comment Comment"},
@@ -75,7 +75,7 @@ const config = {
         enable: {key: "enable", schema: "enable BOOLEAN NOT NULL"},
         name: {key: "name", schema: "name TEXT NOT NULL"},
         producer_id: {key: "producer_id", schema: "producer_id INTEGER REFERENCES farmers_table(id) ON  DELETE CASCADE NOT NULL"},
-        producer_name: {key: "producer_name", schema: "producer_name TEXT REFERENCES farmers_table(name) ON DELETE CASCADE NOT NULL"}, // id Array
+        producer_name: {key: "producer_name", schema: "producer_name TEXT NOT NULL"}, // id Array
         country: {key: "country", schema: "country TEXT NOT NULL"},
         zip: {key: "zip", schema: "zip TEXT NOT NULL"},
         province: {key: "province", schema: "province TEXT NOT NULL"},
