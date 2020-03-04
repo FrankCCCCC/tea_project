@@ -10,9 +10,9 @@ farmer_action.on('mount', function (parent) {
     DbFarmer.createGoodType().then(
         (resolve) => {
             util.log(`Created Good type`)
-            DbFarmer.createSectionType().then(
+            DbFarmer.createCommentType().then(
                 (resolve) => {
-                    util.log(`Created Section type`)
+                    util.log(`Created Comment type`)
                     DbFarmer.createFarmersTable().then(
                         (resolve) => {
                             util.log(`Created farmers_table`)
@@ -56,27 +56,15 @@ farmer_action.get('/query_farmers_count_all', (req, res) => {
 })
 
 farmer_action.post('/insert_farmer', (req, res) => {
-    console.log(req.body)
-    console.log(req.body.content)
-    console.log(JSON.parse(util.NaNUndefinedtoNull(req.body.content)))
+    // console.log(req.body)
+    // console.log(req.body.content)
+    // console.log(JSON.parse(util.NaNUndefinedtoNull(req.body.content)))
     DbFarmer.insertFarmer(
         String(req.body.name), 
-        String(req.body.country), 
-        String(req.body.province), 
-        String(req.body.county), 
-        String(req.body.township), 
-        String(req.body.village), 
-        String(req.body.road), 
-        util.NaNUndefinedtoNull(req.body.slogan), 
-        // String(req.body.slogan), 
-        String(req.body.description), 
-        // JSON.parse(util.NaNUndefinedtoNull(req.body.content)), 
-        JSON.parse(req.body.content), 
+        String(req.body.cover_img), 
         // util.NaNUndefinedtoNull(req.body.items), 
         JSON.parse(util.NaNUndefinedtoNull(req.body.items)), 
-        String(req.body.cover_img), 
-        // util.NaNUndefinedtoNull(req.body.imgs)
-        JSON.parse(util.NaNUndefinedtoNull(req.body.imgs))
+        JSON.parse(util.NaNUndefinedtoNull(req.body.comment))
     ).then(
         (resolve) => {
             console.log(resolve.rows[0])
@@ -99,16 +87,16 @@ farmer_action.post('/insert_farmer', (req, res) => {
 farmer_action.post('/query_farmer_by_id', (req, res) => {
     DbFarmer.queryFarmerById(parseInt(req.body.id, 10)).then(
         (resolve) => {
-            var md = new Remarkable({html: true})
+            // var md = new Remarkable({html: true})
             var res_farmer = resolve.rows[0];
             
             // util.log(md.render(resolve.rows[0].content))
-            res_farmer.description = md.render(resolve.rows[0].description)
-            res_farmer.content = res_farmer.content.map((item ,index, array) => {
-                let section = item
-                section.description = md.render(item.description)
-                return section
-            })
+            // res_farmer.description = md.render(resolve.rows[0].description)
+            // res_farmer.content = res_farmer.content.map((item ,index, array) => {
+            //     let section = item
+            //     section.description = md.render(item.description)
+            //     return section
+            // })
             // res_farmer.content = md.render('Some Markdown text with <span style="color:blue">some *blue* text</span>.')
             util.log(`Sending ${resolve.rowCount} rows to ${req.ip} with ${req.ips}`)
             res.header("Access-Control-Allow-Origin", "*");
@@ -128,25 +116,26 @@ farmer_action.post('/query_farmer_by_id', (req, res) => {
 farmer_action.post('/query_farmer_by_name', (req, res) => {
     DbFarmer.queryFarmerByName(String(req.body.name)).then(
         (resolve) => {
-            let res_post = resolve.rows.map((farmer, index, array) => {
-                let md = new Remarkable({html: true})
-                let res_farmer = farmer;
+            var res_farmer = resolve.rows;
+            // let res_post = resolve.rows.map((farmer, index, array) => {
+            //     let md = new Remarkable({html: true})
+            //     let res_farmer = farmer;
             
-                // util.log(md.render(resolve.rows[0].content))
-                res_farmer.description = md.render(farmer.description)
-                res_farmer.content = res_farmer.content.map((item ,index, array) => {
-                    let section = item
-                    section.description = md.render(item.description)
-                    return section
-                })
-                return res_farmer
-            })
+            //     // util.log(md.render(resolve.rows[0].content))
+            //     res_farmer.description = md.render(farmer.description)
+            //     res_farmer.content = res_farmer.content.map((item ,index, array) => {
+            //         let section = item
+            //         section.description = md.render(item.description)
+            //         return section
+            //     })
+            //     return res_farmer
+            // })
             
             // res_farmer.content = md.render('Some Markdown text with <span style="color:blue">some *blue* text</span>.')
             util.log(`Sending ${resolve.rowCount} rows to ${req.ip} with ${req.ips}`)
             res.header("Access-Control-Allow-Origin", "*");
             // res.send(res_post)
-            res.json(util.makeRes(res_post))
+            res.json(util.makeRes(res_farmer))
         }
     ).catch(
         (reject) => {
@@ -161,25 +150,26 @@ farmer_action.post('/query_farmer_by_name', (req, res) => {
 farmer_action.post('/query_farmer_by_item_id', (req, res) => {
     DbFarmer.queryFarmerByItemId(parseInt(req.body.id, 10)).then(
         (resolve) => {
-            let res_post = resolve.rows.map((farmer, index, array) => {
-                let md = new Remarkable({html: true})
-                let res_farmer = farmer;
+            var res_farmer = resolve.rows;
+            // let res_post = resolve.rows.map((farmer, index, array) => {
+            //     let md = new Remarkable({html: true})
+            //     let res_farmer = farmer;
             
-                // util.log(md.render(resolve.rows[0].content))
-                res_farmer.description = md.render(farmer.description)
-                res_farmer.content = res_farmer.content.map((item ,index, array) => {
-                    let section = item
-                    section.description = md.render(item.description)
-                    return section
-                })
-                return res_farmer
-            })
+            //     // util.log(md.render(resolve.rows[0].content))
+            //     res_farmer.description = md.render(farmer.description)
+            //     res_farmer.content = res_farmer.content.map((item ,index, array) => {
+            //         let section = item
+            //         section.description = md.render(item.description)
+            //         return section
+            //     })
+            //     return res_farmer
+            // })
             
             // res_farmer.content = md.render('Some Markdown text with <span style="color:blue">some *blue* text</span>.')
             util.log(`Sending ${resolve.rowCount} rows to ${req.ip} with ${req.ips}`)
             res.header("Access-Control-Allow-Origin", "*");
             // res.send(res_post)
-            res.json(util.makeRes(res_post))
+            res.json(util.makeRes(res_farmer))
         }
     ).catch(
         (reject) => {
@@ -194,25 +184,26 @@ farmer_action.post('/query_farmer_by_item_id', (req, res) => {
 farmer_action.post('/query_farmer_by_item_name', (req, res) => {
     DbFarmer.queryFarmerByItemName(String(req.body.name)).then(
         (resolve) => {
-            let res_post = resolve.rows.map((farmer, index, array) => {
-                let md = new Remarkable({html: true})
-                let res_farmer = farmer;
+            var res_farmer = resolve.rows;
+            // let res_post = resolve.rows.map((farmer, index, array) => {
+            //     let md = new Remarkable({html: true})
+            //     let res_farmer = farmer;
             
-                // util.log(md.render(resolve.rows[0].content))
-                res_farmer.description = md.render(farmer.description)
-                res_farmer.content = res_farmer.content.map((item ,index, array) => {
-                    let section = item
-                    section.description = md.render(item.description)
-                    return section
-                })
-                return res_farmer
-            })
+            //     // util.log(md.render(resolve.rows[0].content))
+            //     res_farmer.description = md.render(farmer.description)
+            //     res_farmer.content = res_farmer.content.map((item ,index, array) => {
+            //         let section = item
+            //         section.description = md.render(item.description)
+            //         return section
+            //     })
+            //     return res_farmer
+            // })
             
             // res_farmer.content = md.render('Some Markdown text with <span style="color:blue">some *blue* text</span>.')
             util.log(`Sending ${resolve.rowCount} rows to ${req.ip} with ${req.ips}`)
             res.header("Access-Control-Allow-Origin", "*");
             // res.send(res_post)
-            res.json(util.makeRes(res_post))
+            res.json(util.makeRes(res_farmer))
         }
     ).catch(
         (reject) => {

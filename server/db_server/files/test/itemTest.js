@@ -1,5 +1,5 @@
 const should = require('should')
-const DbItem = require('../db/DbItem1');
+const DbItem = require('../db/DbItem');
 const config = require('../config/serverConfig')
 const fetch = require('node-fetch')
 
@@ -83,7 +83,7 @@ describe('DbItem.insertItem', () => {
         comment: "comment"
         },
         {
-        display: "section1",
+        display: "section",
         img: "tea.jpg",
         backgroundColor: "",
         title: "Sample Title1",
@@ -123,10 +123,10 @@ describe('DbItem.insertItem', () => {
             spec,
             "farmer1.jpg", 
             ['hill1.jpg', 'tea.jpg', 'child.jpg'],
-            undefined, 
-            undefined,
-            undefined,
-            undefined,
+            "Sample block_id", 
+            "Sample block_link",
+            "Sample transaction_id",
+            "Sample traceability_link",
             comment,
             isotime,
             true,
@@ -256,183 +256,285 @@ describe('DbItem.queryItemByProducerName', () => {
     })
 })
 
-// var itemCountActions = 0;
-// describe('ItemAction.queryItemsCountAll', () => {
-//     it(`should send the count of all items in items_table`, done => {
-//         fetch(config.item_action_url + '/query_items_count_all',{
-//             method: 'GET'
-//         }).then((response) => {
-//             return response.json()
-//         }).then((response) => {
-//               console.log(response.result)
-//             response.status.should.equal(config.success)
-//             itemCountActions = response.result.count
-//             done()
-//             return response
-//         }).catch(
-//             (reject) => {
-//               console.log(reject)            
-//             }
-//         )
-//     })
-// })
+var itemCountActions = 0;
+describe('ItemAction.queryItemsCountAll', () => {
+    it(`should send the count of all items in items_table`, done => {
+        fetch(config.item_action_url + '/query_items_count_all',{
+            method: 'GET'
+        }).then((response) => {
+            return response.json()
+        }).then((response) => {
+              console.log(response.result)
+            response.status.should.equal(config.success)
+            itemCountActions = response.result.count
+            done()
+            return response
+        }).catch(
+            (reject) => {
+              console.log(reject)            
+            }
+        )
+    })
+})
 
-// describe('ItemAction.insertItem', () => {
-//     it(`should send the id of inserted items in items_table`, done => {
-//         fetch(config.item_action_url + '/insert_item',{
-//             method: 'POST',
-//             body: new URLSearchParams({
-//                 name: "Green Tea", 
-//                 producer: JSON.stringify({id: 3, name: "Lin"}),
-//                 price: 500,
-//                 unit: "NTD",
-//                 description: "# Traditional Flavor",
-//                 spec: JSON.stringify([{property: "100g", value: "Heavily Baked", comment: "Strongest"}, {property: "100g", value: "Heavily Baked", comment: "Strongest"}]),
-//                 cover_img: "farmer1.jpg",
-//                 imgs: JSON.stringify(["hill1.jpg", "tea.jpg", "child.jpg"])
-//             }),
-//             headers: {
-//               'Content-Type': 'application/x-www-form-urlencoded'
-//             }
-//         }).then((response) => {
-//             return response.json()
-//         }).then((response) => {
-//             console.log(response.result.id)
-//             console.log(itemCountActions)
-//             response.status.should.equal(config.success)
-//             response.result.id.should.equal(itemCountActions+1)
-//             itemCountActions = itemCountActions + 1
-//             done()
-//             return response
-//         }).catch((reject) => {
-//               console.log(reject)            
-//         })
-//     })
-// })
+describe('ItemAction.insertItem', () => {
+    let content = [
+        {
+        display: "section",
+        img: "tea.jpg",
+        backgroundColor: "",
+        title: "Sample Title",
+        subtitle: "Sample Subtitle",
+        description: "Sample Description", // Markdown Format
+        data: [{temp: "25", unit: "c"}, {ferment: "30", unit: "%"}],
+        comment: "comment"
+        },
+        {
+        display: "section",
+        img: "tea.jpg",
+        backgroundColor: "",
+        title: "Sample Title1",
+        subtitle: "Sample Subtitle1",
+        description: "Sample Description1", // Markdown Format
+        data: [{temp: "25", unit: "c"}, {ferment: "30", unit: "%"}],
+        comment: "comment"
+        }
+    ]
+    let cert = [{
+        name: "SGS", 
+        link: "www.sgs.com"
+    }]
+    let spec = [{property: "100g", value: "Heavily Baked", comment: "Strongest"}, {property: "100g", value: "Heavily Baked", comment: "Strongest"}]
+    let comment = {note: "Sample Comment", ext: {}}
+    let isotime = "2020-10-05T14:48:00.000Z"
+    it(`should send the id of inserted items in items_table`, done => {
+        fetch(config.item_action_url + '/insert_item',{
+            method: 'POST',
+            body: new URLSearchParams({
+                name: "Green Tea", 
+                producer_id: 3, 
+                producer_name: "Lin", 
+                country: "Taiwan", 
+                zip: "30013", 
+                province: "Taiwan", 
+                county: "NanTou", 
+                township: "Lu Gu", 
+                village: "FongHuang", 
+                road: "GuangFu Rd.", 
+                sell_type: "in_stock", 
+                price: 500, 
+                unit: "NTD",
+                // amount: undefined, 
+                // slogan: undefined, 
+                description: "# Taiwan Tea", 
+                content: JSON.stringify(content), 
+                // certification: undefined,
+                // spec: undefined,
+                cover_img: "farmer1.jpg", 
+                // imgs: undefined,
+                // block_id: undefined, 
+                // block_link: undefined,
+                // transaction_id: undefined,
+                // traceability_link: undefined,
+                // comment: undefined,
+                // expire_on: undefined,
+                is_limited: true,
+                has_expiration: true
+            }),
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then((response) => {
+            return response.json()
+        }).then((response) => {
+            console.log(response.result.id)
+            console.log(itemCountActions)
+            response.status.should.equal(config.success)
+            response.result.id.should.equal(itemCountActions+1)
+            itemCountActions = itemCountActions + 1
+            done()
+            return response
+        }).catch((reject) => {
+              console.log(reject)            
+        })
 
-// describe('ItemAction.queryItemById', () => {
-//     it(`should send the item of queryed id=5 in items_table`, done => {
-//         fetch(config.item_action_url + '/query_item_by_id',{
-//             method: 'POST',
-//             body: new URLSearchParams({
-//                 id: 5
-//             }),
-//             headers: {
-//               'Content-Type': 'application/x-www-form-urlencoded'
-//             }
-//         }).then((response) => {
-//             return response.json()
-//         }).then((response) => {
-//             // console.log(response)
-//             response.status.should.equal(config.success)
-//             response.result.id.should.equal(5)
-//               done()
-//               return response
-//         }).catch((reject) => {
-//               console.log(reject)            
-//         })
-//     })
-// })
+        it(`should send the id of inserted items in items_table`, done => {
+            fetch(config.item_action_url + '/insert_item',{
+                method: 'POST',
+                body: new URLSearchParams({
+                    name: "Green Tea", 
+                    producer_id: 3, 
+                    producer_name: "Lin", 
+                    country: "Taiwan", 
+                    zip: "30013", 
+                    province: "Taiwan", 
+                    county: "NanTou", 
+                    township: "Lu Gu", 
+                    village: "FongHuang", 
+                    road: "GuangFu Rd.", 
+                    sell_type: "in_stock", 
+                    price: 500, 
+                    unit: "NTD",
+                    amount: 3, 
+                    slogan: "# Traditional Flavor", 
+                    description: "# Taiwan Tea", 
+                    content: JSON.stringify(content), 
+                    certification: JSON.stringify(cert),
+                    spec: JSON.stringify(spec),
+                    cover_img: "farmer1.jpg", 
+                    imgs: JSON.stringify(['hill1.jpg', 'tea.jpg', 'child.jpg']),
+                    block_id: "Sample block_id", 
+                    block_link: "Sample block_link",
+                    transaction_id: "Sample transaction_id",
+                    traceability_link: "Sample traceability_link",
+                    comment: JSON.stringify(comment),
+                    expire_on: JSON.stringify(isotime),
+                    is_limited: true,
+                    has_expiration: true
+                }),
+                headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }).then((response) => {
+                return response.json()
+            }).then((response) => {
+                console.log(response.result.id)
+                console.log(itemCountActions)
+                response.status.should.equal(config.success)
+                response.result.id.should.equal(itemCountActions+1)
+                itemCountActions = itemCountActions + 1
+                done()
+                return response
+            }).catch((reject) => {
+                  console.log(reject)            
+            })
+        })
+    })
+})
 
-// describe('ItemAction.queryItemByName', () => {
-//     it(`should send the item of queryed name='Oolong Tea' in items_table`, done => {
-//         fetch(config.item_action_url + '/query_item_by_name',{
-//             method: 'POST',
-//             body: new URLSearchParams({
-//                 name: "Oolong Tea"
-//             }),
-//             headers: {
-//               'Content-Type': 'application/x-www-form-urlencoded'
-//             }
-//         }).then((response) => {
-//             return response.json()
-//         }).then((response) => {
-//             //   console.log(response)
-//             response.status.should.equal(config.success)
-//             response.result.forEach((item, index, array) => {
-//                 item.name.should.equal('Oolong Tea')
-//             })
+describe('ItemAction.queryItemById', () => {
+    it(`should send the item of queryed id=5 in items_table`, done => {
+        fetch(config.item_action_url + '/query_item_by_id',{
+            method: 'POST',
+            body: new URLSearchParams({
+                id: 5
+            }),
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then((response) => {
+            return response.json()
+        }).then((response) => {
+            // console.log(response)
+            response.status.should.equal(config.success)
+            response.result.id.should.equal(5)
+              done()
+              return response
+        }).catch((reject) => {
+              console.log(reject)            
+        })
+    })
+})
+
+describe('ItemAction.queryItemByName', () => {
+    it(`should send the item of queryed name='Oolong Tea' in items_table`, done => {
+        fetch(config.item_action_url + '/query_item_by_name',{
+            method: 'POST',
+            body: new URLSearchParams({
+                name: "Oolong Tea"
+            }),
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then((response) => {
+            return response.json()
+        }).then((response) => {
+            //   console.log(response)
+            response.status.should.equal(config.success)
+            response.result.forEach((item, index, array) => {
+                item.name.should.equal('Oolong Tea')
+            })
             
-//               done()
-//               return response
-//         }).catch((reject) => {
-//               console.log(reject)            
-//         })
-//     })
-// })
+              done()
+              return response
+        }).catch((reject) => {
+              console.log(reject)            
+        })
+    })
+})
 
-// describe('ItemAction.queryItemByProducerId', () => {
-//     it(`should send the item of queryed producer id=2 in items_table`, done => {
-//         fetch(config.item_action_url + '/query_item_by_producer_id',{
-//             method: 'POST',
-//             body: new URLSearchParams({
-//                 id: 2
-//             }),
-//             headers: {
-//               'Content-Type': 'application/x-www-form-urlencoded'
-//             }
-//         }).then((response) => {
-//             return response.json()
-//         }).then((response) => {
-//             //   console.log(response)
-//             response.status.should.equal(config.success)
-//             response.result.forEach((item, index, array) => {
-//                 item.producer.id.should.equal(2)
-//             })
-//               done()
-//               return response
-//         }).catch((reject) => {
-//               console.log(reject)            
-//         })
-//     })
-// })
+describe('ItemAction.queryItemByProducerId', () => {
+    it(`should send the item of queryed producer_id=3 in items_table`, done => {
+        fetch(config.item_action_url + '/query_item_by_producer_id',{
+            method: 'POST',
+            body: new URLSearchParams({
+                id: 3
+            }),
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then((response) => {
+            return response.json()
+        }).then((response) => {
+            //   console.log(response)
+            response.status.should.equal(config.success)
+            response.result.forEach((item, index, array) => {
+                item.producer_id.should.equal(3)
+            })
+              done()
+              return response
+        }).catch((reject) => {
+              console.log(reject)            
+        })
+    })
+})
 
-// describe('ItemAction.queryItemByProducerName', () => {
-//     it(`should send the item of queryed producer name='Dai' in items_table`, done => {
-//         fetch(config.item_action_url + '/query_item_by_producer_name',{
-//             method: 'POST',
-//             body: new URLSearchParams({
-//                 name: "Dai"
-//             }),
-//             headers: {
-//               'Content-Type': 'application/x-www-form-urlencoded'
-//             }
-//         }).then((response) => {
-//             return response.json()
-//         }).then((response) => {
-//             //   console.log(response)
-//             response.status.should.equal(config.success)
-//             response.result.forEach((item, index, array) => {
-//                 item.producer.name.should.equal('Dai')
-//             })
-//               done()
-//               return response
-//         }).catch((reject) => {
-//               console.log(reject)            
-//         })
-//     })
-// })
+describe('ItemAction.queryItemByProducerName', () => {
+    it(`should send the item of queryed producer_name='Lin' in items_table`, done => {
+        fetch(config.item_action_url + '/query_item_by_producer_name',{
+            method: 'POST',
+            body: new URLSearchParams({
+                name: "Lin"
+            }),
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then((response) => {
+            return response.json()
+        }).then((response) => {
+            //   console.log(response)
+            response.status.should.equal(config.success)
+            response.result.forEach((item, index, array) => {
+                item.producer_name.should.equal('Lin')
+            })
+              done()
+              return response
+        }).catch((reject) => {
+              console.log(reject)            
+        })
+    })
+})
 
-// describe('ItemAction.queryItemList', () => {
-//     it(`should send items list count=2, offset=3 in items_table`, done => {
-//         fetch(config.item_action_url + '/query_item_list',{
-//             method: 'POST',
-//             body: new URLSearchParams({
-//                 count: 2,
-//                 offset: 3
-//             }),
-//             headers: {
-//               'Content-Type': 'application/x-www-form-urlencoded'
-//             }
-//         }).then((response) => {
-//             return response.json()
-//         }).then((response) => {
-//             response.status.should.equal(config.success)
-//             response.result.length.should.equal(2)
-//             done()
-//             return response
-//         }).catch((reject) => {
-//               console.log(reject)            
-//         })
-//     })
-// })
+describe('ItemAction.queryItemList', () => {
+    it(`should send items list count=2, offset=3 in items_table`, done => {
+        fetch(config.item_action_url + '/query_item_list',{
+            method: 'POST',
+            body: new URLSearchParams({
+                count: 2,
+                offset: 3
+            }),
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then((response) => {
+            return response.json()
+        }).then((response) => {
+            response.status.should.equal(config.success)
+            response.result.length.should.equal(2)
+            done()
+            return response
+        }).catch((reject) => {
+              console.log(reject)            
+        })
+    })
+})

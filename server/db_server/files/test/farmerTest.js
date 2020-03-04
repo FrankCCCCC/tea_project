@@ -1,5 +1,5 @@
 const should = require('should')
-const DbFarmer = require('../db/DbFarmer1');
+const DbFarmer = require('../db/DbFarmer');
 const config = require('../config/serverConfig')
 const fetch = require('node-fetch')
 

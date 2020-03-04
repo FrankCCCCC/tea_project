@@ -1,4 +1,4 @@
-const ds = require('./dataStructure1');
+const ds = require('./dataStructure');
 const Util = require('../util/Util');
 const Db = require('./Db')
 

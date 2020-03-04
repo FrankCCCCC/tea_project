@@ -8,22 +8,52 @@ const { Remarkable } = require('remarkable');
 var item_action = express();
 
 item_action.on('mount', function (parent) {
-    DbItem.createProducerType().then(
+    DbItem.createCommentType().then(
         (resolve) => {
-            util.log(`Created Producer type`)
+            util.log(`Created Comment type`)
             DbItem.createSpecType().then(
                 (resolve) => {
                     util.log(`Created Spec type`)
-                    DbItem.createItemsTable().then(
+                    DbItem.createSellTypeType().then(
                         (resolve) => {
-                            util.log(`Created items_table`)
-                            util.log(`item_action is mounted By ${parent}`)
-                            return resolve
-                    }).catch(
+                            util.log(`Created SellType type`)
+                            DbItem.createSectionType().then(
+                                (resolve) => {
+                                    util.log(`Created Section type`)
+                                    DbItem.createCertificationType().then(
+                                        (resolve) => {
+                                            util.log(`Created Certification type`)
+                                            DbItem.createItemsTable().then(
+                                                (resolve) => {
+                                                    util.log(`Created items_table`)
+                                                    util.log(`item_action is mounted By ${parent}`)
+                                                    return resolve
+                                            }).catch(
+                                                (reject) => {
+                                                    util.log(`Error: ${reject}`)
+                                                    return reject;
+                                            })
+                                        }
+                                    ).catch(
+                                        (reject) => {
+                                            util.log(`Error: ${reject}`)
+                                            return reject;   
+                                        }
+                                    )
+                                }
+                            ).catch(
+                                (reject) => {
+                                    util.log(`Error: ${reject}`)
+                                    return reject;   
+                                }
+                            )
+                        }
+                    ).catch(
                         (reject) => {
                             util.log(`Error: ${reject}`)
                             return reject;
-                    })
+                        }
+                    )
                     return resolve
             }).catch(
                 (reject) => {
@@ -57,7 +87,38 @@ item_action.get('/query_items_count_all', (req, res) => {
 })
 
 item_action.post('/insert_item', (req, res) => {
-    DbItem.insertItem(String(req.body.name), JSON.parse(String(req.body.producer)), Number(req.body.price), String(req.body.unit), String(req.body.description), JSON.parse(util.NaNUndefinedtoNull(req.body.spec)), String(req.body.cover_img), JSON.parse(util.NaNUndefinedtoNull(req.body.imgs))).then(
+    console.log(req.body)
+    DbItem.insertItem(
+        String(req.body.name), 
+        parseInt(req.body.producer_id, 10), 
+        String(req.body.producer_name), 
+        String(req.body.country), 
+        String(req.body.zip), 
+        String(req.body.province), 
+        String(req.body.county), 
+        String(req.body.township), 
+        String(req.body.village), 
+        String(req.body.road), 
+        String(req.body.sell_type), 
+        Number(req.body.price), 
+        String(req.body.unit), 
+        parseInt(req.body.amount, 10), 
+        util.NaNUndefinedtoNull(req.body.slogan), 
+        String(req.body.description), 
+        JSON.parse(req.body.content), 
+        JSON.parse(util.NaNUndefinedtoNull(req.body.certification)), 
+        JSON.parse(util.NaNUndefinedtoNull(req.body.spec)), 
+        String(req.body.cover_img), 
+        JSON.parse(util.NaNUndefinedtoNull(req.body.imgs)),
+        util.NaNUndefinedtoNull(req.body.block_id), 
+        util.NaNUndefinedtoNull(req.body.block_link), 
+        util.NaNUndefinedtoNull(req.body.transaction_id), 
+        util.NaNUndefinedtoNull(req.body.traceability_link), 
+        JSON.parse(util.NaNUndefinedtoNull(req.body.comment)), 
+        util.NaNUndefinedtoNull(req.body.expire_on), 
+        util.string2bool(req.body.is_limited), 
+        util.string2bool(req.body.has_expiration), 
+        ).then(
         (resolve) => {
             // console.log(resolve.rows[0])
             util.log(`Sending ${resolve.rowCount} rows to ${req.ip} with ${req.ips}`)

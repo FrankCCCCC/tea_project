@@ -3,6 +3,9 @@ const Util = require('../util/Util');
 const dbConfig = require('../config/dbConfig')
 const Db = require('./Db')
 
+/**
+ * The createGoodType function would create a type called 'Good' in Postgres DB
+ */
 function createGoodType(){
     let command = `DO $$ BEGIN
         CREATE TYPE ${ds.dataStructure.Good.type_name} AS (${ds.dataStructure.Good.id.schema}, ${ds.dataStructure.Good.name.schema});
@@ -11,26 +14,17 @@ function createGoodType(){
     END $$;`;
 
     return Db.query(command)
-    // util.log(command)
-    // return pool.query(command).then(
-    //     (resolve) => {
-    //         // console.log(resolve)
-    //         util.log(`command: ${resolve.command}, rowCount: ${resolve.rowCount}`)
-    //     }
-    // ).catch(
-    //     (reject) => {
-    //         util.log(`Error: ${reject}`)
-    //         return reject;
-    //     }
-    // )
 }
 
-function createSectionType(){
+/**
+ * The createCommentType function would create a type called 'Comment' in Postgres DB
+ */
+function createCommentType(){
     let command = `DO $$ BEGIN
-        CREATE TYPE ${ds.dataStructure.Section.type_name} AS (${ds.dataStructure.Section.title.schema}, ${ds.dataStructure.Section.subtitle.schema}, ${ds.dataStructure.Section.description.schema}, ${ds.dataStructure.Section.img.schema});
+        CREATE TYPE ${ds.dataStructure.Comment.type_name} AS (${ds.dataStructure.Comment.note.schema}, ${ds.dataStructure.Comment.ext.schema});
     EXCEPTION
         WHEN duplicate_object THEN null;
-    END $$;`
+    END $$;`;
 
     return Db.query(command)
 }
@@ -39,18 +33,9 @@ function createFarmersTable(){
     let command = `CREATE TABLE IF NOT EXISTS ${ds.dataStructure.farmer.table_name}(
     ${ds.dataStructure.farmer.id.schema},
     ${ds.dataStructure.farmer.name.schema},
-    ${ds.dataStructure.farmer.country.schema},
-    ${ds.dataStructure.farmer.province.schema},
-    ${ds.dataStructure.farmer.county.schema},
-    ${ds.dataStructure.farmer.township.schema},
-    ${ds.dataStructure.farmer.village.schema},
-    ${ds.dataStructure.farmer.road.schema},
-    ${ds.dataStructure.farmer.slogan.schema},
-    ${ds.dataStructure.farmer.description.schema},
-    ${ds.dataStructure.farmer.content.schema},
-    ${ds.dataStructure.farmer.items.schema},
     ${ds.dataStructure.farmer.cover_img.schema},
-    ${ds.dataStructure.farmer.imgs.schema},
+    ${ds.dataStructure.farmer.items.schema},
+    ${ds.dataStructure.farmer.comment.schema},
     ${ds.dataStructure.farmer.create_on.schema},
     ${ds.dataStructure.farmer.latest_modify.schema})`;
 
@@ -68,18 +53,9 @@ function queryFarmerById(farmerId){
     let command = `SELECT 
     ${ds.dataStructure.farmer.id.key},
     ${ds.dataStructure.farmer.name.key},
-    ${ds.dataStructure.farmer.country.key},
-    ${ds.dataStructure.farmer.province.key},
-    ${ds.dataStructure.farmer.county.key},
-    ${ds.dataStructure.farmer.township.key},
-    ${ds.dataStructure.farmer.village.key},
-    ${ds.dataStructure.farmer.road.key},
-    ${ds.dataStructure.farmer.slogan.key},
-    ${ds.dataStructure.farmer.description.key},
-    array_to_json(${ds.dataStructure.farmer.content.key}) AS ${ds.dataStructure.farmer.content.key},
-    array_to_json(${ds.dataStructure.farmer.items.key}) AS ${ds.dataStructure.farmer.items.key},
     ${ds.dataStructure.farmer.cover_img.key},
-    array_to_json(${ds.dataStructure.farmer.imgs.key}) AS ${ds.dataStructure.farmer.imgs.key},
+    array_to_json(${ds.dataStructure.farmer.items.key}) AS ${ds.dataStructure.farmer.items.key},
+    row_to_json(${ds.dataStructure.farmer.comment.key}) AS ${ds.dataStructure.farmer.comment.key},
     ${ds.dataStructure.farmer.create_on.key}, 
     ${ds.dataStructure.farmer.latest_modify.key}
     FROM ${ds.dataStructure.farmer.table_name} WHERE ${ds.dataStructure.farmer.id.key} = '${parseInt(farmerId, 10)}';`;
@@ -93,18 +69,9 @@ function queryFarmerByName(farmerName){
     let command = `SELECT 
     ${ds.dataStructure.farmer.id.key},
     ${ds.dataStructure.farmer.name.key},
-    ${ds.dataStructure.farmer.country.key},
-    ${ds.dataStructure.farmer.province.key},
-    ${ds.dataStructure.farmer.county.key},
-    ${ds.dataStructure.farmer.township.key},
-    ${ds.dataStructure.farmer.village.key},
-    ${ds.dataStructure.farmer.road.key},
-    ${ds.dataStructure.farmer.slogan.key},
-    ${ds.dataStructure.farmer.description.key},
-    array_to_json(${ds.dataStructure.farmer.content.key}) AS ${ds.dataStructure.farmer.content.key},
-    array_to_json(${ds.dataStructure.farmer.items.key}) AS ${ds.dataStructure.farmer.items.key},
     ${ds.dataStructure.farmer.cover_img.key},
-    array_to_json(${ds.dataStructure.farmer.imgs.key}) AS ${ds.dataStructure.farmer.imgs.key},
+    array_to_json(${ds.dataStructure.farmer.items.key}) AS ${ds.dataStructure.farmer.items.key},
+    row_to_json(${ds.dataStructure.farmer.comment.key}) AS ${ds.dataStructure.farmer.comment.key},
     ${ds.dataStructure.farmer.create_on.key}, 
     ${ds.dataStructure.farmer.latest_modify.key}
     FROM ${ds.dataStructure.farmer.table_name} WHERE ${ds.dataStructure.farmer.name.key} = '${String(farmerName)}';`;
@@ -118,18 +85,9 @@ function queryFarmerByItemId(itemId){
     let command = `SELECT 
     ${ds.dataStructure.farmer.id.key},
     ${ds.dataStructure.farmer.name.key},
-    ${ds.dataStructure.farmer.country.key},
-    ${ds.dataStructure.farmer.province.key},
-    ${ds.dataStructure.farmer.county.key},
-    ${ds.dataStructure.farmer.township.key},
-    ${ds.dataStructure.farmer.village.key},
-    ${ds.dataStructure.farmer.road.key},
-    ${ds.dataStructure.farmer.slogan.key},
-    ${ds.dataStructure.farmer.description.key},
-    array_to_json(${ds.dataStructure.farmer.content.key}) AS ${ds.dataStructure.farmer.content.key},
-    array_to_json(${ds.dataStructure.farmer.items.key}) AS ${ds.dataStructure.farmer.items.key},
     ${ds.dataStructure.farmer.cover_img.key},
-    array_to_json(${ds.dataStructure.farmer.imgs.key}) AS ${ds.dataStructure.farmer.imgs.key},
+    array_to_json(${ds.dataStructure.farmer.items.key}) AS ${ds.dataStructure.farmer.items.key},
+    row_to_json(${ds.dataStructure.farmer.comment.key}) AS ${ds.dataStructure.farmer.comment.key},
     ${ds.dataStructure.farmer.create_on.key}, 
     ${ds.dataStructure.farmer.latest_modify.key}
     FROM ${ds.dataStructure.farmer.table_name} WHERE ${ds.dataStructure.farmer.id.key} IN (
@@ -146,18 +104,9 @@ function queryFarmerByItemName(itemName){
     let command = `SELECT 
     ${ds.dataStructure.farmer.id.key},
     ${ds.dataStructure.farmer.name.key},
-    ${ds.dataStructure.farmer.country.key},
-    ${ds.dataStructure.farmer.province.key},
-    ${ds.dataStructure.farmer.county.key},
-    ${ds.dataStructure.farmer.township.key},
-    ${ds.dataStructure.farmer.village.key},
-    ${ds.dataStructure.farmer.road.key},
-    ${ds.dataStructure.farmer.slogan.key},
-    ${ds.dataStructure.farmer.description.key},
-    array_to_json(${ds.dataStructure.farmer.content.key}) AS ${ds.dataStructure.farmer.content.key},
-    array_to_json(${ds.dataStructure.farmer.items.key}) AS ${ds.dataStructure.farmer.items.key},
     ${ds.dataStructure.farmer.cover_img.key},
-    array_to_json(${ds.dataStructure.farmer.imgs.key}) AS ${ds.dataStructure.farmer.imgs.key},
+    array_to_json(${ds.dataStructure.farmer.items.key}) AS ${ds.dataStructure.farmer.items.key},
+    row_to_json(${ds.dataStructure.farmer.comment.key}) AS ${ds.dataStructure.farmer.comment.key},
     ${ds.dataStructure.farmer.create_on.key}, 
     ${ds.dataStructure.farmer.latest_modify.key}
     FROM ${ds.dataStructure.farmer.table_name} WHERE ${ds.dataStructure.farmer.id.key} IN (
@@ -187,18 +136,9 @@ function queryFarmerList(count, offset){
     let command = `SELECT 
     ${ds.dataStructure.farmer.id.key},
     ${ds.dataStructure.farmer.name.key},
-    ${ds.dataStructure.farmer.country.key},
-    ${ds.dataStructure.farmer.province.key},
-    ${ds.dataStructure.farmer.county.key},
-    ${ds.dataStructure.farmer.township.key},
-    ${ds.dataStructure.farmer.village.key},
-    ${ds.dataStructure.farmer.road.key},
-    ${ds.dataStructure.farmer.slogan.key},
-    ${ds.dataStructure.farmer.description.key},
-    array_to_json(${ds.dataStructure.farmer.content.key}) AS ${ds.dataStructure.farmer.content.key},
-    array_to_json(${ds.dataStructure.farmer.items.key}) AS ${ds.dataStructure.farmer.items.key},
     ${ds.dataStructure.farmer.cover_img.key},
-    array_to_json(${ds.dataStructure.farmer.imgs.key}) AS ${ds.dataStructure.farmer.imgs.key},
+    array_to_json(${ds.dataStructure.farmer.items.key}) AS ${ds.dataStructure.farmer.items.key},
+    row_to_json(${ds.dataStructure.farmer.comment.key}) AS ${ds.dataStructure.farmer.comment.key},
     ${ds.dataStructure.farmer.create_on.key}, 
     ${ds.dataStructure.farmer.latest_modify.key}
     FROM ${ds.dataStructure.farmer.table_name} ORDER BY ${ds.dataStructure.farmer.latest_modify.key} DESC ${row_counts} ${row_offset};`
@@ -206,75 +146,31 @@ function queryFarmerList(count, offset){
     return Db.query(command)
 }
 
-function insertFarmer(name, country, province, county, township, village, road, slogan, description, content, items, cover_img, imgs) {
+function insertFarmer(name, cover_img, items, comment) {
     Util.checkString(name, 'DbFarmer.insertFarmer name')
-    Util.checkString(country, 'DbFarmer.insertFarmer country')
-    Util.checkString(province, 'DbFarmer.insertFarmer province')
-    Util.checkString(county, 'DbFarmer.insertFarmer county')
-    Util.checkString(township, 'DbFarmer.insertFarmer township')
-    Util.checkString(village, 'DbFarmer.insertFarmer village')
-    Util.checkString(road, 'DbFarmer.insertFarmer road')
-    let reSlogan = Util.checkString(slogan, 'DbFarmer.insertFarmer slogan', false)
-    Util.checkString(description, 'DbFarmer.insertFarmer description')
-    Util.checkArray(content, 'DbFarmer.insertFarmer content')
-    let reItems = Util.checkArray(items, 'DbFarmer.insertFarmer items', false)
     Util.checkString(cover_img, 'DbFarmer.insertFarmer cover_img')
-    let reImgs = Util.checkArray(imgs, 'DbFarmer.insertFarmer imgs', false)
+    let re_items = Util.checkArray(items, 'DbFarmer.insertFarmer items', false)
+    let re_comment = Util.checkObject(comment, 'DbFarmer.insertOrder comment', false)
 
-    if(reSlogan === null) {
-        reSlogan = `null`
+    if(re_items === null){
+        re_items = `null`
     }else{
-        reSlogan = `'${reSlogan}'`
+        re_items = `ARRAY(SELECT json_populate_record(null::Good, json_array_elements('${JSON.stringify(items)}')))`
     }
 
-    if(reItems === null){
-        reItems = `null`
+    if(re_comment === null){
+        re_comment = `null`
     }else{
-        reItems = `ARRAY(SELECT json_populate_record(null::Good, json_array_elements('${JSON.stringify(items)}')))`
+        re_comment = `json_populate_record(null::Comment, '${JSON.stringify(re_comment)}')`
     }
 
-    if(reImgs === null){
-        reImgs = `null`
-    }else{
-        reImgs = `ARRAY(SELECT json_array_elements_text('${JSON.stringify(imgs)}'))`
-    }
-
-    var description_new = description.replace(/'/g, `''`);
     let command = `INSERT INTO ${ds.dataStructure.farmer.table_name}(
         ${ds.dataStructure.farmer.name.key},
-        ${ds.dataStructure.farmer.country.key},
-        ${ds.dataStructure.farmer.province.key},
-        ${ds.dataStructure.farmer.county.key},
-        ${ds.dataStructure.farmer.township.key},
-        ${ds.dataStructure.farmer.village.key},
-        ${ds.dataStructure.farmer.road.key},
-        ${ds.dataStructure.farmer.slogan.key},
-        ${ds.dataStructure.farmer.description.key},
-        ${ds.dataStructure.farmer.content.key},
-        ${ds.dataStructure.farmer.items.key},
         ${ds.dataStructure.farmer.cover_img.key},
-        ${ds.dataStructure.farmer.imgs.key})
-        VALUES('${name}', '${country}', '${province}', '${county}', '${township}', 
-        '${village}', '${road}', ${reSlogan}, '${description_new}', 
-        ARRAY(SELECT json_populate_record(null::Section, json_array_elements('${JSON.stringify(content)}'))), 
-        ${reItems}, 
-        '${cover_img}', ${reImgs}
-        ) RETURNING ${ds.dataStructure.farmer.id.key};`;
-        // `INSERT INTO ${ds.dataStructure.farmer.table_name}(
-        // ${ds.dataStructure.farmer.name.key},
-        // ${ds.dataStructure.farmer.country.key},
-        // ${ds.dataStructure.farmer.province.key},
-        // ${ds.dataStructure.farmer.county.key},
-        // ${ds.dataStructure.farmer.township.key},
-        // ${ds.dataStructure.farmer.village.key},
-        // ${ds.dataStructure.farmer.road.key},
-        // ${ds.dataStructure.farmer.slogan.key},
-        // ${ds.dataStructure.farmer.description.key},
-        // ${ds.dataStructure.farmer.content.key},
-        // ${ds.dataStructure.farmer.items.key},
-        // ${ds.dataStructure.farmer.cover_img.key},
-        // ${ds.dataStructure.farmer.imgs.key})
-        // VALUES('${name}', '${country}', '${province}', '${county}', '${township}', '${village}', '${road}', '${slogan}', '${description_new}', ARRAY(SELECT json_populate_record(null::Section, json_array_elements('${JSON.stringify(content)}'))), ARRAY(SELECT json_populate_record(null::Good, json_array_elements('${JSON.stringify(items)}'))), '${cover_img}', ARRAY(SELECT json_array_elements_text('${JSON.stringify(imgs)}'))) RETURNING ${ds.dataStructure.farmer.id.key};`;
+        ${ds.dataStructure.farmer.items.key},
+        ${ds.dataStructure.farmer.comment.key})
+        VALUES('${name}', '${cover_img}', ${re_items}, ${re_comment}) RETURNING ${ds.dataStructure.farmer.id.key};`;
+        
     return Db.query(command)
 }
 
@@ -283,20 +179,18 @@ function insertFarmer(name, country, province, county, township, village, road, 
 // createFarmersTable()
 
 
-let sections = [
-    {title: "The Best", subtitle: "Best", description: "Universal Best Better Tea", img: "tea.jpg"},
-    {title: "The Better", subtitle: "Better", description: "Universal Better Tea", img: "tea_tree.jpg"},
-]
+let comment = {note: "First", ext: {}}
+
 let items = [
     {id: 2, name: "Green Tea",},
     {id: 1, name: "Oolong Tea"}
 ]
-let imgs = ["hill1.jpg", "hill2.jpg", "child.jpg"]
+
 // queryFarmersCountAll()
 for(let i=0; i<4; i++){
-    insertFarmer("Da", "Taiwan", "Taiwan", "Nantou", "LuGu", "FongHuang", "indus.rd", "Universal Best Tea", "# Best Tea Ever", sections, items, "farmer1.jpg", undefined)
-    insertFarmer("Ui", "Taiwan", "Taiwan", "Nantou", "LuGu", "FongHuang", "indus.rd", "Universal Best Tea", "# Best Tea Ever", sections, items, "farmer1.jpg", imgs)
-    insertFarmer("Dai3", "Taiwan", "Taiwan", "Nantou", "Lu/Gu", "FongHuang", "indus.rd", "Universal Best Tea", "# Best Tea Ever", sections, items, "farmer1.jpg", imgs)
+    insertFarmer("Da", "farmer1.jpg", items, comment)
+    insertFarmer("Da", "farmer1.jpg", items, comment)
+    insertFarmer("Da", "farmer1.jpg", items, comment)
 }
 // queryFarmerById(1)
 // queryFarmerByItemId(1)
@@ -305,7 +199,7 @@ for(let i=0; i<4; i++){
 
 
 exports.createGoodType = createGoodType;
-exports.createSectionType = createSectionType;
+exports.createCommentType = createCommentType;
 exports.createFarmersTable = createFarmersTable;
 exports.queryFarmersCountAll = queryFarmersCountAll;
 exports.insertFarmer = insertFarmer;

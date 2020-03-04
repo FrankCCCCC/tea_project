@@ -91,7 +91,7 @@ function checkString(i, paramName, isRequired=true){
 }
 
 function checkObject(i, paramName, isRequired=true){
-    if(typeof(i) !== 'object' || Object.keys(i).length <=0 || i === null || i === undefined || Number.isNaN(i)){
+    if(typeof(i) !== 'object' || i === null || i === undefined || Number.isNaN(i)){
         if(isRequired){
             log(`Warning: ${paramName} = ${i} is not an Object`)
             throw `Warning: ${paramName} = ${i} is not an Object`
@@ -99,7 +99,16 @@ function checkObject(i, paramName, isRequired=true){
             return null
         }
     }else{
-        return i
+        if(Object.keys(i).length <=0){
+            if(isRequired){
+                log(`Warning: ${paramName} = ${i} is not an Object`)
+                throw `Warning: ${paramName} = ${i} is not an Object`
+            }else{
+                return null
+            }
+        }else{
+            return i
+        }
     }
 }
 
