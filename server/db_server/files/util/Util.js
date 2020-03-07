@@ -1,6 +1,6 @@
 const config = require('../config/serverConfig')
+const static_config = require('../config/staticConfig')
 const fs = require('fs');
-
 
 function shortStr(str){
     return String(str).substring(0, 12) + '...'
@@ -167,6 +167,152 @@ function nullhandler(variable, output){
     }
 }
 
+function makeMediaUrl(file){
+    // let supported_image_format = ["jpg", "png", "svg", "gif"]
+    // let supported_video_format = ["mp4", "avi"]
+    if(typeof(file) === 'string'){
+        let splited = file.split(".")
+        let format = splited[splited.length-1]
+        if(static_config.supported_image_format.includes(format)){
+            return `${static_config.img_url}${file}`
+        }else if(static_config.supported_video_format.includes(format)){
+            return `${static_config.video_url}${file}`
+        }else{
+            log(`Error: ${file} is not supported`)
+            return file
+        }
+    }else if(Array.isArray(file)){
+        if(file.length > 0){
+            return file.map((item, index, array) => {
+                let splited = item.split(".")
+                let format = splited[splited.length-1]
+                if(static_config.supported_image_format.includes(format)){
+                    return `${static_config.img_url}${item}`
+                }else if(static_config.supported_video_format.includes(format)){
+                    return `${static_config.video_url}${item}`
+                }else{
+                    log(`Error: The element ${item} of [${file}] is not supported`)
+                    return item
+                }
+            });
+        }
+    }
+}
+
+function targetFilter(obj, prop){
+    if(config.media_targets.includes(prop)){
+        return makeMediaUrl(obj)
+    }else if(config.markdown_targets.includes(prop)){
+        var md = new Remarkable({html: true})
+        return md.render(obj)
+    }else{
+        return  obj
+    }
+}
+
+function object_iterate(obj, path){
+    if(typeof(obj) === 'object' && obj !== null && obj !== undefined){
+        let copy = obj
+        if(Object.keys(obj).length > 0){
+            for(let prop in obj){
+                // let part = obj[prop]
+                if(typeof(obj[prop]) === 'string'){
+                    // if(config.media_targets.includes(prop)){
+                    //     copy[prop] = makeMediaUrl(obj[prop])
+                    // }
+
+                    copy[prop] = targetFilter(obj[prop], prop)
+                }else if(Array.isArray(obj[prop])){
+                    copy[prop] = array_iterate(obj[prop], prop)
+                }else if(typeof(obj[prop]) === 'object'){
+                    copy[prop] = object_iterate(copy[prop], prop)
+                }
+            }
+        }
+        return copy
+    }else{
+        return obj
+    }
+}
+
+function array_iterate(array, path){
+    if(Array.isArray(array)){
+        let copy = array
+        if(array.length > 0){
+            for(let i = 0; i < array.length; i++){
+                if(typeof(array[i]) === 'string'){
+                    // if(config.media_targets.includes(path)){
+                    //     copy[i] = makeMediaUrl(array[i])
+                    // }
+                    copy[i] = targetFilter(array[i], path)
+                }else if(Array.isArray(array[i])){
+                    copy[i] = array_iterate(array[i], path)
+                }else if(typeof(array[i]) === 'object'){
+                    copy[i] = object_iterate(array[i], path)
+                }
+            }
+        }
+        return copy
+    }else{
+        return obj
+    }
+}
+
+function dataConverter(obj){
+    if(typeof(obj) === 'object'){
+        return object_iterate(obj, "")
+    }else if(Array.isArray(obj)){
+        return array_iterate(obj, "")
+    }else{
+        log(`Error: ${obj} is not a string, an object or, an array, invalid media target`)
+        return obj
+    }
+}
+// let obj = {
+//     img: ["farmer1.jpg", "f.mp4", "f.svg", "f."],
+//     sec: [
+//         {
+//             cover_img: "cover_img.jpg",
+//             title: "cover_img.jpg"
+//         },
+//         {
+//             cover_img: "cover_img2.jpg",
+//             title: "cover_img2.jpg"
+//         }
+//     ],
+//     ss: [
+//         [
+//             [
+//                 {
+//                     cover_img: "cover_img.jpg",
+//                     title: "cover_img.jpg"
+//                 },
+//                 {
+//                     cover_img: "cover_img.jpg",
+//                     title: "cover_img.jpg"
+//                 },
+//             ],
+//             [
+//                 {
+//                     cover_img: "cover_img.jpg",
+//                     title: "cover_img.jpg"
+//                 },
+//                 {
+//                     cover_img: "cover_img.jpg",
+//                     title: "cover_img.jpg"
+//                 },
+//             ]
+//         ]
+//     ]
+// }
+// console.log(makeMediaUrl(["farmer1.jpg", "f.mp4", "f.svg", "f."]))
+// let re = mediaConverter(obj)
+// console.log(re)
+// console.log(re.ss[0][0])
+// console.log(re.ss[0][1])
+
+// console.log(mediaConverter(["farmer1.jpg", "f.mp4", "f.svg", "f."]))
+
 exports.log = log
 exports.shortStr = shortStr
 exports.makeRes = makeRes
@@ -179,3 +325,5 @@ exports.checkArray = checkArray
 exports.NaNUndefinedtoNull = NaNUndefinedtoNull
 exports.string2bool = string2bool
 exports.nullhandler = nullhandler
+exports.makeMediaUrl = makeMediaUrl
+exports.dataConverter = dataConverter

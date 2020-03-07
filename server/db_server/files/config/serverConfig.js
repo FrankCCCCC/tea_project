@@ -21,6 +21,9 @@ const query_app_data_by_property = '/query_app_data_by_property'
 const query_app_data_list = '/query_app_data_list'
 const app_data_action_url = local_url + ':'  + String(port) + app_data_action
 
+const media_targets = ['img', "imgs", 'image', 'images', 'cover_img', 'cover_image', 'video']
+const markdown_targets = ['description']
+
 exports.post_action = post_action
 exports.item_action = item_action
 exports.farmer_action = farmer_action
@@ -43,3 +46,6 @@ exports.query_app_data_by_id = query_app_data_by_id
 exports.query_app_data_by_property = query_app_data_by_property
 exports.query_app_data_list = query_app_data_list
 exports.app_data_action_url = app_data_action_url
+
+exports.media_targets = media_targets
+exports.markdown_targets = markdown_targets

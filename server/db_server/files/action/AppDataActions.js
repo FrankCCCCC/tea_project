@@ -1,9 +1,9 @@
 const DbAppData = require('../db/DbAppData');
 const util = require('../util/Util')
 const Config = require('../config/serverConfig')
-const actions = require('./actions')
+// const actions = require('./actions')
 const express = require('express');
-const { Remarkable } = require('remarkable');
+// const { Remarkable } = require('remarkable');
 
 var app_data_action = express();
 
@@ -70,11 +70,11 @@ app_data_action.post(Config.insert_app_data, (req, res) => {
 app_data_action.post(Config.query_app_data_by_id, (req, res) => {
     DbAppData.queryAppDataById(parseInt(req.body.id, 10)).then(
         (resolve) => {
-            var md = new Remarkable({html: true})
+            // var md = new Remarkable({html: true})
             var res_app_data = resolve.rows[0];
-            
+            res_app_data = util.dataConverter(res_app_data)
             // util.log(md.render(resolve.rows[0].content))
-            res_app_data.description = md.render(resolve.rows[0].description)
+            // res_app_data.description = md.render(resolve.rows[0].description)
             // res_app_data.content = md.render('Some Markdown text with <span style="color:blue">some *blue* text</span>.')
             util.log(`Sending ${resolve.rowCount} rows to ${req.ip} with ${req.ips}`)
             res.header("Access-Control-Allow-Origin", "*");
@@ -94,20 +94,14 @@ app_data_action.post(Config.query_app_data_by_id, (req, res) => {
 app_data_action.post(Config.query_app_data_by_property, (req, res) => {
     DbAppData.queryAppDataByProperty(String(req.body.property)).then(
         (resolve) => {
-            let res_post = resolve.rows.map((app_data, index, array) => {
-                let md = new Remarkable({html: true})
-                let res_app_data = app_data;
-            
-                // util.log(md.render(resolve.rows[0].content))
-                res_app_data.description = md.render(app_data.description)
-                return res_app_data
-            })
+            let res_app_data = resolve.rows
+            res_app_data = util.dataConverter(res_app_data)
             
             // res_app_data.content = md.render('Some Markdown text with <span style="color:blue">some *blue* text</span>.')
             util.log(`Sending ${resolve.rowCount} rows to ${req.ip} with ${req.ips}`)
             res.header("Access-Control-Allow-Origin", "*");
             // res.send(res_post)
-            res.json(util.makeRes(res_post))
+            res.json(util.makeRes(res_app_data))
         }
     ).catch(
         (reject) => {
@@ -122,18 +116,21 @@ app_data_action.post(Config.query_app_data_by_property, (req, res) => {
 app_data_action.post(Config.query_app_data_list, (req, res) => {
     DbAppData.queryAppDataList(parseInt(req.body.count, 10), parseInt(req.body.offset, 10)).then(
         (resolve) => {
-            let res_app_datas = resolve.rows.map(
-                (app_data, index, array) => {
-                    let new_app_data = app_data
-                    new_app_data.cover_img = actions.make_img_url(app_data.cover_img)
-                    return new_app_data
-                }
-            )
+            // let res_app_datas = resolve.rows.map(
+            //     (app_data, index, array) => {
+            //         let new_app_data = app_data
+            //         new_app_data.cover_img = actions.make_img_url(app_data.cover_img)
+            //         return new_app_data
+            //     }
+            // )
+            let res_app_data = resolve.rows
+            res_app_data = util.dataConverter(res_app_data)
+
             util.log(`Sending ${resolve.rowCount} rows to ${req.ip} with ${req.ips}`)
             res.header("Access-Control-Allow-Origin", "*");
             // res.send(JSON.stringify(resolve.rows));
             // res.send(resolve.rows)
-            res.json(util.makeRes(res_app_datas))
+            res.json(util.makeRes(res_app_data))
     }).catch(
         (reject) => {
         res.header("Access-Control-Allow-Origin", "*");

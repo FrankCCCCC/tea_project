@@ -72,12 +72,12 @@ post_action.post('/insert_post', (req, res) => {
 post_action.post('/query_post_by_id', (req, res) => {
     DbPost.queryPost(parseInt(req.body.id, 10)).then(
         (resolve) => {
-            var md = new Remarkable({html: true})
-            var res_post = resolve.rows[0];
+            // var md = new Remarkable({html: true})
+            var res_post = util.dataConverter(resolve.rows[0]);
             
             // util.log(md.render(resolve.rows[0].content))
-            res_post.content = md.render(resolve.rows[0].content)
-            res_post.cover_img = actions.make_img_url(res_post.cover_img)
+            // res_post.content = md.render(resolve.rows[0].content)
+            // res_post.cover_img = actions.make_img_url(res_post.cover_img)
             // res_post.content = md.render('Some Markdown text with <span style="color:blue">some *blue* text</span>.')
             util.log(`Sending ${resolve.rowCount} rows to ${req.ip} with ${req.ips}`)
             res.header("Access-Control-Allow-Origin", "*");
@@ -100,13 +100,14 @@ post_action.post('/query_post_by_id', (req, res) => {
 post_action.post('/query_post_list', (req, res) => {
     DbPost.queryPostList(Number(req.body.count), Number(req.body.offset)).then(
         (resolve) => {
-            let res_posts = resolve.rows.map(
-                (item, index, array) => {
-                    let new_post = item
-                    new_post.cover_img = actions.make_img_url(item.cover_img)
-                    return new_post
-                }
-            )
+            // let res_posts = resolve.rows.map(
+            //     (item, index, array) => {
+            //         let new_post = item
+            //         new_post.cover_img = actions.make_img_url(item.cover_img)
+            //         return new_post
+            //     }
+            // )
+            var res_posts = util.dataConverter(resolve.rows);
             util.log(`Sending ${resolve.rowCount} rows to ${req.ip} with ${req.ips}`)
             res.header("Access-Control-Allow-Origin", "*");
             // res.send(JSON.stringify(resolve.rows));
