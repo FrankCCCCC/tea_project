@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Color from '../theme/color'
 import Slider from '../slider/Slider'
 import HeroTitle from '../hero_title/HeroTitle'
 import Gallery from '../gallery/Gallery'
@@ -68,7 +69,10 @@ class HomePage extends React.Component{
             {this.state.is_loaded?
                 <div>
                     <Slider sliderInput = {this.state.sliderInput} is_show_indicator = {true} is_show_control = {true}/>
-                    <Banner/>
+                    <div class="container" style={{margin: "2rem"}}>
+                        <Banner media="http://localhost:5000/img/tea_tree.jpg" backgroundColor="rgba(150,150,150,1)" html_content={<h3 style={{color: Color.blueDark}}>"賣茶葉賺大錢的方法也不是沒有，但是茶葉這東西，生我養我的，我做不到"</h3>}/>
+                    </div>
+                    
                     <HeroTitle title={hero_title_home} paragraph={hero_paragraph_home}/>
                     <div class="container">
                         <Gallery galleryInput={this.state.galleryInput} route="farmer"/>

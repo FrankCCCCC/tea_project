@@ -3,15 +3,16 @@ import {Link, useRouteMatch} from 'react-router-dom';
 import {caption_title_style, caption_subtitle_style} from '../theme/font'
 import './Carousel.css'
 
-// @carouselInput = [{
-//     media: 'media_url string',
-//     backgroundColor: 'color code string',
-//     html_content: raw html code
-//     link: 'string'
-// }];
-// @is_show_indicator = boolean;
-// @is_show_control = boolean;
-// @opacity: float number
+/**
+ * @param {Object[]} carouselInput - The object array of Carousel
+ * @param {String} carouselInput[].media - The backgraound image of item
+ * @param {String} carouselInput[].backgroundColor - The backgraound color of item
+ * @param {String} carouselInput[].html_content - The html content inner carousel of item
+ * @param {String} carouselInput[].link - The hyper link of item
+ * @param {Number} opacity - The backgraound color opacity of item
+ * @param {Boolean} is_show_control - Is show left, right controlor
+ * @param {Boolean} is_show_indicator - Is show indicator
+ */
 
 function Carousel(props){
     if(!Array.isArray(props.carouselInput)){
@@ -34,9 +35,14 @@ function Carousel(props){
         if(i==0){var classA = "carousel-item active";}
         else{var classA = "carousel-item";}
 
-        let spilit_array = props.carouselInput[i].media.split('.')
-        let media_format = spilit_array[spilit_array.length-1];
-        if(media_format === 'jpg' || media_format === 'png' || media_format === 'svg'|| media_format === 'gif'){
+        let spilit_array = ''
+        let media_format = ''
+        if(props.carouselInput[i].media !== undefined && props.carouselInput[i].media !== null){
+            spilit_array = props.carouselInput[i].media.split('.')
+            media_format = spilit_array[spilit_array.length-1]
+        }
+        
+        if(media_format === 'jpg' || media_format === 'png' || media_format === 'svg'|| media_format === 'gif' || media_format === ''){
             content.push(
                 <div class={classA + " carousel"} style={{backgroundImage: "url("+ props.carouselInput[i].media +")"}}>
                     {/* <Link to={`${url}post/${props.carouselInput[i].id}`}> */}

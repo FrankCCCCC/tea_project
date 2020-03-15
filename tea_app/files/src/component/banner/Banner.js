@@ -18,7 +18,7 @@ import Color from '../theme/color'
  * @param {String} link - Hyper link activate on click
  */
 
-function Banner(){
+function Banner(props){
     var html_content = (
         <div style={{display: 'table', position: 'absolute', width: '100%', height: '100%'}}>
             <div style={{display: 'table-cell', width: '100%', textAlign: 'center', verticalAlign: 'middle'}}>
@@ -39,15 +39,24 @@ function Banner(){
         </div>
     )
     var carouselInput = [{
-        media: "http://192.168.43.203:5000/img/tea_tree.jpg",
-        backgroundColor: 'rgba(255,255,255,1)',
+        media: "http://localhost:5000/img/tea_tree.jpg",
+        backgroundColor: 'rgba(150,150,150,1)',
         html_content: html_content,
         link: '',
     }]
 
     return (
-        <div style={{}}>
-            <Carousel carouselInput = {carouselInput} is_show_indicator = {false} is_show_control = {false} opacity = {1}/>
+        <div style={{backgroundColor: "white", boxShadow: "1px 1px 5px grey", border: "", borderRadius: '20px', width: "100%", height: "100%", padding: "3rem", display: "table"}}>
+            <div style={{display: "table-cell", verticalAlign: "middle", textAlign: "center"}}>
+                
+                <a href={props.link}>
+                    <div style={{fontFamily: font_style.fontFamily, fontWeight: "bold", opacity: props.opacity}}>
+                        {props.html_content}
+                    </div>
+                </a>
+                
+            </div>
+            {/* <Carousel carouselInput = {carouselInput} is_show_indicator = {false} is_show_control = {false} opacity = {1}/> */}
         </div>
     )
 }

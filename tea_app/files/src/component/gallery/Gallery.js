@@ -30,7 +30,7 @@ class Gallery extends React.Component{
         }
     }
 
-    makeItem(i, id, img, caption_title, caption_subtitle, title, subtitle, badge, route){
+    makeItem(i, id, img, caption_title, caption_subtitle, route, title, subtitle, badge){
         return (
             <div key={i} style={{marginBottom: "1rem", display: "inline-block"}}>
                 <Link to={`${route}/${id}`}>
@@ -51,8 +51,6 @@ class Gallery extends React.Component{
                         </div>
                     </div>
                     <div>
-                        
-                        
                     </div>
                 </Link>
                 <div style={{width: "100%", paddingTop: "1rem", paddingRight: "0rem", paddingLeft: "0rem", marginBottom: "0rem"}}>
@@ -61,7 +59,7 @@ class Gallery extends React.Component{
                         <span style={{color: Color.grey}}>{subtitle}</span>
                     </div>
                 </div>
-        </div>
+            </div>
         )
     }
 
