@@ -11,6 +11,13 @@ import Color from '../theme/color'
 //     link: 'string'
 // }];
 
+/**
+ * @param {String} media - Media URL
+ * @param {String} backgroundColor - Background color code
+ * @param {String} html_content - Raw HTML code
+ * @param {String} link - Hyper link activate on click
+ */
+
 function Banner(){
     var html_content = (
         <div style={{display: 'table', position: 'absolute', width: '100%', height: '100%'}}>

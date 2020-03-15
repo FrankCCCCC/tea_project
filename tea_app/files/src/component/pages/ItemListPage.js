@@ -26,10 +26,11 @@ function ItemListPage(props) {
     )
     return (
         <div>
-          <HeroTitle title="我們的茶" paragraph="最傳統的凍頂烏龍茶"/>
-          <div class="container">
-            <GalleryList countAll={fetchItemCountAll().then((response) => {return response.count})} loadrequest={fetchItemList_p} route="item"/>
-          </div>
+            <div style={{height: "3rem"}}></div>
+            <HeroTitle title="我們的茶" paragraph="最傳統的凍頂烏龍茶"/>
+            <div class="container">
+                <GalleryList countAll={fetchItemCountAll().then((response) => {return response.count})} loadrequest={fetchItemList_p} route="item"/>
+            </div>
         </div>
     );
 }

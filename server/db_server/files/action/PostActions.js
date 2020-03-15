@@ -1,5 +1,6 @@
-const DbPost = require('../db/DbPost');
+const DbPost = require('../db/DbPost')
 const util = require('../util/Util')
+const Config = require('../config/serverConfig')
 const actions = require('./actions')
 const express = require('express');
 const { Remarkable } = require('remarkable');
@@ -20,7 +21,7 @@ post_action.on('mount', function (parent) {
                     
 })
 
-post_action.get('/query_posts_count_all', (req, res) => {
+post_action.get(Config.query_posts_count_all, (req, res) => {
     DbPost.queryPostsCountAll().then(
         (resolve) => {
             // util.log(`Sending ${resolve.rowCount} rows to ${req.ip} with ${req.ips}`)
@@ -44,7 +45,7 @@ post_action.get('/query_posts_count_all', (req, res) => {
     )
 })
 
-post_action.post('/insert_post', (req, res) => {
+post_action.post(Config.insert_post, (req, res) => {
     DbPost.insertPost(req.body.title, req.body.subtitle, req.body.author, req.body.content, req.body.cover_img).then(
         (resolve) => {
             
@@ -69,7 +70,7 @@ post_action.post('/insert_post', (req, res) => {
     )
 })
 
-post_action.post('/query_post_by_id', (req, res) => {
+post_action.post(Config.query_post_by_id, (req, res) => {
     DbPost.queryPost(parseInt(req.body.id, 10)).then(
         (resolve) => {
             // var md = new Remarkable({html: true})
@@ -97,7 +98,7 @@ post_action.post('/query_post_by_id', (req, res) => {
     );
 })
 
-post_action.post('/query_post_list', (req, res) => {
+post_action.post(Config.query_post_list, (req, res) => {
     DbPost.queryPostList(Number(req.body.count), Number(req.body.offset)).then(
         (resolve) => {
             // let res_posts = resolve.rows.map(

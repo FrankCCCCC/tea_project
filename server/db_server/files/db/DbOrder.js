@@ -428,6 +428,45 @@ function insertOrder(buyer_name, phone, email, bank_code, bank_account, country,
     return Db.query(command)
 }
 
+function insertDummy(){
+    let items = [
+        {id: 1, name: "Green Tea", quantity: 1, price: 300, unit: "NTD"},
+        {id: 2, name: "Oolong Tea", quantity: 2, price: 200, unit: "NTD"}
+    ]
+    
+    let comment = {note: "First", ext: {}}
+    for(let i=0; i<5; i++){
+        insertOrder(
+            "Da", 
+            "0908293456", 
+            "example@gmail.com", 
+            "301", 
+            "88882222444", 
+            "Taiwan", 
+            "50010", 
+            "Taiwan", 
+            "Nantou", 
+            "LuGu", 
+            "FongHuang", 
+            "indus.rd", 
+            items, 
+            700, 
+            "NTD", 
+            3, 
+            undefined, 
+            undefined, 
+            undefined, 
+            true, 
+            true, 
+            true, 
+            true, 
+            false, 
+            comment
+        )
+    }
+    
+}
+
 // createCommentType()
 // creatSellTypeType()
 // creatOrderItemType()
@@ -439,9 +478,7 @@ function insertOrder(buyer_name, phone, email, bank_code, bank_account, country,
 //     {id: 2, name: "Oolong Tea", quantity: 2, price: 200, unit: "NTD"}
 // ]
 // queryOrdersCountAll()
-// for(let i=0; i<4; i++){
-    // insertOrder("Da", "0908293456", "example@gmail.com", "301", "88882222444", "Taiwan", "50010", "Taiwan", "Nantou", "LuGu", "FongHuang", "indus.rd", items, 700, "NTD", 3, undefined, undefined, undefined, true, true, true, true, false, comment)
-// }
+
 // queryOrderById(1)
 // queryOrderByItemId(1)
 // queryOrderByItemName('Oolong Tea')
@@ -461,3 +498,4 @@ exports.queryOrderByBuyerName = queryOrderByBuyerName;
 exports.queryOrderList = queryOrderList;
 exports.queryOrderByItemId = queryOrderByItemId;
 exports.queryOrderByItemName = queryOrderByItemName;
+exports.insertDummy = insertDummy

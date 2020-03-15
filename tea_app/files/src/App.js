@@ -34,7 +34,7 @@ function App() {
     <div className="App">
       <Provider store={combine_store}>
         <Router>
-            <AppNav/>          
+            <AppNav/>
             <Switch>
               <Route path="/" exact component={HomePage}/>
               <Route path="/about" exact component={FarmerPage}/>

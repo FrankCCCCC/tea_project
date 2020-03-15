@@ -83,7 +83,7 @@ services:
       - tea-network
 
   postgres:
-    image: 
+    build: 
       context: ./server/db_server/postgres
     ports:
       - "35432:5432"

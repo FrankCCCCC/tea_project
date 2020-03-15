@@ -174,24 +174,25 @@ function insertFarmer(name, cover_img, items, comment) {
     return Db.query(command)
 }
 
+function insertDummy(){
+    let comment = {note: "First", ext: {}}
+
+    let items = [
+        {id: 2, name: "Green Tea",},
+        {id: 1, name: "Oolong Tea"}
+    ]
+
+    for(let i=0; i<5; i++){
+        insertFarmer("Da", "farmer1.jpg", items, comment)
+    }
+}
+// queryFarmersCountAll()
 // createGoodType()
 // createSectionType()
 // createFarmersTable()
 
 
-let comment = {note: "First", ext: {}}
 
-let items = [
-    {id: 2, name: "Green Tea",},
-    {id: 1, name: "Oolong Tea"}
-]
-
-// queryFarmersCountAll()
-for(let i=0; i<4; i++){
-    insertFarmer("Da", "farmer1.jpg", items, comment)
-    insertFarmer("Da", "farmer1.jpg", items, comment)
-    insertFarmer("Da", "farmer1.jpg", items, comment)
-}
 // queryFarmerById(1)
 // queryFarmerByItemId(1)
 // queryFarmerByItemName('Oolong Tea')
@@ -208,3 +209,4 @@ exports.queryFarmerByName = queryFarmerByName;
 exports.queryFarmerList = queryFarmerList;
 exports.queryFarmerByItemId = queryFarmerByItemId;
 exports.queryFarmerByItemName = queryFarmerByItemName;
+exports.insertDummy = insertDummy;

@@ -102,7 +102,7 @@ function Slider(props){
 
     if(!Array.isArray(props.sliderInput)){
         console.log("Error sliderInput is not array")
-        throw "Error sliderInput is not array";
+        // throw "Error sliderInput is not array";
         return -1;
     }
     var carouselInput = props.sliderInput.map(

@@ -5,6 +5,7 @@ const OrderActions = require('./action/OrderActions')
 const AppDataActions = require('./action/AppDataActions')
 const serverConfig = require('./config/serverConfig')
 const util = require('./util/Util')
+const Init = require('./init/Init')
 const express = require('express');
 const cors = require('cors')
 const helmet = require('helmet')
@@ -25,4 +26,12 @@ app.use(serverConfig.app_data_action, AppDataActions.actions)
 
 app.listen(serverConfig.port, () => {
     util.log(`Server is listening on port ${serverConfig.port}`)
+    util.log(`${process.argv[2]} Mode`)
+    switch(process.argv[2]){
+        case 'dev':
+            Init.devInit()
+            break
+        case 'deploy':
+            Init.deployInit()
+    }
 });

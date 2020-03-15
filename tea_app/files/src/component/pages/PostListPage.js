@@ -10,10 +10,11 @@ function PostListPage(props) {
 
     return (
         <div>
+          <div style={{height: "3rem"}}></div>
           {/* <LoadingPage/> */}
           <HeroTitle title="最新消息" paragraph="各種稀奇古怪的事"/>
           <div class="container">
-            <GalleryList countAll={fetchPostsCountAll().then((response) => {return response.count})} loadrequest={fetchPostList} route="post"/>
+              <GalleryList countAll={fetchPostsCountAll().then((response) => {return response.count})} loadrequest={fetchPostList} route="post"/>
           </div>
         </div>
     );

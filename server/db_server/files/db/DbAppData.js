@@ -198,6 +198,91 @@ function insertAppData(property, data, comment) {
     return Db.query(command)
 }
 
+function insertDummy(){
+    let comment = {note: "", ext: null}
+    const sliderInput = [{
+        id: 1,
+        media: "tea_farmer.mp4",
+        caption_title: "南投鹿谷鳳凰村",
+        caption_subtitle: "南投鹿谷鳳凰村",
+        link: "http://localhost:5000/video/tea_farmer.mp4"
+      },
+      {
+        id: 2,
+        media: "hill1.jpg",
+        caption_title: "Leafhopper",
+        caption_subtitle: "Leafhopper"
+      },
+      {
+        id: 3,
+        media: "tea.jpg",
+        caption_title: "林氏凍頂烏龍茶",
+        caption_subtitle: "林氏凍頂烏龍茶"
+      }];
+    insertAppData(`home_slider`, sliderInput, comment)
+    const galleryInput = [{
+        img: "farmer1.jpg",
+        caption_title: "陳朝鳳",
+        caption_subtitle: "鹿谷 凍頂",
+        title: "陳朝鳳",
+        subtitle: "鹿谷 凍頂",
+        id: 1
+      },
+      {
+        img: "farmer2.jpg",
+        caption_title: "張大春",
+        caption_subtitle: "鹿谷 鳳凰",
+        title: "張大春",
+        subtitle: "鹿谷 鳳凰",
+        id: 2
+      },
+      {
+        img: "farmer3.jpg",
+        caption_title: "林大宇",
+        caption_subtitle: "鹿谷 鳳凰",
+        title: "林大宇",
+        subtitle: "鹿谷 鳳凰",
+        id: 3
+      },
+      {
+        img: "farmer4.jpg",
+        caption_title: "林大宇",
+        caption_subtitle: "鹿谷 鳳凰",
+        title: "林大宇",
+        subtitle: "鹿谷 鳳凰",
+        id: 1
+      },
+      {
+        img: "tea_tree.jpg",
+        caption_title: "林大宇",
+        caption_subtitle: "鹿谷 鳳凰",
+        title: "林大宇",
+        subtitle: "鹿谷 鳳凰",
+        id: 1
+      },
+      {
+        img: "child.jpg",
+        caption_title: "林大宇",
+        caption_subtitle: "鹿谷 鳳凰",
+        title: "林大宇",
+        subtitle: "鹿谷 鳳凰",
+        id: 1
+      },
+      {
+        img: "farmer7.jpg",
+        caption_title: "林大宇",
+        caption_subtitle: "鹿谷 鳳凰",
+        title: "林大宇",
+        subtitle: "鹿谷 鳳凰",
+        id: 1
+      }]
+      insertAppData(`home_gallery`, galleryInput, comment)
+    for(let i=0; i<5; i++){
+        let now = new Date
+        insertAppData(`Test ${now.toISOString()}`, undefined, comment)
+    }
+}
+
 // createCommentType()
 // createAppDatasTable()
 
@@ -223,5 +308,6 @@ exports.insertAppData = insertAppData;
 exports.queryAppDataById = queryAppDataById;
 exports.queryAppDataByProperty = queryAppDataByProperty;
 exports.queryAppDataList = queryAppDataList;
+exports.insertDummy = insertDummy
 // exports.queryAppDataByItemId = queryAppDataByItemId;
 // exports.queryAppDataByItemName = queryAppDataByItemName;

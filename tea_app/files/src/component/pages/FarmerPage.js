@@ -15,7 +15,7 @@ var sectionInput1 = {
   paragraph: `製茶過程獨特之處在於：
   凍頂烏龍茶的採制工藝十分講究，採摘青心烏龍等良種芽葉，經曬青、涼青、浪青、炒青、揉捻、初烘、多次反復的團揉(包揉)、復烘、再焙火而製成。
   尤其茶葉烘乾後需再重複以布包成球狀揉捻茶葉，使其成半發酵、半球狀，稱為「布揉製茶」或「熱團揉」。揉捻後，茶葉帶有隱隱金黃色。`,
-  img: 'http://192.168.43.203:5000/img/hill1.jpg',
+  img: 'http://localhost:5000/img/hill1.jpg',
   is_reverse: true
 };
 var sectionInput2 = {
@@ -30,7 +30,7 @@ var sectionInput2 = {
   最優秀的凍頂烏龍茶又稱鳳茶，為當地存放十年以上的好茶，在古時最尊貴富人家婚禮上奉獻給父母喝！以表尊敬與地位上的尊貴。
    
   「林氏傳統古典凍頂烏龍茶」，歷經無數次高低起伏的炭火淬煉焙製，冰火輪迴、起伏滋味，門外兵馬、壺中水沸。烘焙過程中，稍有閃失，不是炭焦味，就是失去好茶韻味，可謂舉棋，起手無回。其迭有層次的風韻，把杯，無酒也醉，足可讓您拋開人生成敗起伏，休兵楚河漢界。`,
-  img: 'http://192.168.43.203:5000/img/tea_tree.jpg',
+  img: 'http://localhost:5000/img/tea_tree.jpg',
   is_reverse: false
 };
 var sectionInput3 = {
@@ -45,14 +45,14 @@ var sectionInput3 = {
   最優秀的凍頂烏龍茶又稱鳳茶，為當地存放十年以上的好茶，在古時最尊貴富人家婚禮上奉獻給父母喝！以表尊敬與地位上的尊貴。
    
   「林氏傳統古典凍頂烏龍茶」，歷經無數次高低起伏的炭火淬煉焙製，冰火輪迴、起伏滋味，門外兵馬、壺中水沸。烘焙過程中，稍有閃失，不是炭焦味，就是失去好茶韻味，可謂舉棋，起手無回。其迭有層次的風韻，把杯，無酒也醉，足可讓您拋開人生成敗起伏，休兵楚河漢界。`,
-  img: 'http://192.168.43.203:5000/img/tea.jpg',
+  img: 'http://localhost:5000/img/tea.jpg',
   is_reverse: true
 };
 var sectionInput4 = {
   title: "團揉、復烘、焙火",
   subtitle: "在瞬息萬變的現代 傳承百年的好味道",
   paragraph: `林氏傳統古典凍頂烏龍茶」，歷經無數次高低起伏的炭火淬煉焙製，冰火輪迴、起伏滋味，門外兵馬、壺中水沸。烘焙過程中，稍有閃失，不是炭焦味，就是失去好茶韻味，可謂舉棋，起手無回。其迭有層次的風韻，把杯，無酒也醉，足可讓您拋開人生成敗起伏，休兵楚河漢界。`,
-  img: 'http://192.168.43.203:5000/img/tea.jpg',
+  img: 'http://localhost:5000/img/tea.jpg',
   is_reverse: false
 };
 var sectionList = [sectionInput1, sectionInput2, sectionInput3, sectionInput4]
@@ -60,20 +60,20 @@ var content = []
 
 const sliderInput = [{
   id: 1,
-  media: "http://192.168.43.203:5000/video/tea_farmer.mp4",
+  media: "http://localhost:5000/video/tea_farmer.mp4",
   caption_title: slide2_caption,
   caption_subtitle: slide2_caption,
-  link: "http://192.168.43.203:5000/video/tea_farmer.mp4"
+  link: "http://localhost:5000/video/tea_farmer.mp4"
 },
 {
   id: 2,
-  media: "http://192.168.43.203:5000/img/hill1.jpg",
+  media: "http://localhost:5000/img/hill1.jpg",
   caption_title: slide1_caption,
   caption_subtitle: slide1_caption
 },
 {
   id: 3,
-  media: "http://192.168.43.203:5000/img/tea.jpg",
+  media: "http://localhost:5000/img/tea.jpg",
   caption_title: slide3_caption,
   caption_subtitle: slide3_caption
 }];

@@ -460,12 +460,76 @@ function queryItemList(count, offset){
     return Db.query(command)
 }
 
+function insertDummy(){
+    let content = [
+        {
+        display: "section",
+        img: "tea.jpg",
+        backgroundColor: "",
+        title: "Sample Title",
+        subtitle: "Sample Subtitle",
+        description: "Sample Description", // Markdown Format
+        data: [{temp: "25", unit: "c"}, {ferment: "30", unit: "%"}],
+        comment: "comment"
+        },
+        {
+        display: "section",
+        img: "tea.jpg",
+        backgroundColor: "",
+        title: "Sample Title1",
+        subtitle: "Sample Subtitle1",
+        description: "Sample Description1", // Markdown Format
+        data: [{temp: "25", unit: "c"}, {ferment: "30", unit: "%"}],
+        comment: "comment"
+        }
+    ]
+    let cert = [{
+        name: "SGS", 
+        link: "www.sgs.com"
+    }]
+    let spec = [{property: "100g", value: "Heavily Baked", comment: "Strongest"}, {property: "100g", value: "Heavily Baked", comment: "Strongest"}]
+    let comment = {note: "Sample Comment", ext: {}}
+    let isotime = "2020-10-05T14:48:00.000Z"
+
+    for(let i=0; i<5; i++){
+        insertItem(
+            "Green Tea", 
+            3, 
+            "Lin", 
+            "Taiwan", 
+            "30013", 
+            "Taiwan", 
+            "NanTou", 
+            "Lu Gu", 
+            "FongHuang", 
+            "GuangFu Rd.", 
+            "in_stock", 
+            500, 
+            "NTD",
+            3, 
+            "# Traditional Flavor", 
+            "# Taiwan Tea", 
+            content, 
+            cert,
+            spec,
+            "farmer1.jpg", 
+            ['hill1.jpg', 'tea.jpg', 'child.jpg'],
+            "Sample block_id", 
+            "Sample block_link",
+            "Sample transaction_id",
+            "Sample traceability_link",
+            comment,
+            isotime,
+            true,
+            true
+        )
+    }
+}
+
 // createProducerType();
 // createSpecType();
 // createItemsTable();
-// for(let i=0; i<10; i++){
-    // insertItem("Green Tea", {id: 3, name: "Lin"}, 500, "NTD", "# Traditional Flavor", [{property: "100g", value: "Heavily Baked", comment: "Strongest"}, {property: "100g", value: "Heavily Baked", comment: "Strongest"}], "farmer1.jpg", ['hill1.jpg', 'tea.jpg', 'child.jpg'])
-// }
+
 // queryItemsCountAll();
 // queryItemById(1);
 // queryItemByName(`1=1`);
@@ -489,9 +553,4 @@ exports.queryItemByName = queryItemByName;
 exports.queryItemByProducerId = queryItemByProducerId;
 exports.queryItemByProducerName = queryItemByProducerName;
 exports.queryItemList = queryItemList;
-
-// DO $$ BEGIN
-//     CREATE TYPE Good AS (id INTEGER, name TEXT);
-// EXCEPTION
-//     WHEN duplicate_object THEN null;
-// END $$;
+exports.insertDummy = insertDummy
