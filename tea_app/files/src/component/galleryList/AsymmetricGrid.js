@@ -25,7 +25,7 @@ class AsymmetricGrid extends React.Component{
         }
     }
 
-    append(in){
+    append(){
 
     }
 
