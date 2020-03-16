@@ -25,6 +25,9 @@ class PostListPage extends React.Component {
     }
 
     makeLoader(count, offset){
+        var akk = new AsymmetricGrid
+        akk.append()
+        var b = <akk/>
         return fetchPostList(count, offset).then(
             (resolve) => {}
         )
