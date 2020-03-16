@@ -2,9 +2,7 @@ import React from 'react';
 import ShoppingList from '../shoppingList/ShoppingList'
 import {font_style} from '../theme/font';
 import TextInput from '../form/textInput'
-import {infoSetInfo, infoGetState} from  '../redux/action'
-import {cart_store, info_store} from '../redux/store'
-// import {cart_store, info_store} from '../redux/store'
+import {infoSetInfo} from  '../redux/action'
 import {first_name,
         last_name,
         phone_number,
@@ -29,7 +27,6 @@ import {first_name,
         submit_order,
         order_receiving_url
     } from '../theme/text';
-// import "shards-ui/dist/css/shards.min.css"
 
 class CartPage extends React.Component{
     constructor(props){
@@ -43,24 +40,8 @@ class CartPage extends React.Component{
             road: "",
             agree_receive_notice: true,
             agree_privacy_term: false,
-            // isGoing: true,
-            // numberOfGuests: 0,
             is_validated: "needs-validation"
         }
-        // let store_state = infoGetState()
-        // this.state = {
-        //     first_name: store_state.first_name == undefined ? "":store_state.first_name,
-        //     last_name: store_state.last_name == undefined ? "":store_state.last_name,
-        //     phone_number: store_state.phone_number == undefined ? "":store_state.phone_number,
-        //     county: store_state.county == undefined ? "":store_state.county,
-        //     township: store_state.township == undefined ? "":store_state.township,
-        //     road: store_state.road == undefined ? "":store_state.road,
-        //     agree_receive_notice: true,
-        //     agree_privacy_term: false,
-        //     // isGoing: true,
-        //     // numberOfGuests: 0,
-        //     is_validated: "needs-validation"
-        // }
 
         this.handle_input_change = this.handle_input_change.bind(this);
         this.handle_submit_click = this.handle_submit_click.bind(this);
@@ -69,7 +50,7 @@ class CartPage extends React.Component{
     handle_input_change(event){
         const target = event.target;
         const name = target.name;
-        const value = target.type == 'checkbox'? target.checked : target.value;
+        const value = target.type === 'checkbox'? target.checked : target.value;
         this.setState({
             [name]: value
         })
@@ -79,7 +60,7 @@ class CartPage extends React.Component{
 
     handle_submit_click(event){
         var form = event.target;
-        if(form.checkValidity() == false){
+        if(form.checkValidity() === false){
             event.preventDefault();
             event.stopPropagation();
         }

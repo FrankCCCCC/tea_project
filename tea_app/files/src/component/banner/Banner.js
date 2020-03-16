@@ -22,7 +22,7 @@ function Banner(props){
     var html_content = (
         <div style={{display: 'table', position: 'absolute', width: '100%', height: '100%'}}>
             <div style={{display: 'table-cell', width: '100%', textAlign: 'center', verticalAlign: 'middle'}}>
-                <div class='container' style={{color: Color.blueDark, fontFamily: font_style.fontFamily, fontWeight: "bold"}}>
+                {/* <div class='container' style={{color: Color.blueDark, fontFamily: font_style.fontFamily, fontWeight: "bold"}}> */}
                     {/* <div class="d-flex justify-content-around align-content-around flex-wrap mb-3">
                         <div>
                             <h4 style={{}}>臺灣茶葉年總消耗量</h4>
@@ -33,8 +33,8 @@ function Banner(props){
                             <h1 style={{fontSize: '6rem'}}>10000<span style={{fontSize: '2rem'}}>頓</span></h1>
                         </div>
                     </div> */}
-                    <h2 style={{color: Color.blueDark, fontSize: '4rem', fontFamily: font_style.fontFamily, fontWeight: "bold"}}>"賣茶葉賺大錢的方法也不是沒有，但是茶葉這東西，生我養我的，我做不到"</h2>
-                </div>
+                    <h2 style={{color: Color.blueDark, fontSize: '4rem', fontFamily: font_style.fontFamily, fontWeight: "bold", textAlign: 'center'}}>"賣茶葉賺大錢的方法也不是沒有，但是茶葉這東西，生我養我的，我做不到"</h2>
+                {/* </div> */}
             </div>
         </div>
     )
@@ -46,8 +46,8 @@ function Banner(props){
     }]
 
     return (
-        <div style={{backgroundColor: "white", boxShadow: "1px 1px 5px grey", border: "", borderRadius: '20px', width: "100%", height: "100%", padding: "3rem", display: "table"}}>
-            <div style={{display: "table-cell", verticalAlign: "middle", textAlign: "center"}}>
+        // <div style={{backgroundColor: "white", boxShadow: "1px 1px 5px grey", border: "", borderRadius: '20px', width: "100%", height: "100%", padding: "3rem", display: "table"}}>
+            // <div style={{display: "table-cell", verticalAlign: "middle", textAlign: "center"}}>
                 
                 <a href={props.link}>
                     <div style={{fontFamily: font_style.fontFamily, fontWeight: "bold", opacity: props.opacity}}>
@@ -55,9 +55,9 @@ function Banner(props){
                     </div>
                 </a>
                 
-            </div>
-            {/* <Carousel carouselInput = {carouselInput} is_show_indicator = {false} is_show_control = {false} opacity = {1}/> */}
-        </div>
+            // </div>
+            // {/* <Carousel carouselInput = {carouselInput} is_show_indicator = {false} is_show_control = {false} opacity = {1}/> */}
+        // </div>
     )
 }
 

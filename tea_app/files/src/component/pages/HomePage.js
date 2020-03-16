@@ -3,9 +3,10 @@ import React from 'react';
 import Color from '../theme/color'
 import Slider from '../slider/Slider'
 import HeroTitle from '../hero_title/HeroTitle'
-import Gallery from '../gallery/Gallery'
+import Gallery from '../gallery/Gallery1'
+import AsymmetricGrid from '../galleryList/AsymmetricGrid'
 import Banner from '../banner/Banner'
-import Carousel from '../carousel/Carousel'
+import Card from '../card/Card'
 import {fetchAppDataByProperty} from '../fetch/fetchAppData'
 import LoadingPage from '../pages/LoadingPage'
 
@@ -17,6 +18,12 @@ class HomePage extends React.Component{
         this.state = {
             is_loaded: false
         }
+    }
+
+    makeItems(array){
+        return array.map((item, index, array) => {
+            return <Gallery uuid={index} id={item.id} catergory={item.catergory} img={item.img} caption_title={item.caption_title} caption_subtitle={item.caption_subtitle} title={item.caption_title} subtitle={item.caption_subtitle} badge={item.badge} route={item.route}/>
+        })
     }
 
     fetchLoader(){
@@ -37,7 +44,7 @@ class HomePage extends React.Component{
             (resolve) => {
                 // console.log(resolve)
                 this.setState({
-                    galleryInput: resolve[0].data
+                    galleryInput: this.makeItems(resolve[0].data)
                 })
             }
         ).catch(
@@ -72,10 +79,11 @@ class HomePage extends React.Component{
                     <div class="container" style={{margin: "2rem"}}>
                         <Banner media="http://localhost:5000/img/tea_tree.jpg" backgroundColor="rgba(150,150,150,1)" html_content={<h3 style={{color: Color.blueDark}}>"賣茶葉賺大錢的方法也不是沒有，但是茶葉這東西，生我養我的，我做不到"</h3>}/>
                     </div>
-                    
+                    <Card/>
                     <HeroTitle title={hero_title_home} paragraph={hero_paragraph_home}/>
                     <div class="container">
-                        <Gallery galleryInput={this.state.galleryInput} route="farmer"/>
+                        <AsymmetricGrid items={this.state.galleryInput} column_count={3} column_width={"2rem"} column_width={"20rem"}/>
+                        {/* <Gallery galleryInput={this.state.galleryInput} route="farmer"/> */}
                     </div>
                 </div> :
                 <LoadingPage/>

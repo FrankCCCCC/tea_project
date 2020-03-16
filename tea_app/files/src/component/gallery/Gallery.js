@@ -35,8 +35,8 @@ class Gallery extends React.Component{
             <div key={i} style={{marginBottom: "1rem", display: "inline-block"}}>
                 <Link to={`${route}/${id}`}>
                     <div style={{position: "relative", textAlign: "", color: "white"}}>
-                        <img class="img-fluid" src={img} alt="Card image cap" style={{width: "100%", borderRadius: "4px"}}/>
-                        <div style={{position: "absolute", bottom: "0rem", right: "0rem", width: "100%", height: "100%", background: "linear-gradient(to top, rgba(0,0,0,0.9), 5rem, rgba(0,0,0,0))", borderRadius: "6px"}}>
+                        <img class="img-fluid" src={img} alt="Card image cap" style={{width: "100%", borderRadius: "20px", boxShadow: "5px 5px 20px grey"}}/>
+                        <div style={{position: "absolute", bottom: "0rem", right: "0rem", width: "100%", height: "100%", background: "linear-gradient(to top, rgba(0,0,0,0.9), 5rem, rgba(0,0,0,0))", borderRadius: "20px"}}>
                             <div style={{position: "absolute", bottom: "0rem", right: "0rem", width: "100%", paddingRight: "0.5rem", paddingLeft: "0.5rem", marginBottom: "0.5rem"}}>
                                 <div style={{textAlign: "left"}}>
                                     <h5 style={{fontWeight: "bold", marginBottom: "2px"}}>{caption_title}</h5>
@@ -49,8 +49,6 @@ class Gallery extends React.Component{
                                 </span>
                             </div>
                         </div>
-                    </div>
-                    <div>
                     </div>
                 </Link>
                 <div style={{width: "100%", paddingTop: "1rem", paddingRight: "0rem", paddingLeft: "0rem", marginBottom: "0rem"}}>
@@ -80,7 +78,19 @@ class Gallery extends React.Component{
             var t = [];
             for(let i=0; i < this.props.galleryInput.length; i++){
                 console.log(`${this.props.route}/${this.props.galleryInput[i].id}`)
-                t.push(this.makeItem(i, this.props.galleryInput[i].id, this.props.galleryInput[i].img, this.props.galleryInput[i].caption_title, this.props.galleryInput[i].caption_subtitle, this.props.route))
+                t.push(
+                    this.makeItem(
+                        i, 
+                        this.props.galleryInput[i].id, 
+                        this.props.galleryInput[i].img, 
+                        this.props.galleryInput[i].caption_title, 
+                        this.props.galleryInput[i].caption_subtitle, 
+                        this.props.route,
+                        this.props.galleryInput[i].title, 
+                        this.props.galleryInput[i].subtitle,
+                        this.props.galleryInput[i].badge
+                    )
+                )
                 
             }
             
@@ -97,7 +107,7 @@ class Gallery extends React.Component{
         // console.log(this.state.content)
         return (
             <div style={font_style}>
-                <div style={{columnCount: "3",columnWidth: "250px", columnGap: "1rem"}}>
+                <div style={{columnCount: "3",columnWidth: "250px", columnGap: "2rem"}}>
                     {this.state.content}
                 </div>
             </div>

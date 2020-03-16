@@ -3,9 +3,7 @@ import InfiniteScroll from 'react-infinite-scroller';
 import Gallery from '../gallery/Gallery'
 
 /**
- * @param {promise} countAll - The fetch promise that can count the number of all items
- * @param {function} loadRequest - The function that can load specific number of items after speific item
- * @param {string} route - The route would be added to the current URL and the page would be directed to the specified page according to the link
+ * @param {Object[]} items - Array of elements in asymmetric grid
  */
 
 class GalleryList extends React.Component{
@@ -42,7 +40,7 @@ class GalleryList extends React.Component{
         if(this.state.loaded_item_number < this.state.items_count){
             this.state.loadrequest(this.state.load_item_number_per_time,this.state.loaded_item_number).then(
                 (response) => {
-                    console.log(response);
+                    // console.log(response);
                     var temp = this.state.posts;
                     response.map((item, index, array) => {
                         console.log(this.state.posts);
@@ -51,16 +49,13 @@ class GalleryList extends React.Component{
                                 id: item.id,
                                 img: item.cover_img,
                                 caption_title: item.title,
-                                caption_subtitle: item.subtitle
+                                caption_subtitle: item.subtitle,
+                                title: item.title,
+                                subtitle: item.subtitle
                             }
                         );
-                        
-                        // return 
                     })
-                    // if(this.state.loaded_item_number > 0){
-                    //     postList.push(this.state.posts);
-                    // }
-                    console.log(this.state.posts[0].id);
+                    // console.log(this.state.posts[0].id);
                     this.setState({
                         loaded_item_number: this.state.loaded_item_number + this.state.load_item_number_per_time,
                         posts: temp
