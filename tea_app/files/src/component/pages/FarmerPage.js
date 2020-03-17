@@ -84,7 +84,7 @@ function FarmerPage() {
     // console.log(sectionList[i].is_reverse)
     // sectionInput.is_reverse = !sectionInput.is_reverse
     content.push(
-      <Section sectionInput={sectionList[i]}/>
+      <Section id={sectionList[i].id} title={sectionList[i].title} subtitle={sectionList[i].subtitle} paragraph={sectionList[i].paragraph} img={sectionList[i].img} is_reverse={sectionList[i].is_reverse} />
     )
     // console.log(sectionList[i].is_reverse)
   }

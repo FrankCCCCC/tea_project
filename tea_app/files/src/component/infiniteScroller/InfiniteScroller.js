@@ -42,7 +42,9 @@ class InfiniteScroller extends React.Component{
     handleLoadMore(page){
         // console.log(this.state.items_count)
         // console.log(this.state.loaded_item_number)
+        // console.log(this.state.load_item_number_per_time)
         if(this.state.loaded_item_number < this.state.items_count){
+            // console.log(this.state.)
             this.props.load_request(this.state.load_item_number_per_time, this.state.loaded_item_number).then(
                 (resolve) => {
                     var temp = this.state.items;

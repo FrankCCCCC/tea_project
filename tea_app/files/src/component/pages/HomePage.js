@@ -3,8 +3,9 @@ import React from 'react';
 import Color from '../theme/color'
 import Slider from '../slider/Slider'
 import HeroTitle from '../hero_title/HeroTitle'
-import Gallery from '../gallery/Gallery1'
-import AsymmetricGrid from '../galleryList/AsymmetricGrid'
+import Gallery from '../gallery/Gallery'
+import FlexGrid from '../grid/FlexGrid'
+import AsymmetricGrid from '../grid/AsymmetricGrid'
 import Banner from '../banner/Banner'
 import Card from '../card/Card'
 import {fetchAppDataByProperty} from '../fetch/fetchAppData'
@@ -20,9 +21,20 @@ class HomePage extends React.Component{
         }
     }
 
+    makeCards(){
+        let cards = []
+        cards[0] = <Card uuid={0} background={"url(http://localhost:5000/img/farmer3.jpg)"} top={<h5 style={{color: Color.white}}>每年約有</h5>} head={<h1 style={{color: Color.white, letterSpacing: "0.3rem"}}>5 位</h1>} title={<h5 style={{color: Color.white}}>茶農轉作四季豆</h5>} min_height={"15rem"} min_width={"20rem"} mask={"rgba(0, 0, 0, 0.3)"}/>
+        cards[1] = <Card uuid={1} background={"url(http://localhost:5000/img/hill1.jpg)"} top={<h5 style={{color: Color.white}}>在台灣</h5>} head={<h1 style={{color: Color.white, letterSpacing: "0.3rem"}}>4 倍</h1>} title={<h5 style={{color: Color.white}}>四季豆利潤比茶葉高出</h5>} min_height={"15rem"} min_width={"20rem"} mask={"rgba(0, 0, 0, 0.3)"}/>
+        cards[3] = <Card uuid={1} background={"url(http://localhost:5000/img/hill2.jpg)"} top={<h5 style={{color: Color.white}}>但市面上卻有</h5>} head={<h1 style={{color: Color.white, letterSpacing: "0.3rem"}}>90%</h1>} title={<h5 style={{color: Color.white}}>的台灣茶是假的</h5>} min_height={"15rem"} min_width={"20rem"} mask={"rgba(0, 0, 0, 0.3)"}/>
+
+        return (
+            <FlexGrid items={cards}/>
+        )
+    }
+
     makeItems(array){
         return array.map((item, index, array) => {
-            return <Gallery uuid={index} id={item.id} catergory={item.catergory} img={item.img} caption_title={item.caption_title} caption_subtitle={item.caption_subtitle} title={item.caption_title} subtitle={item.caption_subtitle} badge={item.badge} route={item.route}/>
+            return <Gallery uuid={index} id={item.id} catergory={item.catergory} img={item.img} caption_title={"說書人"} caption_subtitle={"林阿祥"} title={item.caption_title} subtitle={item.caption_subtitle} badge={item.badge} route={"item"}/>
         })
     }
 
@@ -79,11 +91,13 @@ class HomePage extends React.Component{
                     <div class="container" style={{margin: "2rem"}}>
                         <Banner media="http://localhost:5000/img/tea_tree.jpg" backgroundColor="rgba(150,150,150,1)" html_content={<h3 style={{color: Color.blueDark}}>"賣茶葉賺大錢的方法也不是沒有，但是茶葉這東西，生我養我的，我做不到"</h3>}/>
                     </div>
-                    <Card/>
+                    <HeroTitle title={"凍頂烏龍茶  正在消逝"} paragraph={"茶葉生存的最後危機"}/>
+                    <div class="container">
+                        {this.makeCards()}
+                    </div>
                     <HeroTitle title={hero_title_home} paragraph={hero_paragraph_home}/>
                     <div class="container">
                         <AsymmetricGrid items={this.state.galleryInput} column_count={3} column_width={"2rem"} column_width={"20rem"}/>
-                        {/* <Gallery galleryInput={this.state.galleryInput} route="farmer"/> */}
                     </div>
                 </div> :
                 <LoadingPage/>
