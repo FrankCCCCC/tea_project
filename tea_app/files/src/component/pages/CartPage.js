@@ -104,7 +104,7 @@ class CartPage extends React.Component{
                                 {/* <label for="validation_email" style={{fontFamily: font_style.fontFamily, color: Color.greyDark, fontWeight: "bold"}}>{email}</label>
                                 <input type="text" name="email" pattern="[^@\s]+@[^@\s]+" class="form-control" id="validation_email" onChange={this.handle_input_change} style={{border: `1px solid ${Color.greenDark}`}} required/>
                                 <div class="invalid-feedback">{email_input_error}</div> */}
-                                <TextBox input_name={"email"} label={email} handle_on_change={this.handle_input_change} pattern={"[^@\s]+@[^@\s]+"} invalid_feedback={email_input_error} is_required={true}/>
+                                <TextBox input_name={"email"} label={email} handle_on_change={this.handle_input_change} pattern={"[^@]+@[^@]+"} invalid_feedback={email_input_error} is_required={true}/>
                             </div>
                         </div>
                         <div class="form-row">
