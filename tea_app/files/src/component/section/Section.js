@@ -51,7 +51,7 @@ class Section extends React.Component{
                 {/* <button onClick={this.handleBuyClick} style={{fontFamily: font_style.fontFamily, fontSize: "1.1rem", color: "white", border: "0px", paddingTop: "0.8rem", paddingBottom: "0.8rem", paddingRight: "1.5rem", paddingLeft: "1.5rem", backgroundColor: Color.blueDark, borderRadius: Shape.half_circle, boxShadow: Shape.box_shadow}}>加入購物車</button> */}
                 <button onClick={this.handleBuyClick} style={{position: "absolute", transition: "translateY(50%)", color: Color.blueDark, border: `2px solid ${Color.blueDark}`, paddingTop: "0.8rem", paddingBottom: "0.8rem", paddingRight: "1.5rem", paddingLeft: "1.5rem", backgroundColor: "rgba(255, 255, 255, 0)", borderRadius: Shape.half_circle}}>
                     <div>
-                        <img style={{width: "1.2rem", marginRight: "0.5rem",}} src={ShoppingCart} />
+                        <img style={{width: "1.2rem", marginRight: "0.5rem", marginBottom: "0.3rem"}} src={ShoppingCart} />
                         <span style={{fontFamily: font_style.fontFamily, fontWeight: "bold", fontSize: "1.1rem"}}>加入購物車</span>
                     </div>
                 </button>
@@ -59,17 +59,17 @@ class Section extends React.Component{
         )
         let data = (
             <div style={{color: "grey", fontFamily: font_style.fontFamily, fontWeight: "bold"}}>
-                <div class="d-flex justify-content-left align-content-center flex-nowrap mb-3">
-                    {/* <div style={{textAlign: "center"}}> */}
-                        {/* <h4 style={{fontWeight: "bold"}}>發酵溫度</h4>
-                        <h1 style={{color: Color.greenDark, fontSize: '3rem'}}>26.3<span style={{fontSize: '2rem'}}>度</span></h1> */}
-                        {/* <MiniCard head={<h1 style={{color: Color.white}}>26.3</h1>} title={<h4 style={{fontWeight: "bold", color: Color.white}}>發酵溫度</h4>} background={Color.greenDark} horizontal_align={"center"} min_width={"50%"}/> */}
-                    {/* </div> */}
-                    {/* <div style={{textAlign: "center" }}> */}
-                        {/* <h4 style={{fontWeight: "bold"}}>發酵濕度</h4>
-                        <h1 style={{color: Color.greenDark, fontSize: '3rem'}}>63<span style={{fontSize: '2rem'}}>%</span></h1> */}
+                <div class="d-flex justify-content-around align-content-center flex-nowrap" style={{padding: "1rem"}}>
+                    <div style={{textAlign: "center"}}>
+                        <h4 style={{fontWeight: "bold"}}>發酵溫度</h4>
+                        <h1 style={{color: Color.greenDark, fontSize: '3rem'}}>26.3<span style={{fontSize: '2rem'}}>度</span></h1>
+                        {/* <MiniCard head={<h1 style={{color: Color.white}}>26.3</h1>} title={<h4 style={{fontWeight: "bold", color: Color.white}}>發酵溫度</h4>} background={Color.greenDark} horizontal_align={"center"} min_width={"100%"}/> */}
+                    </div>
+                    <div style={{textAlign: "center" }}>
+                        <h4 style={{fontWeight: "bold"}}>發酵濕度</h4>
+                        <h1 style={{color: Color.greenDark, fontSize: '3rem'}}>63<span style={{fontSize: '2rem'}}>%</span></h1>
                         {/* <MiniCard head={<h1 style={{color: Color.yellowHightLight}}>63%</h1>} title={<h4 style={{fontWeight: "bold", color: Color.white}}>發酵濕度</h4>} background={Color.greenDark} horizontal_align={"center"} min_width={"50%"}/> */}
-                    {/* </div> */}
+                    </div>
                 </div>
             </div>
         )
@@ -96,11 +96,12 @@ class Section extends React.Component{
                                 </div>
                             </div>
                         </div> */}
-                        <div style={{width: "90%", margin: "auto"}}>
+                        <div style={{width: "95%", margin: "auto"}}>
                             {/* <Gallery id={this.props.id} img={this.props.img}/> */}
-                            <MiniCard uuid={this.props.id} background={`url(${this.props.img})`} min_height={"100vh"} min_width={"100%"}/>
+                            <MiniCard uuid={this.props.id} background={`url(${this.props.img})`} min_height={"70vh"} min_width={"100%"} />
                         </div>
                     </div>
+                    {/* <FlexGrid flex_wrap={"nowrap"} items={[<MiniCard head={<h1 style={{color: Color.white}}>26.3</h1>} title={<h4 style={{fontWeight: "bold", color: Color.white}}>發酵溫度</h4>} background={Color.greenDark} horizontal_align={"center"} min_width={"45%"}/>, <MiniCard head={<h1 style={{color: Color.yellowHightLight}}>63%</h1>} title={<h4 style={{fontWeight: "bold", color: Color.white}}>發酵濕度</h4>} background={Color.greenDark} horizontal_align={"center"} min_width={"45%"}/>]} justify_content={"center"}/> */}
                 </div>
             </div>
         );

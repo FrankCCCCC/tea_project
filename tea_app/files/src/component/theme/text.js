@@ -10,7 +10,7 @@ export const hero_paragraph_home = '來自鹿谷鄉的茶農  向您獻上最經
 export const fb_link = "https://www.facebook.com/%E7%B6%A0%E8%9F%AC%E6%95%B8%E6%93%9ALeafhopper";
 export const ig_link = "";
 export const first_name = "名字";
-export const last_name = "姓氏";
+export const name = "姓名";
 export const cellphone_number = "手機號碼";
 export const telephone_number = "電話號碼";
 export const phone_number = "電話號碼";
@@ -24,7 +24,7 @@ export const road = "道路及詳細地址";
 export const zip = "五位郵遞區號";
 
 export const first_name_input_error = "請輸入您的名字";
-export const last_name_input_error = "請輸入您的姓氏";
+export const name_input_error = "請輸入您的姓氏";
 export const cellphone_number_input_error = "請輸入您的手機號碼";
 export const telephone_number_input_error = "請輸入您的電話號碼";
 export const phone_number_input_error = "請輸入您的電話號碼";

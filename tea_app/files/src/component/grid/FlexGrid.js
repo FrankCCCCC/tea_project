@@ -53,7 +53,7 @@ class Grid extends React.Component{
 
     render(){
         return (
-            <div style={{display: "flex", flexDirection: this.state.flex_direction, flexWrap: this.state.flex_wrap, justify_content: this.state.justify_content, alignItems: this.state.align_items, alignContent: this.state.align_content}}>
+            <div style={{display: "flex", minWidth: "100%", flexDirection: this.state.flex_direction, flexWrap: this.state.flex_wrap, justifyContent: this.state.justify_content, alignItems: this.state.align_items, alignContent: this.state.align_content}}>
                 {this.state.items}
             </div>
         )

@@ -1,10 +1,11 @@
 import React from 'react';
 import ShoppingList from '../shoppingList/ShoppingList'
+import HeroTitile from '../hero_title/HeroTitle'
 import {font_style} from '../theme/font';
-import TextInput from '../form/textInput'
+import TextBox from '../form/TextBox'
 import {infoSetInfo} from  '../redux/action'
 import {first_name,
-        last_name,
+        name,
         phone_number,
         email,
         county,
@@ -12,7 +13,7 @@ import {first_name,
         road,
         zip,
         first_name_input_error,
-        last_name_input_error,
+        name_input_error,
         phone_number_input_error,
         email_input_error,
         county_input_error,
@@ -27,6 +28,8 @@ import {first_name,
         submit_order,
         order_receiving_url
     } from '../theme/text';
+import Color from '../theme/color'
+
 
 class CartPage extends React.Component{
     constructor(props){
@@ -74,69 +77,62 @@ class CartPage extends React.Component{
     render(){
         return (
             <div>
-                <div style={{height: "10rem"}}></div>
+                <div style={{height: "3rem"}}></div>
+                <HeroTitile title={"購物車"}/>
                 <div class="container">
                     <ShoppingList/>
                 </div>
-                <div style={{height: "10rem"}}></div>
+
+                <HeroTitile title={"購買人資訊"}/>
                 <div class="container mb-3" style={font_style}>
                     
-
                     <form class={this.state.is_validated} action={order_receiving_url} novalidate>
                         <div class="form-row">
-                            <div class="col-md-6 mb-3">
-                                <TextInput input_name = "first_name" label={first_name} handle_on_change={this.handle_input_change} invalid_feedback = {first_name_input_error}/>
+                            <div class="col-md-4 mb-3">
+                                {/* <label for="validation_name" style={{fontFamily: font_style.fontFamily, color: Color.greyDark, fontWeight: "bold"}}>{name}</label>
+                                <input type="text" name="name" class="form-control" id="validation_name" onChange={this.handle_input_change} style={{border: `1px solid ${Color.greenDark}`}} required/>
+                                <div class="invalid-feedback">{name_input_error}</div> */}
+                                <TextBox input_name={"name"} label={name} handle_on_change={this.handle_input_change} invalid_feedback={name_input_error} is_required={true}/>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="validation_last_name">{last_name}</label>
-                                <input type="text" name="last_name" class="form-control" id="validation_last_name" onChange={this.handle_input_change} required/>
-                                <div class="invalid-feedback">{last_name_input_error}</div>
+                            <div class="col-md-4 mb-3">
+                                {/* <label for="validation_phone_number" style={{fontFamily: font_style.fontFamily, color: Color.greyDark, fontWeight: "bold"}}>{phone_number}</label>
+                                <input type="text" name="phone_number" pattern="[0-9]{9,}" class="form-control" id="validation_phone_number" onChange={this.handle_input_change} style={{border: `1px solid ${Color.greenDark}`}} required/>
+                                <div class="invalid-feedback">{phone_number_input_error}</div> */}
+                                <TextBox input_name={"phone_number"} label={phone_number} handle_on_change={this.handle_input_change} pattern={"[0-9]{9,}"} invalid_feedback={phone_number_input_error} is_required={true}/>
                             </div>
-                        </div>
-                        <div class="form-row">
-                            {/* <div class="col-md-6 mb-3">
-                                <label for="validation_cellphone">{cellphone_number}</label>
-                                <input type="text" name="cellphone_number" class="form-control" id="validation_cellphone_number" onChange={this.handle_input_change} required/>
-                                <div class="invalid-feedback">{cellphone_number_input_error}</div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="validation_telephone_number">{telephone_number}</label>
-                                <input type="text" name="telephone_number" class="form-control" id="validation_telephone_number" onChange={this.handle_input_change} required/>
-                                <div class="invalid-feedback">{telephone_number_input_error}</div>
-                            </div> */}
-                            <div class="col-md-6 mb-3">
-                                <label for="validation_phone_number">{phone_number}</label>
-                                <input type="text" name="phone_number" pattern="[0-9]{9,}" class="form-control" id="validation_phone_number" onChange={this.handle_input_change} required/>
-                                <div class="invalid-feedback">{phone_number_input_error}</div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="validation_email">{email}</label>
-                                <input type="text" name="email" pattern="[^@\s]+@[^@\s]+" class="form-control" id="validation_email" onChange={this.handle_input_change} required/>
-                                <div class="invalid-feedback">{email_input_error}</div>
+                            <div class="col-md-4 mb-3">
+                                {/* <label for="validation_email" style={{fontFamily: font_style.fontFamily, color: Color.greyDark, fontWeight: "bold"}}>{email}</label>
+                                <input type="text" name="email" pattern="[^@\s]+@[^@\s]+" class="form-control" id="validation_email" onChange={this.handle_input_change} style={{border: `1px solid ${Color.greenDark}`}} required/>
+                                <div class="invalid-feedback">{email_input_error}</div> */}
+                                <TextBox input_name={"email"} label={email} handle_on_change={this.handle_input_change} pattern={"[^@\s]+@[^@\s]+"} invalid_feedback={email_input_error} is_required={true}/>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col-md-4 mb-3">
-                                <label for="validation_zip">{zip}</label>
-                                <input type="text" name="zip" pattern="[0-9]{5}" class="form-control" id="validation_zip" onChange={this.handle_input_change} required/>
-                                <div class="invalid-feedback">{zip_input_error}</div>
+                                {/* <label for="validation_zip">{zip}</label>
+                                <input type="text" name="zip" pattern="[0-9]{5}" class="form-control" id="validation_zip" onChange={this.handle_input_change} style={{border: `1px solid ${Color.greenDark}`}} required/>
+                                <div class="invalid-feedback">{zip_input_error}</div> */}
+                                <TextBox input_name={"zip"} label={zip} handle_on_change={this.handle_input_change} pattern={"[0-9]{5}"} invalid_feedback={zip_input_error} is_required={true}/>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="validation_county">{county}</label>
+                                {/* <label for="validation_county">{county}</label>
                                 <input type="text" name="county" class="form-control" id="validation_county" onChange={this.handle_input_change} required/>
-                                <div class="invalid-feedback">{county_input_error}</div>
+                                <div class="invalid-feedback">{county_input_error}</div> */}
+                                <TextBox input_name={"county"} label={county} handle_on_change={this.handle_input_change} invalid_feedback={county_input_error} is_required={true}/>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="validation_township">{township}</label>
+                                {/* <label for="validation_township">{township}</label>
                                 <input type="text" name="township" class="form-control" id="validation_township" onChange={this.handle_input_change} required/>
-                                <div class="invalid-feedback">{township_input_error}</div>
+                                <div class="invalid-feedback">{township_input_error}</div> */}
+                                <TextBox input_name={"township"} label={township} handle_on_change={this.handle_input_change} invalid_feedback={township_input_error} is_required={true}/>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col mb-3">
-                                <label for="validation_road">{road}</label>
+                                {/* <label for="validation_road">{road}</label>
                                 <input type="text" name="road" class="form-control" id="validation_road" onChange={this.handle_input_change} required/>
-                                <div class="invalid-feedback">{road_input_error}</div>
+                                <div class="invalid-feedback">{road_input_error}</div> */}
+                                <TextBox input_name={"road"} label={road} handle_on_change={this.handle_input_change} invalid_feedback={road_input_error} is_required={true}/>
                             </div>
                         </div>
                         <div class="form-row">
