@@ -1,7 +1,7 @@
 import React from 'react';
 import HeroTitle from '../hero_title/HeroTitle'
 import Gallery from '../gallery/Gallery';
-import GalleryList from '../galleryList/GalleryList';
+// import GalleryList from '../galleryList/GalleryList';
 import {fetchItemList, fetchItemCountAll, fetchItemList_p} from '../fetch/fetchItem';
 
 function ItemListPage(props) {
@@ -29,7 +29,7 @@ function ItemListPage(props) {
             <div style={{height: "3rem"}}></div>
             <HeroTitle title="我們的茶" paragraph="最傳統的凍頂烏龍茶"/>
             <div class="container">
-                <GalleryList countAll={fetchItemCountAll().then((response) => {return response.count})} loadrequest={fetchItemList_p} route="item"/>
+                {/* <GalleryList countAll={fetchItemCountAll().then((response) => {return response.count})} loadrequest={fetchItemList_p} route="item"/> */}
             </div>
         </div>
     );
