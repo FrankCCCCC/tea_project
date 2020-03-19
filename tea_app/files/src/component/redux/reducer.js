@@ -15,7 +15,7 @@ export const cartReducer = (state = cart_init_state, action) => {
     switch(action.type) {
         case(action_add_item): 
             current_list = state.cart
-            current_list.push({id: action.id, img: action.img, name: action.name, quantity: action.quantity, price: action.price})
+            current_list.push({id: action.id, img: action.img, name: action.name, quantity: action.quantity, price: action.price, unit: action.unit})
             re = {
                 cart: current_list
             }

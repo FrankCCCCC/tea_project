@@ -20,18 +20,18 @@ class PostListPage extends React.Component {
             (resolve) => {
                 return resolve.map((item, index, array) => {
                     return {
-                        id: item.id, 
-                        img: item.cover_img, 
+                        id: parseInt(item.id, 10), 
+                        img: String(item.cover_img), 
                         // caption_title: item.title,
                         // caption_subtitle: item.subtitle,
-                        title: item.title,
-                        subtitle: item.subtitle
+                        title: String(item.title),
+                        subtitle: String(item.subtitle)
                     }
                 })
             }
         ).then((resolve) => {
             return resolve.map((item, index, array) => {
-                return <Gallery uuid={index} id={item.id} catergory={item.catergory} img={item.img} caption_title={item.caption_title} caption_subtitle={item.caption_subtitle} title={item.title} subtitle={item.subtitle} badge={item.badge} route={"post"}/>
+                return <Gallery uuid={parseInt(index, 10)} id={parseInt(item.id, 10)} catergory={item.catergory} img={item.img} caption_title={item.caption_title} caption_subtitle={item.caption_subtitle} title={item.title} subtitle={item.subtitle} badge={item.badge} route={"post"}/>
             })
         })
     }

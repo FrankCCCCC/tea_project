@@ -70,7 +70,7 @@ const sliderInput = [{
 }];
 
 const certi = [
-  <MiniCard uuid={1} background={"url(http://localhost:5000/img/hill2.jpg)"} head={<h1 style={{color: Color.white, letterSpacing: "0.3rem", marginRight: "4rem"}}>SGS</h1>} title={<h5 style={{color: Color.white}}>檢驗合格</h5>} min_width={"10rem"} mask={"rgba(0, 0, 0, 0.3)"}/>,
+  <MiniCard uuid={1} background={"url(http://localhost:5000/img/hill2.jpg)"} head={<h1 style={{color: Color.white, letterSpacing: "0.3rem"}}>SGS</h1>} title={<h5 style={{color: Color.white}}>檢驗合格</h5>} min_width={"10rem"} mask={"rgba(0, 0, 0, 0.3)"}/>,
   <MiniCard uuid={2} background={"url(http://localhost:5000/img/hill1.jpg)"} head={<h1 style={{color: Color.white, letterSpacing: "0.3rem"}}>產地認證</h1>} title={<h5 style={{color: Color.white}}>鹿谷鄉公所</h5>} min_width={"10rem"} mask={"rgba(0, 0, 0, 0.3)"}/>,
   <MiniCard uuid={3} background={"url(http://localhost:5000/img/tea.jpg)"} head={<h1 style={{color: Color.white, letterSpacing: "0.3rem"}}>農殘檢驗</h1>} title={<h5 style={{color: Color.white}}>清大實驗室</h5>} min_width={"10rem"} mask={"rgba(0, 0, 0, 0.3)"}/>,
 ]
@@ -93,7 +93,7 @@ function FarmerPage() {
       {content}
       <HeroTitle title={"檢驗認證"} paragraph={"我們只給你最好的"}/>
       <div style={{marginRight: "2rem", marginLeft: "2rem"}}>
-        <FlexGrid items={certi} justify_content={"left"}/>
+        <FlexGrid items={certi} justify_content={"left"} flex_wrap={"wrap"}/>
       </div>
     </div>
   );

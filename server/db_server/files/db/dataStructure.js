@@ -53,7 +53,7 @@ const config = {
         title: {key: "title", schema: "title TEXT NOT NULL"},
         subtitle: {key: "subtitle", schema: "subtitle TEXT NOT NULL"},
         author: {key: "author", schema:"author TEXT NOT NULL"},
-        content: {key: "content", schema: "content TEXT NOT NULL"},
+        description: {key: "description", schema: "description TEXT NOT NULL"},
         comment: {key: "comment", schema: "comment Comment"},
         create_on: {key: "create_on", schema: "create_on TIMESTAMP default current_timestamp"},
         latest_modify: {key: "latest_modify", schema: "latest_modify TIMESTAMP default current_timestamp"}

@@ -30,59 +30,59 @@ import ShoppingCart from '../img/shopping_cart.svg'
 //     sectionInput: sectionInput
 // };
 
-
+/**
+ * @param {Integer} id - The ID of the the section for the list
+ * @param {Integer} uuid - The ID of the the section for React to identify
+ * @param {String} title - The title of the content in the section
+ * @param {String} subtitle - The subtitle of the content in the section
+ * @param {String} paragraph - The paragraph of the content in the section
+ * @param {String} img - The img of the section
+ * @param {Boolean} is_reverse - Whether the content and the image swap
+ * @param {Object} extra - The data and index of the content in the section
+ */
 
 class Section extends React.Component{
     constructor(props) {
         super(props);
-        this.handleBuyClick = this.handleBuyClick.bind(this);
+        // this.handleBuyClick = this.handleBuyClick.bind(this);
     }
 
-    handleBuyClick(){
-        console.log(cartGetState())
-        cartAddItem(2, "http://localhost:5000/img/hill2.jpg", "綠蟬招牌紅茶", 2, 350)
-        console.log(cartGetState())
-    }
+    // handleBuyClick(){
+    //     console.log(cartGetState())
+    //     cartAddItem(2, "http://localhost:5000/img/hill2.jpg", "綠蟬招牌紅茶", 2, 350)
+    //     console.log(cartGetState())
+    // }
 
     render(){
         let classVar = `row ${this.props.is_reverse? "flex-row-reverse" : "flex-row"} align-items-center`;
 
-        let data1 = (<div style={{textAlign: "center"}}>
-            <h4 style={{fontWeight: "bold"}}>發酵溫度</h4>
-            <h1 style={{color: Color.greenDark, fontSize: '3rem'}}>26.3<span style={{fontSize: '2rem'}}>度</span></h1>
-        </div>)
+        // let data1 = (<div style={{textAlign: "center"}}>
+        //     <h4 style={{fontWeight: "bold"}}>發酵溫度</h4>
+        //     <h1 style={{color: Color.greenDark, fontSize: '3rem'}}>26.3<span style={{fontSize: '2rem'}}>度</span></h1>
+        // </div>)
 
-        let data2 = (<div style={{textAlign: "center" }}>
-            <h4 style={{fontWeight: "bold"}}>發酵濕度</h4>
-            <h1 style={{color: Color.greenDark, fontSize: '3rem'}}>63<span style={{fontSize: '2rem'}}>%</span></h1>
-        </div>)
+        // let data2 = (<div style={{textAlign: "center" }}>
+        //     <h4 style={{fontWeight: "bold"}}>發酵濕度</h4>
+        //     <h1 style={{color: Color.greenDark, fontSize: '3rem'}}>63<span style={{fontSize: '2rem'}}>%</span></h1>
+        // </div>)
 
-        let button = (
-            <div>
-                {/* <button onClick={this.handleBuyClick} style={{fontFamily: font_style.fontFamily, fontSize: "1.1rem", color: "white", border: "0px", paddingTop: "0.8rem", paddingBottom: "0.8rem", paddingRight: "1.5rem", paddingLeft: "1.5rem", backgroundColor: Color.blueDark, borderRadius: Shape.half_circle, boxShadow: Shape.box_shadow}}>加入購物車</button> */}
-                <button onClick={this.handleBuyClick} style={{position: "absolute", transition: "translateY(50%)", color: Color.blueDark, border: `2px solid ${Color.blueDark}`, paddingTop: "0.8rem", paddingBottom: "0.8rem", paddingRight: "1.5rem", paddingLeft: "1.5rem", backgroundColor: "rgba(255, 255, 255, 0)", borderRadius: Shape.half_circle}}>
-                    <div>
-                        <img style={{width: "1.2rem", marginRight: "0.5rem", marginBottom: "0.3rem"}} src={ShoppingCart} />
-                        <span style={{fontFamily: font_style.fontFamily, fontWeight: "bold", fontSize: "1.1rem"}}>加入購物車</span>
-                    </div>
-                </button>
-            </div>
-        )
-        let data = (
-            <div style={{color: "grey", fontFamily: font_style.fontFamily, fontWeight: "bold"}}>
-                <FlexGrid items={[data1, data2]} flex_wrap={"nowrap"} justify_content="space-around"/>
-                {/* <div class="d-flex justify-content-around align-content-center flex-nowrap" style={{padding: "1rem"}}>
-                    <div style={{textAlign: "center"}}>
-                        <h4 style={{fontWeight: "bold"}}>發酵溫度</h4>
-                        <h1 style={{color: Color.greenDark, fontSize: '3rem'}}>26.3<span style={{fontSize: '2rem'}}>度</span></h1>
-                    </div>
-                    <div style={{textAlign: "center" }}>
-                        <h4 style={{fontWeight: "bold"}}>發酵濕度</h4>
-                        <h1 style={{color: Color.greenDark, fontSize: '3rem'}}>63<span style={{fontSize: '2rem'}}>%</span></h1>
-                    </div>
-                </div> */}
-            </div>
-        )
+        // let button = (
+        //     <div>
+        //         {/* <button onClick={this.handleBuyClick} style={{fontFamily: font_style.fontFamily, fontSize: "1.1rem", color: "white", border: "0px", paddingTop: "0.8rem", paddingBottom: "0.8rem", paddingRight: "1.5rem", paddingLeft: "1.5rem", backgroundColor: Color.blueDark, borderRadius: Shape.half_circle, boxShadow: Shape.box_shadow}}>加入購物車</button> */}
+        //         <button onClick={this.handleBuyClick} style={{position: "absolute", transition: "translateY(50%)", color: Color.blueDark, border: `2px solid ${Color.blueDark}`, paddingTop: "0.8rem", paddingBottom: "0.8rem", paddingRight: "1.5rem", paddingLeft: "1.5rem", backgroundColor: "rgba(255, 255, 255, 0)", borderRadius: Shape.half_circle}}>
+        //             <div>
+        //                 <img style={{width: "1.2rem", marginRight: "0.5rem", marginBottom: "0.3rem"}} src={ShoppingCart} />
+        //                 <span style={{fontFamily: font_style.fontFamily, fontWeight: "bold", fontSize: "1.1rem"}}>加入購物車</span>
+        //             </div>
+        //         </button>
+        //     </div>
+        // )
+        // let data = (
+        //     <div style={{color: "grey", fontFamily: font_style.fontFamily, fontWeight: "bold"}}>
+        //         {/* <FlexGrid items={[data1, data2]} flex_wrap={"nowrap"} justify_content="space-around"/> */}
+        //         {this.props.extra}
+        //     </div>
+        // )
 
         return(
             <div>
@@ -91,7 +91,8 @@ class Section extends React.Component{
                         <div style={{textAlign: "left", color: "grey", padding: "3rem"}}>
                             <Content title={this.props.title} subtitle={this.props.subtitle} paragraph={this.props.paragraph}/>
                             <div>
-                                {this.props.id == 1? button:data}
+                                {/* {this.props.id == 1? button:data} */}
+                                {this.props.extra}
                             </div>
                         </div>
                         

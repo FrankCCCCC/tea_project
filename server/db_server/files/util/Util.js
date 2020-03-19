@@ -1,6 +1,7 @@
 const config = require('../config/serverConfig')
 const static_config = require('../config/staticConfig')
 const fs = require('fs');
+const { Remarkable } = require('remarkable');
 
 function shortStr(str){
     return String(str).substring(0, 12) + '...'

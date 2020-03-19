@@ -15,17 +15,9 @@ const fetchMedia = require('../fetch/fetchMedia')
 //     cover_img: "image url or null in string"
 // };
 
-var t = {};
-
-// const props = {
-//     title: "凍頂烏龍的故事",
-//     subtitle: "subtitle string",
-//     author: "author string",
-//     create_on: "ISO time format string",
-//     lastest_modify: "ISO time format string",
-//     content: "<h5>String</h5>",
-//     cover_img: 'http://192.168.43.203:5000/img/farmer2.jpg'
-// }
+/**
+ * @param {Integer} postId
+ */
 
 class PostPage extends React.Component{
     constructor(props){
@@ -60,7 +52,7 @@ class PostPage extends React.Component{
               title: resolve_post.title,
               subtitle: resolve_post.subtitle,
               author: resolve_post.author,
-              content: resolve_post.content,
+              description: resolve_post.description,
               create_on: resolve_post.create_on,
               lastest_modify: resolve_post.lastest_modify,
             });
@@ -96,7 +88,7 @@ class PostPage extends React.Component{
                       </div>
                   </div>
                   <div class="container" data-aos="fade-right">
-                      <Post content={this.state.content}/>
+                      <Post content={this.state.description}/>
                   </div>
               </div> :
               <LoadingPage/>

@@ -3,7 +3,7 @@ const Db = require('./Db')
 const util = require('../util/Util')
 
 function createPostsTable(){
-    let command = `CREATE TABLE IF NOT EXISTS ${ds.dataStructure.post.table_name}(${ds.dataStructure.post.id.schema},${ds.dataStructure.post.title.schema},${ds.dataStructure.post.subtitle.schema},${ds.dataStructure.post.author.schema},${ds.dataStructure.post.content.schema},${ds.dataStructure.post.cover_img.schema},${ds.dataStructure.post.create_on.schema}, ${ds.dataStructure.post.latest_modify.schema})`;
+    let command = `CREATE TABLE IF NOT EXISTS ${ds.dataStructure.post.table_name}(${ds.dataStructure.post.id.schema},${ds.dataStructure.post.title.schema},${ds.dataStructure.post.subtitle.schema},${ds.dataStructure.post.author.schema},${ds.dataStructure.post.description.schema},${ds.dataStructure.post.cover_img.schema},${ds.dataStructure.post.create_on.schema}, ${ds.dataStructure.post.latest_modify.schema})`;
 
     return Db.query(command)
 }
@@ -42,20 +42,20 @@ function queryPost(id){
     return Db.query(command)
 }
 
-function insertPost(title, subtitle, author, content, cover_img){
+function insertPost(title, subtitle, author, description, cover_img){
     util.checkString(title)
     util.checkString(subtitle)
     util.checkString(author)
-    util.checkString(content)
+    util.checkString(description)
     util.checkString(cover_img)
-    var content_new = content.replace(/'/g, `''`);
-    let command = `INSERT INTO ${ds.dataStructure.post.table_name}(${ds.dataStructure.post.title.key}, ${ds.dataStructure.post.subtitle.key}, ${ds.dataStructure.post.author.key}, ${ds.dataStructure.post.content.key}, ${ds.dataStructure.post.cover_img.key}) VALUES('${title}', '${subtitle}', '${author}', '${util.shortStr(content_new)}', '${cover_img}') RETURNING ${ds.dataStructure.post.id.key};`
+    var description_new = description.replace(/'/g, `''`);
+    let command = `INSERT INTO ${ds.dataStructure.post.table_name}(${ds.dataStructure.post.title.key}, ${ds.dataStructure.post.subtitle.key}, ${ds.dataStructure.post.author.key}, ${ds.dataStructure.post.description.key}, ${ds.dataStructure.post.cover_img.key}) VALUES('${title}', '${subtitle}', '${author}', '${util.shortStr(description_new)}', '${cover_img}') RETURNING ${ds.dataStructure.post.id.key};`
     
     return Db.query(command)
 }
 
 function insertDummy(){
-    let content = `# Remarkable
+    let description = `# Remarkable
 
     > Experience real-time editing with Remarkable!
 
@@ -284,7 +284,7 @@ function insertDummy(){
     You'll like those projects! :)
     `
     for(let i=0; i<5; i++){
-        insertPost('Test Title', 'Test Subtile', 'Test Author', content, 'child.jpg');
+        insertPost('Test Title', 'Test Subtile', 'Test Author', description, 'child.jpg');
     }
 }
 

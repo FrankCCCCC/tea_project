@@ -15,7 +15,7 @@ function ItemListPage(props) {
                         id: item.id,
                         cover_img: item.cover_img,
                         title: item.name,
-                        subtitle: item.producer.name
+                        subtitle: item.producer_name
                     }
                     return list_item
                 }

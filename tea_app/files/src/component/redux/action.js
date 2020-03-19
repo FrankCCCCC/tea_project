@@ -11,8 +11,8 @@ export const cartSubscribe = (funct) => {
     cart_store.subscribe(funct)
 }
 
-export const cartAddItem = (id, img, name, quantity, price) => {
-    cart_store.dispatch({type: action_add_item, id: id, img: img, name: name, quantity: quantity, price: price});
+export const cartAddItem = (id, img, name, quantity, price, unit) => {
+    cart_store.dispatch({type: action_add_item, id: id, img: img, name: name, quantity: quantity, price: price, unit: unit});
 }
 
 export const cartDeleteItem = (list_id) => {
@@ -54,8 +54,8 @@ function test(){
 
 cart_store.subscribe(test)
 
-cartAddItem(1, "http://localhost:5000/img/tea.jpg", "林氏傳統凍頂烏龍茶", 1, 300)
-cartAddItem(2, "http://localhost:5000/img/tea.jpg", "陳氏傳統東方美人茶", 2, 250)
+cartAddItem(1, "http://localhost:5000/img/tea.jpg", "林氏傳統凍頂烏龍茶", 1, 300, "NTD")
+cartAddItem(2, "http://localhost:5000/img/tea.jpg", "陳氏傳統東方美人茶", 2, 250, "NTD")
 // cartAddItem(3, "Test Oolong3", 3)
 // cartDeleteItem(2, "Test Oolong2")
 // cartSetQuantity(3, "Test Oolong3", 5)
