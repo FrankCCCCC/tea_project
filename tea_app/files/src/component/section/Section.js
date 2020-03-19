@@ -4,6 +4,7 @@ import Gallery from '../gallery/Gallery'
 import MiniCard from '../card/MiniCard'
 import FlexGrid from '../grid/FlexGrid'
 import Carousel from '../carousel/Carousel'
+import Content from '../content/Content'
 import {ButtonPillarBlueDark} from '../button/Button'
 import {cartAddItem, cartGetState} from '../redux/action'
 import './Section.css';
@@ -46,6 +47,16 @@ class Section extends React.Component{
     render(){
         let classVar = `row ${this.props.is_reverse? "flex-row-reverse" : "flex-row"} align-items-center`;
 
+        let data1 = (<div style={{textAlign: "center"}}>
+            <h4 style={{fontWeight: "bold"}}>發酵溫度</h4>
+            <h1 style={{color: Color.greenDark, fontSize: '3rem'}}>26.3<span style={{fontSize: '2rem'}}>度</span></h1>
+        </div>)
+
+        let data2 = (<div style={{textAlign: "center" }}>
+            <h4 style={{fontWeight: "bold"}}>發酵濕度</h4>
+            <h1 style={{color: Color.greenDark, fontSize: '3rem'}}>63<span style={{fontSize: '2rem'}}>%</span></h1>
+        </div>)
+
         let button = (
             <div>
                 {/* <button onClick={this.handleBuyClick} style={{fontFamily: font_style.fontFamily, fontSize: "1.1rem", color: "white", border: "0px", paddingTop: "0.8rem", paddingBottom: "0.8rem", paddingRight: "1.5rem", paddingLeft: "1.5rem", backgroundColor: Color.blueDark, borderRadius: Shape.half_circle, boxShadow: Shape.box_shadow}}>加入購物車</button> */}
@@ -59,18 +70,17 @@ class Section extends React.Component{
         )
         let data = (
             <div style={{color: "grey", fontFamily: font_style.fontFamily, fontWeight: "bold"}}>
-                <div class="d-flex justify-content-around align-content-center flex-nowrap" style={{padding: "1rem"}}>
+                <FlexGrid items={[data1, data2]} flex_wrap={"nowrap"} justify_content="space-around"/>
+                {/* <div class="d-flex justify-content-around align-content-center flex-nowrap" style={{padding: "1rem"}}>
                     <div style={{textAlign: "center"}}>
                         <h4 style={{fontWeight: "bold"}}>發酵溫度</h4>
                         <h1 style={{color: Color.greenDark, fontSize: '3rem'}}>26.3<span style={{fontSize: '2rem'}}>度</span></h1>
-                        {/* <MiniCard head={<h1 style={{color: Color.white}}>26.3</h1>} title={<h4 style={{fontWeight: "bold", color: Color.white}}>發酵溫度</h4>} background={Color.greenDark} horizontal_align={"center"} min_width={"100%"}/> */}
                     </div>
                     <div style={{textAlign: "center" }}>
                         <h4 style={{fontWeight: "bold"}}>發酵濕度</h4>
                         <h1 style={{color: Color.greenDark, fontSize: '3rem'}}>63<span style={{fontSize: '2rem'}}>%</span></h1>
-                        {/* <MiniCard head={<h1 style={{color: Color.yellowHightLight}}>63%</h1>} title={<h4 style={{fontWeight: "bold", color: Color.white}}>發酵濕度</h4>} background={Color.greenDark} horizontal_align={"center"} min_width={"50%"}/> */}
                     </div>
-                </div>
+                </div> */}
             </div>
         )
 
@@ -79,10 +89,7 @@ class Section extends React.Component{
                 <div class={classVar} style={{height:"100%"}}>
                     <div class="col-lg-6" style={{textAlign: "center", verticalAlign: "middle", padding: ""}}>
                         <div style={{textAlign: "left", color: "grey", padding: "3rem"}}>
-                            <h3 style={{marginBottom: "0rem", fontFamily: font_style.fontFamily, fontWeight: "bold"}}>{this.props.title}</h3>
-                            <div style={{marginBottom: "1rem", height: "0.2rem", width: "5rem", backgroundColor: Color.greenDark}}></div>
-                                <h5 style={{marginBottom: "0.3rem", fontFamily: font_style.fontFamily}}>{this.props.subtitle}</h5>
-                                <p style={{fontFamily: font_style.fontFamily, fontSize: "1rem"}}>{this.props.paragraph}</p>
+                            <Content title={this.props.title} subtitle={this.props.subtitle} paragraph={this.props.paragraph}/>
                             <div>
                                 {this.props.id == 1? button:data}
                             </div>
@@ -97,11 +104,9 @@ class Section extends React.Component{
                             </div>
                         </div> */}
                         <div style={{width: "95%", margin: "auto"}}>
-                            {/* <Gallery id={this.props.id} img={this.props.img}/> */}
                             <MiniCard uuid={this.props.id} background={`url(${this.props.img})`} min_height={"70vh"} min_width={"100%"} />
                         </div>
                     </div>
-                    {/* <FlexGrid flex_wrap={"nowrap"} items={[<MiniCard head={<h1 style={{color: Color.white}}>26.3</h1>} title={<h4 style={{fontWeight: "bold", color: Color.white}}>發酵溫度</h4>} background={Color.greenDark} horizontal_align={"center"} min_width={"45%"}/>, <MiniCard head={<h1 style={{color: Color.yellowHightLight}}>63%</h1>} title={<h4 style={{fontWeight: "bold", color: Color.white}}>發酵濕度</h4>} background={Color.greenDark} horizontal_align={"center"} min_width={"45%"}/>]} justify_content={"center"}/> */}
                 </div>
             </div>
         );

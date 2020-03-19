@@ -86,7 +86,7 @@ class MiniCard extends React.Component {
         return (
             // <div key={i} style={{margin: "1rem", backgroundColor: Color.blueDark, borderRadius: "20px", display: "inline-block", boxShadow: "5px 5px 20px grey", minHeight: "5rem", minWidth: "20rem"}}>
             <div key={this.state.uuid} style={{background: this.props.background, backgroundPosition: "center", backgroundSize: "cover", backgroundRepeat: "no-repeat", boxShadow: Shape.box_shadow, minWidth: this.state.min_width, minHeight: this.state.min_height, borderRadius: Shape.round_corner, display: "inline-block", opacity: this.state.opacity, margin: "1rem"}} href={this.state.link}>
-                <div style={{display: "table", width: "100%", height: "100%", backgroundColor: this.state.mask, borderRadius: Shape.round_corner}}>
+                <div style={{display: "table", minWidth: this.props.min_width, minHeight: this.props.min_height, backgroundColor: this.state.mask, borderRadius: Shape.round_corner}}>
                     <div style={{display: "table-cell", tableLayout: "fixed", verticalAlign: this.state.vertical_align, textAlign: this.state.horizontal_align}}>
                         <div style={{padding: "3rem", fontFamily: font_style.fontFamily}}>
                                 <div style={{}}>

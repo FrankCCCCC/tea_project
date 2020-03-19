@@ -1,6 +1,5 @@
 import React from 'react';
-// import InfiniteScroll from 'react-infinite-scroller';
-// import Gallery from '../gallery/Gallery'
+import {assertArray, assertInteger, assertString} from '../util/Util'
 
 /**
  * @param {Object[]} items - Array of elements in asymmetric grid
@@ -9,56 +8,25 @@ import React from 'react';
  * @param {String} column_gap - The width of gap between columns
  */
 
-class AsymmetricGrid extends React.Component{
-    constructor(props){
-        super(props);
-        if(!Array.isArray(this.props.items)){
-            console.log("Error AsymmetricGrid items is not array")
-            throw "Error AsymmetricGrid items is not array";
-            return -1;
-        }
-        this.state = {
-            items: [],
-            column_count: 3,
-            column_width: "10rem",
-            column_gap: "2rem"
-        }
-    }
+function AsymmetricGrid(props) {
+    assertArray(props.items)
+    assertInteger(props.column_count)
+    assertString(props.column_width)
+    assertString(props.column_gap)
 
-    append(){
-
-    }
-
-    componentDidMount(){
-        this.setState({
-            items: this.props.items,
-            column_count: this.props.column_count,
-            column_width: this.props.column_width,
-            column_gap: this.props.column_gap
-        })
-    }
-
-    componentDidUpdate(){
-        if(this.state.items.length != this.props.items.length){
-            this.setState({
-                items: this.props.items,
-                column_count: this.props.column_count,
-                column_width: this.props.column_width,
-                column_gap: this.props.column_gap
-            })
-        }
-    }
-
-    render(){
-        return (
-            <div style={{}}>
-                {/* <Gallery galleryInput={this.state.posts} route={this.props.route}/> */}
-                <div style={{columnCount: this.state.column_count, columnWidth: this.state.column_width, columnGap: this.state.column_gap}}>
-                    {this.state.items}
-                </div>
+    return (
+        <div style={{width: "100%", height: "100%"}}>
+            <div style={{columnCount: props.column_count, columnWidth: props.column_width, columnGap: props.column_gap}}>
+                {props.items}
             </div>
-        );
-    }
+        </div>
+    )
+}
+
+AsymmetricGrid.defaultProps = {
+    column_count: 3, 
+    column_width: "10rem", 
+    column_gap: "2rem"
 }
 
 export default AsymmetricGrid;
