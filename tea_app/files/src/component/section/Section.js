@@ -50,7 +50,6 @@ function Section(props){
                     <div style={{textAlign: "left", color: "grey", padding: "3rem"}}>
                         <Content title={props.title} subtitle={props.subtitle} paragraph={props.paragraph}/>
                         <div>
-                            {/* {props.id == 1? button:data} */}
                             {props.extra}
                         </div>
                     </div>

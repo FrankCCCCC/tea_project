@@ -163,7 +163,7 @@ class ItemPage extends React.Component{
               }
               
             var button = (
-            <button onClick={handleBuyClick} style={{color: Color.blueDark, border: `2px solid ${Color.blueDark}`, paddingTop: "0.8rem", paddingBottom: "0.8rem", paddingRight: "1.5rem", paddingLeft: "1.5rem", marginBottom: "3rem", backgroundColor: "rgba(255, 255, 255, 0)", borderRadius: Shape.half_circle}}>
+            <button onClick={handleBuyClick} style={{color: Color.blueDark, border: `2px solid ${Color.blueDark}`, paddingTop: "0.8rem", paddingBottom: "0.8rem", paddingRight: "1.5rem", paddingLeft: "1.5rem", marginTop: "3rem", marginBottom: "3rem", backgroundColor: "rgba(255, 255, 255, 0)", borderRadius: Shape.half_circle}}>
             <div>
                 <img style={{width: "1.2rem", marginRight: "0.5rem", marginBottom: "0.3rem"}} src={ShoppingCart} />
                 <span style={{fontFamily: font_style.fontFamily, fontWeight: "bold", fontSize: "1.1rem"}}>加入購物車</span>
@@ -171,7 +171,7 @@ class ItemPage extends React.Component{
             </button>)
         
             var content = this.state.props.content.map((item, index, array) => {
-              return <Section id={index} title={item.title} subtitle={item.subtitle} paragraph={item.description} img={item.img} is_reverse={index === 0? true : false} extra={this.mapDataToPresent(item.data)}/>
+              return <Section id={index} title={item.title} subtitle={item.subtitle} paragraph={removeHtmlTag(item.description)} img={item.img} is_reverse={index === 0? true : false} extra={this.mapDataToPresent(item.data)}/>
             })
 
             var description = removeHtmlTag(this.state.props.description)
