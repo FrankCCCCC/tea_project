@@ -5,6 +5,9 @@ import Gallery from '../gallery/Gallery';
 import {fetchItemList, fetchItemCountAll, fetchItemList_p} from '../fetch/fetchItem';
 import AsymmetricGrid from '../grid/AsymmetricGrid'
 import InfiniteScroller from '../infiniteScroller/InfiniteScroller'
+import {PillBadge} from '../badge/Badge'
+import Color from '../theme/color'
+import {pre_sell_badge_text, in_stock_badge_text, hero_title_item_list_page, hero_paragraph_item_list_page} from '../theme/text'
 
 // function ItemListPage(props) {
 //     let loadRequest = fetchItemList(1,3).then(
@@ -50,6 +53,9 @@ class ItemListPage extends React.Component{
         return fetchItemList(count, offset).then(
             (resolve) => {
                 return resolve.map((item, index, array) => {
+                    let sell_type = ''
+                    if(item.sell_type === 'in_stock'){sell_type = in_stock_badge_text}
+                    else if(item.sell_type === 'pre_sale'){sell_type = pre_sell_badge_text}
                     return {
                         id: parseInt(item.id, 10), 
                         img: String(item.cover_img), 
@@ -57,7 +63,8 @@ class ItemListPage extends React.Component{
                         // caption_title: item.title,
                         // caption_subtitle: item.subtitle,
                         title: String(item.name),
-                        subtitle: String(item.producer_name)
+                        subtitle: String(item.producer_name),
+                        badge: <PillBadge color={Color.yellowHightLight} text={sell_type}/>
                     }
                 })
             }
@@ -86,7 +93,7 @@ class ItemListPage extends React.Component{
         return (
             <div>
                 <div style={{height: "3rem"}}></div>
-                <HeroTitle title="我們的茶" paragraph="最傳統的凍頂烏龍茶"/>
+                <HeroTitle title={hero_title_item_list_page} paragraph={hero_paragraph_item_list_page}/>
                 <div class="container">
                     {/* <GalleryList countAll={fetchItemCountAll().then((response) => {return response.count})} loadrequest={fetchItemList_p} route="item"/> */}
                     <InfiniteScroller count_all={fetchItemCountAll().then((response) => {return response.count})} load_request={this.handleLoadMore} grid_adapter={this.adapter} load_item_number_per_time={3}/>

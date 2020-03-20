@@ -30,7 +30,7 @@ const config = {
         township: {key: "township", schema: "township TEXT NOT NULL"},
         village: {key: "village", schema: "village TEXT NOT NULL"},
         road: {key: "road", schema: "road TEXT NOT NULL"},
-        items: {key: "items", schema: "items OrderItem[] NOT NULL"},
+        items: {key: "items", schema: "items OrderItem ARRAY NOT NULL"},
         total_price: {key: "total_price", schema: "total_price NUMERIC NOT NULL"},
         unit: {key: "unit", schema: "unit TEXT NOT NULL", options: ["NTD"]},
         total_quantity: {key: "total_quantity", schema: "total_quantity INTEGER NOT NULL"},
@@ -91,10 +91,10 @@ const config = {
         slogan: {key: "slogan", schema: "slogan TEXT"},
         description: {key: "description", schema: "description TEXT NOT NULL"}, // Markdown Format
         content: {key: "content", schema: "content Section ARRAY NOT NULL"},
-        certification: {key: "certification", schema: "certification Certification[]"},
+        certification: {key: "certification", schema: "certification Certification ARRAY"},
         spec: {key: "spec", schema: "spec Spec ARRAY"}, // 
         cover_img: {key: "cover_img", schema: "cover_img TEXT NOT NULL"},
-        imgs: {key: "imgs", schema: "imgs TEXT[]"}, // String Array
+        imgs: {key: "imgs", schema: "imgs TEXT ARRAY"}, // String Array
         block_id: {key: "block_id", schema: "block_id TEXT"},
         block_link: {key: "block_link", schema: "block_link TEXT"},
         transaction_id: {key: "transaction_id", schema: "transaction_id TEXT"},
@@ -109,7 +109,7 @@ const config = {
     },
     Section: {
         type_name: "Section",
-        display: {key: "display", schema: "display DisplayType"},
+        display: {key: "display", schema: "display TEXT"},
         img: {key: "img", schema: "img TEXT"},
         backgroundColor: {key: "backgroundColor", schema: "backgroundColor TEXT"},
         title: {key: "title", schema: "title TEXT"},

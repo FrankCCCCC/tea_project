@@ -33,6 +33,7 @@ item_action.on('mount', function (parent) {
                                                     util.log(`Error: ${reject}`)
                                                     return reject;
                                             })
+                                            return resolve
                                         }
                                     ).catch(
                                         (reject) => {
@@ -40,6 +41,7 @@ item_action.on('mount', function (parent) {
                                             return reject;   
                                         }
                                     )
+                                    return resolve
                                 }
                             ).catch(
                                 (reject) => {
@@ -47,6 +49,7 @@ item_action.on('mount', function (parent) {
                                     return reject;   
                                 }
                             )
+                            return resolve
                         }
                     ).catch(
                         (reject) => {
@@ -140,11 +143,12 @@ item_action.post('/insert_item', (req, res) => {
 item_action.post('/query_item_by_id', (req, res) => {
     DbItem.queryItemById(parseInt(req.body.id, 10)).then(
         (resolve) => {
-            var md = new Remarkable({html: true})
-            var res_item = resolve.rows[0];
+            // var md = new Remarkable({html: true})
+            // var res_item = resolve.rows[0];
             
             // util.log(md.render(resolve.rows[0].content))
-            res_item.description = md.render(resolve.rows[0].description)
+            // res_item.description = md.render(resolve.rows[0].description)
+            var res_item = util.dataConverter(resolve.rows[0]);
             // res_item.content = md.render('Some Markdown text with <span style="color:blue">some *blue* text</span>.')
             util.log(`Sending ${resolve.rowCount} rows to ${req.ip} with ${req.ips}`)
             res.header("Access-Control-Allow-Origin", "*");

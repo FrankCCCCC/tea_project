@@ -40,7 +40,8 @@ class Gallery extends React.Component{
                             </div>
                             <div style={{position: "absolute", top: "0.7rem", right: "1rem"}}>
                                 <span style={{textAlign: "right"}}>
-                                    <PillBadge color={Color.yellowHightLight} text={"預售"}/>
+                                    {/* <PillBadge color={Color.yellowHightLight} text={"預售"}/> */}
+                                    {badge}
                                 </span>
                             </div>
                         </div>

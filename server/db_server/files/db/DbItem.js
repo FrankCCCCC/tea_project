@@ -263,7 +263,7 @@ function queryItemById(itemId){
         ${ds.dataStructure.item.slogan.key},
         ${ds.dataStructure.item.description.key},
         array_to_json(${ds.dataStructure.item.content.key}) AS ${ds.dataStructure.item.content.key},
-        ${ds.dataStructure.item.certification.key},
+        array_to_json(${ds.dataStructure.item.certification.key}) AS ${ds.dataStructure.item.certification.key},
         array_to_json(${ds.dataStructure.item.spec.key}) AS ${ds.dataStructure.item.spec.key},
         ${ds.dataStructure.item.cover_img.key},
         array_to_json(${ds.dataStructure.item.imgs.key}) AS ${ds.dataStructure.item.imgs.key},
@@ -304,7 +304,7 @@ function queryItemByName(itemName){
     ${ds.dataStructure.item.slogan.key},
     ${ds.dataStructure.item.description.key},
     array_to_json(${ds.dataStructure.item.content.key}) AS ${ds.dataStructure.item.content.key},
-    ${ds.dataStructure.item.certification.key},
+    array_to_json(${ds.dataStructure.item.certification.key}) AS ${ds.dataStructure.item.certification.key},
     array_to_json(${ds.dataStructure.item.spec.key}) AS ${ds.dataStructure.item.spec.key},
     ${ds.dataStructure.item.cover_img.key},
     array_to_json(${ds.dataStructure.item.imgs.key}) AS ${ds.dataStructure.item.imgs.key},
@@ -347,7 +347,7 @@ function queryItemByProducerId(producerId){
         array_to_json(${ds.dataStructure.item.content.key}) AS ${ds.dataStructure.item.content.key},
         ${ds.dataStructure.item.certification.key},
         array_to_json(${ds.dataStructure.item.spec.key}) AS ${ds.dataStructure.item.spec.key},
-        ${ds.dataStructure.item.cover_img.key},
+        array_to_json(${ds.dataStructure.item.certification.key}) AS ${ds.dataStructure.item.certification.key},
         array_to_json(${ds.dataStructure.item.imgs.key}) AS ${ds.dataStructure.item.imgs.key},
         ${ds.dataStructure.item.block_id.key},
         ${ds.dataStructure.item.block_link.key},
@@ -386,7 +386,7 @@ function queryItemByProducerName(producerName){
         ${ds.dataStructure.item.slogan.key},
         ${ds.dataStructure.item.description.key},
         array_to_json(${ds.dataStructure.item.content.key}) AS ${ds.dataStructure.item.content.key},
-        ${ds.dataStructure.item.certification.key},
+        array_to_json(${ds.dataStructure.item.certification.key}) AS ${ds.dataStructure.item.certification.key},
         array_to_json(${ds.dataStructure.item.spec.key}) AS ${ds.dataStructure.item.spec.key},
         ${ds.dataStructure.item.cover_img.key},
         array_to_json(${ds.dataStructure.item.imgs.key}) AS ${ds.dataStructure.item.imgs.key},
@@ -442,7 +442,7 @@ function queryItemList(count, offset){
         ${ds.dataStructure.item.slogan.key},
         ${ds.dataStructure.item.description.key},
         array_to_json(${ds.dataStructure.item.content.key}) AS ${ds.dataStructure.item.content.key},
-        ${ds.dataStructure.item.certification.key},
+        array_to_json(${ds.dataStructure.item.certification.key}) AS ${ds.dataStructure.item.certification.key},
         array_to_json(${ds.dataStructure.item.spec.key}) AS ${ds.dataStructure.item.spec.key},
         ${ds.dataStructure.item.cover_img.key},
         array_to_json(${ds.dataStructure.item.imgs.key}) AS ${ds.dataStructure.item.imgs.key},
@@ -469,7 +469,7 @@ function insertDummy(){
         title: "Sample Title",
         subtitle: "Sample Subtitle",
         description: "Sample Description", // Markdown Format
-        data: [{temp: "25", unit: "c"}, {ferment: "30", unit: "%"}],
+        data: [{property: "Temperature", index: "25", unit: "c"}, {property: "Ferment", index: "30", unit: "%"}],
         comment: "comment"
         },
         {
@@ -479,12 +479,15 @@ function insertDummy(){
         title: "Sample Title1",
         subtitle: "Sample Subtitle1",
         description: "Sample Description1", // Markdown Format
-        data: [{temp: "25", unit: "c"}, {ferment: "30", unit: "%"}],
+        data: [{property: "Temperature", index: "25", unit: "c"}, {property: "Ferment", index: "30", unit: "%"}],
         comment: "comment"
         }
     ]
     let cert = [{
         name: "SGS", 
+        link: "www.sgs.com"
+    }, {
+        name: "Origin Place Certi", 
         link: "www.sgs.com"
     }]
     let spec = [{property: "100g", value: "Heavily Baked", comment: "Strongest"}, {property: "100g", value: "Heavily Baked", comment: "Strongest"}]
@@ -529,6 +532,7 @@ function insertDummy(){
 // createProducerType();
 // createSpecType();
 // createItemsTable();
+// createSectionType()
 
 // queryItemsCountAll();
 // queryItemById(1);
