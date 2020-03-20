@@ -27,7 +27,7 @@ class Gallery extends React.Component{
 
     makeItem(i, id, img, caption_title, caption_subtitle, route, title, subtitle, badge){
         return (
-            <div key={i} style={{marginBottom: "1rem", display: "inline-block"}}>
+            <div data-aos="fade-up" key={i} style={{marginBottom: "1rem", display: "inline-block"}}>
                 <Link to={`${route}/${id}`}>
                     <div style={{position: "relative", textAlign: "", color: "white"}}>
                         <img class="img-fluid" src={img} alt="Card image cap" style={{width: "100%", borderRadius: "20px", boxShadow: "5px 5px 20px grey"}}/>

@@ -7,6 +7,7 @@ import AppNav from './component/nav/AppNav'
 import HomePage from './component/pages/HomePage'
 import FarmerPage from './component/pages/FarmerPage'
 import CartPage from './component/pages/CartPage'
+import AboutPage from './component/pages/AboutPage'
 import PostPage from './component/pages/PostPage'
 import PostListPage from './component/pages/PostListPage'
 import ItemPage from './component/pages/ItemPage'
@@ -34,7 +35,7 @@ function App() {
             <AppNav/>
             <Switch>
               <Route path="/" exact component={HomePage}/>
-              <Route path="/about" exact component={FarmerPage}/>
+              <Route path="/about" exact component={AboutPage}/>
               <Route path="/item" exact component={ItemListPage}/>
               <Route path="/cart" exact component={CartPage}/>
               <Route path="/post" exact component={PostListPage} />

@@ -15,6 +15,8 @@ import {font_style, title_style, subtitle_style, paragraph_style} from '../theme
 import {cartAddItem, cartGetState} from '../redux/action'
 import {fetchItemById} from '../fetch/fetchItem'
 import LoadingPage from '../pages/LoadingPage'
+import {removeHtmlTag} from '../util/Util'
+import { AnimateNumber } from '../animate/Animate'
 
 let data1 = (
 <div style={{textAlign: "center"}}>
@@ -126,10 +128,11 @@ class ItemPage extends React.Component{
     
     mapDataToPresent(datas){
         let data_list = datas.map((item, index, array) => {
+
             return (
             <div style={{textAlign: "center"}}>
                 <h4 style={{fontWeight: "bold", fontFamily: font_style.fontFamily}}>{item.property}</h4>
-                <h1 style={{color: Color.greenDark, fontSize: '3rem', fontFamily: font_style.fontFamily}}>{item.index}<span style={{fontSize: '2rem'}}>{item.unit}</span></h1>
+                <h1 style={{color: Color.greenDark, fontSize: '3rem', fontFamily: font_style.fontFamily}}><AnimateNumber number={item.index}/><span style={{fontSize: '2rem'}}>{item.unit}</span></h1>
             </div>)
         })
         return <FlexGrid items={data_list} flex_wrap={"nowrap"} justify_content={"space-around"}/>
@@ -168,10 +171,10 @@ class ItemPage extends React.Component{
             </button>)
         
             var content = this.state.props.content.map((item, index, array) => {
-              return <Section id={index} title={item.title} subtitle={item.subtitle} paragraph={item.paragraph} img={item.img} is_reverse={index === 0? true : false} extra={this.mapDataToPresent(item.data)}/>
+              return <Section id={index} title={item.title} subtitle={item.subtitle} paragraph={item.description} img={item.img} is_reverse={index === 0? true : false} extra={this.mapDataToPresent(item.data)}/>
             })
 
-            var description = this.state.props.description.replace(/<[^>]*>/g, "")
+            var description = removeHtmlTag(this.state.props.description)
     
             return (
                 <div>
@@ -197,33 +200,33 @@ class ItemPage extends React.Component{
     }
 }
 
-function mapToSlider(imgs){
-    return imgs.map((item, index, array) => {
-        return {
-            id: index,
-            media: item,
-            caption_title: "",
-            caption_subtitle: "",
-            link: item
-        }
-    })
-}
+// function mapToSlider(imgs){
+//     return imgs.map((item, index, array) => {
+//         return {
+//             id: index,
+//             media: item,
+//             caption_title: "",
+//             caption_subtitle: "",
+//             link: item
+//         }
+//     })
+// }
 
-function mapToCerti(certis){
-    return certis.map((item, index, array) => {
-        return <MiniCard uuid={index} background={"url(http://localhost:5000/img/hill2.jpg)"} head={<h1 style={{color: Color.white, letterSpacing: "0.3rem"}}>SGS</h1>} title={<h5 style={{color: Color.white}}>檢驗合格</h5>} min_width={"10rem"} mask={"rgba(0, 0, 0, 0.3)"}/>
-    })
-}
+// function mapToCerti(certis){
+//     return certis.map((item, index, array) => {
+//         return <MiniCard uuid={index} background={"url(http://localhost:5000/img/hill2.jpg)"} head={<h1 style={{color: Color.white, letterSpacing: "0.3rem"}}>SGS</h1>} title={<h5 style={{color: Color.white}}>檢驗合格</h5>} min_width={"10rem"} mask={"rgba(0, 0, 0, 0.3)"}/>
+//     })
+// }
 
-function mapDataToPresent(datas){
-    let data_list = datas.map((item, index, array) => {
-        return (
-        <div style={{textAlign: "center"}}>
-            <h4 style={{fontWeight: "bold", fontFamily: font_style.fontFamily}}>{item.property}</h4>
-            <h1 style={{color: Color.greenDark, fontSize: '3rem', fontFamily: font_style.fontFamily}}>{item.index}<span style={{fontSize: '2rem'}}>{item.unit}</span></h1>
-        </div>)
-    })
-    return <FlexGrid items={data_list} flex_wrap={"nowrap"} justify_content={"space-around"}/>
-}
+// function mapDataToPresent(datas){
+//     let data_list = datas.map((item, index, array) => {
+//         return (
+//         <div style={{textAlign: "center"}}>
+//             <h4 style={{fontWeight: "bold", fontFamily: font_style.fontFamily}}>{item.property}</h4>
+//             <h1 style={{color: Color.greenDark, fontSize: '3rem', fontFamily: font_style.fontFamily}}>{item.index}<span style={{fontSize: '2rem'}}>{item.unit}</span></h1>
+//         </div>)
+//     })
+//     return <FlexGrid items={data_list} flex_wrap={"nowrap"} justify_content={"space-around"}/>
+// }
 
 export default ItemPage;

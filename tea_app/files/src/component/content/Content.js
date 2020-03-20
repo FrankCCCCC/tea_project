@@ -20,8 +20,8 @@ function Content(props) {
         <div style={{ width: "100%", height:"100%"}}>
             <h3 style={{marginBottom: "0rem", fontFamily: font_style.fontFamily, fontWeight: "bold"}}>{props.title}</h3>
             <div style={{marginBottom: "1rem", height: "0.2rem", width: "5rem", backgroundColor: props.bar_color}}></div>
-                <h5 style={{marginBottom: "0.3rem", fontFamily: font_style.fontFamily}}>{props.subtitle}</h5>
-                <p style={{fontFamily: font_style.fontFamily, fontSize: "1rem"}}>{props.paragraph}</p>
+                <div style={{marginBottom: "0.3rem", fontFamily: font_style.fontFamily}}>{props.subtitle}</div>
+                <div style={{fontFamily: font_style.fontFamily, fontSize: "1rem"}}>{props.paragraph}</div>
         </div>
     )
 }

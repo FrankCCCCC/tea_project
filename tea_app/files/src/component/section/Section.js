@@ -41,79 +41,35 @@ import ShoppingCart from '../img/shopping_cart.svg'
  * @param {Object} extra - The data and index of the content in the section
  */
 
-class Section extends React.Component{
-    constructor(props) {
-        super(props);
-        // this.handleBuyClick = this.handleBuyClick.bind(this);
-    }
-
-    // handleBuyClick(){
-    //     console.log(cartGetState())
-    //     cartAddItem(2, "http://localhost:5000/img/hill2.jpg", "綠蟬招牌紅茶", 2, 350)
-    //     console.log(cartGetState())
-    // }
-
-    render(){
-        let classVar = `row ${this.props.is_reverse? "flex-row-reverse" : "flex-row"} align-items-center`;
-
-        // let data1 = (<div style={{textAlign: "center"}}>
-        //     <h4 style={{fontWeight: "bold"}}>發酵溫度</h4>
-        //     <h1 style={{color: Color.greenDark, fontSize: '3rem'}}>26.3<span style={{fontSize: '2rem'}}>度</span></h1>
-        // </div>)
-
-        // let data2 = (<div style={{textAlign: "center" }}>
-        //     <h4 style={{fontWeight: "bold"}}>發酵濕度</h4>
-        //     <h1 style={{color: Color.greenDark, fontSize: '3rem'}}>63<span style={{fontSize: '2rem'}}>%</span></h1>
-        // </div>)
-
-        // let button = (
-        //     <div>
-        //         {/* <button onClick={this.handleBuyClick} style={{fontFamily: font_style.fontFamily, fontSize: "1.1rem", color: "white", border: "0px", paddingTop: "0.8rem", paddingBottom: "0.8rem", paddingRight: "1.5rem", paddingLeft: "1.5rem", backgroundColor: Color.blueDark, borderRadius: Shape.half_circle, boxShadow: Shape.box_shadow}}>加入購物車</button> */}
-        //         <button onClick={this.handleBuyClick} style={{position: "absolute", transition: "translateY(50%)", color: Color.blueDark, border: `2px solid ${Color.blueDark}`, paddingTop: "0.8rem", paddingBottom: "0.8rem", paddingRight: "1.5rem", paddingLeft: "1.5rem", backgroundColor: "rgba(255, 255, 255, 0)", borderRadius: Shape.half_circle}}>
-        //             <div>
-        //                 <img style={{width: "1.2rem", marginRight: "0.5rem", marginBottom: "0.3rem"}} src={ShoppingCart} />
-        //                 <span style={{fontFamily: font_style.fontFamily, fontWeight: "bold", fontSize: "1.1rem"}}>加入購物車</span>
-        //             </div>
-        //         </button>
-        //     </div>
-        // )
-        // let data = (
-        //     <div style={{color: "grey", fontFamily: font_style.fontFamily, fontWeight: "bold"}}>
-        //         {/* <FlexGrid items={[data1, data2]} flex_wrap={"nowrap"} justify_content="space-around"/> */}
-        //         {this.props.extra}
-        //     </div>
-        // )
-
-        return(
-            <div>
-                <div class={classVar} style={{height:"100%"}}>
-                    <div class="col-lg-6" style={{textAlign: "center", verticalAlign: "middle", padding: ""}}>
-                        <div style={{textAlign: "left", color: "grey", padding: "3rem"}}>
-                            <Content title={this.props.title} subtitle={this.props.subtitle} paragraph={this.props.paragraph}/>
-                            <div>
-                                {/* {this.props.id == 1? button:data} */}
-                                {this.props.extra}
-                            </div>
+function Section(props){
+    let classVar = `row ${props.is_reverse? "flex-row-reverse" : "flex-row"} align-items-center`;
+    return(
+        <div data-aos="fade-up">
+            <div class={classVar} style={{height:"100%"}}>
+                <div class="col-lg-6" style={{textAlign: "center", verticalAlign: "middle", padding: ""}}>
+                    <div style={{textAlign: "left", color: "grey", padding: "3rem"}}>
+                        <Content title={props.title} subtitle={props.subtitle} paragraph={props.paragraph}/>
+                        <div>
+                            {/* {props.id == 1? button:data} */}
+                            {props.extra}
                         </div>
-                        
                     </div>
-                    <div class="col-lg-6" style={{height: "100%", padding: 0}}>
-                        {/* <div class="carousel slide" data-ride="carousel">
-                            <div class="carousel-inner" role="listbox">
-                                <div class="carousel-item active section" style={{backgroundImage: "url("+ this.props.img +")", width: "100%"}}>
-                                </div>
+                    
+                </div>
+                <div class="col-lg-6" style={{height: "100%", padding: 0}}>
+                    {/* <div class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner" role="listbox">
+                            <div class="carousel-item active section" style={{backgroundImage: "url("+ props.img +")", width: "100%"}}>
                             </div>
-                        </div> */}
-                        <div style={{width: "95%", margin: "auto"}}>
-                            <MiniCard uuid={this.props.id} background={`url(${this.props.img})`} min_height={"70vh"} min_width={"100%"} />
                         </div>
+                    </div> */}
+                    <div style={{width: "80%", margin: "auto"}}>
+                        <MiniCard uuid={props.id} background={`url(${props.img})`} min_height={"70vh"} min_width={"100%"} />
                     </div>
                 </div>
             </div>
-        );
-    }
-    
-    
+        </div>
+    );
 }
 
 export default Section;
