@@ -64,7 +64,7 @@ class ItemListPage extends React.Component{
                         // caption_subtitle: item.subtitle,
                         title: String(item.name),
                         subtitle: String(item.producer_name),
-                        badge: <PillBadge color={Color.yellowHightLight} text={sell_type}/>
+                        badge: <PillBadge textColor={Color.white} backgroundColor={Color.yellowHightLight} text={sell_type}/>
                     }
                 })
             }

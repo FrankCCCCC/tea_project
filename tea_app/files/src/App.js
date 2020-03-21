@@ -13,6 +13,7 @@ import PostListPage from './component/pages/PostListPage'
 import ItemPage from './component/pages/ItemPage'
 import ItemListPage from './component/pages/ItemListPage'
 import LoadingPage from './component/pages/LoadingPage'
+import Fab from './component/fab/Fab'
 import {combine_store} from './component/redux/store'
 
 import 'bootstrap'
@@ -45,6 +46,7 @@ function App() {
               <Route component={HomePage}/>
             </Switch>
             {/* <LoadingPage/> */}
+            <Fab/>
             <Footer/>
         </Router>
       </Provider>
