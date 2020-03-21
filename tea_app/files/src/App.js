@@ -32,6 +32,7 @@ function App() {
   return (
     <div className="App">
       <Provider store={combine_store}>
+      <Provider store={combine_store}>
         <Router>
             <AppNav/>
             <Switch>
@@ -49,6 +50,7 @@ function App() {
             <Fab/>
             <Footer/>
         </Router>
+      </Provider>
       </Provider>
     </div>
   );

@@ -2,10 +2,11 @@ import React from 'react'
 import {useSpring} from 'react-spring'
 import {AnimateNumber} from '../animate/Animate'
 import Toast from '../toast/Toast'
-import Alert from '../alert/Alert'
+import {Alert, makeAlert} from '../popUps/Alert'
+import {popUpAddPopUp} from '../popUps/PopUpAction'
 
 function AboutPage(props){
-    
+    // popUpAddPopUp(2, makeAlert("Test, tttest"), 3000)
     return (
         <div>
             
