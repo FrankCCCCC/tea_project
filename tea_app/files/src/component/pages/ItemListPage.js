@@ -7,7 +7,8 @@ import AsymmetricGrid from '../grid/AsymmetricGrid'
 import InfiniteScroller from '../infiniteScroller/InfiniteScroller'
 import {PillBadge} from '../badge/Badge'
 import Color from '../theme/color'
-import {pre_sell_badge_text, in_stock_badge_text, hero_title_item_list_page, hero_paragraph_item_list_page} from '../theme/text'
+import {hero_title_item_list_page, hero_paragraph_item_list_page} from '../theme/text'
+import {mapSellTypeToText} from '../util/Util'
 
 // function ItemListPage(props) {
 //     let loadRequest = fetchItemList(1,3).then(
@@ -53,9 +54,8 @@ class ItemListPage extends React.Component{
         return fetchItemList(count, offset).then(
             (resolve) => {
                 return resolve.map((item, index, array) => {
-                    let sell_type = ''
-                    if(item.sell_type === 'in_stock'){sell_type = in_stock_badge_text}
-                    else if(item.sell_type === 'pre_sale'){sell_type = pre_sell_badge_text}
+                    let sell_type = mapSellTypeToText(item.sell_type)
+                    
                     return {
                         id: parseInt(item.id, 10), 
                         img: String(item.cover_img), 

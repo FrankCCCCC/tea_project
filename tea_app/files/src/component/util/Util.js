@@ -1,3 +1,5 @@
+import {pre_sell, in_stock} from '../util/config'
+import {pre_sell_text, in_stock_text} from '../theme/text'
 /**
  * @param {Number} i - The number for type assertion
  * @param {Boolean} is_required - The flag to control whether allow undefined input
@@ -48,4 +50,11 @@ export function assertArray(i, is_required = false){
  */
 export function removeHtmlTag(html){
     return String(html).replace(/<[^>]*>/g, "")
+}
+
+export function mapSellTypeToText(sell_type){
+    let sell_type_text = ""
+    if(sell_type === pre_sell){sell_type_text = pre_sell_text}
+    else if(sell_type === in_stock){sell_type_text = in_stock_text}
+    return sell_type_text
 }

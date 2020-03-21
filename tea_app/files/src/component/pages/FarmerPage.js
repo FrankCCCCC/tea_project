@@ -98,7 +98,7 @@ const props = {
 function FarmerPage() {
     var handleBuyClick = () => {
         console.log(cartGetState())
-        cartAddItem(props.id, props.cover_img, props.name, 1, props.price, props.unit)
+        cartAddItem(props.id, props.cover_img, props.name, props.sell_type, 1, props.price, props.unit)
         console.log(cartGetState())
       }
       

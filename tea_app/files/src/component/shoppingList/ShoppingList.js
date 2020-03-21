@@ -4,6 +4,8 @@ import {font_style} from '../theme/font'
 import Color from '../theme/color'
 import {PillBadge} from '../badge/Badge'
 import deleteLogo from '../img/x-grey.svg'
+import {mapSellTypeToText} from '../util/Util'
+import Shape from '../theme/Shape'
 
 class ShoppingList extends React.Component{
     constructor(props){
@@ -41,14 +43,20 @@ class ShoppingList extends React.Component{
         )
     }
 
-    makeListItem(list_id, name, img, quantity, price) {
+    makeListItem(list_id, img, name, sell_type, quantity, price) {
+        let sell_type_text = mapSellTypeToText(sell_type)
+        console.log(sell_type_text)
         return (
             <div class="d-flex align-items-center justify-content-between"  style={{marginBottom: "1rem"}}>
                 <div style={{backgroundImage: `url(${img})`, width: "5rem", height: "5rem", borderRadius: "4px", backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}}></div>
                 <div class='flex-fill' style={{marginLeft: '1rem', color: Color.grey, fontSize: '1.3rem', fontWeight: 'bold', width: '50%'}}>{name}
-                    <div style={{color: Color.white}}><PillBadge color={Color.yellowHightLight} text={"預售"}/></div>
+                    <div style={{color: Color.white}}><PillBadge color={Color.yellowHightLight} text={sell_type_text}/></div>
                 </div>
-                <div class='flex-fill' style={{textAlign:"right", width: '20%'}}>{quantity}</div>
+                <div class='flex-fill' style={{textAlign:"right", width: '20%'}}>
+                    <div>
+                        <input style={{width: "5rem", background:"", border: `2px solid ${Color.blueLight}`, borderRadius: Shape.round_corner, paddingTop: "0.3rem", paddingBottom: "0.3rem", paddingLeft: "1.5rem", paddingRight: "1.5rem", textAlign: "center", color: Color.greenDark}} type='text' value={quantity}/>
+                    </div>
+                </div>
                 <div class='flex-fill' style={{textAlign:"right", width: '20%'}}>{`${price} $`}</div>
                 
                 <div class='flex-fill' style={{textAlign:"right", width: '10%'}}>
@@ -78,7 +86,7 @@ class ShoppingList extends React.Component{
             let total_number = this.countStoreCartToTotalNumber(cart)
             let total_price = this.calculateStoreCartToTotalPrice(cart)
             let list = cart.map((item, index, array) => {
-                return this.makeListItem(index, item.name, item.img, item.quantity, item.price)
+                return this.makeListItem(index, item.img, item.name, item.sell_type, item.quantity, item.price)
             })
             let sum = this.makeListSum(total_number, total_price)
             return (

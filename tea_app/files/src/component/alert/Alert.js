@@ -3,6 +3,7 @@ import React from 'react'
 import {font_style} from '../theme/font'
 import Color from '../theme/color'
 import Shape from '../theme/Shape'
+import x from '../img/x-grey.svg'
 import $ from 'jquery'
 
 /**
@@ -41,10 +42,11 @@ function Alert(props) {
         <div aria-live="polite" aria-atomic="true" style={{position: "relative", minHeight: "200px", width: "100%", zIndex: 100}}>
             <div style={{position: "absolute", top: "100%", right: "1rem", width: "30rem"}}>
                 {/* Taost instance */}
-                <div class={`alert`} role="alert" style={{color: Color.white, background: Color.greenDark, borderRadius: Shape.round_corner, boxShadow: Shape.box_shadow, fontFamily: font_style.fontFamily, fontSize: "1rem", fontWeight: "bold"}}>
+                <div class={`alert`} role="alert" style={{color: Color.grey, background: Color.greenLight, borderRadius: Shape.round_corner, boxShadow: `5px 5px 20px ${Color.greenLight}`, fontFamily: font_style.fontFamily, fontSize: "1rem", fontWeight: "bold"}}>
                     <strong>{props.title}</strong>{props.message}
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                        {/* <span  aria-hidden="true">&times;</span> */}
+                        <img src={x} style={{width: "0.8rem", height: "0.8rem"}}/>
                     </button>
                 </div>
 

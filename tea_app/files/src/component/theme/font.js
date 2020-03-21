@@ -7,7 +7,7 @@ export const secondary_color = {
 }
 
 export const font_style = {
-    fontFamily: "Helvetica, Arial, LiHei Pro, 黑體-繁, 微軟正黑體, sans-serif"
+    fontFamily: "Helvetica, Arial, LiHei Pro, 微軟正黑體, 黑體-繁, sans-serif"
 };
 export const title_style = {
     fontFamily: font_style.fontFamily,

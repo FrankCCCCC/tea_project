@@ -16,7 +16,8 @@ import {cartAddItem, cartGetState} from '../redux/action'
 import {fetchItemById} from '../fetch/fetchItem'
 import LoadingPage from '../pages/LoadingPage'
 import {removeHtmlTag} from '../util/Util'
-import { AnimateNumber } from '../animate/Animate'
+import {AnimateNumber} from '../animate/Animate'
+import {hero_title_item_page_ceritfication, hero_paragraph_item_page_ceritfication, add_to_cart, already_in_cart} from '../theme/text'
 
 let data1 = (
 <div style={{textAlign: "center"}}>
@@ -138,6 +139,33 @@ class ItemPage extends React.Component{
         return <FlexGrid items={data_list} flex_wrap={"nowrap"} justify_content={"space-around"}/>
     }
 
+    makeBuyButton(){
+        var handleBuyClick = (event) => {
+            cartAddItem(this.state.props.id, this.state.props.cover_img, this.state.props.name, this.state.props.sell_type, 1, this.state.props.price, this.state.props.unit)
+            // console.log(cartGetState())
+            event.currentTarget.innerHTML = already_in_cart
+            event.currentTarget.style.color = Color.greyLight
+            event.currentTarget.style.borderColor = Color.greyLight
+            event.currentTarget.setAttribute("disabled", "disabled")
+            
+          }
+
+        var handleHover = (event) => {
+            console.log("hi")
+            event.currentTarget.style.color = Color.greyLight
+            event.currentTarget.style.borderColor = Color.greyLight
+        }
+          
+        return (
+        <button onClick={handleBuyClick.bind(this)} onMouseOver={handleHover.bind(this)} style={{color: Color.blueDark, border: `2px solid ${Color.blueDark}`, paddingTop: "0.8rem", paddingBottom: "0.8rem", paddingRight: "1.5rem", paddingLeft: "1.5rem", marginTop: "3rem", marginBottom: "3rem", backgroundColor: "rgba(255, 255, 255, 0)", borderRadius: Shape.half_circle, fontFamily: font_style.fontFamily, fontWeight: "bold", fontSize: "1.1rem"}}>
+        {/* <div> */}
+            {/* <img style={{width: "1.2rem", marginRight: "0.5rem", marginBottom: "0.3rem"}} src={ShoppingCart} /> */}
+            {/* <span style={{fontFamily: font_style.fontFamily, fontWeight: "bold", fontSize: "1.1rem"}}>{add_to_cart}</span> */}
+            {add_to_cart}
+        {/* </div> */}
+        </button>)
+    }
+
     componentDidMount(){
         if(typeof(this.state.props_id) != "number"){
             console.log("Error: ItemPage parameter id is not number")
@@ -156,19 +184,20 @@ class ItemPage extends React.Component{
     render(){
         if(this.state.is_loaded){
             console.log(this.state)
-            var handleBuyClick = () => {
-                console.log(cartGetState())
-                cartAddItem(this.state.props.id, this.state.props.cover_img, this.state.props.name, 1, this.state.props.price, this.state.props.unit)
-                console.log(cartGetState())
-              }
+            // var handleBuyClick = () => {
+            //     // console.log(cartGetState())
+            //     cartAddItem(this.state.props.id, this.state.props.cover_img, this.state.props.name, this.state.props.sell_type, 1, this.state.props.price, this.state.props.unit)
+            //     // console.log(cartGetState())
+
+            //   }
               
-            var button = (
-            <button onClick={handleBuyClick} style={{color: Color.blueDark, border: `2px solid ${Color.blueDark}`, paddingTop: "0.8rem", paddingBottom: "0.8rem", paddingRight: "1.5rem", paddingLeft: "1.5rem", marginTop: "3rem", marginBottom: "3rem", backgroundColor: "rgba(255, 255, 255, 0)", borderRadius: Shape.half_circle}}>
-            <div>
-                <img style={{width: "1.2rem", marginRight: "0.5rem", marginBottom: "0.3rem"}} src={ShoppingCart} />
-                <span style={{fontFamily: font_style.fontFamily, fontWeight: "bold", fontSize: "1.1rem"}}>加入購物車</span>
-            </div>
-            </button>)
+            // var button = (
+            // <button onClick={handleBuyClick.bind(this)} style={{color: Color.blueDark, border: `2px solid ${Color.blueDark}`, paddingTop: "0.8rem", paddingBottom: "0.8rem", paddingRight: "1.5rem", paddingLeft: "1.5rem", marginTop: "3rem", marginBottom: "3rem", backgroundColor: "rgba(255, 255, 255, 0)", borderRadius: Shape.half_circle}}>
+            // <div>
+            //     <img style={{width: "1.2rem", marginRight: "0.5rem", marginBottom: "0.3rem"}} src={ShoppingCart} />
+            //     <span style={{fontFamily: font_style.fontFamily, fontWeight: "bold", fontSize: "1.1rem"}}>加入購物車</span>
+            // </div>
+            // </button>)
         
             var content = this.state.props.content.map((item, index, array) => {
               return <Section id={index} title={item.title} subtitle={item.subtitle} paragraph={removeHtmlTag(item.description)} img={item.img} is_reverse={index === 0? true : false} extra={this.mapDataToPresent(item.data)}/>
@@ -181,9 +210,9 @@ class ItemPage extends React.Component{
                     <Slider sliderInput = {this.mapToSlider(this.state.props.imgs)} is_show_indicator = {true} is_show_control = {true}/>
                     <Banner/>
                     <HeroTitle title={this.state.props.name} paragraph={description}/>
-                    <Section title={this.state.props.name} paragraph={description} img={this.state.props.cover_img} is_reverse={false} extra={button}/>
+                    <Section title={this.state.props.name} paragraph={description} img={this.state.props.cover_img} is_reverse={false} extra={this.makeBuyButton()}/>
                     {content}
-                    <HeroTitle title={"檢驗認證"} paragraph={"我們只給你最好的"}/>
+                    <HeroTitle title={hero_title_item_page_ceritfication} paragraph={hero_paragraph_item_page_ceritfication}/>
                     <div style={{marginRight: "2rem", marginLeft: "2rem"}}>
                         <FlexGrid items={this.mapToCerti(this.state.props.certification)} justify_content={"left"} flex_wrap={"wrap"}/>
                     </div>

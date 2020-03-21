@@ -15,10 +15,11 @@ export const cartReducer = (state = cart_init_state, action) => {
     switch(action.type) {
         case(action_add_item): 
             current_list = state.cart
-            current_list.push({id: action.id, img: action.img, name: action.name, quantity: action.quantity, price: action.price, unit: action.unit})
+            current_list.push({id: action.id, img: action.img, name: action.name, sell_type: action.sell_type, quantity: action.quantity, price: action.price, unit: action.unit})
             re = {
                 cart: current_list
             }
+            console.log(current_list)
             return re
         case(action_delete_item):
             current_list = state.cart

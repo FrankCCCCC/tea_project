@@ -11,8 +11,17 @@ export const cartSubscribe = (funct) => {
     cart_store.subscribe(funct)
 }
 
-export const cartAddItem = (id, img, name, quantity, price, unit) => {
-    cart_store.dispatch({type: action_add_item, id: id, img: img, name: name, quantity: quantity, price: price, unit: unit});
+/**
+ * @param {Integer} id - The origin item ID
+ * @param {String} img - The cover image of the item
+ * @param {String} name - The name of the item
+ * @param {String} sell_type - The selling type of the item
+ * @param {Integer} quantity - The order quantity of the item
+ * @param {Number} price - The price of the item
+ * @param {String} unit - The unit of the price
+ */
+export const cartAddItem = (id, img, name, sell_type, quantity, price, unit) => {
+    cart_store.dispatch({type: action_add_item, id: id, img: img, name: name, sell_type: sell_type, quantity: quantity, price: price, unit: unit});
 }
 
 export const cartDeleteItem = (list_id) => {
@@ -39,6 +48,10 @@ export const cartGetState = () => {
     return cart_store.getState()
 }
 
+export const cartGetItemNumber = () => {
+    return cart_store.getState()
+}
+
 export const infoSetInfo = (key, value) => {
     info_store.dispatch({type: action_set_info, key: key, value: value})
 }
@@ -54,8 +67,8 @@ function test(){
 
 cart_store.subscribe(test)
 
-cartAddItem(1, "http://localhost:5000/img/tea.jpg", "林氏傳統凍頂烏龍茶", 1, 300, "NTD")
-cartAddItem(2, "http://localhost:5000/img/tea.jpg", "陳氏傳統東方美人茶", 2, 250, "NTD")
+cartAddItem(1, "http://localhost:5000/img/tea.jpg", "林氏傳統凍頂烏龍茶", "pre_sell", 1, 300, "NTD")
+cartAddItem(2, "http://localhost:5000/img/tea.jpg", "陳氏傳統東方美人茶", "in_stock", 2, 250, "NTD")
 // cartAddItem(3, "Test Oolong3", 3)
 // cartDeleteItem(2, "Test Oolong2")
 // cartSetQuantity(3, "Test Oolong3", 5)

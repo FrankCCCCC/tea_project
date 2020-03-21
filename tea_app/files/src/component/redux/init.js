@@ -4,12 +4,15 @@ export const cart_init_state = {
 
 export const info_init_state = {
     info: {
-        first_name: "",
-        last_name: "",
+        name: "",
         phone_number: "",
+        email: "",
+        zip: "",
         county: "",
         township: "",
         road: "",
+        agree_receive_notice: true,
+        agree_privacy_term: false
     }
 }
 

@@ -22,7 +22,7 @@ export const Badge = (props) => {
  */
 export const PillBadge = (props) => {
     return (
-        <span style={{paddingTop: "0.2rem", paddingBottom: "0.2rem", paddingLeft: "0.4rem", paddingRight: "0.4rem", borderRadius: Shape.half_circle, fontSize: "1rem", fontFamily: font_style.fontFamily, fontWeight: 'bold', backgroundColor: props.backgroundColor, color: props.textColor}}>{props.text}</span>
+        <span style={{paddingTop: "0.2rem", paddingBottom: "0.2rem", paddingLeft: "0.4rem", paddingRight: "0.4rem", borderRadius: Shape.half_circle, fontSize: "0.8rem", fontFamily: font_style.fontFamily, fontWeight: 'bold', backgroundColor: props.backgroundColor, color: props.textColor}}>{props.text}</span>
     )
 }
 
