@@ -39,12 +39,12 @@ pop_up_store.subscribe(test)
 var pop_up_test = (
     <div class={`alert`} role="alert" style={{color: Color.grey, background: Color.greenLight, borderRadius: Shape.round_corner, boxShadow: `5px 5px 20px ${Color.greenLight}`, fontFamily: font_style.fontFamily, fontSize: "1rem", fontWeight: "bold"}}>
         <strong>props.title</strong>props.message
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" style={{marginLeft: "2rem"}}>
             <img src={X} style={{width: "0.8rem", height: "0.8rem"}}/>
         </button>
     </div>
 )
-popUpAddPopUp(1, pop_up_test, 3)
-popUpAddPopUp(1, pop_up_test, 3)
+// popUpAddPopUp(1, pop_up_test, 3)
+// popUpAddPopUp(1, pop_up_test, 3)
 // popUpAddPopUp(1, pop_up_test, 3)
 // popUpAddPopUp(1, pop_up_test, 3)

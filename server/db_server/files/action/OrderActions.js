@@ -3,6 +3,7 @@ const Util = require('../util/Util')
 const actions = require('./actions')
 const express = require('express');
 const { Remarkable } = require('remarkable');
+const Email = require('../email/Email')
 
 var order_action = express();
 
@@ -78,50 +79,91 @@ order_action.get('/query_orders_count_all', (req, res) => {
 })
 
 order_action.post('/insert_order', (req, res) => {
-    console.log(req.body)
-    DbOrder.insertOrder(
-        String(req.body.buyer_name), 
-        String(req.body.phone), 
-        String(req.body.email), 
-        String(req.body.bank_code), 
-        String(req.body.bank_account), 
-        String(req.body.country), 
-        String(req.body.zip), 
-        String(req.body.province), 
-        String(req.body.county), 
-        String(req.body.township), 
-        String(req.body.village), 
-        String(req.body.road), 
-        JSON.parse(String(req.body.items)),
-        Number(req.body.total_price), 
-        String(req.body.unit), 
-        parseInt(req.body.total_quantity, 10), 
-        undefined, 
-        undefined, 
-        undefined, 
-        Util.string2bool(req.body.agree_policy), 
-        Util.string2bool(req.body.agree_promotion), 
-        false, 
-        false, 
-        false, 
-        JSON.parse(String(req.body.comment)),
-        ).then(
-        (resolve) => {
-            // console.log(resolve.rows[0])
-            Util.log(`Sending ${resolve.rowCount} rows to ${req.ip} with ${req.ips}`)
-            res.header("Access-Control-Allow-Origin", "*");
-            // res.send(resolve.rows[0])
-            // console.log(Util.makeRes(resolve.rows[0]))
-            res.json(Util.makeRes(resolve.rows[0]))
+    let calculateStoreCartToTotalPrice = (cart) => {
+        if(cart.length > 0){
+            let l = cart.length
+            let total_price = 0
+            for(let i=0; i<l; i++){
+                total_price += Number(cart[i].price) * parseInt(cart[i].quantity, 10)
+            }
+            return total_price
+        }else{
+            return 0
         }
-    ).catch(
-        (reject) => {
-            Util.log(`Error: ${reject}`)
-            res.header("Access-Control-Allow-Origin", "*");
-            // res.send(reject)
-            res.json(Util.makeRes(reject, false))
+    }
+    let countStoreCartToTotalNumber = (cart) => {
+        if(cart.length > 0){
+            let l = cart.length
+            let total_number = 0
+            for(let i=0; i<l; i++){
+                total_number += parseInt(cart[i].quantity)
+            }
+            return total_number
+        }else{
+            return 0
         }
-    )
+    }
+
+    if(calculateStoreCartToTotalPrice(JSON.parse(String(req.body.items))) !== Number(req.body.total_price)){
+        Util.log(`Error: The total price of item is not correct`)
+        res.header("Access-Control-Allow-Origin", "*");
+        // res.send(reject)
+        res.json(Util.makeRes("訂單總金額錯誤", false))
+    }else if(countStoreCartToTotalNumber(JSON.parse(String(req.body.items))) !== parseInt(req.body.total_quantity, 10)){
+        Util.log(`Error: The total quantity of item is not correct`)
+        res.header("Access-Control-Allow-Origin", "*");
+        // res.send(reject)
+        res.json(Util.makeRes("訂單總數量錯誤", false))
+    }else{
+        console.log(req.body)
+        let address = String(req.body.country) + ' ' + String(req.body.zip) + String(req.body.province) + ' ' + String(req.body.county) + ' ' + String(req.body.township) + ' ' + String(req.body.village) + ' ' + String(req.body.road)
+        Email.sendConfirmOrderMail(String(req.body.email), String(req.body.buyer_name), address, JSON.parse(String(req.body.items)), Number(req.body.total_price))
+        DbOrder.insertOrder(
+            String(req.body.buyer_name), 
+            String(req.body.phone), 
+            String(req.body.email), 
+            String(req.body.bank_code), 
+            String(req.body.bank_account), 
+            String(req.body.country), 
+            String(req.body.zip), 
+            String(req.body.province), 
+            String(req.body.county), 
+            String(req.body.township), 
+            String(req.body.village), 
+            String(req.body.road), 
+            JSON.parse(String(req.body.items)),
+            Number(req.body.total_price), 
+            String(req.body.unit), 
+            parseInt(req.body.total_quantity, 10), 
+            undefined, 
+            undefined, 
+            undefined, 
+            Util.string2bool(req.body.agree_policy), 
+            Util.string2bool(req.body.agree_promotion), 
+            false, 
+            false, 
+            false, 
+            JSON.parse(String(req.body.comment)),
+            ).then(
+            (resolve) => {
+                // console.log(resolve.rows[0])
+                Util.log(`Sending ${resolve.rowCount} rows to ${req.ip} with ${req.ips}`)
+                res.header("Access-Control-Allow-Origin", "*");
+                // res.send(resolve.rows[0])
+                // console.log(Util.makeRes(resolve.rows[0]))
+                res.json(Util.makeRes(resolve.rows[0]))
+            }
+        ).catch(
+            (reject) => {
+                Util.log(`Error: ${reject}`)
+                res.header("Access-Control-Allow-Origin", "*");
+                // res.send(reject)
+                res.json(Util.makeRes(reject, false))
+            }
+        )
+    }
+
+    
 })
 
 order_action.post('/query_order_by_id', (req, res) => {

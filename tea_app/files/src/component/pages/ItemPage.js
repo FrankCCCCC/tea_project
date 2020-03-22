@@ -10,14 +10,14 @@ import FlexGrid from '../grid/FlexGrid'
 import {slide1_caption, slide2_caption, slide3_caption} from '../theme/text'
 import Color from '../theme/color'
 import Shape from '../theme/Shape'
-import ShoppingCart from '../img/shopping_cart.svg'
+import {makeAlert} from '../popUps/Alert'
 import {font_style, title_style, subtitle_style, paragraph_style} from '../theme/font';
 import {cartAddItem, cartGetState} from '../redux/action'
 import {fetchItemById} from '../fetch/fetchItem'
 import LoadingPage from '../pages/LoadingPage'
 import {removeHtmlTag} from '../util/Util'
 import {AnimateNumber} from '../animate/Animate'
-import {hero_title_item_page_ceritfication, hero_paragraph_item_page_ceritfication, add_to_cart, already_in_cart} from '../theme/text'
+import {hero_title_item_page_ceritfication, hero_paragraph_item_page_ceritfication, add_to_cart, already_in_cart, alert_add_to_cart} from '../theme/text'
 
 let data1 = (
 <div style={{textAlign: "center"}}>
@@ -147,7 +147,7 @@ class ItemPage extends React.Component{
             event.currentTarget.style.color = Color.greyLight
             event.currentTarget.style.borderColor = Color.greyLight
             event.currentTarget.setAttribute("disabled", "disabled")
-            
+            makeAlert(alert_add_to_cart, "", 10000)
           }
 
         var handleHover = (event) => {

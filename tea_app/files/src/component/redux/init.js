@@ -1,5 +1,8 @@
 export const cart_init_state = {
-    cart: []
+    cart: [],
+    total_price: 0,
+    unit: "",
+    total_number: 0
 }
 
 export const info_init_state = {

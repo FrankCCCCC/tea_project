@@ -1,5 +1,5 @@
-import {pre_sell, in_stock} from '../util/config'
-import {pre_sell_text, in_stock_text} from '../theme/text'
+import {pre_sale, in_stock} from '../util/config'
+import {pre_sale_text, in_stock_text} from '../theme/text'
 /**
  * @param {Number} i - The number for type assertion
  * @param {Boolean} is_required - The flag to control whether allow undefined input
@@ -54,7 +54,7 @@ export function removeHtmlTag(html){
 
 export function mapSellTypeToText(sell_type){
     let sell_type_text = ""
-    if(sell_type === pre_sell){sell_type_text = pre_sell_text}
+    if(sell_type === pre_sale){sell_type_text = pre_sale_text}
     else if(sell_type === in_stock){sell_type_text = in_stock_text}
     return sell_type_text
 }

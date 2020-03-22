@@ -41,7 +41,7 @@ const item_action_url = db_server_url + "/" + item_action;
 const query_item_by_id_url = item_action_url + "/" + query_item_by_id;
 const query_item_list_url = item_action_url + "/" + query_item_list;
 const query_items_count_all_url = item_action_url + "/" + query_items_count_all;
-export const pre_sell = "pre_sell"
+export const pre_sale = "pre_sale"
 export const in_stock = "in_stock"
 
 const order_action = "order_action";

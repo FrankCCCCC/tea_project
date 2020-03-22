@@ -154,7 +154,8 @@ const config = {
     },
     SellType: { // Enum Type
         type_name: "SellType",
-        schema: "ENUM('pre_sale', 'in_stock')"
+        schema: "ENUM('pre_sale', 'in_stock')", 
+        options: ["pre_sale", "in_stock"]
     },
     DisplayType: { // Enum Type
         type_name: "DisplayType",

@@ -19,7 +19,7 @@ export const popUpReducer = (state = pop_up_init_state, action) => {
             }
             current_pop_up.push({id: action.id, pop_up: action.pop_up, delay: action.delay})
             re = {
-                pop_ups: current_pop_up
+                pop_up: current_pop_up
             }
             return re
         case(action_delete_pop_up):

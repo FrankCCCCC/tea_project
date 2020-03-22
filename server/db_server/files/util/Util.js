@@ -1,5 +1,6 @@
 const config = require('../config/serverConfig')
 const static_config = require('../config/staticConfig')
+const Ds = require('../db/dataStructure')
 const fs = require('fs');
 const { Remarkable } = require('remarkable');
 
@@ -269,6 +270,15 @@ function dataConverter(obj){
         return obj
     }
 }
+
+function convertSellTypeToString(sell_type){
+    if(sell_type === Ds.dataStructure.SellType.options[0]){
+        return config.pre_sell
+    }if(sell_type === Ds.dataStructure.SellType.options[1]){
+        return config.in_stock
+    }
+}
+
 // let obj = {
 //     img: ["farmer1.jpg", "f.mp4", "f.svg", "f."],
 //     sec: [
@@ -328,3 +338,4 @@ exports.string2bool = string2bool
 exports.nullhandler = nullhandler
 exports.makeMediaUrl = makeMediaUrl
 exports.dataConverter = dataConverter
+exports.convertSellTypeToString = convertSellTypeToString

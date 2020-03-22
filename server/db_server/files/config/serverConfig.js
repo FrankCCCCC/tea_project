@@ -9,6 +9,8 @@ const port = 8000
 const success = 'SUCCESS'
 const error = 'ERROR'
 
+const pre_sell = '預售'
+const in_stock = '現貨'
 
 const item_action_url = local_url + ':'  + String(port) + item_action
 const farmer_action_url = local_url + ':'  + String(port) + farmer_action
@@ -40,6 +42,9 @@ exports.local_url = local_url
 
 exports.success = success
 exports.error = error
+
+exports.pre_sell = pre_sell
+exports.in_stock = in_stock
 
 exports.item_action_url = item_action_url
 exports.farmer_action_url = farmer_action_url

@@ -6,6 +6,7 @@ import {PillBadge} from '../badge/Badge'
 import deleteLogo from '../img/x-grey.svg'
 import {mapSellTypeToText} from '../util/Util'
 import Shape from '../theme/Shape'
+import {cartSetQuantity} from '../redux/action'
 
 class ShoppingList extends React.Component{
     constructor(props){
@@ -22,9 +23,6 @@ class ShoppingList extends React.Component{
             width:'100%',
             minHeight: "3rem",
             margin: "1rem",
-            // backgroundColor: Color.blueDark,
-            // border: '3px solid', 
-            // borderColor: Color.blueDark, 
             borderRadius: '5px'
         }
 
@@ -37,9 +35,15 @@ class ShoppingList extends React.Component{
         }
     }
 
+    handleQuantityChange(event) {
+        let list_id = Number(event.target.getAttribute('list_id'))
+        let item_quantity = Number(event.target.value)
+        cartSetQuantity(list_id, item_quantity)
+    }
+
     makeEmptyList(){
         return(
-            <div style={this.itemStyle}>尚無商品</div>
+            <div style={{color: 'grey', fontSize: "2rem", fontWeight: "bold", fontFamily: font_style.fontFamily, width:'100%', minHeight: "3rem", margin: "1rem", borderRadius: '5px'}}>尚無商品</div>
         )
     }
 
@@ -54,7 +58,7 @@ class ShoppingList extends React.Component{
                 </div>
                 <div class='flex-fill' style={{textAlign:"right", width: '20%'}}>
                     <div>
-                        <input style={{width: "5rem", background:"", border: `2px solid ${Color.blueLight}`, borderRadius: Shape.round_corner, paddingTop: "0.3rem", paddingBottom: "0.3rem", paddingLeft: "1.5rem", paddingRight: "1.5rem", textAlign: "center", color: Color.greenDark}} type='text' value={quantity}/>
+                        <input list_id={list_id} style={{width: "5rem", background:"", border: `2px solid ${Color.blueLight}`, borderRadius: Shape.round_corner, paddingTop: "0.3rem", paddingBottom: "0.3rem", paddingLeft: "1.5rem", paddingRight: "1.5rem", textAlign: "center", color: Color.greenDark}} onChange={this.handleQuantityChange} type='number' min='1'/>
                     </div>
                 </div>
                 <div class='flex-fill' style={{textAlign:"right", width: '20%'}}>{`${price} $`}</div>
@@ -170,7 +174,7 @@ class ShoppingList extends React.Component{
     render(){
         return (
             <div>
-                <div style={this.itemStyle}>
+                <div style={{display: 'table', overflow: 'hidden', color: 'grey', fontFamily: font_style.fontFamily, width:'100%', minHeight: "3rem", margin: "1rem", borderRadius: '5px'}}>
                     <div style={{display: 'table-cell', verticalAlign: 'middle'}}>
                         {this.state.list_content}        
                     </div>

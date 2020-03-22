@@ -14,6 +14,8 @@ import ItemPage from './component/pages/ItemPage'
 import ItemListPage from './component/pages/ItemListPage'
 import LoadingPage from './component/pages/LoadingPage'
 import Fab from './component/fab/Fab'
+import {Alert} from './component/popUps/Alert'
+import {pop_up_store} from './component/popUps/PopUpStore'
 import {combine_store} from './component/redux/store'
 
 import 'bootstrap'
@@ -32,25 +34,25 @@ function App() {
   return (
     <div className="App">
       <Provider store={combine_store}>
-      <Provider store={combine_store}>
-        <Router>
-            <AppNav/>
-            <Switch>
-              <Route path="/" exact component={HomePage}/>
-              <Route path="/about" exact component={AboutPage}/>
-              <Route path="/item" exact component={ItemListPage}/>
-              <Route path="/cart" exact component={CartPage}/>
-              <Route path="/post" exact component={PostListPage} />
-              <Route path={`/farmer/:farmerId`} exact component={FarmerPage}/>
-              <Route path={`/post/:postId`} exact component={PostPage}/>
-              <Route path={`/item/:itemId`} exact component={ItemPage}/>
-              <Route component={HomePage}/>
-            </Switch>
-            {/* <LoadingPage/> */}
-            <Fab/>
-            <Footer/>
-        </Router>
-      </Provider>
+        <Provider store={pop_up_store}>
+          <Router>
+              <AppNav/>
+              <Switch>
+                <Route path="/home" exact component={HomePage}/>
+                <Route path="/about" exact component={AboutPage}/>
+                <Route path="/item" exact component={ItemListPage}/>
+                <Route path="/cart" exact component={CartPage}/>
+                <Route path="/post" exact component={PostListPage} />
+                <Route path={`/farmer/:farmerId`} exact component={FarmerPage}/>
+                <Route path={`/post/:postId`} exact component={PostPage}/>
+                <Route path={`/item/:itemId`} exact component={ItemPage}/>
+                <Route component={HomePage}/>
+              </Switch>
+              {/* <LoadingPage/> */}
+              <Alert />
+              <Footer/>
+          </Router>
+        </Provider>
       </Provider>
     </div>
   );

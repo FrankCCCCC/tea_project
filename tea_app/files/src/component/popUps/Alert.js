@@ -4,7 +4,7 @@ import {font_style} from '../theme/font'
 import Color from '../theme/color'
 import Shape from '../theme/Shape'
 import X from '../img/x-grey-dark.svg'
-import {popUpSubscribe, popUpGetState} from './PopUpAction'
+import {popUpSubscribe, popUpGetState, popUpAddPopUp, popUpDeletePopUp} from './PopUpAction'
 import $ from 'jquery'
 
 /**
@@ -15,70 +15,133 @@ import $ from 'jquery'
  * @param {Boolean} is_cancelable - Whether the toast can be canceled manually
  */
 
-// class Alert extends React.Component{
-//     constructor(props){
-//         super(props)
-//     }
+export class Alert extends React.Component{
+    constructor(props){
+        super(props)
+        this.handleAlertChange = this.handleAlertChange.bind(this)
 
-//     componentDidMount(){}
+        this.state = {
+            pop_up: (<div></div>),
+            pop_up_detail: []
+        }
+    }
 
-//     componentDidUpdate(prevProps, prevState, snapshot){}
+    handleAlertChange(){
+        let store_content = popUpGetState().pop_up
+        // console.log(popUpGetState())
+        // console.log(store_content)
+        let pop_up_list = (<div></div>)
+        let pop_up_list_detail = []
+        if(store_content !== undefined && store_content !== []){
+            pop_up_list = store_content.map((item, index, array) => {
+                return (
+                    item.pop_up
+                )
+            })
 
-//     render(){
-//         return(
-//             <div aria-live="polite" aria-atomic="true" style={{position: "relative", minHeight: "200px", width: "100%", zIndex: 100}}>
-//                 <div style={{position: "absolute", top: "100%", right: "0", width: "30rem"}}>
+            pop_up_list_detail = store_content.map((item, index, array) => {
+                return (
+                    item
+                )
+            })
+        }
+        this.setState({
+            pop_up: pop_up_list,
+            pop_up_detail: pop_up_list_detail
+        })
+        
+    }
 
-//                 </div>
-//             </div>
-//         )
-//     }
-// }
+    componentDidMount(){
+        popUpSubscribe(this.handleAlertChange)
+        
+        let pop_up_detail = this.state.pop_up_detail
+        console.log(pop_up_detail)
+        if(Array.isArray(pop_up_detail)){
+            for(let item in pop_up_detail){
+                console.log(item)
+                setTimeout(()  => {popUpDeletePopUp(item.id)}, item.delay)
+            }
+        }
+        
+    }
 
-export function makeAlert(title, message) {
-    return (
-        // Taost Position
-        <div aria-live="polite" aria-atomic="true" style={{position: "relative", minHeight: "200px", width: "100%", zIndex: 100}}>
-            <div style={{position: "absolute", top: "100%", right: "1rem", width: "30rem"}}>
-                {/* Taost instance */}
-                <div class={`alert`} role="alert" style={{color: Color.grey, background: Color.greenLight, borderRadius: Shape.round_corner, boxShadow: `5px 5px 20px ${Color.greenLight}`, fontFamily: font_style.fontFamily, fontSize: "1rem", fontWeight: "bold"}}>
-                    <strong>title</strong>message
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <img src={X} style={{width: "0.8rem", height: "0.8rem"}}/>
-                    </button>
+    componentDidUpdate(prevProps, prevState, snapshot){}
+
+    render(){
+        return (
+            <div style={{display: "table", position: "fixed", bottom: "3rem", right: "3rem", zIndex: 100}}>
+                <div style={{display: "table-cell", verticalAlign: "middle", textAlign: "center"}}>
+                    {this.state.pop_up}
                 </div>
             </div>
-        </div>)
-}
-
-popUpSubscribe(Alert)
-
-export function Alert(props) {
-    let store_content = popUpGetState().pop_ups
-    console.log(popUpGetState())
-    console.log(store_content)
-    let pop_up_list = (<div></div>)
-    if(store_content !== undefined && store_content !== []){
-        pop_up_list = store_content.map((item, index, array) => {
-            return (
-                item.pop_up
+            // Taost Position
+            // <div aria-live="polite" aria-atomic="true" style={{position: "fixed", minHeight: "200px", width: "100%", zIndex: 100}}>
+            //     <div style={{top: "100%", right: "1rem", width: "30rem"}}>
+            //         {/* Taost instance */}
+            //         {pop_up_list}
+            //     </div>
+            // </div>
             )
-        })
     }
-    return (
-        // Taost Position
-        <div aria-live="polite" aria-atomic="true" style={{position: "relative", minHeight: "200px", width: "100%", zIndex: 100}}>
-            <div style={{position: "absolute", top: "100%", right: "1rem", width: "30rem"}}>
-                {/* Taost instance */}
-                {pop_up_list}
-            </div>
-        </div>)
 }
 
-Alert.defaultProps = {
-    delay: 5000,
-    is_auto_hide: true,
-    is_cancelable: true
+/**
+ * 
+ * @param {String} title - The title of the alert
+ * @param {Sting} message - The message of the alert
+ * @param {Number} delay - The delay in milliseconds of the alert
+ */
+
+export function makeAlert(title, message, delay) {
+    let alert = (
+        <div class={`alert`} role="alert" style={{color: Color.grey, background: Color.greenLight, borderRadius: Shape.round_corner, boxShadow: `5px 5px 20px ${Color.greenLight}`, fontFamily: font_style.fontFamily, fontSize: "1rem", fontWeight: "bold"}}>
+            <strong>{title}</strong>{message}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" style={{marginLeft: "2rem"}}>
+                <img src={X} style={{width: "0.8rem", height: "0.8rem"}}/>
+            </button>
+        </div>
+    )
+    let id = Date.now()
+    popUpAddPopUp(id, alert, delay)
+
+    return id
 }
+
+// popUpSubscribe(Alert)
+
+// export function Alert(props) {
+//     let store_content = popUpGetState().pop_up
+//     console.log(popUpGetState())
+//     console.log(store_content)
+//     let pop_up_list = (<div></div>)
+//     if(store_content !== undefined && store_content !== []){
+//         pop_up_list = store_content.map((item, index, array) => {
+//             return (
+//                 item.pop_up
+//             )
+//         })
+//     }
+//     return (
+//         <div style={{display: "table", position: "fixed", bottom: "3rem", right: "3rem", zIndex: 100}}>
+//             <div style={{display: "table-cell", verticalAlign: "middle", textAlign: "center"}}>
+//                 {pop_up_list}
+//             </div>
+//         </div>
+//         // Taost Position
+//         // <div aria-live="polite" aria-atomic="true" style={{position: "fixed", minHeight: "200px", width: "100%", zIndex: 100}}>
+//         //     <div style={{top: "100%", right: "1rem", width: "30rem"}}>
+//         //         {/* Taost instance */}
+//         //         {pop_up_list}
+//         //     </div>
+//         // </div>
+//         )
+// }
+
+// Alert.defaultProps = {
+//     delay: 5000,
+//     is_auto_hide: true,
+//     is_cancelable: true
+// }
 
 // export default Alert
