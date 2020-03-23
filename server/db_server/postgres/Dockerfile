@@ -7,7 +7,7 @@ ENV POSTGRES_DB playdb
 ENV POSTGRES_USER postgres
 ENV POSTGRES_PASSWORD 0910shc
 
-COPY install.sh /docker-entrypoint-initdb.d/
+COPY ./install.sh /docker-entrypoint-initdb.d/install.sh
 WORKDIR /
 
 EXPOSE 5432

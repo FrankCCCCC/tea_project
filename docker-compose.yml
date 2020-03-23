@@ -64,7 +64,6 @@ services:
     build: 
       context: ./server/db_server
     depends_on:
-      # - db
       - postgres
     # links:
       # - db
@@ -83,6 +82,7 @@ services:
       - tea-network
 
   postgres:
+    container_name: database
     build: 
       context: ./server/db_server/postgres
     ports:
