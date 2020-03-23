@@ -5,6 +5,11 @@ const dbConfig = require('../config/dbConfig')
 const pool = new Pool(dbConfig.config);
 // const pool = new Pool({connectionString: process.env.DATABASE_URL})
 
+pool.on('error', (err, client) => {
+    console.error('Error: ', err)
+    
+})
+
 function query(command){
     util.log(command)
     return pool.query(command).then(

@@ -58,11 +58,25 @@ services:
         delay: 10s
       restart_policy:
         condition: on-failure
-  
+
+  postgres:
+    container_name: database
+    build: 
+      context: ./server/db_server/postgres
+    ports:
+      - "35432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 0910shc
+      POSTGRES_DB: playdb
+    networks:
+      - tea-network
+
   server:
     container_name: server
     build: 
       context: ./server/db_server
+    command: ["./wait-for-it.sh", "postgres:5432", "--", "npm", "run", start]
     depends_on:
       - postgres
     # links:
@@ -78,19 +92,6 @@ services:
       PORT: 8000
       # DATABASE_URL: db
       # - DB_HOST=db
-    networks:
-      - tea-network
-
-  postgres:
-    container_name: database
-    build: 
-      context: ./server/db_server/postgres
-    ports:
-      - "35432:5432"
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 0910shc
-      POSTGRES_DB: playdb
     networks:
       - tea-network
 

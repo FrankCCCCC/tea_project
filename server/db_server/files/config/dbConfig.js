@@ -1,6 +1,6 @@
 const config = {
     user: 'postgres',
-    host: "localhost",
+    host: "postgres",
     database: "playdb",
     password: "0910shc",
     port: "5432",

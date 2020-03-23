@@ -11,4 +11,4 @@ RUN npm install
 RUN npm install mocha -g
 
 EXPOSE 8000
-ENTRYPOINT ["npm", "run", "start"]
+# ENTRYPOINT ["npm", "run", "start"]
