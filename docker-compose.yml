@@ -76,7 +76,7 @@ services:
     container_name: server
     build: 
       context: ./server/db_server
-    command: ["./wait-for-it.sh", "postgres:5432", "--", "npm", "run", start]
+    command: ["./wait-for-it.sh", "postgres:5432", "--", "npm", "run", "remote_dev"]
     depends_on:
       - postgres
     # links:

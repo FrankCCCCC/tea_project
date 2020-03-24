@@ -26,12 +26,16 @@ app.use(serverConfig.app_data_action, AppDataActions.actions)
 
 app.listen(serverConfig.port, () => {
     util.log(`Server is listening on port ${serverConfig.port}`)
-    util.log(`${process.argv[2]} Mode`)
-    switch(process.argv[2]){
+    util.log(`${process.env.mode} Mode`)
+    switch(process.env.mode){
         case 'dev':
+            Init.devInit()
+            break
+        case 'remote_dev':
             Init.devInit()
             break
         case 'deploy':
             Init.deployInit()
+            break
     }
 });

@@ -1,7 +1,8 @@
 const image_route = '/img/'
 const video_route = '/video/'
-// const static_server_base_url = 'http://192.168.99.100'
-const static_server_base_url = 'http://localhost'
+const static_server_base_url = process.env.static_host
+const static_server_base_url = 'http://leafhopper_service.nctu.me'
+// const static_server_base_url = 'http://localhost'
 const port = 5000
 
 const img_url = static_server_base_url + ':' + String(port) + image_route
