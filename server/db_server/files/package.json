@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "start": "ststic_host=http://localhost db_host=http://localhost mode=start node index.js",
-    "deploy": "static_host=http://leafhopper_service.nctu.me db_host=http://leafhopper_service.nctu.me mode=deploy node index.js",
+    "start": "node index.js ststic_host=http://localhost db_host=http://localhost mode=start ",
+    "deploy": "static_host=http://leafhopper_service.nctu.me db_host=postgres mode=deploy node index.js",
     "dev": "ststic_host=http://localhost db_host=http://localhost mode=dev node index.js",
-    "remote_dev": "ststic_host=http://leafhopper_service.nctu.me db_host=http://leafhopper_service.nctu.me mode=remote_dev node index.js"
+    "remote_dev": "ststic_host=http://leafhopper_service.nctu.me db_host=postgres mode=remote_dev node index.js"
   },
   "author": "",
   "license": "ISC",
