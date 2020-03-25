@@ -24,6 +24,7 @@ order_action.on('mount', function (parent) {
                                         (resolve) => {
                                             Util.log(`Created orders_table`)
                                             Util.log(`order_action is mounted By ${parent}`)
+                                            order_action.emit('ready', null)
                                             return resolve
                                     }).catch(
                                         (reject) => {

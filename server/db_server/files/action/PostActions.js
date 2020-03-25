@@ -12,6 +12,7 @@ post_action.on('mount', function (parent) {
         (resolve) => {
             util.log(`Created posts_table`)
             util.log(`post_action is mounted By ${parent}`)
+            post_action.emit('post_ready', null)
             return resolve
     }).catch(
         (reject) => {

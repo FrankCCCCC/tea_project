@@ -46,9 +46,9 @@ exports.error = error
 exports.pre_sell = pre_sell
 exports.in_stock = in_stock
 
-exports.item_action_url = item_action_url
-exports.farmer_action_url = farmer_action_url
-exports.order_action_url = order_action_url
+// exports.item_action_url = item_action_url
+// exports.farmer_action_url = farmer_action_url
+// exports.order_action_url = order_action_url
 
 exports.query_app_datas_count_all = query_app_datas_count_all
 exports.insert_app_data = insert_app_data

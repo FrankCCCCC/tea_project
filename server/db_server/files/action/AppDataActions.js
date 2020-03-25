@@ -15,6 +15,7 @@ app_data_action.on('mount', function (parent) {
                 (resolve) => {
                     util.log(`Created app_datas_table`)
                     util.log(`app_data_action is mounted By ${parent}`)
+                    app_data_action.emit('ready', null)
                     return resolve
             }).catch(
                 (reject) => {

@@ -5,17 +5,18 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "start": "node index.js ststic_host=http://localhost db_host=http://localhost mode=start ",
-    "deploy": "static_host=http://leafhopper_service.nctu.me db_host=postgres mode=deploy node index.js",
-    "dev": "ststic_host=http://localhost db_host=http://localhost mode=dev node index.js",
-    "remote_dev": "ststic_host=http://leafhopper_service.nctu.me db_host=postgres mode=remote_dev node index.js"
+    "start": "node index.js",
+    "deploy": "node index.js",
+    "remote_dev": "node index.j"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
+    "custom-env": "^2.0.1",
     "express": "^4.17.1",
     "helmet": "^3.21.2",
+    "minimist": "^1.2.5",
     "node-fetch": "^2.6.0",
     "nodemailer": "^6.4.6",
     "pg": "^7.17.1",

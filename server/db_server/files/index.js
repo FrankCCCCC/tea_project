@@ -9,45 +9,60 @@ const Init = require('./init/Init')
 const express = require('express');
 const cors = require('cors')
 const helmet = require('helmet')
+require('custom-env').env('start')
 
 var app = express()
 var is_ready = false
 
-// new Promise((resolve) => {
-    app.set('trust proxy', true)
-    app.use(express.urlencoded({extended: false}));
-    app.use(express.json());
-    app.use(cors());
-    app.use(helmet())
+app.set('trust proxy', true)
+app.use(express.urlencoded({extended: false}));
+app.use(express.json());
+app.use(cors());
+app.use(helmet())
 
-    app.use(serverConfig.post_action, PostActions.actions)
+app.use(serverConfig.post_action, PostActions.actions)
+PostActions.actions.on('post_ready', () => {
+    console.log('PostActions Ready')
+
     app.use(serverConfig.item_action, ItemActions.actions)
-    app.use(serverConfig.farmer_action, FarmerActions.actions)
-    app.use(serverConfig.order_action, OrderActions.actions)
-    app.use(serverConfig.app_data_action, AppDataActions.actions)  
-    // console.log("hi1")
-    // resolve()
-// }).then((error) => {
-    // console.log("hi2")
-    // is_ready = true
-// })
+    ItemActions.actions.on('ready', () => {
+        console.log('ItemActions Ready')
 
-// while(!is_ready){}
-app.on('ready', () => {
-    app.listen(serverConfig.port, () => {
-        console.log('Start listening')
-        util.log(`Server is listening on port ${serverConfig.port}`)
-        util.log(`${process.env.mode} Mode`)
-        switch(process.env.mode){
-            case 'dev':
-                Init.devInit()
-                break
-            case 'remote_dev':
-                Init.devInit()
-                break
-            case 'deploy':
-                Init.deployInit()
-                break
-        }
-    });
+        app.use(serverConfig.farmer_action, FarmerActions.actions)
+        FarmerActions.actions.on('ready', () => {
+            console.log('FarmerActions Ready')
+
+            app.use(serverConfig.order_action, OrderActions.actions)
+            OrderActions.actions.on('ready', () => {
+                console.log('OrderActions Ready')
+
+                app.use(serverConfig.app_data_action, AppDataActions.actions)  
+                AppDataActions.actions.on('ready', () => {
+                    console.log('AppDataActions Ready')
+                    app.listen(serverConfig.port, setup)
+                })
+            })
+        })  
+    })
 })
+
+var setup = () => {
+    console.log(process.env.DB_HOST)
+    console.log(process.env.STATIC_HOST)
+    console.log(process.env.DB_USER)
+    console.log(process.env.MODE)
+    util.log(`Server is listening on port ${process.env.PORT}`)
+    util.log(`${process.env.MODE} Mode`)
+    switch(process.env.MODE){
+        case 'dev':
+            Init.devInit()
+            break
+        case 'remote_dev':
+            Init.devInit()
+            break
+        case 'deploy':
+            Init.deployInit()
+            break
+    }
+};
+

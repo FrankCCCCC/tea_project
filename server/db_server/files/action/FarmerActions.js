@@ -17,6 +17,7 @@ farmer_action.on('mount', function (parent) {
                         (resolve) => {
                             util.log(`Created farmers_table`)
                             util.log(`farmer_action is mounted By ${parent}`)
+                            farmer_action.emit('ready', null)
                             return resolve
                     }).catch(
                         (reject) => {

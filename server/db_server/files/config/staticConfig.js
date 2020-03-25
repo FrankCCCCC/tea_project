@@ -1,6 +1,8 @@
+require('custom-env').env('start')
+
 const image_route = '/img/'
 const video_route = '/video/'
-const static_server_base_url = process.env.static_host
+const static_server_base_url = process.env.STATIC_HOST
 // const static_server_base_url = 'http://leafhopper_service.nctu.me'
 // const static_server_base_url = 'http://localhost'
 const port = 5000

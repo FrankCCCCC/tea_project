@@ -27,6 +27,7 @@ item_action.on('mount', function (parent) {
                                                 (resolve) => {
                                                     util.log(`Created items_table`)
                                                     util.log(`item_action is mounted By ${parent}`)
+                                                    item_action.emit('ready', null)
                                                     return resolve
                                             }).catch(
                                                 (reject) => {
