@@ -9,7 +9,7 @@ const Init = require('./init/Init')
 const express = require('express');
 const cors = require('cors')
 const helmet = require('helmet')
-require('custom-env').env('start')
+require('custom-env').env(process.argv[2])
 
 var app = express()
 var is_ready = false
