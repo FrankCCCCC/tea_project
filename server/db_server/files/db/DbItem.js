@@ -123,8 +123,8 @@ function insertItem(name, producer_id, producer_name, country, zip, province, co
     let re_amount = Util.checkInt(amount, `DbItem.insertItem amount`, false)
     let re_slogan = Util.checkString(slogan, `DbItem.insertItem slogan`, false)
     Util.checkString(description, `DbItem.insertItem description`)
-    Util.checkArray(content, 'DbFarmer.insertFarmer content')
-    let re_certification = Util.checkObject(certification, 'DbFarmer.insertFarmer certification', false)
+    Util.checkArray(content, 'DbItem.insertItem content')
+    let re_certification = Util.checkObject(certification, 'DbItem.insertItem certification', false)
     let re_spec = Util.checkArray(spec, `DbItem.insertItem spec`, false)
     Util.checkString(cover_img, `DbItem.insertItem cover_img`)
     let re_imgs =  Util.checkArray(imgs, `DbItem.insertItem imgs`, false)
@@ -132,10 +132,10 @@ function insertItem(name, producer_id, producer_name, country, zip, province, co
     let re_block_link = Util.checkString(block_link, `DbItem.insertItem block_link`, false)
     let re_transaction_id = Util.checkString(transaction_id, `DbItem.insertItem transaction_id`, false)
     let re_traceability_link = Util.checkString(traceability_link, `DbItem.insertItem traceability_link`, false)
-    let re_comment =  Util.checkObject(comment, 'DbFarmer.insertFarmer comment', false)
-    let re_expire_on =  Util.checkString(expire_on, 'DbFarmer.insertFarmer expire_on', false)
-    Util.checkBool(is_limited, 'DbFarmer.insertFarmer is_limited')
-    Util.checkBool(has_expiration, 'DbFarmer.insertFarmer has_expiration')
+    let re_comment =  Util.checkObject(comment, 'DbItem.insertItem comment', false)
+    let re_expire_on =  Util.checkString(expire_on, 'DbItem.insertItem expire_on', false)
+    Util.checkBool(is_limited, 'DbItem.insertItem is_limited')
+    Util.checkBool(has_expiration, 'DbItem.insertItem has_expiration')
 
     var description_new = description.replace(/'/g, `''`);
 
