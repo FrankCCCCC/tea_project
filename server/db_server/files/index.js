@@ -12,7 +12,6 @@ const helmet = require('helmet')
 require('custom-env').env(process.argv[2])
 
 var app = express()
-var is_ready = false
 
 app.set('trust proxy', true)
 app.use(express.urlencoded({extended: false}));
@@ -39,7 +38,8 @@ PostActions.actions.on('post_ready', () => {
                 app.use(serverConfig.app_data_action, AppDataActions.actions)  
                 AppDataActions.actions.on('ready', () => {
                     console.log('AppDataActions Ready')
-                    app.listen(process.env.PORT, setup)
+                    // app.listen(process.env.SERVER_PORT, setup)
+                    app.listen(serverConfig.port, setup)
                 })
             })
         })  
@@ -51,7 +51,7 @@ var setup = () => {
     // console.log(process.env.STATIC_HOST)
     // console.log(process.env.DB_USER)
     // console.log(process.env.MODE)
-    util.log(`Server is listening on port ${process.env.PORT}`)
+    util.log(`Server is listening on port ${serverConfig.port}`)
     util.log(`${process.env.MODE} Mode`)
     switch(process.env.MODE){
         case 'dev':

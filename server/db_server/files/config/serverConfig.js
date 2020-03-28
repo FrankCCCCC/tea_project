@@ -1,3 +1,5 @@
+require('custom-env').env(process.argv[2])
+
 const post_action = '/post_action'
 const item_action = '/item_action'
 const farmer_action = '/farmer_action'
@@ -5,6 +7,7 @@ const order_action = '/order_action'
 const app_data_action = '/app_data_action'
 // const local_url = 'http://localhost'
 // const port = 8000
+const port = process.env.SERVER_PORT
 
 const success = 'SUCCESS'
 const error = 'ERROR'
@@ -37,7 +40,7 @@ exports.item_action = item_action
 exports.farmer_action = farmer_action
 exports.order_action = order_action
 exports.app_data_action = app_data_action
-// exports.port = port
+exports.port = port
 // exports.local_url = local_url
 
 exports.success = success
