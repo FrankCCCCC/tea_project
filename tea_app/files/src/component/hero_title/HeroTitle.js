@@ -1,6 +1,7 @@
 import React from 'react'
 import {font_style, hero_title_style, hero_paragraph_style} from '../theme/font'
 import Color from '../theme/color'
+import {Head1, Head2, Head6} from '../typography/Typography'
 
 /**
  * @param {String} title - The title of the hero object
@@ -10,10 +11,10 @@ import Color from '../theme/color'
 
  function HeroTitle(props){
     return (
-        <div data-aos="fade-up" class="jumbotron jumbotron-fluid" style={{backgroundColor: Color.white, textAlign: "left", margin: "0px"}}>
+        <div data-aos="fade-up" class="" style={{backgroundColor: Color.white, textAlign: "left", marginTop: "4rem", marginBottom: "4rem"}}>
             <div class="container">
-                <h1 class="display-4" style={{fontFamily: font_style.fontFamily, color: Color.greyDark}}><strong>{props.title}</strong></h1>
-                <p class="lead" style={{fontFamily: font_style.fontFamily, color: Color.greyDark}}><strong>{props.paragraph}</strong></p>
+                <Head1 text={props.title}/>
+                <Head6 text={props.paragraph}/>
             </div>
         </div>
     );

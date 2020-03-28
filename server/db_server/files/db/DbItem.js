@@ -463,24 +463,44 @@ function queryItemList(count, offset){
 function insertDummy(){
     let content = [
         {
-        display: "section",
-        img: "tea.jpg",
-        backgroundColor: "",
-        title: "Sample Title",
-        subtitle: "Sample Subtitle",
-        description: "Sample Description", // Markdown Format
-        data: [{property: "Temperature", index: "25", unit: "c"}, {property: "Ferment", index: "30", unit: "%"}],
-        comment: "comment"
+            display: "section",
+            img: "process1.gif",
+            backgroundColor: "",
+            title: "炒茶",
+            subtitle: "林大宇",
+            description: "Sample Description", // Markdown Format
+            data: [{property: "溫度", index: "25", unit: "c"}, {property: "濕度", index: "30", unit: "%"}],
+            comment: "comment"
         },
         {
-        display: "section",
-        img: "tea.jpg",
-        backgroundColor: "",
-        title: "Sample Title1",
-        subtitle: "Sample Subtitle1",
-        description: "Sample Description1", // Markdown Format
-        data: [{property: "Temperature", index: "25", unit: "c"}, {property: "Ferment", index: "30", unit: "%"}],
-        comment: "comment"
+            display: "section",
+            img: "process2.gif",
+            backgroundColor: "",
+            title: "萎凋",
+            subtitle: "林國棟",
+            description: "Sample Description1", // Markdown Format
+            data: [{property: "溫度", index: "25", unit: "c"}, {property: "濕度", index: "30", unit: "%"}],
+            comment: "comment"
+        },
+        {
+            display: "section",
+            img: "process3.gif",
+            backgroundColor: "",
+            title: "烘焙",
+            subtitle: "蔡培火",
+            description: "Sample Description1", // Markdown Format
+            data: [{property: "溫度", index: "25", unit: "c"}, {property: "濕度", index: "30", unit: "%"}],
+            comment: "comment"
+        },
+        {
+            display: "section",
+            img: "process4.gif",
+            backgroundColor: "",
+            title: "揉捻",
+            subtitle: "張大春",
+            description: "Sample Description1", // Markdown Format
+            data: [{property: "溫度", index: "25", unit: "c"}, {property: "濕度", index: "30", unit: "%"}],
+            comment: "comment"
         }
     ]
     let cert = [{
@@ -496,27 +516,27 @@ function insertDummy(){
 
     for(let i=0; i<5; i++){
         insertItem(
-            "Green Tea", 
+            "林氏傳統凍頂烏龍茶", 
             3, 
-            "Lin", 
-            "Taiwan", 
+            "林大宇", 
+            "臺灣", 
             "30013", 
-            "Taiwan", 
-            "NanTou", 
-            "Lu Gu", 
-            "FongHuang", 
-            "GuangFu Rd.", 
+            "台灣省", 
+            "南投縣", 
+            "鹿谷鄉", 
+            "鳳凰村", 
+            "產業道路", 
             "in_stock", 
             500, 
             "NTD",
             3, 
-            "# Traditional Flavor", 
+            "# 即使在改變口味的尖峰上，仍然堅持住最古老的好味道", 
             "# Taiwan Tea", 
             content, 
             cert,
             spec,
             "farmer1.jpg", 
-            ['hill1.jpg', 'tea.jpg', 'child.jpg'],
+            ['tea_farmer.gif', 'group.jpg', 'leaf.jpg'],
             "Sample block_id", 
             "Sample block_link",
             "Sample transaction_id",
