@@ -9,7 +9,7 @@ const Init = require('./init/Init')
 const express = require('express');
 const cors = require('cors')
 const helmet = require('helmet')
-require('custom-env').env('start')
+require('custom-env').env(process.argv[2])
 
 var app = express()
 var is_ready = false
@@ -24,13 +24,13 @@ app.use(serverConfig.post_action, PostActions.actions)
 PostActions.actions.on('post_ready', () => {
     console.log('PostActions Ready')
 
-    app.use(serverConfig.item_action, ItemActions.actions)
-    ItemActions.actions.on('ready', () => {
-        console.log('ItemActions Ready')
+    app.use(serverConfig.farmer_action, FarmerActions.actions)
+    FarmerActions.actions.on('ready', () => {
+        console.log('FarmerActions Ready')
 
-        app.use(serverConfig.farmer_action, FarmerActions.actions)
-        FarmerActions.actions.on('ready', () => {
-            console.log('FarmerActions Ready')
+        app.use(serverConfig.item_action, ItemActions.actions)
+        ItemActions.actions.on('ready', () => {
+            console.log('ItemActions Ready')
 
             app.use(serverConfig.order_action, OrderActions.actions)
             OrderActions.actions.on('ready', () => {
@@ -39,7 +39,7 @@ PostActions.actions.on('post_ready', () => {
                 app.use(serverConfig.app_data_action, AppDataActions.actions)  
                 AppDataActions.actions.on('ready', () => {
                     console.log('AppDataActions Ready')
-                    app.listen(serverConfig.port, setup)
+                    app.listen(process.env.PORT, setup)
                 })
             })
         })  
@@ -47,10 +47,10 @@ PostActions.actions.on('post_ready', () => {
 })
 
 var setup = () => {
-    console.log(process.env.DB_HOST)
-    console.log(process.env.STATIC_HOST)
-    console.log(process.env.DB_USER)
-    console.log(process.env.MODE)
+    // console.log(process.env.DB_HOST)
+    // console.log(process.env.STATIC_HOST)
+    // console.log(process.env.DB_USER)
+    // console.log(process.env.MODE)
     util.log(`Server is listening on port ${process.env.PORT}`)
     util.log(`${process.env.MODE} Mode`)
     switch(process.env.MODE){

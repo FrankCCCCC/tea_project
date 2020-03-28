@@ -1,4 +1,4 @@
-require('custom-env').env('start')
+require('custom-env').env(process.argv[2])
 
 const image_route = '/img/'
 const video_route = '/video/'
