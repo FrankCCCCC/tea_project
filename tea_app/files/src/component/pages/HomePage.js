@@ -6,7 +6,7 @@ import HeroTitle from '../hero_title/HeroTitle'
 import Gallery from '../gallery/Gallery'
 import FlexGrid from '../grid/FlexGrid'
 import AsymmetricGrid from '../grid/AsymmetricGrid'
-import Banner from '../banner/Banner'
+import Quote from '../quote/Quote'
 import MiniCard from '../card/MiniCard'
 import {fetchAppDataByProperty} from '../fetch/fetchAppData'
 import LoadingPage from '../pages/LoadingPage'
@@ -34,7 +34,7 @@ class HomePage extends React.Component{
 
     makeItems(array){
         return array.map((item, index, array) => {
-            return <Gallery uuid={index} id={item.id} catergory={item.catergory} img={item.img} caption_title={"說書人"} caption_subtitle={"林阿祥"} title={item.caption_title} subtitle={item.caption_subtitle} badge={item.badge} route={"item"}/>
+            return <Gallery uuid={index} id={item.id} catergory={item.catergory} img={item.img} caption_title={item.caption_title} caption_subtitle={item.caption_subtitle} title={item.title} subtitle={item.subtitle} badge={item.badge} route={"item"}/>
         })
     }
 
@@ -89,7 +89,7 @@ class HomePage extends React.Component{
                 <div>
                     <Slider sliderInput = {this.state.sliderInput} is_show_indicator = {true} is_show_control = {true}/>
                     {/* <div class="container" style={{margin: "2rem"}}>
-                        <Banner media="http://localhost:5000/img/tea_tree.jpg" backgroundColor="rgba(150,150,150,1)" html_content={<h3 style={{color: Color.blueDark}}>"賣茶葉賺大錢的方法也不是沒有，但是茶葉這東西，生我養我的，我做不到"</h3>}/>
+                        <Quote media="http://localhost:5000/img/tea_tree.jpg" backgroundColor="rgba(150,150,150,1)" html_content={<h3 style={{color: Color.blueDark}}>"賣茶葉賺大錢的方法也不是沒有，但是茶葉這東西，生我養我的，我做不到"</h3>}/>
                     </div> */}
                     <HeroTitle title={"凍頂烏龍茶  正在消逝"} paragraph={"茶葉生存的最後危機"}/>
                     <div class="container">

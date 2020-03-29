@@ -35,7 +35,7 @@ function AppNav(){
                   {/* <a class="nav-link" href="/cart"> */}
                   <Link class="nav-link" to="/cart">
                     <img src={cart_icon} style={{width: "1.5rem", height: "1.5rem", color: ""}}></img>
-                    <span style={{position: 'relative', right: "0.5rem", bottom: "0.5rem"}}><PillBadge textColor={Color.greyDark} backgroundColor={Color.greenLight} text={"3"}/></span>
+                    {/* <span style={{position: 'relative', right: "0.5rem", bottom: "0.5rem"}}><PillBadge textColor={Color.greyDark} backgroundColor={Color.greenLight} text={"3"}/></span> */}
                   </Link>
                   {/* </a> */}
               </div>
