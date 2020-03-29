@@ -1,6 +1,7 @@
 const ds = require('./dataStructure');
 const Db = require('./Db')
 const util = require('../util/Util')
+const Fs = require('fs')
 
 function createPostsTable(){
     let command = `CREATE TABLE IF NOT EXISTS ${ds.dataStructure.post.table_name}(${ds.dataStructure.post.id.schema},${ds.dataStructure.post.title.schema},${ds.dataStructure.post.subtitle.schema},${ds.dataStructure.post.author.schema},${ds.dataStructure.post.description.schema},${ds.dataStructure.post.cover_img.schema},${ds.dataStructure.post.create_on.schema}, ${ds.dataStructure.post.latest_modify.schema})`;
@@ -49,13 +50,14 @@ function insertPost(title, subtitle, author, description, cover_img){
     util.checkString(description)
     util.checkString(cover_img)
     var description_new = description.replace(/'/g, `''`);
-    let command = `INSERT INTO ${ds.dataStructure.post.table_name}(${ds.dataStructure.post.title.key}, ${ds.dataStructure.post.subtitle.key}, ${ds.dataStructure.post.author.key}, ${ds.dataStructure.post.description.key}, ${ds.dataStructure.post.cover_img.key}) VALUES('${title}', '${subtitle}', '${author}', '${util.shortStr(description_new)}', '${cover_img}') RETURNING ${ds.dataStructure.post.id.key};`
+    let command = `INSERT INTO ${ds.dataStructure.post.table_name}(${ds.dataStructure.post.title.key}, ${ds.dataStructure.post.subtitle.key}, ${ds.dataStructure.post.author.key}, ${ds.dataStructure.post.description.key}, ${ds.dataStructure.post.cover_img.key}) VALUES('${title}', '${subtitle}', '${author}', '${description_new}', '${cover_img}') RETURNING ${ds.dataStructure.post.id.key};`
     
     return Db.query(command)
 }
 
 function insertDummy(){
-    let description = `# Remarkable
+    let file = Fs.readFileSync(`sample.md`, 'utf8')
+    let description = `# Remarkable99
 
     > Experience real-time editing with Remarkable!
 
@@ -284,7 +286,7 @@ function insertDummy(){
     You'll like those projects! :)
     `
     for(let i=0; i<5; i++){
-        insertPost('凍頂村的故事', '傳承百年的好味道', '綠蟬工作團隊', description, 'leaf.jpg');
+        insertPost('凍頂村的故事', '傳承百年的好味道', '綠蟬工作團隊', file, 'leaf.jpg');
     }
 }
 
