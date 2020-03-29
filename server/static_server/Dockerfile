@@ -16,8 +16,9 @@
 
 # TAG: db_server
 FROM nginx
-# RUN apt-get update
-# RUN apt-get install curl sudo -y
+RUN sed -i '/jessie-updates/d' /etc/apt/sources.list
+RUN apt-get update
+RUN apt-get install curl sudo -y
 
 RUN rm /etc/nginx/conf.d/default.conf
 COPY ./nginx/nginx.conf /etc/nginx/conf.d/nginx.conf
