@@ -1,7 +1,9 @@
+const os = require('os');
+const ifaces = os.networkInterfaces();
+const fs = require('fs');
 const config = require('../config/serverConfig')
 const static_config = require('../config/staticConfig')
 const Ds = require('../db/dataStructure')
-const fs = require('fs');
 const { Remarkable } = require('remarkable');
 
 function shortStr(str){
@@ -113,27 +115,6 @@ function checkObject(i, paramName, isRequired=true){
         }
     }
 }
-
-// function checkArray(i, paramName, isRequired=true){
-//     if(!Array.isArray(i)){
-//         log(`Warning: ${paramName} = ${i} is not an Array`)
-            // throw `Warning: ${paramName} = ${i} is not an Array`
-//         return []
-//     }else{
-//         if(isRequired){
-//             if(i === null || i === undefined || i === NaN || i === "" || i=== {} || i=== []){
-//                 log(`Warning: ${paramName} = ${i} is Required`)
-//                 throw `Warning: ${paramName} = ${i} is Required`
-//             }
-//         }else{
-//             if(i === null || i === undefined || i === NaN || i === "" || i=== {} || i=== []){
-//                 return null
-//             }else{
-//                 return i
-//             }
-//         }
-//     }
-// }
 
 function checkArray(i, paramName, isRequired=true){
     if(!Array.isArray(i) || i.length <= 0 || i === undefined || i === null || Number.isNaN(i)){
@@ -279,6 +260,35 @@ function convertSellTypeToString(sell_type){
     }
 }
 
+function getLocalIp(){
+    'use strict';
+
+    Object.keys(ifaces).forEach(function (ifname) {
+    var alias = 0;
+
+    ifaces[ifname].forEach(
+        function (iface) {
+            if ('IPv4' !== iface.family || iface.internal !== false) {
+            // skip over internal (i.e. 127.0.0.1) and non-ipv4 addresses
+            return;
+            }
+
+            if (alias >= 1) {
+            // this single interface has multiple ipv4 addresses
+            console.log("A" + ifname + ':' + alias, iface.address);
+            } else {
+            // this interface has only one ipv4 adress
+            console.log("B" + ifname, iface.address);
+            }
+            console.log(alias)
+            ++alias;
+        });
+    });
+
+    // en0 192.168.1.101
+    // eth0 10.0.0.101
+}
+
 // let obj = {
 //     img: ["farmer1.jpg", "f.mp4", "f.svg", "f."],
 //     sec: [
@@ -323,6 +333,8 @@ function convertSellTypeToString(sell_type){
 // console.log(re.ss[0][1])
 
 // console.log(mediaConverter(["farmer1.jpg", "f.mp4", "f.svg", "f."]))
+
+getLocalIp()
 
 exports.log = log
 exports.shortStr = shortStr
