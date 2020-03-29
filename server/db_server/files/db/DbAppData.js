@@ -205,7 +205,7 @@ function insertDummy(){
         media: "tea_farmer.gif",
         caption_title: "南投鹿谷鳳凰村",
         caption_subtitle: "南投鹿谷鳳凰村",
-        link: "http://leafhopper_service.nctu.me:5000/video/tea_farmer.mp4"
+        link: "https://www.youtube.com/watch?v=DGAs2Ld-Uyo&feature=youtu.be&fbclid=IwAR2Hvh3AVWSESXap6Ykjmfr2AXh80OZsps8EJP4eKSviOzVd2va8fi3Ake8"
       },
       {
         id: 2,

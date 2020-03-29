@@ -467,8 +467,8 @@ function insertDummy(){
             img: "process1.gif",
             backgroundColor: "",
             title: "炒茶",
-            subtitle: "林大宇",
-            description: "Sample Description", // Markdown Format
+            subtitle: "林國村",
+            description: "林國村：鹿谷鄉鳳凰村人－林秋冬之子　現年55歲秉其父之精神在茶藝這塊領域上繼續專研，尤其在炒茶這塊更是加以研究，並傳授幫助台灣高山茶改良之傳統技術上不足！研發一套專屬於林氏的炒茶技術。", // Markdown Format
             data: [{property: "溫度", index: "25", unit: "c"}, {property: "濕度", index: "30", unit: "%"}],
             comment: "comment"
         },
@@ -478,7 +478,7 @@ function insertDummy(){
             backgroundColor: "",
             title: "萎凋",
             subtitle: "林國棟",
-            description: "Sample Description1", // Markdown Format
+            description: "凍頂茶的原產地在南投縣的鹿谷鄉其中海拔最高的地方莫屬於鳳凰產區，主要是以青心烏龍為原料製成的半發酵茶，傳統上，其發酵程度在高達50%左右。", // Markdown Format
             data: [{property: "溫度", index: "25", unit: "c"}, {property: "濕度", index: "30", unit: "%"}],
             comment: "comment"
         },
@@ -488,7 +488,7 @@ function insertDummy(){
             backgroundColor: "",
             title: "烘焙",
             subtitle: "蔡培火",
-            description: "Sample Description1", // Markdown Format
+            description: "茶葉烘乾後需再重複以布包成球狀揉捻茶葉，使其成半發酵、半球狀，稱為「布揉製茶」或「熱團揉」。揉捻後，茶葉帶有隱隱金黃色。傳統古典凍頂烏龍茶帶明顯焙火味。", // Markdown Format
             data: [{property: "溫度", index: "25", unit: "c"}, {property: "濕度", index: "30", unit: "%"}],
             comment: "comment"
         },
@@ -498,7 +498,7 @@ function insertDummy(){
             backgroundColor: "",
             title: "揉捻",
             subtitle: "張大春",
-            description: "Sample Description1", // Markdown Format
+            description: "茶葉烘乾後需再重複以布包成球狀揉捻茶葉，使其成半發酵、半球狀，稱為「布揉製茶」或「熱團揉」。揉捻後，茶葉帶有隱隱金黃色。傳統古典凍頂烏龍茶帶明顯焙火味。", // Markdown Format
             data: [{property: "溫度", index: "25", unit: "c"}, {property: "濕度", index: "30", unit: "%"}],
             comment: "comment"
         }
@@ -535,8 +535,8 @@ function insertDummy(){
             content, 
             cert,
             spec,
-            "farmer1.jpg", 
-            ['tea_farmer.gif', 'group.jpg', 'leaf.jpg'],
+            "the_tea_farmer.jpg", 
+            ['tea_farmer.gif', 'group.jpg', 'tea_red.jpg'],
             "Sample block_id", 
             "Sample block_link",
             "Sample transaction_id",

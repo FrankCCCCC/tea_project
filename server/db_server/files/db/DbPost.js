@@ -284,7 +284,7 @@ function insertDummy(){
     You'll like those projects! :)
     `
     for(let i=0; i<5; i++){
-        insertPost('Test Title', 'Test Subtile', 'Test Author', description, 'child.jpg');
+        insertPost('凍頂村的故事', '傳承百年的好味道', '綠蟬工作團隊', description, 'leaf.jpg');
     }
 }
 
