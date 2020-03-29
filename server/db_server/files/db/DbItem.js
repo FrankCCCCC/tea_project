@@ -507,7 +507,7 @@ function insertDummy(){
         name: "SGS", 
         link: "www.sgs.com"
     }, {
-        name: "Origin Place Certi", 
+        name: "產地檢測", 
         link: "www.sgs.com"
     }]
     let spec = [{property: "100g", value: "Heavily Baked", comment: "Strongest"}, {property: "100g", value: "Heavily Baked", comment: "Strongest"}]
@@ -530,12 +530,46 @@ function insertDummy(){
             500, 
             "NTD",
             3, 
+            "這是我們林氏家族百年多來好幾代人努力保存於世的味道，即使站在這時代改變口味的交鋒上，仍然堅持住這最古老的味道。", 
             "# 即使在改變口味的尖峰上，仍然堅持住最古老的好味道", 
-            "# Taiwan Tea", 
             content, 
             cert,
             spec,
             "the_tea_farmer.jpg", 
+            ['tea_farmer.gif', 'group.jpg', 'tea_red.jpg'],
+            "Sample block_id", 
+            "Sample block_link",
+            "Sample transaction_id",
+            "Sample traceability_link",
+            comment,
+            isotime,
+            true,
+            true
+        )
+    }
+
+    for(let i=0; i<5; i++){
+        insertItem(
+            "林氏傳統凍頂烏龍茶", 
+            3, 
+            "林大宇", 
+            "臺灣", 
+            "30013", 
+            "台灣省", 
+            "南投縣", 
+            "鹿谷鄉", 
+            "鳳凰村", 
+            "產業道路", 
+            "in_stock", 
+            500, 
+            "NTD",
+            3, 
+            "這是我們林氏家族百年多來好幾代人努力保存於世的味道，即使站在這時代改變口味的交鋒上，仍然堅持住這最古老的味道。", 
+            "# 即使在改變口味的尖峰上，仍然堅持住最古老的好味道", 
+            content, 
+            cert,
+            spec,
+            "tea_red.jpg", 
             ['tea_farmer.gif', 'group.jpg', 'tea_red.jpg'],
             "Sample block_id", 
             "Sample block_link",

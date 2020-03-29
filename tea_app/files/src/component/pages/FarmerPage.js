@@ -5,7 +5,7 @@ import Gallery from '../gallery/Gallery'
 import MiniCard from '../card/MiniCard'
 import Section from '../section/Section'
 import VideoSlide from '../videoSlide/VideoSlider'
-import Banner from '../banner/Banner'
+import Quote from '../quote/Quote'
 import FlexGrid from '../grid/FlexGrid'
 import {slide1_caption, slide2_caption, slide3_caption} from '../theme/text'
 import Color from '../theme/color'
@@ -117,7 +117,7 @@ function FarmerPage() {
   return (
     <div>
       <Slider sliderInput = {mapToSlider(props.imgs)} is_show_indicator = {true} is_show_control = {true}/>
-      <Banner/>
+      <Quote/>
       <HeroTitle title={props.name} paragraph={props.description}/>
       <Section title={props.name} subtitle={props.description} img={props.cover_img} is_reverse={false} extra={button}/>
       {content}

@@ -49,7 +49,7 @@ function Section(props){
                 <div class="col-lg-6" style={{textAlign: "center", verticalAlign: "middle", padding: ""}}>
                     <div style={{textAlign: "left", color: "grey", padding: "3rem"}}>
                         <Content title={props.title} subtitle={props.subtitle} paragraph={props.paragraph}/>
-                        <div>
+                        <div style={{marginTop: "2rem"}}>
                             {props.extra}
                         </div>
                     </div>

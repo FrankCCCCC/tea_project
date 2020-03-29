@@ -12,6 +12,13 @@ function weightConvert(weight){
     if(weight === 'regular') return 
 }
 
+/**
+ * 
+ * @param {String} text - The text of the header
+ * @param {String} color - The font color of the header
+ * @param {String} font_weight -The font weight of the header
+ * @param {String} letter_spacing - the space between the letters  of the header
+ */
 export function Head1(props) {
     return (
         <div style={{fontSize: "calc(2rem + 1vw)", letterSpacing: props.letter_spacing, fontFamily: font_style.fontFamily, color: props.color, fontWeight: props.font_weight}}>
@@ -41,6 +48,13 @@ Head2.defaultProps = {
     letter_spacing: "normal",
 }
 
+/**
+ * 
+ * @param {String} text - The text of the header
+ * @param {String} color - The font color of the header
+ * @param {String} font_weight -The font weight of the header
+ * @param {String} letter_spacing - the space between the letters  of the header
+ */
 export function Head3(props) {
     return (
         <div style={{ fontSize: "calc(1.6rem + 0.8vw)", letterSpacing: props.letter_spacing, fontFamily: font_style.fontFamily, color: props.color, fontWeight: props.font_weight}}>

@@ -5,7 +5,7 @@ import Gallery from '../gallery/Gallery'
 import MiniCard from '../card/MiniCard'
 import Section from '../section/Section'
 import VideoSlide from '../videoSlide/VideoSlider'
-import Banner from '../banner/Banner'
+import Quote from '../quote/Quote'
 import FlexGrid from '../grid/FlexGrid'
 import {slide1_caption, slide2_caption, slide3_caption} from '../theme/text'
 import Color from '../theme/color'
@@ -200,7 +200,7 @@ class ItemPage extends React.Component{
             // </button>)
         
             var content = this.state.props.content.map((item, index, array) => {
-              return <Section id={index} title={item.title} subtitle={item.subtitle} paragraph={removeHtmlTag(item.description)} img={item.img} is_reverse={index === 0? true : false} extra={this.mapDataToPresent(item.data)}/>
+              return <Section id={index} title={item.title} subtitle={item.subtitle} paragraph={removeHtmlTag(item.description)} img={item.img} is_reverse={index % 2 === 0? true : false} extra={this.mapDataToPresent(item.data)}/>
             })
 
             var description = removeHtmlTag(this.state.props.description)
@@ -208,7 +208,9 @@ class ItemPage extends React.Component{
             return (
                 <div>
                     <Slider sliderInput = {this.mapToSlider(this.state.props.imgs)} is_show_indicator = {true} is_show_control = {true}/>
-                    <Banner/>
+                    <div style={{marginTop: "3rem"}}>
+                        <Quote text={`'${this.state.props.slogan}'`} font/>
+                    </div>
                     <HeroTitle title={this.state.props.name} paragraph={description}/>
                     <Section title={this.state.props.name} paragraph={description} img={this.state.props.cover_img} is_reverse={false} extra={this.makeBuyButton()}/>
                     {content}
@@ -228,34 +230,5 @@ class ItemPage extends React.Component{
         
     }
 }
-
-// function mapToSlider(imgs){
-//     return imgs.map((item, index, array) => {
-//         return {
-//             id: index,
-//             media: item,
-//             caption_title: "",
-//             caption_subtitle: "",
-//             link: item
-//         }
-//     })
-// }
-
-// function mapToCerti(certis){
-//     return certis.map((item, index, array) => {
-//         return <MiniCard uuid={index} background={"url(http://localhost:5000/img/hill2.jpg)"} head={<h1 style={{color: Color.white, letterSpacing: "0.3rem"}}>SGS</h1>} title={<h5 style={{color: Color.white}}>檢驗合格</h5>} min_width={"10rem"} mask={"rgba(0, 0, 0, 0.3)"}/>
-//     })
-// }
-
-// function mapDataToPresent(datas){
-//     let data_list = datas.map((item, index, array) => {
-//         return (
-//         <div style={{textAlign: "center"}}>
-//             <h4 style={{fontWeight: "bold", fontFamily: font_style.fontFamily}}>{item.property}</h4>
-//             <h1 style={{color: Color.greenDark, fontSize: '3rem', fontFamily: font_style.fontFamily}}>{item.index}<span style={{fontSize: '2rem'}}>{item.unit}</span></h1>
-//         </div>)
-//     })
-//     return <FlexGrid items={data_list} flex_wrap={"nowrap"} justify_content={"space-around"}/>
-// }
 
 export default ItemPage;
