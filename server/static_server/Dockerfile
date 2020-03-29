@@ -16,7 +16,7 @@
 
 # TAG: db_server
 FROM nginx
-RUN sed -i '/jessie-updates/d' /etc/apt/sources.list
+RUN sed -i '/jessie-updates/d' /etc/apt/sources.list  # Now archived
 RUN apt-get update
 RUN apt-get install curl sudo -y
 
