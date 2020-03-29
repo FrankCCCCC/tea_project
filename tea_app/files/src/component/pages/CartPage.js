@@ -172,10 +172,10 @@ class CartPage extends React.Component{
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="col mb-3">
+                            <div class="col-md-6 mb-3">
                                 <TextBox input_name={"village"} label={village} value={infoGetState().info.village} handle_on_change={this.handle_input_change} invalid_feedback={village_input_error} is_required={true}/>
                             </div>
-                            <div class="col mb-3">
+                            <div class="col-md-6 mb-3">
                                 <TextBox input_name={"road"} label={road} value={infoGetState().info.road} handle_on_change={this.handle_input_change} invalid_feedback={road_input_error} is_required={true}/>
                             </div>
                         </div>

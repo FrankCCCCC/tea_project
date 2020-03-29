@@ -88,9 +88,9 @@ class HomePage extends React.Component{
             {this.state.is_loaded?
                 <div>
                     <Slider sliderInput = {this.state.sliderInput} is_show_indicator = {true} is_show_control = {true}/>
-                    <div class="container" style={{margin: "2rem"}}>
+                    {/* <div class="container" style={{margin: "2rem"}}>
                         <Banner media="http://localhost:5000/img/tea_tree.jpg" backgroundColor="rgba(150,150,150,1)" html_content={<h3 style={{color: Color.blueDark}}>"賣茶葉賺大錢的方法也不是沒有，但是茶葉這東西，生我養我的，我做不到"</h3>}/>
-                    </div>
+                    </div> */}
                     <HeroTitle title={"凍頂烏龍茶  正在消逝"} paragraph={"茶葉生存的最後危機"}/>
                     <div class="container">
                         {this.makeCards()}

@@ -7,6 +7,7 @@ import deleteLogo from '../img/x-grey.svg'
 import {mapSellTypeToText} from '../util/Util'
 import Shape from '../theme/Shape'
 import {cartSetQuantity} from '../redux/action'
+import {Head6} from '../typography/Typography'
 
 class ShoppingList extends React.Component{
     constructor(props){
@@ -51,22 +52,37 @@ class ShoppingList extends React.Component{
         let sell_type_text = mapSellTypeToText(sell_type)
         console.log(sell_type_text)
         return (
-            <div class="d-flex align-items-center justify-content-between"  style={{marginBottom: "1rem"}}>
-                <div style={{backgroundImage: `url(${img})`, width: "5rem", height: "5rem", borderRadius: "4px", backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}}></div>
-                <div class='flex-fill' style={{marginLeft: '1rem', color: Color.grey, fontSize: '1.3rem', fontWeight: 'bold', width: '50%'}}>{name}
-                    <div style={{color: Color.white}}><PillBadge color={Color.yellowHightLight} text={sell_type_text}/></div>
-                </div>
-                <div class='flex-fill' style={{textAlign:"right", width: '20%'}}>
-                    <div>
-                        <input list_id={list_id} style={{width: "5rem", background:"", border: `2px solid ${Color.blueLight}`, borderRadius: Shape.round_corner, paddingTop: "0.3rem", paddingBottom: "0.3rem", paddingLeft: "1.5rem", paddingRight: "1.5rem", textAlign: "center", color: Color.greenDark}} onChange={this.handleQuantityChange} type='number' min='1'/>
+            <div class="d-flex align-items-center justify-content-between flex-wrap"  style={{marginBottom: "1rem"}}>
+                <div class='flex-fill col-md-7'>
+                    <div class='d-flex align-items-center justify-content-start flex-nowrap'>
+                        <div style={{backgroundImage: `url(${img})`, width: "5rem", height: "5rem", borderRadius: "4px", backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}}></div>
+                        <div style={{marginLeft: '1rem', color: Color.grey, fontSize: '1.3rem', fontWeight: 'bold', width: '50%'}}>
+                            <Head6 text={name}/>
+                            <div style={{color: Color.white}}><PillBadge color={Color.yellowHightLight} text={sell_type_text}/></div>
+                        </div>
                     </div>
                 </div>
-                <div class='flex-fill' style={{textAlign:"right", width: '20%'}}>{`${price} $`}</div>
                 
-                <div class='flex-fill' style={{textAlign:"right", width: '10%'}}>
-                    <button onClick={this.handleShoppingItemDelete} style={{backgroundColor: "rgba(1,1,1,0)", border: "0px"}}>
-                        <a><img src={deleteLogo} style={{width:"1rem"}} list_id={list_id}></img></a>
-                    </button>
+                <div class='flex-fill col-md-5' style={{marginTop: '1rem', marginBottom: '1rem'}}>
+                    <div class='d-flex align-items-center justify-content-between flex-nowrap'>
+                        <div style={{textAlign:"leftt", width: '40%'}}>
+                        {/* <div class='flex-fill col-md-2' style={{textAlign:"right"}}> */}
+                            <div>
+                                <input list_id={list_id} style={{width: "5rem", background:"", border: `2px solid ${Color.blueLight}`, borderRadius: Shape.round_corner, paddingTop: "0.3rem", paddingBottom: "0.3rem", paddingLeft: "1.5rem", paddingRight: "1.5rem", textAlign: "center", color: Color.greenDark}} onChange={this.handleQuantityChange} type='number' min='1'/>
+                            </div>
+                        </div>
+                        <div style={{textAlign:"right", width: '40%'}}>
+                        {/* <div class='flex-fill col-md-2' style={{textAlign:"right"}}> */}
+                            {`${price} $`}
+                        </div>
+                        
+                        <div style={{textAlign:"right", width: '20%'}}>
+                        {/* <div class='flex-fill col-md-1' style={{textAlign:"right"}}> */}
+                            <button onClick={this.handleShoppingItemDelete} style={{backgroundColor: "rgba(1,1,1,0)", border: "0px"}}>
+                                <a><img src={deleteLogo} style={{width:"1rem"}} list_id={list_id}></img></a>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
             // {/* <div style={{width: '10%', height: '0.1rem', backgroundColor: Color.greyLight}}></div> */}
@@ -78,7 +94,7 @@ class ShoppingList extends React.Component{
             <div>
                 <div class="d-flex align-items-center justify-content-between"  style={{marginBottom: "1rem"}}>
                     <div class='flex-fill' style={{textAlign:"left", width: '20%', fontSize: '1.2rem', fontWeight: "bold", marginLeft: "1rem"}}>{`小計`}</div>
-                    <div class='flex-fill' style={{textAlign:"right", width: '20%', fontSize: '1.2rem', fontWeight: "bold"}}>{`${total_price} $`}</div>
+                    <div class='flex-fill' style={{textAlign:"right", width: '20%', fontSize: '1.2rem', fontWeight: "bold", marginRight: '2rem'}}>{`${total_price} $`}</div>
                 </div>
                 {/* <div style={{width: '10%', height: '0.1rem', backgroundColor: Color.greyLight}}></div> */}
             </div>

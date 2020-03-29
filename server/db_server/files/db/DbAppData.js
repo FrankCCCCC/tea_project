@@ -202,10 +202,10 @@ function insertDummy(){
     let comment = {note: "", ext: null}
     const sliderInput = [{
         id: 1,
-        media: "tea_farmer.mp4",
+        media: "tea_farmer.gif",
         caption_title: "南投鹿谷鳳凰村",
         caption_subtitle: "南投鹿谷鳳凰村",
-        link: "http://localhost:5000/video/tea_farmer.mp4"
+        link: "http://leafhopper_service.nctu.me:5000/video/tea_farmer.mp4"
       },
       {
         id: 2,
