@@ -57,7 +57,7 @@ class Post extends React.Component{
         fontWeight: 300,
         margin: '6rem auto 1rem',
         maxWidth: '48rem',
-        lineHeight: '1.85'}}>
+        lineHeight: '1.85', wordWrap: 'break-word'}}>
             <div dangerouslySetInnerHTML={this.state.html}>
             </div>
         </div>
