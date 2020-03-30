@@ -10,11 +10,11 @@ import {font_style} from '../theme/font'
 import Color from '../theme/color'
 
 function AboutPage(props){
-    makeAlert("TestTitle", "TestMessage", 3)
+    // makeAlert("TestTitle", "TestMessage", 3)
     return (
         <div>
             
-            <div style={{paddingTop: "3rem"}}></div>
+            {/* <div style={{paddingTop: "3rem"}}></div>
             <AnimateNumber number={5}/>
             <h1 style={{fontFamily: font_style.fontFamily, color: props.color}}>這是 Head1</h1>
             <Head1 text="這是 Head1"/>
@@ -27,7 +27,9 @@ function AboutPage(props){
             <h5 style={{fontFamily: font_style.fontFamily, color: props.color}}>這是 Head5</h5>
             <Head5 text="這是 Head5"/>
             <h6 style={{fontFamily: font_style.fontFamily, color: props.color}}>這是 Head6</h6>
-            <Head6 text="這是 Head6"/>
+            <Head6 text="這是 Head6"/> */}
+
+
         </div>
     )
 }

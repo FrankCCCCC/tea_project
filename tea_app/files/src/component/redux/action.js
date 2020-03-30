@@ -65,10 +65,10 @@ function test(){
     console.log(cart_store.getState())
 }
 
-cart_store.subscribe(test)
+// cart_store.subscribe(test)
 
-cartAddItem(1, "http://localhost:5000/img/tea.jpg", "林氏傳統凍頂烏龍茶", "pre_sale", 1, 300, "NTD")
-cartAddItem(2, "http://localhost:5000/img/tea.jpg", "陳氏傳統東方美人茶", "in_stock", 2, 250, "NTD")
+// cartAddItem(1, "http://localhost:5000/img/tea.jpg", "林氏傳統凍頂烏龍茶", "pre_sale", 1, 300, "NTD")
+// cartAddItem(2, "http://localhost:5000/img/tea.jpg", "陳氏傳統東方美人茶", "in_stock", 2, 250, "NTD")
 // cartAddItem(3, "Test Oolong3", 3)
 // cartDeleteItem(2, "Test Oolong2")
 // cartSetQuantity(3, "Test Oolong3", 5)
