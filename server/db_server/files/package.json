@@ -8,7 +8,8 @@
     "start": "node index.js start",
     "deploy": "node index.js deploy",
     "dev": "node index.js dev",
-    "remote_dev": "node index.js remote_dev"
+    "remote_dev": "node index.js remote_dev",
+    "heroku": "node index.js heroku"
   },
   "author": "",
   "license": "ISC",
