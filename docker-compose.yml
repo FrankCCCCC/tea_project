@@ -96,6 +96,7 @@ services:
       - tea-network
 
   adminer:
+    container_name: adminer
     image: adminer
     restart: always
     ports:
