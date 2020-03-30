@@ -10,8 +10,11 @@ import Quote from '../quote/Quote'
 import MiniCard from '../card/MiniCard'
 import {fetchAppDataByProperty} from '../fetch/fetchAppData'
 import LoadingPage from '../pages/LoadingPage'
-
 import {hero_title_home, hero_paragraph_home} from '../theme/text';
+
+import Farmer3 from '../img/farmer3.jpg'
+import Hill1 from '../img/hill1.jpg'
+import Hill2 from '../img/hill2.jpg'
 
 class HomePage extends React.Component{
     constructor(props){
@@ -23,9 +26,9 @@ class HomePage extends React.Component{
 
     makeCards(){
         let cards = []
-        cards[0] = <MiniCard uuid={0} background={"url(http://leafhopper_service.nctu.me:5000/img/farmer3.jpg)"} top={<h5 style={{color: Color.white}}>每年約有</h5>} head={<h1 style={{color: Color.white, letterSpacing: "0.3rem"}}>5 位</h1>} title={<h5 style={{color: Color.white}}>茶農轉作四季豆</h5>} min_height={"20rem"} min_width={"20rem"} mask={"rgba(0, 0, 0, 0.3)"}/>
-        cards[1] = <MiniCard uuid={1} background={"url(http://leafhopper_service.nctu.me:5000/img/hill1.jpg)"} top={<h5 style={{color: Color.white}}>在台灣</h5>} head={<h1 style={{color: Color.white, letterSpacing: "0.3rem"}}>4 倍</h1>} title={<h5 style={{color: Color.white}}>四季豆利潤比茶葉高出</h5>} min_height={"20rem"} min_width={"20rem"} mask={"rgba(0, 0, 0, 0.3)"}/>
-        cards[3] = <MiniCard uuid={1} background={"url(http://leafhopper_service.nctu.me:5000/img/hill2.jpg)"} top={<h5 style={{color: Color.white}}>但市面上卻有</h5>} head={<h1 style={{color: Color.white, letterSpacing: "0.3rem"}}>90%</h1>} title={<h5 style={{color: Color.white}}>的台灣茶是假的</h5>} min_height={"20rem"} min_width={"20rem"} mask={"rgba(0, 0, 0, 0.3)"}/>
+        cards[0] = <MiniCard uuid={0} background={`url(${Farmer3})`} top={<h5 style={{color: Color.white}}>每年約有</h5>} head={<h1 style={{color: Color.white, letterSpacing: "0.3rem"}}>5 位</h1>} title={<h5 style={{color: Color.white}}>茶農轉作四季豆</h5>} min_height={"20rem"} min_width={"20rem"} mask={"rgba(0, 0, 0, 0.3)"}/>
+        cards[1] = <MiniCard uuid={1} background={`url(${Hill1})`} top={<h5 style={{color: Color.white}}>在台灣</h5>} head={<h1 style={{color: Color.white, letterSpacing: "0.3rem"}}>4 倍</h1>} title={<h5 style={{color: Color.white}}>四季豆利潤比茶葉高出</h5>} min_height={"20rem"} min_width={"20rem"} mask={"rgba(0, 0, 0, 0.3)"}/>
+        cards[3] = <MiniCard uuid={1} background={`url(${Hill2})`} top={<h5 style={{color: Color.white}}>但市面上卻有</h5>} head={<h1 style={{color: Color.white, letterSpacing: "0.3rem"}}>90%</h1>} title={<h5 style={{color: Color.white}}>的台灣茶是假的</h5>} min_height={"20rem"} min_width={"20rem"} mask={"rgba(0, 0, 0, 0.3)"}/>
 
         return (
             <FlexGrid items={cards}/>

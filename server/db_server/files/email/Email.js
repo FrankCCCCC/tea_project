@@ -1,7 +1,7 @@
 // import Mail from 'nodemailer/lib/mailer'
 
 const nodemailer = require('nodemailer')
-const MailConfig = require('./MailConfig')
+const MailConfig = require('../config/MailConfig')
 const Util = require('../util/Util')
 
 const mailTransport = nodemailer.createTransport({
@@ -11,13 +11,6 @@ const mailTransport = nodemailer.createTransport({
         pass: MailConfig.password
     }
 })
-
-const options = {
-    from: 'leafhopper.tw@gmail.com',
-    to: 'unaxultraspaceos5@gmail.com',
-    subject: '主旨',
-    text: '測試郵件'
-}
 
 function sendEmail(mail_options){
     mailTransport.sendMail(mail_options, (error, info) => {
@@ -57,6 +50,7 @@ function sendConfirmOrderMail(to, name, address, order, price){
                     <h4>綠蟬數據感謝您的支持，一起傳承臺灣百年茶文化</h4>`
     // let text_content = name + MailConfig.confirm_order.greet + MailConfig.confirm_order.already_recieved + JSON.stringify(order) + MailConfig.confirm_order.total_price + price + MailConfig.confirm_order.thank
     sendEmail({from: MailConfig.account, to :to, subject: MailConfig.confirm_order.subject, html: text_content})
+    sendEmail({from: MailConfig.account, to :MailConfig.official, subject: MailConfig.notify_order.subject, html: text_content})
 }
 
 exports.sendEmail = sendEmail

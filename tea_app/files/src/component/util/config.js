@@ -1,5 +1,6 @@
 // const base_url = "http://localhost"
-const base_url = 'http://leafhopper_service.nctu.me'
+// const base_url = 'http://leafhopper_service.nctu.me'
+const base_url = 'https://tea-deploy.herokuapp.com'
 const app_server_port = 3000;
 const db_server_port = 8000;
 const db_port = 5432;

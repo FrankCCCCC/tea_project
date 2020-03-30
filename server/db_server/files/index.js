@@ -63,6 +63,9 @@ var setup = () => {
         case 'deploy':
             Init.deployInit()
             break
+        case 'heroku':
+            Init.devInit()
+            break
     }
 };
 
