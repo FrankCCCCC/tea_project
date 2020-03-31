@@ -21,7 +21,7 @@ function weightConvert(weight){
  */
 export function Head1(props) {
     return (
-        <div style={{fontSize: "calc(2rem + 1vw)", letterSpacing: props.letter_spacing, fontFamily: font_style.fontFamily, color: props.color, fontWeight: props.font_weight}}>
+        <div style={{fontSize: "calc(2rem + 1vw)", letterSpacing: props.letter_spacing, fontFamily: font_style.fontFamily, color: props.color, fontWeight: props.font_weight, wordWrap: 'break-word'}}>
             {props.text}
         </div>
     )
@@ -35,7 +35,7 @@ Head1.defaultProps = {
 
 export function Head2(props) {
     return (
-        <div style={{ fontSize: "calc(1.8rem + 0.9vw)", letterSpacing: props.letter_spacing, fontFamily: font_style.fontFamily, color: props.color, fontWeight: props.font_weight}}>
+        <div style={{ fontSize: "calc(1.8rem + 0.9vw)", letterSpacing: props.letter_spacing, fontFamily: font_style.fontFamily, color: props.color, fontWeight: props.font_weight, wordWrap: 'break-word'}}>
             {props.text}
         </div>
     )   
@@ -57,7 +57,7 @@ Head2.defaultProps = {
  */
 export function Head3(props) {
     return (
-        <div style={{ fontSize: "calc(1.6rem + 0.8vw)", letterSpacing: props.letter_spacing, fontFamily: font_style.fontFamily, color: props.color, fontWeight: props.font_weight}}>
+        <div style={{ fontSize: "calc(1.6rem + 0.8vw)", letterSpacing: props.letter_spacing, fontFamily: font_style.fontFamily, color: props.color, fontWeight: props.font_weight, wordWrap: 'break-word'}}>
             {props.text}
         </div>
     )   
@@ -72,7 +72,7 @@ Head3.defaultProps = {
 
 export function Head4(props) {
     return (
-        <div style={{ fontSize: "calc(1.4rem + 0.7vw)", letterSpacing: props.letter_spacing, fontFamily: font_style.fontFamily, color: props.color, fontWeight: props.font_weight}}>
+        <div style={{ fontSize: "calc(1.4rem + 0.7vw)", letterSpacing: props.letter_spacing, fontFamily: font_style.fontFamily, color: props.color, fontWeight: props.font_weight, wordWrap: 'break-word'}}>
             {props.text}
         </div>
     )   
@@ -86,7 +86,7 @@ Head4.defaultProps = {
 
 export function Head5(props) {
     return (
-        <div style={{ fontSize: "calc(1.2rem + 0.6vw)", letterSpacing: props.letter_spacing, fontFamily: font_style.fontFamily, color: props.color, fontWeight: props.font_weight}}>
+        <div style={{ fontSize: "calc(1.2rem + 0.6vw)", letterSpacing: props.letter_spacing, fontFamily: font_style.fontFamily, color: props.color, fontWeight: props.font_weight, wordWrap: 'break-word'}}>
             {props.text}
         </div>
     )   
@@ -100,7 +100,7 @@ Head5.defaultProps = {
 
 export function Head6(props) {
     return (
-        <div style={{ fontSize: "calc(1rem + 0.5vw)", letterSpacing: props.letter_spacing, fontFamily: font_style.fontFamily, color: props.color, fontWeight: props.font_weight}}>
+        <div style={{ fontSize: "calc(1rem + 0.5vw)", letterSpacing: props.letter_spacing, fontFamily: font_style.fontFamily, color: props.color, fontWeight: props.font_weight, wordWrap: 'break-word'}}>
             {props.text}
         </div>
     )   
