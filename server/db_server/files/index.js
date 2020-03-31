@@ -54,6 +54,9 @@ var setup = () => {
     util.log(`Server is listening on port ${serverConfig.port}`)
     util.log(`${process.env.MODE} Mode`)
     switch(process.env.MODE){
+	case 'start':
+	    Init.devInit()
+	    break
         case 'dev':
             Init.devInit()
             break

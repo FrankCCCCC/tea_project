@@ -15,10 +15,8 @@ server{
     listen 80;
     # server_name static_server:5000;
     server_name leafhopper_service.nctu.me, www.leafhopper_service.nctu.me;
+    add_header Access-Control-Allow-Origin *;
     location / {
-	if ($request_method ~* "(GET|POST)") {
-	     add_header "Access-Control-Allow-Origin"  *;
-        }
         alias /static_server/public/;
     }
 }

@@ -78,7 +78,7 @@ class PostPage extends React.Component{
           <div>
             {this.state.is_loaded? 
               <div data-aos="fade-left">
-                  <div class="" style={{background: `${this.state.cover_img}`, height: "100vh", minHeight: "350px", backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat"}}>
+                  <div class="" style={{background: `url(${this.state.cover_img})`, height: "100vh", minHeight: "350px", backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat"}}>
                       <div style={{width: "100%", height: "100%", textAlign: "left", backgroundColor: "rgba(0,0,0,0.5)"}}>
                           <div style={{position: "absolute", top: "50%", transform: "translateY(-50%)", marginLeft: "3rem", marginRight: "3rem"}}>
                               <h1 style={title_style}>{this.state.title}</h1>
