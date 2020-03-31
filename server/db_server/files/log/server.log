@@ -12547,3 +12547,3245 @@ You''ll like those projects! :)', 'leaf.jpg') RETURNING id;
     FROM items_table AS items_table ORDER BY create_on DESC LIMIT 3 OFFSET 81; 
 2020-03-30T03:52:53.957Z Local: 3/30/2020, 11:52:53 AM command: SELECT, rowCount: 1 
 2020-03-30T03:52:53.962Z Local: 3/30/2020, 11:52:53 AM Sending 1 rows to ::1 with  
+2020-03-30T13:30:49.073Z Local: 3/30/2020, 9:30:49 PM CREATE TABLE IF NOT EXISTS posts_table(id serial PRIMARY KEY NOT NULL,title TEXT NOT NULL,subtitle TEXT NOT NULL,author TEXT NOT NULL,description TEXT NOT NULL,cover_img TEXT,create_on TIMESTAMP default current_timestamp, latest_modify TIMESTAMP default current_timestamp) 
+2020-03-30T13:30:49.240Z Local: 3/30/2020, 9:30:49 PM Created posts_table 
+2020-03-30T13:30:49.239Z Local: 3/30/2020, 9:30:49 PM command: CREATE, rowCount: null 
+2020-03-30T13:30:49.241Z Local: 3/30/2020, 9:30:49 PM post_action is mounted By function(req, res, next) {
+    app.handle(req, res, next);
+  } 
+2020-03-30T13:30:49.243Z Local: 3/30/2020, 9:30:49 PM DO $$ BEGIN
+        CREATE TYPE Good AS (id INTEGER, name TEXT);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-03-30T13:30:49.304Z Local: 3/30/2020, 9:30:49 PM command: DO, rowCount: null 
+2020-03-30T13:30:49.308Z Local: 3/30/2020, 9:30:49 PM Created Good type 
+2020-03-30T13:30:49.309Z Local: 3/30/2020, 9:30:49 PM DO $$ BEGIN
+        CREATE TYPE Comment AS (note TEXT, ext JSONB);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-03-30T13:30:49.311Z Local: 3/30/2020, 9:30:49 PM command: DO, rowCount: null 
+2020-03-30T13:30:49.312Z Local: 3/30/2020, 9:30:49 PM Created Comment type 
+2020-03-30T13:30:49.313Z Local: 3/30/2020, 9:30:49 PM CREATE TABLE IF NOT EXISTS farmers_table(
+    id serial PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL,
+    cover_img TEXT NOT NULL,
+    items Good ARRAY,
+    comment Comment,
+    create_on TIMESTAMP default current_timestamp,
+    latest_modify TIMESTAMP default current_timestamp) 
+2020-03-30T13:30:49.315Z Local: 3/30/2020, 9:30:49 PM command: CREATE, rowCount: null 
+2020-03-30T13:30:49.316Z Local: 3/30/2020, 9:30:49 PM farmer_action is mounted By function(req, res, next) {
+    app.handle(req, res, next);
+  } 
+2020-03-30T13:30:49.316Z Local: 3/30/2020, 9:30:49 PM Created farmers_table 
+2020-03-30T13:30:49.322Z Local: 3/30/2020, 9:30:49 PM DO $$ BEGIN
+        CREATE TYPE Comment AS (note TEXT, ext JSONB);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-03-30T13:30:49.324Z Local: 3/30/2020, 9:30:49 PM command: DO, rowCount: null 
+2020-03-30T13:30:49.327Z Local: 3/30/2020, 9:30:49 PM 
+    DO $$ BEGIN
+        CREATE TYPE Spec AS (property TEXT, value TEXT);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-03-30T13:30:49.326Z Local: 3/30/2020, 9:30:49 PM Created Comment type 
+2020-03-30T13:30:49.329Z Local: 3/30/2020, 9:30:49 PM command: DO, rowCount: null 
+2020-03-30T13:30:49.334Z Local: 3/30/2020, 9:30:49 PM Created Spec type 
+2020-03-30T13:30:49.335Z Local: 3/30/2020, 9:30:49 PM DO $$ BEGIN
+        CREATE TYPE SellType AS 
+            ENUM('pre_sale', 'in_stock');
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-03-30T13:30:49.336Z Local: 3/30/2020, 9:30:49 PM command: DO, rowCount: null 
+2020-03-30T13:30:49.337Z Local: 3/30/2020, 9:30:49 PM Created SellType type 
+2020-03-30T13:30:49.338Z Local: 3/30/2020, 9:30:49 PM DO $$ BEGIN
+        CREATE TYPE Section AS (
+            display TEXT, 
+            img TEXT, 
+            backgroundColor TEXT, 
+            title TEXT,
+            subtitle TEXT, 
+            description TEXT,
+            data JSONB);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-03-30T13:30:49.341Z Local: 3/30/2020, 9:30:49 PM command: DO, rowCount: null 
+2020-03-30T13:30:49.342Z Local: 3/30/2020, 9:30:49 PM Created Section type 
+2020-03-30T13:30:49.347Z Local: 3/30/2020, 9:30:49 PM DO $$ BEGIN
+        CREATE TYPE Certification AS (
+            name TEXT, 
+            link TEXT);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-03-30T13:30:49.350Z Local: 3/30/2020, 9:30:49 PM command: DO, rowCount: null 
+2020-03-30T13:30:49.350Z Local: 3/30/2020, 9:30:49 PM Created Certification type 
+2020-03-30T13:30:49.351Z Local: 3/30/2020, 9:30:49 PM 
+    CREATE TABLE IF NOT EXISTS items_table(
+    id serial PRIMARY KEY NOT NULL,
+    enable BOOLEAN NOT NULL,
+    name TEXT NOT NULL,
+    producer_id INTEGER REFERENCES farmers_table(id) ON  DELETE CASCADE NOT NULL,
+    producer_name TEXT NOT NULL,
+    country TEXT NOT NULL,
+    zip TEXT NOT NULL,
+    province TEXT NOT NULL,
+    county TEXT NOT NULL,
+    township TEXT NOT NULL,
+    village TEXT NOT NULL,
+    road TEXT NOT NULL,
+    sell_type SellType NOT NULL,
+    price NUMERIC NOT NULL,
+    unit TEXT NOT NULL,
+    amount INTEGER,
+    sold INTEGER NOT NULL,
+    slogan TEXT,
+    description TEXT NOT NULL,
+    content Section ARRAY NOT NULL,
+    certification Certification ARRAY,
+    spec Spec ARRAY,
+    cover_img TEXT NOT NULL, 
+    imgs TEXT ARRAY, 
+    block_id TEXT, 
+    block_link TEXT, 
+    transaction_id TEXT, 
+    traceability_link TEXT, 
+    comment Comment, 
+    create_on TIMESTAMP default current_timestamp, 
+    latest_modify TIMESTAMP default current_timestamp, 
+    expire_on TIMESTAMP, 
+    is_limited BOOLEAN NOT NULL, 
+    has_expiration BOOLEAN NOT NULL,
+    CONSTRAINT is_valid CHECK((amount >= sold AND sell_type = 'in_stock' AND is_limited = 'true') OR (create_on <= expire_on AND sell_type = 'pre_sale' AND has_expiration = 'true'))); 
+2020-03-30T13:30:49.354Z Local: 3/30/2020, 9:30:49 PM command: CREATE, rowCount: null 
+2020-03-30T13:30:49.355Z Local: 3/30/2020, 9:30:49 PM Created items_table 
+2020-03-30T13:30:49.356Z Local: 3/30/2020, 9:30:49 PM item_action is mounted By function(req, res, next) {
+    app.handle(req, res, next);
+  } 
+2020-03-30T13:30:49.361Z Local: 3/30/2020, 9:30:49 PM DO $$ BEGIN
+        CREATE TYPE Comment AS (note TEXT, ext JSONB);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-03-30T13:30:49.363Z Local: 3/30/2020, 9:30:49 PM command: DO, rowCount: null 
+2020-03-30T13:30:49.365Z Local: 3/30/2020, 9:30:49 PM DO $$ BEGIN
+        CREATE TYPE SellType AS ENUM('pre_sale', 'in_stock');
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-03-30T13:30:49.364Z Local: 3/30/2020, 9:30:49 PM Created Comment type 
+2020-03-30T13:30:49.367Z Local: 3/30/2020, 9:30:49 PM command: DO, rowCount: null 
+2020-03-30T13:30:49.368Z Local: 3/30/2020, 9:30:49 PM Created Selltype type 
+2020-03-30T13:30:49.369Z Local: 3/30/2020, 9:30:49 PM DO $$ BEGIN
+        CREATE TYPE OrderItem AS (
+            id INTEGER, 
+            name TEXT, 
+            quantity INTEGER, 
+            price NUMERIC, 
+            unit TEXT);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-03-30T13:30:49.378Z Local: 3/30/2020, 9:30:49 PM command: DO, rowCount: null 
+2020-03-30T13:30:49.379Z Local: 3/30/2020, 9:30:49 PM Created OrderItem type 
+2020-03-30T13:30:49.379Z Local: 3/30/2020, 9:30:49 PM 
+    DO $$ BEGIN
+        CREATE EXTENSION "uuid-ossp";
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-03-30T13:30:49.396Z Local: 3/30/2020, 9:30:49 PM command: DO, rowCount: null 
+2020-03-30T13:30:49.396Z Local: 3/30/2020, 9:30:49 PM Created uuid-ossp extension 
+2020-03-30T13:30:49.397Z Local: 3/30/2020, 9:30:49 PM CREATE TABLE IF NOT EXISTS orders_table(
+    id serial PRIMARY KEY NOT NULL,
+    order_id uuid DEFAULT uuid_generate_v4(),
+    buyer_name TEXT NOT NULL,
+    phone TEXT NOT NULL,
+    email TEXT NOT NULL,
+    bank_code TEXT NOT NULL,
+    bank_account TEXT NOT NULL,
+    country TEXT NOT NULL,
+    zip TEXT NOT NULL,
+    province TEXT NOT NULL,
+    county TEXT NOT NULL,
+    township TEXT NOT NULL,
+    village TEXT NOT NULL,
+    road TEXT NOT NULL,
+    items OrderItem ARRAY NOT NULL,
+    total_price NUMERIC NOT NULL,
+    unit TEXT NOT NULL,
+    total_quantity INTEGER NOT NULL,
+    block_id TEXT,
+    block_link TEXT,
+    transaction_id TEXT,
+    agree_policy BOOLEAN NOT NULL,
+    agree_promotion BOOLEAN NOT NULL,
+    is_paid BOOLEAN NOT NULL,
+    is_send BOOLEAN NOT NULL,
+    is_recieved BOOLEAN NOT NULL,
+    comment Comment,
+    create_on TIMESTAMP default current_timestamp,
+    latest_modify TIMESTAMP default current_timestamp) 
+2020-03-30T13:30:49.406Z Local: 3/30/2020, 9:30:49 PM command: CREATE, rowCount: null 
+2020-03-30T13:30:49.407Z Local: 3/30/2020, 9:30:49 PM Created orders_table 
+2020-03-30T13:30:49.408Z Local: 3/30/2020, 9:30:49 PM order_action is mounted By function(req, res, next) {
+    app.handle(req, res, next);
+  } 
+2020-03-30T13:30:49.411Z Local: 3/30/2020, 9:30:49 PM DO $$ BEGIN
+        CREATE TYPE Comment AS (note TEXT, ext JSONB);
+    EXCEPTION
+        WHEN duplicate_object THEN null;
+    END $$; 
+2020-03-30T13:30:49.418Z Local: 3/30/2020, 9:30:49 PM command: DO, rowCount: null 
+2020-03-30T13:30:49.419Z Local: 3/30/2020, 9:30:49 PM Created Comment type 
+2020-03-30T13:30:49.419Z Local: 3/30/2020, 9:30:49 PM CREATE TABLE IF NOT EXISTS app_datas_table(
+    id serial PRIMARY KEY NOT NULL,
+    property TEXT UNIQUE NOT NULL,
+    data JSONB,
+    comment Comment,
+    create_on TIMESTAMP default current_timestamp,
+    latest_modify TIMESTAMP default current_timestamp) 
+2020-03-30T13:30:49.422Z Local: 3/30/2020, 9:30:49 PM command: CREATE, rowCount: null 
+2020-03-30T13:30:49.422Z Local: 3/30/2020, 9:30:49 PM Created app_datas_table 
+2020-03-30T13:30:49.423Z Local: 3/30/2020, 9:30:49 PM app_data_action is mounted By function(req, res, next) {
+    app.handle(req, res, next);
+  } 
+2020-03-30T13:30:49.429Z Local: 3/30/2020, 9:30:49 PM Server is listening on port 8000 
+2020-03-30T13:30:49.432Z Local: 3/30/2020, 9:30:49 PM dev Mode 
+2020-03-30T13:30:49.433Z Local: 3/30/2020, 9:30:49 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment)
+        VALUES('home_slider', '[{"id":1,"media":"tea_farmer.gif","caption_title":"南投鹿谷鳳凰村","caption_subtitle":"南投鹿谷鳳凰村","link":"https://www.youtube.com/watch?v=DGAs2Ld-Uyo&feature=youtu.be&fbclid=IwAR2Hvh3AVWSESXap6Ykjmfr2AXh80OZsps8EJP4eKSviOzVd2va8fi3Ake8"},{"id":2,"media":"hill1.jpg","caption_title":"Leafhopper","caption_subtitle":"Leafhopper"},{"id":3,"media":"tea.jpg","caption_title":"林氏凍頂烏龍茶","caption_subtitle":"林氏凍頂烏龍茶"}]', json_populate_record(null::Comment, '{"note":"","ext":null}')
+        ) RETURNING id; 
+2020-03-30T13:30:49.434Z Local: 3/30/2020, 9:30:49 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment)
+        VALUES('home_gallery', '[{"img":"farmer1.jpg","caption_title":"陳朝鳳","caption_subtitle":"鹿谷 凍頂","title":"陳朝鳳","subtitle":"鹿谷 凍頂","id":1},{"img":"farmer2.jpg","caption_title":"張大春","caption_subtitle":"鹿谷 鳳凰","title":"張大春","subtitle":"鹿谷 鳳凰","id":2},{"img":"farmer3.jpg","caption_title":"林大宇","caption_subtitle":"鹿谷 鳳凰","title":"林大宇","subtitle":"鹿谷 鳳凰","id":3},{"img":"farmer4.jpg","caption_title":"林大宇","caption_subtitle":"鹿谷 鳳凰","title":"林大宇","subtitle":"鹿谷 鳳凰","id":1},{"img":"tea_tree.jpg","caption_title":"林大宇","caption_subtitle":"鹿谷 鳳凰","title":"林大宇","subtitle":"鹿谷 鳳凰","id":1},{"img":"child.jpg","caption_title":"林大宇","caption_subtitle":"鹿谷 鳳凰","title":"林大宇","subtitle":"鹿谷 鳳凰","id":1},{"img":"farmer7.jpg","caption_title":"林大宇","caption_subtitle":"鹿谷 鳳凰","title":"林大宇","subtitle":"鹿谷 鳳凰","id":1}]', json_populate_record(null::Comment, '{"note":"","ext":null}')
+        ) RETURNING id; 
+2020-03-30T13:30:49.436Z Local: 3/30/2020, 9:30:49 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment)
+        VALUES('Test 2020-03-30T13:30:49.436Z', null, json_populate_record(null::Comment, '{"note":"","ext":null}')
+        ) RETURNING id; 
+2020-03-30T13:30:49.434Z Local: 3/30/2020, 9:30:49 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment)
+        VALUES('Test 2020-03-30T13:30:49.434Z', null, json_populate_record(null::Comment, '{"note":"","ext":null}')
+        ) RETURNING id; 
+2020-03-30T13:30:49.436Z Local: 3/30/2020, 9:30:49 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment)
+        VALUES('Test 2020-03-30T13:30:49.436Z', null, json_populate_record(null::Comment, '{"note":"","ext":null}')
+        ) RETURNING id; 
+2020-03-30T13:30:49.437Z Local: 3/30/2020, 9:30:49 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment)
+        VALUES('Test 2020-03-30T13:30:49.437Z', null, json_populate_record(null::Comment, '{"note":"","ext":null}')
+        ) RETURNING id; 
+2020-03-30T13:30:49.437Z Local: 3/30/2020, 9:30:49 PM INSERT INTO farmers_table(
+        name,
+        cover_img,
+        items,
+        comment)
+        VALUES('Da', 'farmer1.jpg', ARRAY(SELECT json_populate_record(null::Good, json_array_elements('[{"id":2,"name":"Green Tea"},{"id":1,"name":"Oolong Tea"}]'))), json_populate_record(null::Comment, '{"note":"First","ext":{}}')) RETURNING id; 
+2020-03-30T13:30:49.438Z Local: 3/30/2020, 9:30:49 PM INSERT INTO farmers_table(
+        name,
+        cover_img,
+        items,
+        comment)
+        VALUES('Da', 'farmer1.jpg', ARRAY(SELECT json_populate_record(null::Good, json_array_elements('[{"id":2,"name":"Green Tea"},{"id":1,"name":"Oolong Tea"}]'))), json_populate_record(null::Comment, '{"note":"First","ext":{}}')) RETURNING id; 
+2020-03-30T13:30:49.435Z Local: 3/30/2020, 9:30:49 PM INSERT INTO app_datas_table(
+        property,
+        data,
+        comment)
+        VALUES('Test 2020-03-30T13:30:49.435Z', null, json_populate_record(null::Comment, '{"note":"","ext":null}')
+        ) RETURNING id; 
+2020-03-30T13:30:49.439Z Local: 3/30/2020, 9:30:49 PM INSERT INTO farmers_table(
+        name,
+        cover_img,
+        items,
+        comment)
+        VALUES('Da', 'farmer1.jpg', ARRAY(SELECT json_populate_record(null::Good, json_array_elements('[{"id":2,"name":"Green Tea"},{"id":1,"name":"Oolong Tea"}]'))), json_populate_record(null::Comment, '{"note":"First","ext":{}}')) RETURNING id; 
+2020-03-30T13:30:49.439Z Local: 3/30/2020, 9:30:49 PM INSERT INTO farmers_table(
+        name,
+        cover_img,
+        items,
+        comment)
+        VALUES('Da', 'farmer1.jpg', ARRAY(SELECT json_populate_record(null::Good, json_array_elements('[{"id":2,"name":"Green Tea"},{"id":1,"name":"Oolong Tea"}]'))), json_populate_record(null::Comment, '{"note":"First","ext":{}}')) RETURNING id; 
+2020-03-30T13:30:49.447Z Local: 3/30/2020, 9:30:49 PM 
+        INSERT INTO items_table(
+            enable,
+            name,
+            producer_id,
+            producer_name,
+            country,
+            zip,
+            province,
+            county,
+            township,
+            village,
+            road,
+            sell_type,
+            price,
+            unit,
+            amount,
+            sold,
+            slogan,
+            description,
+            content,
+            certification,
+            spec,
+            cover_img,
+            imgs,
+            block_id,
+            block_link,
+            transaction_id,
+            traceability_link,
+            comment,
+            expire_on,
+            is_limited,
+            has_expiration)
+        VALUES('false', '林氏傳統凍頂烏龍茶', '3', '林大宇', '臺灣', '30013', '台灣省', '南投縣', '鹿谷鄉', '鳳凰村', '產業道路', 'in_stock',
+        '500', 'NTD', '3', '0', '這是我們林氏家族百年多來好幾代人努力保存於世的味道，即使站在這時代改變口味的交鋒上，仍然堅持住這最古老的味道。', '# 即使在改變口味的尖峰上，仍然堅持住最古老的好味道', ARRAY( SELECT json_populate_record(null::Section, json_array_elements('[{"display":"section","img":"process1.gif","backgroundColor":"","title":"炒茶","subtitle":"林國村","description":"林國村：鹿谷鄉鳳凰村人－林秋冬之子　現年55歲秉其父之精神在茶藝這塊領域上繼續專研，尤其在炒茶這塊更是加以研究，並傳授幫助台灣高山茶改良之傳統技術上不足！研發一套專屬於林氏的炒茶技術。","data":[{"property":"溫度","index":"25","unit":"c"},{"property":"濕度","index":"30","unit":"%"}],"comment":"comment"},{"display":"section","img":"process2.gif","backgroundColor":"","title":"萎凋","subtitle":"林國棟","description":"凍頂茶的原產地在南投縣的鹿谷鄉其中海拔最高的地方莫屬於鳳凰產區，主要是以青心烏龍為原料製成的半發酵茶，傳統上，其發酵程度在高達50%左右。","data":[{"property":"溫度","index":"25","unit":"c"},{"property":"濕度","index":"30","unit":"%"}],"comment":"comment"},{"display":"section","img":"process3.gif","backgroundColor":"","title":"烘焙","subtitle":"蔡培火","description":"茶葉烘乾後需再重複以布包成球狀揉捻茶葉，使其成半發酵、半球狀，稱為「布揉製茶」或「熱團揉」。揉捻後，茶葉帶有隱隱金黃色。傳統古典凍頂烏龍茶帶明顯焙火味。","data":[{"property":"溫度","index":"25","unit":"c"},{"property":"濕度","index":"30","unit":"%"}],"comment":"comment"},{"display":"section","img":"process4.gif","backgroundColor":"","title":"揉捻","subtitle":"張大春","description":"茶葉烘乾後需再重複以布包成球狀揉捻茶葉，使其成半發酵、半球狀，稱為「布揉製茶」或「熱團揉」。揉捻後，茶葉帶有隱隱金黃色。傳統古典凍頂烏龍茶帶明顯焙火味。","data":[{"property":"溫度","index":"25","unit":"c"},{"property":"濕度","index":"30","unit":"%"}],"comment":"comment"}]'))), ARRAY( SELECT json_populate_record(null::Certification, json_array_elements('[{"name":"SGS","link":"www.sgs.com"},{"name":"產地檢測","link":"www.sgs.com"}]'))), ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('[{"property":"100g","value":"Heavily Baked","comment":"Strongest"},{"property":"100g","value":"Heavily Baked","comment":"Strongest"}]'))), 'the_tea_farmer.jpg', ARRAY(SELECT json_array_elements_text('["tea_farmer.gif","group.jpg","tea_red.jpg"]')), 
+        'Sample block_id', 'Sample block_link', 'Sample transaction_id', 'Sample traceability_link', 
+        json_populate_record(null::Comment, '{"note":"Sample Comment","ext":{}}'), '2020-10-05T14:48:00.000Z', true, true
+        ) RETURNING id; 
+2020-03-30T13:30:49.440Z Local: 3/30/2020, 9:30:49 PM INSERT INTO farmers_table(
+        name,
+        cover_img,
+        items,
+        comment)
+        VALUES('Da', 'farmer1.jpg', ARRAY(SELECT json_populate_record(null::Good, json_array_elements('[{"id":2,"name":"Green Tea"},{"id":1,"name":"Oolong Tea"}]'))), json_populate_record(null::Comment, '{"note":"First","ext":{}}')) RETURNING id; 
+2020-03-30T13:30:49.451Z Local: 3/30/2020, 9:30:49 PM 
+        INSERT INTO items_table(
+            enable,
+            name,
+            producer_id,
+            producer_name,
+            country,
+            zip,
+            province,
+            county,
+            township,
+            village,
+            road,
+            sell_type,
+            price,
+            unit,
+            amount,
+            sold,
+            slogan,
+            description,
+            content,
+            certification,
+            spec,
+            cover_img,
+            imgs,
+            block_id,
+            block_link,
+            transaction_id,
+            traceability_link,
+            comment,
+            expire_on,
+            is_limited,
+            has_expiration)
+        VALUES('false', '林氏傳統凍頂烏龍茶', '3', '林大宇', '臺灣', '30013', '台灣省', '南投縣', '鹿谷鄉', '鳳凰村', '產業道路', 'in_stock',
+        '500', 'NTD', '3', '0', '這是我們林氏家族百年多來好幾代人努力保存於世的味道，即使站在這時代改變口味的交鋒上，仍然堅持住這最古老的味道。', '# 即使在改變口味的尖峰上，仍然堅持住最古老的好味道', ARRAY( SELECT json_populate_record(null::Section, json_array_elements('[{"display":"section","img":"process1.gif","backgroundColor":"","title":"炒茶","subtitle":"林國村","description":"林國村：鹿谷鄉鳳凰村人－林秋冬之子　現年55歲秉其父之精神在茶藝這塊領域上繼續專研，尤其在炒茶這塊更是加以研究，並傳授幫助台灣高山茶改良之傳統技術上不足！研發一套專屬於林氏的炒茶技術。","data":[{"property":"溫度","index":"25","unit":"c"},{"property":"濕度","index":"30","unit":"%"}],"comment":"comment"},{"display":"section","img":"process2.gif","backgroundColor":"","title":"萎凋","subtitle":"林國棟","description":"凍頂茶的原產地在南投縣的鹿谷鄉其中海拔最高的地方莫屬於鳳凰產區，主要是以青心烏龍為原料製成的半發酵茶，傳統上，其發酵程度在高達50%左右。","data":[{"property":"溫度","index":"25","unit":"c"},{"property":"濕度","index":"30","unit":"%"}],"comment":"comment"},{"display":"section","img":"process3.gif","backgroundColor":"","title":"烘焙","subtitle":"蔡培火","description":"茶葉烘乾後需再重複以布包成球狀揉捻茶葉，使其成半發酵、半球狀，稱為「布揉製茶」或「熱團揉」。揉捻後，茶葉帶有隱隱金黃色。傳統古典凍頂烏龍茶帶明顯焙火味。","data":[{"property":"溫度","index":"25","unit":"c"},{"property":"濕度","index":"30","unit":"%"}],"comment":"comment"},{"display":"section","img":"process4.gif","backgroundColor":"","title":"揉捻","subtitle":"張大春","description":"茶葉烘乾後需再重複以布包成球狀揉捻茶葉，使其成半發酵、半球狀，稱為「布揉製茶」或「熱團揉」。揉捻後，茶葉帶有隱隱金黃色。傳統古典凍頂烏龍茶帶明顯焙火味。","data":[{"property":"溫度","index":"25","unit":"c"},{"property":"濕度","index":"30","unit":"%"}],"comment":"comment"}]'))), ARRAY( SELECT json_populate_record(null::Certification, json_array_elements('[{"name":"SGS","link":"www.sgs.com"},{"name":"產地檢測","link":"www.sgs.com"}]'))), ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('[{"property":"100g","value":"Heavily Baked","comment":"Strongest"},{"property":"100g","value":"Heavily Baked","comment":"Strongest"}]'))), 'the_tea_farmer.jpg', ARRAY(SELECT json_array_elements_text('["tea_farmer.gif","group.jpg","tea_red.jpg"]')), 
+        'Sample block_id', 'Sample block_link', 'Sample transaction_id', 'Sample traceability_link', 
+        json_populate_record(null::Comment, '{"note":"Sample Comment","ext":{}}'), '2020-10-05T14:48:00.000Z', true, true
+        ) RETURNING id; 
+2020-03-30T13:30:49.454Z Local: 3/30/2020, 9:30:49 PM 
+        INSERT INTO items_table(
+            enable,
+            name,
+            producer_id,
+            producer_name,
+            country,
+            zip,
+            province,
+            county,
+            township,
+            village,
+            road,
+            sell_type,
+            price,
+            unit,
+            amount,
+            sold,
+            slogan,
+            description,
+            content,
+            certification,
+            spec,
+            cover_img,
+            imgs,
+            block_id,
+            block_link,
+            transaction_id,
+            traceability_link,
+            comment,
+            expire_on,
+            is_limited,
+            has_expiration)
+        VALUES('false', '林氏傳統凍頂烏龍茶', '3', '林大宇', '臺灣', '30013', '台灣省', '南投縣', '鹿谷鄉', '鳳凰村', '產業道路', 'in_stock',
+        '500', 'NTD', '3', '0', '這是我們林氏家族百年多來好幾代人努力保存於世的味道，即使站在這時代改變口味的交鋒上，仍然堅持住這最古老的味道。', '# 即使在改變口味的尖峰上，仍然堅持住最古老的好味道', ARRAY( SELECT json_populate_record(null::Section, json_array_elements('[{"display":"section","img":"process1.gif","backgroundColor":"","title":"炒茶","subtitle":"林國村","description":"林國村：鹿谷鄉鳳凰村人－林秋冬之子　現年55歲秉其父之精神在茶藝這塊領域上繼續專研，尤其在炒茶這塊更是加以研究，並傳授幫助台灣高山茶改良之傳統技術上不足！研發一套專屬於林氏的炒茶技術。","data":[{"property":"溫度","index":"25","unit":"c"},{"property":"濕度","index":"30","unit":"%"}],"comment":"comment"},{"display":"section","img":"process2.gif","backgroundColor":"","title":"萎凋","subtitle":"林國棟","description":"凍頂茶的原產地在南投縣的鹿谷鄉其中海拔最高的地方莫屬於鳳凰產區，主要是以青心烏龍為原料製成的半發酵茶，傳統上，其發酵程度在高達50%左右。","data":[{"property":"溫度","index":"25","unit":"c"},{"property":"濕度","index":"30","unit":"%"}],"comment":"comment"},{"display":"section","img":"process3.gif","backgroundColor":"","title":"烘焙","subtitle":"蔡培火","description":"茶葉烘乾後需再重複以布包成球狀揉捻茶葉，使其成半發酵、半球狀，稱為「布揉製茶」或「熱團揉」。揉捻後，茶葉帶有隱隱金黃色。傳統古典凍頂烏龍茶帶明顯焙火味。","data":[{"property":"溫度","index":"25","unit":"c"},{"property":"濕度","index":"30","unit":"%"}],"comment":"comment"},{"display":"section","img":"process4.gif","backgroundColor":"","title":"揉捻","subtitle":"張大春","description":"茶葉烘乾後需再重複以布包成球狀揉捻茶葉，使其成半發酵、半球狀，稱為「布揉製茶」或「熱團揉」。揉捻後，茶葉帶有隱隱金黃色。傳統古典凍頂烏龍茶帶明顯焙火味。","data":[{"property":"溫度","index":"25","unit":"c"},{"property":"濕度","index":"30","unit":"%"}],"comment":"comment"}]'))), ARRAY( SELECT json_populate_record(null::Certification, json_array_elements('[{"name":"SGS","link":"www.sgs.com"},{"name":"產地檢測","link":"www.sgs.com"}]'))), ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('[{"property":"100g","value":"Heavily Baked","comment":"Strongest"},{"property":"100g","value":"Heavily Baked","comment":"Strongest"}]'))), 'the_tea_farmer.jpg', ARRAY(SELECT json_array_elements_text('["tea_farmer.gif","group.jpg","tea_red.jpg"]')), 
+        'Sample block_id', 'Sample block_link', 'Sample transaction_id', 'Sample traceability_link', 
+        json_populate_record(null::Comment, '{"note":"Sample Comment","ext":{}}'), '2020-10-05T14:48:00.000Z', true, true
+        ) RETURNING id; 
+2020-03-30T13:30:49.452Z Local: 3/30/2020, 9:30:49 PM 
+        INSERT INTO items_table(
+            enable,
+            name,
+            producer_id,
+            producer_name,
+            country,
+            zip,
+            province,
+            county,
+            township,
+            village,
+            road,
+            sell_type,
+            price,
+            unit,
+            amount,
+            sold,
+            slogan,
+            description,
+            content,
+            certification,
+            spec,
+            cover_img,
+            imgs,
+            block_id,
+            block_link,
+            transaction_id,
+            traceability_link,
+            comment,
+            expire_on,
+            is_limited,
+            has_expiration)
+        VALUES('false', '林氏傳統凍頂烏龍茶', '3', '林大宇', '臺灣', '30013', '台灣省', '南投縣', '鹿谷鄉', '鳳凰村', '產業道路', 'in_stock',
+        '500', 'NTD', '3', '0', '這是我們林氏家族百年多來好幾代人努力保存於世的味道，即使站在這時代改變口味的交鋒上，仍然堅持住這最古老的味道。', '# 即使在改變口味的尖峰上，仍然堅持住最古老的好味道', ARRAY( SELECT json_populate_record(null::Section, json_array_elements('[{"display":"section","img":"process1.gif","backgroundColor":"","title":"炒茶","subtitle":"林國村","description":"林國村：鹿谷鄉鳳凰村人－林秋冬之子　現年55歲秉其父之精神在茶藝這塊領域上繼續專研，尤其在炒茶這塊更是加以研究，並傳授幫助台灣高山茶改良之傳統技術上不足！研發一套專屬於林氏的炒茶技術。","data":[{"property":"溫度","index":"25","unit":"c"},{"property":"濕度","index":"30","unit":"%"}],"comment":"comment"},{"display":"section","img":"process2.gif","backgroundColor":"","title":"萎凋","subtitle":"林國棟","description":"凍頂茶的原產地在南投縣的鹿谷鄉其中海拔最高的地方莫屬於鳳凰產區，主要是以青心烏龍為原料製成的半發酵茶，傳統上，其發酵程度在高達50%左右。","data":[{"property":"溫度","index":"25","unit":"c"},{"property":"濕度","index":"30","unit":"%"}],"comment":"comment"},{"display":"section","img":"process3.gif","backgroundColor":"","title":"烘焙","subtitle":"蔡培火","description":"茶葉烘乾後需再重複以布包成球狀揉捻茶葉，使其成半發酵、半球狀，稱為「布揉製茶」或「熱團揉」。揉捻後，茶葉帶有隱隱金黃色。傳統古典凍頂烏龍茶帶明顯焙火味。","data":[{"property":"溫度","index":"25","unit":"c"},{"property":"濕度","index":"30","unit":"%"}],"comment":"comment"},{"display":"section","img":"process4.gif","backgroundColor":"","title":"揉捻","subtitle":"張大春","description":"茶葉烘乾後需再重複以布包成球狀揉捻茶葉，使其成半發酵、半球狀，稱為「布揉製茶」或「熱團揉」。揉捻後，茶葉帶有隱隱金黃色。傳統古典凍頂烏龍茶帶明顯焙火味。","data":[{"property":"溫度","index":"25","unit":"c"},{"property":"濕度","index":"30","unit":"%"}],"comment":"comment"}]'))), ARRAY( SELECT json_populate_record(null::Certification, json_array_elements('[{"name":"SGS","link":"www.sgs.com"},{"name":"產地檢測","link":"www.sgs.com"}]'))), ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('[{"property":"100g","value":"Heavily Baked","comment":"Strongest"},{"property":"100g","value":"Heavily Baked","comment":"Strongest"}]'))), 'the_tea_farmer.jpg', ARRAY(SELECT json_array_elements_text('["tea_farmer.gif","group.jpg","tea_red.jpg"]')), 
+        'Sample block_id', 'Sample block_link', 'Sample transaction_id', 'Sample traceability_link', 
+        json_populate_record(null::Comment, '{"note":"Sample Comment","ext":{}}'), '2020-10-05T14:48:00.000Z', true, true
+        ) RETURNING id; 
+2020-03-30T13:30:49.449Z Local: 3/30/2020, 9:30:49 PM 
+        INSERT INTO items_table(
+            enable,
+            name,
+            producer_id,
+            producer_name,
+            country,
+            zip,
+            province,
+            county,
+            township,
+            village,
+            road,
+            sell_type,
+            price,
+            unit,
+            amount,
+            sold,
+            slogan,
+            description,
+            content,
+            certification,
+            spec,
+            cover_img,
+            imgs,
+            block_id,
+            block_link,
+            transaction_id,
+            traceability_link,
+            comment,
+            expire_on,
+            is_limited,
+            has_expiration)
+        VALUES('false', '林氏傳統凍頂烏龍茶', '3', '林大宇', '臺灣', '30013', '台灣省', '南投縣', '鹿谷鄉', '鳳凰村', '產業道路', 'in_stock',
+        '500', 'NTD', '3', '0', '這是我們林氏家族百年多來好幾代人努力保存於世的味道，即使站在這時代改變口味的交鋒上，仍然堅持住這最古老的味道。', '# 即使在改變口味的尖峰上，仍然堅持住最古老的好味道', ARRAY( SELECT json_populate_record(null::Section, json_array_elements('[{"display":"section","img":"process1.gif","backgroundColor":"","title":"炒茶","subtitle":"林國村","description":"林國村：鹿谷鄉鳳凰村人－林秋冬之子　現年55歲秉其父之精神在茶藝這塊領域上繼續專研，尤其在炒茶這塊更是加以研究，並傳授幫助台灣高山茶改良之傳統技術上不足！研發一套專屬於林氏的炒茶技術。","data":[{"property":"溫度","index":"25","unit":"c"},{"property":"濕度","index":"30","unit":"%"}],"comment":"comment"},{"display":"section","img":"process2.gif","backgroundColor":"","title":"萎凋","subtitle":"林國棟","description":"凍頂茶的原產地在南投縣的鹿谷鄉其中海拔最高的地方莫屬於鳳凰產區，主要是以青心烏龍為原料製成的半發酵茶，傳統上，其發酵程度在高達50%左右。","data":[{"property":"溫度","index":"25","unit":"c"},{"property":"濕度","index":"30","unit":"%"}],"comment":"comment"},{"display":"section","img":"process3.gif","backgroundColor":"","title":"烘焙","subtitle":"蔡培火","description":"茶葉烘乾後需再重複以布包成球狀揉捻茶葉，使其成半發酵、半球狀，稱為「布揉製茶」或「熱團揉」。揉捻後，茶葉帶有隱隱金黃色。傳統古典凍頂烏龍茶帶明顯焙火味。","data":[{"property":"溫度","index":"25","unit":"c"},{"property":"濕度","index":"30","unit":"%"}],"comment":"comment"},{"display":"section","img":"process4.gif","backgroundColor":"","title":"揉捻","subtitle":"張大春","description":"茶葉烘乾後需再重複以布包成球狀揉捻茶葉，使其成半發酵、半球狀，稱為「布揉製茶」或「熱團揉」。揉捻後，茶葉帶有隱隱金黃色。傳統古典凍頂烏龍茶帶明顯焙火味。","data":[{"property":"溫度","index":"25","unit":"c"},{"property":"濕度","index":"30","unit":"%"}],"comment":"comment"}]'))), ARRAY( SELECT json_populate_record(null::Certification, json_array_elements('[{"name":"SGS","link":"www.sgs.com"},{"name":"產地檢測","link":"www.sgs.com"}]'))), ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('[{"property":"100g","value":"Heavily Baked","comment":"Strongest"},{"property":"100g","value":"Heavily Baked","comment":"Strongest"}]'))), 'the_tea_farmer.jpg', ARRAY(SELECT json_array_elements_text('["tea_farmer.gif","group.jpg","tea_red.jpg"]')), 
+        'Sample block_id', 'Sample block_link', 'Sample transaction_id', 'Sample traceability_link', 
+        json_populate_record(null::Comment, '{"note":"Sample Comment","ext":{}}'), '2020-10-05T14:48:00.000Z', true, true
+        ) RETURNING id; 
+2020-03-30T13:30:49.463Z Local: 3/30/2020, 9:30:49 PM 
+        INSERT INTO items_table(
+            enable,
+            name,
+            producer_id,
+            producer_name,
+            country,
+            zip,
+            province,
+            county,
+            township,
+            village,
+            road,
+            sell_type,
+            price,
+            unit,
+            amount,
+            sold,
+            slogan,
+            description,
+            content,
+            certification,
+            spec,
+            cover_img,
+            imgs,
+            block_id,
+            block_link,
+            transaction_id,
+            traceability_link,
+            comment,
+            expire_on,
+            is_limited,
+            has_expiration)
+        VALUES('false', '林氏傳統凍頂烏龍茶', '3', '林大宇', '臺灣', '30013', '台灣省', '南投縣', '鹿谷鄉', '鳳凰村', '產業道路', 'in_stock',
+        '500', 'NTD', '3', '0', '這是我們林氏家族百年多來好幾代人努力保存於世的味道，即使站在這時代改變口味的交鋒上，仍然堅持住這最古老的味道。', '# 即使在改變口味的尖峰上，仍然堅持住最古老的好味道', ARRAY( SELECT json_populate_record(null::Section, json_array_elements('[{"display":"section","img":"process1.gif","backgroundColor":"","title":"炒茶","subtitle":"林國村","description":"林國村：鹿谷鄉鳳凰村人－林秋冬之子　現年55歲秉其父之精神在茶藝這塊領域上繼續專研，尤其在炒茶這塊更是加以研究，並傳授幫助台灣高山茶改良之傳統技術上不足！研發一套專屬於林氏的炒茶技術。","data":[{"property":"溫度","index":"25","unit":"c"},{"property":"濕度","index":"30","unit":"%"}],"comment":"comment"},{"display":"section","img":"process2.gif","backgroundColor":"","title":"萎凋","subtitle":"林國棟","description":"凍頂茶的原產地在南投縣的鹿谷鄉其中海拔最高的地方莫屬於鳳凰產區，主要是以青心烏龍為原料製成的半發酵茶，傳統上，其發酵程度在高達50%左右。","data":[{"property":"溫度","index":"25","unit":"c"},{"property":"濕度","index":"30","unit":"%"}],"comment":"comment"},{"display":"section","img":"process3.gif","backgroundColor":"","title":"烘焙","subtitle":"蔡培火","description":"茶葉烘乾後需再重複以布包成球狀揉捻茶葉，使其成半發酵、半球狀，稱為「布揉製茶」或「熱團揉」。揉捻後，茶葉帶有隱隱金黃色。傳統古典凍頂烏龍茶帶明顯焙火味。","data":[{"property":"溫度","index":"25","unit":"c"},{"property":"濕度","index":"30","unit":"%"}],"comment":"comment"},{"display":"section","img":"process4.gif","backgroundColor":"","title":"揉捻","subtitle":"張大春","description":"茶葉烘乾後需再重複以布包成球狀揉捻茶葉，使其成半發酵、半球狀，稱為「布揉製茶」或「熱團揉」。揉捻後，茶葉帶有隱隱金黃色。傳統古典凍頂烏龍茶帶明顯焙火味。","data":[{"property":"溫度","index":"25","unit":"c"},{"property":"濕度","index":"30","unit":"%"}],"comment":"comment"}]'))), ARRAY( SELECT json_populate_record(null::Certification, json_array_elements('[{"name":"SGS","link":"www.sgs.com"},{"name":"產地檢測","link":"www.sgs.com"}]'))), ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('[{"property":"100g","value":"Heavily Baked","comment":"Strongest"},{"property":"100g","value":"Heavily Baked","comment":"Strongest"}]'))), 'tea_red.jpg', ARRAY(SELECT json_array_elements_text('["tea_farmer.gif","group.jpg","tea_red.jpg"]')), 
+        'Sample block_id', 'Sample block_link', 'Sample transaction_id', 'Sample traceability_link', 
+        json_populate_record(null::Comment, '{"note":"Sample Comment","ext":{}}'), '2020-10-05T14:48:00.000Z', true, true
+        ) RETURNING id; 
+2020-03-30T13:30:49.461Z Local: 3/30/2020, 9:30:49 PM 
+        INSERT INTO items_table(
+            enable,
+            name,
+            producer_id,
+            producer_name,
+            country,
+            zip,
+            province,
+            county,
+            township,
+            village,
+            road,
+            sell_type,
+            price,
+            unit,
+            amount,
+            sold,
+            slogan,
+            description,
+            content,
+            certification,
+            spec,
+            cover_img,
+            imgs,
+            block_id,
+            block_link,
+            transaction_id,
+            traceability_link,
+            comment,
+            expire_on,
+            is_limited,
+            has_expiration)
+        VALUES('false', '林氏傳統凍頂烏龍茶', '3', '林大宇', '臺灣', '30013', '台灣省', '南投縣', '鹿谷鄉', '鳳凰村', '產業道路', 'in_stock',
+        '500', 'NTD', '3', '0', '這是我們林氏家族百年多來好幾代人努力保存於世的味道，即使站在這時代改變口味的交鋒上，仍然堅持住這最古老的味道。', '# 即使在改變口味的尖峰上，仍然堅持住最古老的好味道', ARRAY( SELECT json_populate_record(null::Section, json_array_elements('[{"display":"section","img":"process1.gif","backgroundColor":"","title":"炒茶","subtitle":"林國村","description":"林國村：鹿谷鄉鳳凰村人－林秋冬之子　現年55歲秉其父之精神在茶藝這塊領域上繼續專研，尤其在炒茶這塊更是加以研究，並傳授幫助台灣高山茶改良之傳統技術上不足！研發一套專屬於林氏的炒茶技術。","data":[{"property":"溫度","index":"25","unit":"c"},{"property":"濕度","index":"30","unit":"%"}],"comment":"comment"},{"display":"section","img":"process2.gif","backgroundColor":"","title":"萎凋","subtitle":"林國棟","description":"凍頂茶的原產地在南投縣的鹿谷鄉其中海拔最高的地方莫屬於鳳凰產區，主要是以青心烏龍為原料製成的半發酵茶，傳統上，其發酵程度在高達50%左右。","data":[{"property":"溫度","index":"25","unit":"c"},{"property":"濕度","index":"30","unit":"%"}],"comment":"comment"},{"display":"section","img":"process3.gif","backgroundColor":"","title":"烘焙","subtitle":"蔡培火","description":"茶葉烘乾後需再重複以布包成球狀揉捻茶葉，使其成半發酵、半球狀，稱為「布揉製茶」或「熱團揉」。揉捻後，茶葉帶有隱隱金黃色。傳統古典凍頂烏龍茶帶明顯焙火味。","data":[{"property":"溫度","index":"25","unit":"c"},{"property":"濕度","index":"30","unit":"%"}],"comment":"comment"},{"display":"section","img":"process4.gif","backgroundColor":"","title":"揉捻","subtitle":"張大春","description":"茶葉烘乾後需再重複以布包成球狀揉捻茶葉，使其成半發酵、半球狀，稱為「布揉製茶」或「熱團揉」。揉捻後，茶葉帶有隱隱金黃色。傳統古典凍頂烏龍茶帶明顯焙火味。","data":[{"property":"溫度","index":"25","unit":"c"},{"property":"濕度","index":"30","unit":"%"}],"comment":"comment"}]'))), ARRAY( SELECT json_populate_record(null::Certification, json_array_elements('[{"name":"SGS","link":"www.sgs.com"},{"name":"產地檢測","link":"www.sgs.com"}]'))), ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('[{"property":"100g","value":"Heavily Baked","comment":"Strongest"},{"property":"100g","value":"Heavily Baked","comment":"Strongest"}]'))), 'tea_red.jpg', ARRAY(SELECT json_array_elements_text('["tea_farmer.gif","group.jpg","tea_red.jpg"]')), 
+        'Sample block_id', 'Sample block_link', 'Sample transaction_id', 'Sample traceability_link', 
+        json_populate_record(null::Comment, '{"note":"Sample Comment","ext":{}}'), '2020-10-05T14:48:00.000Z', true, true
+        ) RETURNING id; 
+2020-03-30T13:30:49.481Z Local: 3/30/2020, 9:30:49 PM 
+        INSERT INTO items_table(
+            enable,
+            name,
+            producer_id,
+            producer_name,
+            country,
+            zip,
+            province,
+            county,
+            township,
+            village,
+            road,
+            sell_type,
+            price,
+            unit,
+            amount,
+            sold,
+            slogan,
+            description,
+            content,
+            certification,
+            spec,
+            cover_img,
+            imgs,
+            block_id,
+            block_link,
+            transaction_id,
+            traceability_link,
+            comment,
+            expire_on,
+            is_limited,
+            has_expiration)
+        VALUES('false', '林氏傳統凍頂烏龍茶', '3', '林大宇', '臺灣', '30013', '台灣省', '南投縣', '鹿谷鄉', '鳳凰村', '產業道路', 'in_stock',
+        '500', 'NTD', '3', '0', '這是我們林氏家族百年多來好幾代人努力保存於世的味道，即使站在這時代改變口味的交鋒上，仍然堅持住這最古老的味道。', '# 即使在改變口味的尖峰上，仍然堅持住最古老的好味道', ARRAY( SELECT json_populate_record(null::Section, json_array_elements('[{"display":"section","img":"process1.gif","backgroundColor":"","title":"炒茶","subtitle":"林國村","description":"林國村：鹿谷鄉鳳凰村人－林秋冬之子　現年55歲秉其父之精神在茶藝這塊領域上繼續專研，尤其在炒茶這塊更是加以研究，並傳授幫助台灣高山茶改良之傳統技術上不足！研發一套專屬於林氏的炒茶技術。","data":[{"property":"溫度","index":"25","unit":"c"},{"property":"濕度","index":"30","unit":"%"}],"comment":"comment"},{"display":"section","img":"process2.gif","backgroundColor":"","title":"萎凋","subtitle":"林國棟","description":"凍頂茶的原產地在南投縣的鹿谷鄉其中海拔最高的地方莫屬於鳳凰產區，主要是以青心烏龍為原料製成的半發酵茶，傳統上，其發酵程度在高達50%左右。","data":[{"property":"溫度","index":"25","unit":"c"},{"property":"濕度","index":"30","unit":"%"}],"comment":"comment"},{"display":"section","img":"process3.gif","backgroundColor":"","title":"烘焙","subtitle":"蔡培火","description":"茶葉烘乾後需再重複以布包成球狀揉捻茶葉，使其成半發酵、半球狀，稱為「布揉製茶」或「熱團揉」。揉捻後，茶葉帶有隱隱金黃色。傳統古典凍頂烏龍茶帶明顯焙火味。","data":[{"property":"溫度","index":"25","unit":"c"},{"property":"濕度","index":"30","unit":"%"}],"comment":"comment"},{"display":"section","img":"process4.gif","backgroundColor":"","title":"揉捻","subtitle":"張大春","description":"茶葉烘乾後需再重複以布包成球狀揉捻茶葉，使其成半發酵、半球狀，稱為「布揉製茶」或「熱團揉」。揉捻後，茶葉帶有隱隱金黃色。傳統古典凍頂烏龍茶帶明顯焙火味。","data":[{"property":"溫度","index":"25","unit":"c"},{"property":"濕度","index":"30","unit":"%"}],"comment":"comment"}]'))), ARRAY( SELECT json_populate_record(null::Certification, json_array_elements('[{"name":"SGS","link":"www.sgs.com"},{"name":"產地檢測","link":"www.sgs.com"}]'))), ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('[{"property":"100g","value":"Heavily Baked","comment":"Strongest"},{"property":"100g","value":"Heavily Baked","comment":"Strongest"}]'))), 'tea_red.jpg', ARRAY(SELECT json_array_elements_text('["tea_farmer.gif","group.jpg","tea_red.jpg"]')), 
+        'Sample block_id', 'Sample block_link', 'Sample transaction_id', 'Sample traceability_link', 
+        json_populate_record(null::Comment, '{"note":"Sample Comment","ext":{}}'), '2020-10-05T14:48:00.000Z', true, true
+        ) RETURNING id; 
+2020-03-30T13:30:49.483Z Local: 3/30/2020, 9:30:49 PM INSERT INTO orders_table(
+        buyer_name,
+        phone,
+        email,
+        bank_code,
+        bank_account,
+        country,
+        zip,
+        province,
+        county,
+        township,
+        village,
+        road,
+        items,
+        total_price,
+        unit,
+        total_quantity,
+        block_id,
+        block_link,
+        transaction_id,
+        agree_policy,
+        agree_promotion,
+        is_paid,
+        is_send,
+        is_recieved,
+        comment)
+        VALUES('Da', '0908293456', 'example@gmail.com', '301', '88882222444', 'Taiwan', '50010', 'Taiwan', 'Nantou', 'LuGu', 
+        'FongHuang', 'indus.rd', ARRAY(SELECT json_populate_record(null::OrderItem, json_array_elements('[{"id":1,"name":"Green Tea","quantity":1,"price":300,"unit":"NTD"},{"id":2,"name":"Oolong Tea","quantity":2,"price":200,"unit":"NTD"}]'))), 
+        '700', '700', '3', null, null, null, 'true', 'true', 'true', 'true', 'false', json_populate_record(null::Comment, '{"note":"First","ext":{}}')
+        ) RETURNING id; 
+2020-03-30T13:30:49.465Z Local: 3/30/2020, 9:30:49 PM 
+        INSERT INTO items_table(
+            enable,
+            name,
+            producer_id,
+            producer_name,
+            country,
+            zip,
+            province,
+            county,
+            township,
+            village,
+            road,
+            sell_type,
+            price,
+            unit,
+            amount,
+            sold,
+            slogan,
+            description,
+            content,
+            certification,
+            spec,
+            cover_img,
+            imgs,
+            block_id,
+            block_link,
+            transaction_id,
+            traceability_link,
+            comment,
+            expire_on,
+            is_limited,
+            has_expiration)
+        VALUES('false', '林氏傳統凍頂烏龍茶', '3', '林大宇', '臺灣', '30013', '台灣省', '南投縣', '鹿谷鄉', '鳳凰村', '產業道路', 'in_stock',
+        '500', 'NTD', '3', '0', '這是我們林氏家族百年多來好幾代人努力保存於世的味道，即使站在這時代改變口味的交鋒上，仍然堅持住這最古老的味道。', '# 即使在改變口味的尖峰上，仍然堅持住最古老的好味道', ARRAY( SELECT json_populate_record(null::Section, json_array_elements('[{"display":"section","img":"process1.gif","backgroundColor":"","title":"炒茶","subtitle":"林國村","description":"林國村：鹿谷鄉鳳凰村人－林秋冬之子　現年55歲秉其父之精神在茶藝這塊領域上繼續專研，尤其在炒茶這塊更是加以研究，並傳授幫助台灣高山茶改良之傳統技術上不足！研發一套專屬於林氏的炒茶技術。","data":[{"property":"溫度","index":"25","unit":"c"},{"property":"濕度","index":"30","unit":"%"}],"comment":"comment"},{"display":"section","img":"process2.gif","backgroundColor":"","title":"萎凋","subtitle":"林國棟","description":"凍頂茶的原產地在南投縣的鹿谷鄉其中海拔最高的地方莫屬於鳳凰產區，主要是以青心烏龍為原料製成的半發酵茶，傳統上，其發酵程度在高達50%左右。","data":[{"property":"溫度","index":"25","unit":"c"},{"property":"濕度","index":"30","unit":"%"}],"comment":"comment"},{"display":"section","img":"process3.gif","backgroundColor":"","title":"烘焙","subtitle":"蔡培火","description":"茶葉烘乾後需再重複以布包成球狀揉捻茶葉，使其成半發酵、半球狀，稱為「布揉製茶」或「熱團揉」。揉捻後，茶葉帶有隱隱金黃色。傳統古典凍頂烏龍茶帶明顯焙火味。","data":[{"property":"溫度","index":"25","unit":"c"},{"property":"濕度","index":"30","unit":"%"}],"comment":"comment"},{"display":"section","img":"process4.gif","backgroundColor":"","title":"揉捻","subtitle":"張大春","description":"茶葉烘乾後需再重複以布包成球狀揉捻茶葉，使其成半發酵、半球狀，稱為「布揉製茶」或「熱團揉」。揉捻後，茶葉帶有隱隱金黃色。傳統古典凍頂烏龍茶帶明顯焙火味。","data":[{"property":"溫度","index":"25","unit":"c"},{"property":"濕度","index":"30","unit":"%"}],"comment":"comment"}]'))), ARRAY( SELECT json_populate_record(null::Certification, json_array_elements('[{"name":"SGS","link":"www.sgs.com"},{"name":"產地檢測","link":"www.sgs.com"}]'))), ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('[{"property":"100g","value":"Heavily Baked","comment":"Strongest"},{"property":"100g","value":"Heavily Baked","comment":"Strongest"}]'))), 'tea_red.jpg', ARRAY(SELECT json_array_elements_text('["tea_farmer.gif","group.jpg","tea_red.jpg"]')), 
+        'Sample block_id', 'Sample block_link', 'Sample transaction_id', 'Sample traceability_link', 
+        json_populate_record(null::Comment, '{"note":"Sample Comment","ext":{}}'), '2020-10-05T14:48:00.000Z', true, true
+        ) RETURNING id; 
+2020-03-30T13:30:49.468Z Local: 3/30/2020, 9:30:49 PM 
+        INSERT INTO items_table(
+            enable,
+            name,
+            producer_id,
+            producer_name,
+            country,
+            zip,
+            province,
+            county,
+            township,
+            village,
+            road,
+            sell_type,
+            price,
+            unit,
+            amount,
+            sold,
+            slogan,
+            description,
+            content,
+            certification,
+            spec,
+            cover_img,
+            imgs,
+            block_id,
+            block_link,
+            transaction_id,
+            traceability_link,
+            comment,
+            expire_on,
+            is_limited,
+            has_expiration)
+        VALUES('false', '林氏傳統凍頂烏龍茶', '3', '林大宇', '臺灣', '30013', '台灣省', '南投縣', '鹿谷鄉', '鳳凰村', '產業道路', 'in_stock',
+        '500', 'NTD', '3', '0', '這是我們林氏家族百年多來好幾代人努力保存於世的味道，即使站在這時代改變口味的交鋒上，仍然堅持住這最古老的味道。', '# 即使在改變口味的尖峰上，仍然堅持住最古老的好味道', ARRAY( SELECT json_populate_record(null::Section, json_array_elements('[{"display":"section","img":"process1.gif","backgroundColor":"","title":"炒茶","subtitle":"林國村","description":"林國村：鹿谷鄉鳳凰村人－林秋冬之子　現年55歲秉其父之精神在茶藝這塊領域上繼續專研，尤其在炒茶這塊更是加以研究，並傳授幫助台灣高山茶改良之傳統技術上不足！研發一套專屬於林氏的炒茶技術。","data":[{"property":"溫度","index":"25","unit":"c"},{"property":"濕度","index":"30","unit":"%"}],"comment":"comment"},{"display":"section","img":"process2.gif","backgroundColor":"","title":"萎凋","subtitle":"林國棟","description":"凍頂茶的原產地在南投縣的鹿谷鄉其中海拔最高的地方莫屬於鳳凰產區，主要是以青心烏龍為原料製成的半發酵茶，傳統上，其發酵程度在高達50%左右。","data":[{"property":"溫度","index":"25","unit":"c"},{"property":"濕度","index":"30","unit":"%"}],"comment":"comment"},{"display":"section","img":"process3.gif","backgroundColor":"","title":"烘焙","subtitle":"蔡培火","description":"茶葉烘乾後需再重複以布包成球狀揉捻茶葉，使其成半發酵、半球狀，稱為「布揉製茶」或「熱團揉」。揉捻後，茶葉帶有隱隱金黃色。傳統古典凍頂烏龍茶帶明顯焙火味。","data":[{"property":"溫度","index":"25","unit":"c"},{"property":"濕度","index":"30","unit":"%"}],"comment":"comment"},{"display":"section","img":"process4.gif","backgroundColor":"","title":"揉捻","subtitle":"張大春","description":"茶葉烘乾後需再重複以布包成球狀揉捻茶葉，使其成半發酵、半球狀，稱為「布揉製茶」或「熱團揉」。揉捻後，茶葉帶有隱隱金黃色。傳統古典凍頂烏龍茶帶明顯焙火味。","data":[{"property":"溫度","index":"25","unit":"c"},{"property":"濕度","index":"30","unit":"%"}],"comment":"comment"}]'))), ARRAY( SELECT json_populate_record(null::Certification, json_array_elements('[{"name":"SGS","link":"www.sgs.com"},{"name":"產地檢測","link":"www.sgs.com"}]'))), ARRAY( SELECT json_populate_record(null::Spec, json_array_elements('[{"property":"100g","value":"Heavily Baked","comment":"Strongest"},{"property":"100g","value":"Heavily Baked","comment":"Strongest"}]'))), 'tea_red.jpg', ARRAY(SELECT json_array_elements_text('["tea_farmer.gif","group.jpg","tea_red.jpg"]')), 
+        'Sample block_id', 'Sample block_link', 'Sample transaction_id', 'Sample traceability_link', 
+        json_populate_record(null::Comment, '{"note":"Sample Comment","ext":{}}'), '2020-10-05T14:48:00.000Z', true, true
+        ) RETURNING id; 
+2020-03-30T13:30:49.488Z Local: 3/30/2020, 9:30:49 PM INSERT INTO orders_table(
+        buyer_name,
+        phone,
+        email,
+        bank_code,
+        bank_account,
+        country,
+        zip,
+        province,
+        county,
+        township,
+        village,
+        road,
+        items,
+        total_price,
+        unit,
+        total_quantity,
+        block_id,
+        block_link,
+        transaction_id,
+        agree_policy,
+        agree_promotion,
+        is_paid,
+        is_send,
+        is_recieved,
+        comment)
+        VALUES('Da', '0908293456', 'example@gmail.com', '301', '88882222444', 'Taiwan', '50010', 'Taiwan', 'Nantou', 'LuGu', 
+        'FongHuang', 'indus.rd', ARRAY(SELECT json_populate_record(null::OrderItem, json_array_elements('[{"id":1,"name":"Green Tea","quantity":1,"price":300,"unit":"NTD"},{"id":2,"name":"Oolong Tea","quantity":2,"price":200,"unit":"NTD"}]'))), 
+        '700', '700', '3', null, null, null, 'true', 'true', 'true', 'true', 'false', json_populate_record(null::Comment, '{"note":"First","ext":{}}')
+        ) RETURNING id; 
+2020-03-30T13:30:49.495Z Local: 3/30/2020, 9:30:49 PM INSERT INTO orders_table(
+        buyer_name,
+        phone,
+        email,
+        bank_code,
+        bank_account,
+        country,
+        zip,
+        province,
+        county,
+        township,
+        village,
+        road,
+        items,
+        total_price,
+        unit,
+        total_quantity,
+        block_id,
+        block_link,
+        transaction_id,
+        agree_policy,
+        agree_promotion,
+        is_paid,
+        is_send,
+        is_recieved,
+        comment)
+        VALUES('Da', '0908293456', 'example@gmail.com', '301', '88882222444', 'Taiwan', '50010', 'Taiwan', 'Nantou', 'LuGu', 
+        'FongHuang', 'indus.rd', ARRAY(SELECT json_populate_record(null::OrderItem, json_array_elements('[{"id":1,"name":"Green Tea","quantity":1,"price":300,"unit":"NTD"},{"id":2,"name":"Oolong Tea","quantity":2,"price":200,"unit":"NTD"}]'))), 
+        '700', '700', '3', null, null, null, 'true', 'true', 'true', 'true', 'false', json_populate_record(null::Comment, '{"note":"First","ext":{}}')
+        ) RETURNING id; 
+2020-03-30T13:30:49.485Z Local: 3/30/2020, 9:30:49 PM INSERT INTO orders_table(
+        buyer_name,
+        phone,
+        email,
+        bank_code,
+        bank_account,
+        country,
+        zip,
+        province,
+        county,
+        township,
+        village,
+        road,
+        items,
+        total_price,
+        unit,
+        total_quantity,
+        block_id,
+        block_link,
+        transaction_id,
+        agree_policy,
+        agree_promotion,
+        is_paid,
+        is_send,
+        is_recieved,
+        comment)
+        VALUES('Da', '0908293456', 'example@gmail.com', '301', '88882222444', 'Taiwan', '50010', 'Taiwan', 'Nantou', 'LuGu', 
+        'FongHuang', 'indus.rd', ARRAY(SELECT json_populate_record(null::OrderItem, json_array_elements('[{"id":1,"name":"Green Tea","quantity":1,"price":300,"unit":"NTD"},{"id":2,"name":"Oolong Tea","quantity":2,"price":200,"unit":"NTD"}]'))), 
+        '700', '700', '3', null, null, null, 'true', 'true', 'true', 'true', 'false', json_populate_record(null::Comment, '{"note":"First","ext":{}}')
+        ) RETURNING id; 
+2020-03-30T13:30:49.499Z Local: 3/30/2020, 9:30:49 PM INSERT INTO posts_table(title, subtitle, author, description, cover_img) VALUES('凍頂村的故事', '傳承百年的好味道', '綠蟬工作團隊', '# Remarkable99
+
+> Experience real-time editing with Remarkable!
+
+Click the `clear` link to start with a clean slate, or get the `permalink` to share or save your results.
+
+***
+
+# h1 Heading
+## h2 Heading
+### h3 Heading
+#### h4 Heading
+##### h5 Heading
+###### h6 Heading
+
+
+## Horizontal Rules
+
+___
+
+***
+
+***
+
+
+## Typographic replacements
+
+Enable typographer option to see result.
+
+(c) (C) (r) (R) (tm) (TM) (p) (P) +-
+
+test.. test... test..... test?..... test!....
+
+!!!!!! ???? ,,
+
+Remarkable -- awesome
+
+"Smartypants, double quotes"
+
+''Smartypants, single quotes''
+
+
+## Emphasis
+
+**This is bold text**
+
+__This is bold text__
+
+*This is italic text*
+
+_This is italic text_
+
+~~Deleted text~~
+
+Superscript: 19^th^
+
+Subscript: H~2~O
+
+++Inserted text++
+
+==Marked text==
+
+
+## Blockquotes
+
+> Blockquotes can also be nested...
+>> ...by using additional greater-than signs right next to each other...
+> > > ...or with spaces between arrows.
+
+
+## Lists
+
+Unordered
+
++ Create a list by starting a line with `+`, `-`, or `*`
++ Sub-lists are made by indenting 2 spaces:
+- Marker character change forces new list start:
+    * Ac tristique libero volutpat at
+    + Facilisis in pretium nisl aliquet
+    - Nulla volutpat aliquam velit
++ Very easy!
+
+Ordered
+
+1. Lorem ipsum dolor sit amet
+2. Consectetur adipiscing elit
+3. Integer molestie lorem at massa
+
+
+1. You can use sequential numbers...
+1. ...or keep all the numbers as `1.`
+
+Start numbering with offset:
+
+57. foo
+1. bar
+
+
+## Code
+
+Inline `code`
+
+Indented code
+
+    // Some comments
+    line 1 of code
+    line 2 of code
+    line 3 of code
+
+
+Block code "fences"
+
+```
+Sample text here...
+```
+
+Syntax highlighting
+
+``` js
+var foo = function (bar) {
+return bar++;
+};
+
+console.log(foo(5));
+```
+
+## Tables
+
+| Option | Description |
+| ------ | ----------- |
+| data   | path to data files to supply the data that will be passed into templates. |
+| engine | engine to be used for processing templates. Handlebars is the default. |
+| ext    | extension to be used for dest files. |
+
+Right aligned columns
+
+| Option | Description |
+| ------:| -----------:|
+| data   | path to data files to supply the data that will be passed into templates. |
+| engine | engine to be used for processing templates. Handlebars is the default. |
+| ext    | extension to be used for dest files. |
+
+
+## Links
+
+[link text](http://dev.nodeca.com)
+
+[link with title](http://nodeca.github.io/pica/demo/ "title text!")
+
+Autoconverted link https://github.com/nodeca/pica (enable linkify to see)
+
+
+## Images
+
+![Minion](https://octodex.github.com/images/minion.png)
+![Stormtroopocat](https://octodex.github.com/images/stormtroopocat.jpg "The Stormtroopocat")
+
+Like links, Images also have a footnote style syntax
+
+![Alt text][id]
+
+With a reference later in the document defining the URL location:
+
+[id]: https://octodex.github.com/images/dojocat.jpg  "The Dojocat"
+
+
+## Footnotes
+
+Footnote 1 link[^first].
+
+Footnote 2 link[^second].
+
+Inline footnote^[Text of inline footnote] definition.
+
+Duplicated footnote reference[^second].
+
+[^first]: Footnote **can have markup**
+
+    and multiple paragraphs.
+
+[^second]: Footnote text.
+
+
+## Definition lists
+
+Term 1
+
+:   Definition 1
+with lazy continuation.
+
+Term 2 with *inline markup*
+
+:   Definition 2
+
+        { some code, part of Definition 2 }
+
+    Third paragraph of definition 2.
+
+_Compact style:_
+
+Term 1
+~ Definition 1
+
+Term 2
+~ Definition 2a
+~ Definition 2b
+
+
+## Abbreviations
+
+This is HTML abbreviation example.
+
+It converts "HTML", but keep intact partial entries like "xxxHTMLyyy" and so on.
+
+*[HTML]: Hyper Text Markup Language
+
+
+***
+
+__Advertisement :)__
+
+- __[pica](https://nodeca.github.io/pica/demo/)__ - high quality and fast image
+resize in browser.
+- __[babelfish](https://github.com/nodeca/babelfish/)__ - developer friendly
+i18n with plurals support and easy syntax.
+
+You''ll like those projects! :)', 'leaf.jpg') RETURNING id; 
+2020-03-30T13:30:49.503Z Local: 3/30/2020, 9:30:49 PM INSERT INTO posts_table(title, subtitle, author, description, cover_img) VALUES('凍頂村的故事', '傳承百年的好味道', '綠蟬工作團隊', '# Remarkable99
+
+> Experience real-time editing with Remarkable!
+
+Click the `clear` link to start with a clean slate, or get the `permalink` to share or save your results.
+
+***
+
+# h1 Heading
+## h2 Heading
+### h3 Heading
+#### h4 Heading
+##### h5 Heading
+###### h6 Heading
+
+
+## Horizontal Rules
+
+___
+
+***
+
+***
+
+
+## Typographic replacements
+
+Enable typographer option to see result.
+
+(c) (C) (r) (R) (tm) (TM) (p) (P) +-
+
+test.. test... test..... test?..... test!....
+
+!!!!!! ???? ,,
+
+Remarkable -- awesome
+
+"Smartypants, double quotes"
+
+''Smartypants, single quotes''
+
+
+## Emphasis
+
+**This is bold text**
+
+__This is bold text__
+
+*This is italic text*
+
+_This is italic text_
+
+~~Deleted text~~
+
+Superscript: 19^th^
+
+Subscript: H~2~O
+
+++Inserted text++
+
+==Marked text==
+
+
+## Blockquotes
+
+> Blockquotes can also be nested...
+>> ...by using additional greater-than signs right next to each other...
+> > > ...or with spaces between arrows.
+
+
+## Lists
+
+Unordered
+
++ Create a list by starting a line with `+`, `-`, or `*`
++ Sub-lists are made by indenting 2 spaces:
+- Marker character change forces new list start:
+    * Ac tristique libero volutpat at
+    + Facilisis in pretium nisl aliquet
+    - Nulla volutpat aliquam velit
++ Very easy!
+
+Ordered
+
+1. Lorem ipsum dolor sit amet
+2. Consectetur adipiscing elit
+3. Integer molestie lorem at massa
+
+
+1. You can use sequential numbers...
+1. ...or keep all the numbers as `1.`
+
+Start numbering with offset:
+
+57. foo
+1. bar
+
+
+## Code
+
+Inline `code`
+
+Indented code
+
+    // Some comments
+    line 1 of code
+    line 2 of code
+    line 3 of code
+
+
+Block code "fences"
+
+```
+Sample text here...
+```
+
+Syntax highlighting
+
+``` js
+var foo = function (bar) {
+return bar++;
+};
+
+console.log(foo(5));
+```
+
+## Tables
+
+| Option | Description |
+| ------ | ----------- |
+| data   | path to data files to supply the data that will be passed into templates. |
+| engine | engine to be used for processing templates. Handlebars is the default. |
+| ext    | extension to be used for dest files. |
+
+Right aligned columns
+
+| Option | Description |
+| ------:| -----------:|
+| data   | path to data files to supply the data that will be passed into templates. |
+| engine | engine to be used for processing templates. Handlebars is the default. |
+| ext    | extension to be used for dest files. |
+
+
+## Links
+
+[link text](http://dev.nodeca.com)
+
+[link with title](http://nodeca.github.io/pica/demo/ "title text!")
+
+Autoconverted link https://github.com/nodeca/pica (enable linkify to see)
+
+
+## Images
+
+![Minion](https://octodex.github.com/images/minion.png)
+![Stormtroopocat](https://octodex.github.com/images/stormtroopocat.jpg "The Stormtroopocat")
+
+Like links, Images also have a footnote style syntax
+
+![Alt text][id]
+
+With a reference later in the document defining the URL location:
+
+[id]: https://octodex.github.com/images/dojocat.jpg  "The Dojocat"
+
+
+## Footnotes
+
+Footnote 1 link[^first].
+
+Footnote 2 link[^second].
+
+Inline footnote^[Text of inline footnote] definition.
+
+Duplicated footnote reference[^second].
+
+[^first]: Footnote **can have markup**
+
+    and multiple paragraphs.
+
+[^second]: Footnote text.
+
+
+## Definition lists
+
+Term 1
+
+:   Definition 1
+with lazy continuation.
+
+Term 2 with *inline markup*
+
+:   Definition 2
+
+        { some code, part of Definition 2 }
+
+    Third paragraph of definition 2.
+
+_Compact style:_
+
+Term 1
+~ Definition 1
+
+Term 2
+~ Definition 2a
+~ Definition 2b
+
+
+## Abbreviations
+
+This is HTML abbreviation example.
+
+It converts "HTML", but keep intact partial entries like "xxxHTMLyyy" and so on.
+
+*[HTML]: Hyper Text Markup Language
+
+
+***
+
+__Advertisement :)__
+
+- __[pica](https://nodeca.github.io/pica/demo/)__ - high quality and fast image
+resize in browser.
+- __[babelfish](https://github.com/nodeca/babelfish/)__ - developer friendly
+i18n with plurals support and easy syntax.
+
+You''ll like those projects! :)', 'leaf.jpg') RETURNING id; 
+2020-03-30T13:30:49.515Z Local: 3/30/2020, 9:30:49 PM INSERT INTO posts_table(title, subtitle, author, description, cover_img) VALUES('凍頂村的故事', '傳承百年的好味道', '綠蟬工作團隊', '# Remarkable99
+
+> Experience real-time editing with Remarkable!
+
+Click the `clear` link to start with a clean slate, or get the `permalink` to share or save your results.
+
+***
+
+# h1 Heading
+## h2 Heading
+### h3 Heading
+#### h4 Heading
+##### h5 Heading
+###### h6 Heading
+
+
+## Horizontal Rules
+
+___
+
+***
+
+***
+
+
+## Typographic replacements
+
+Enable typographer option to see result.
+
+(c) (C) (r) (R) (tm) (TM) (p) (P) +-
+
+test.. test... test..... test?..... test!....
+
+!!!!!! ???? ,,
+
+Remarkable -- awesome
+
+"Smartypants, double quotes"
+
+''Smartypants, single quotes''
+
+
+## Emphasis
+
+**This is bold text**
+
+__This is bold text__
+
+*This is italic text*
+
+_This is italic text_
+
+~~Deleted text~~
+
+Superscript: 19^th^
+
+Subscript: H~2~O
+
+++Inserted text++
+
+==Marked text==
+
+
+## Blockquotes
+
+> Blockquotes can also be nested...
+>> ...by using additional greater-than signs right next to each other...
+> > > ...or with spaces between arrows.
+
+
+## Lists
+
+Unordered
+
++ Create a list by starting a line with `+`, `-`, or `*`
++ Sub-lists are made by indenting 2 spaces:
+- Marker character change forces new list start:
+    * Ac tristique libero volutpat at
+    + Facilisis in pretium nisl aliquet
+    - Nulla volutpat aliquam velit
++ Very easy!
+
+Ordered
+
+1. Lorem ipsum dolor sit amet
+2. Consectetur adipiscing elit
+3. Integer molestie lorem at massa
+
+
+1. You can use sequential numbers...
+1. ...or keep all the numbers as `1.`
+
+Start numbering with offset:
+
+57. foo
+1. bar
+
+
+## Code
+
+Inline `code`
+
+Indented code
+
+    // Some comments
+    line 1 of code
+    line 2 of code
+    line 3 of code
+
+
+Block code "fences"
+
+```
+Sample text here...
+```
+
+Syntax highlighting
+
+``` js
+var foo = function (bar) {
+return bar++;
+};
+
+console.log(foo(5));
+```
+
+## Tables
+
+| Option | Description |
+| ------ | ----------- |
+| data   | path to data files to supply the data that will be passed into templates. |
+| engine | engine to be used for processing templates. Handlebars is the default. |
+| ext    | extension to be used for dest files. |
+
+Right aligned columns
+
+| Option | Description |
+| ------:| -----------:|
+| data   | path to data files to supply the data that will be passed into templates. |
+| engine | engine to be used for processing templates. Handlebars is the default. |
+| ext    | extension to be used for dest files. |
+
+
+## Links
+
+[link text](http://dev.nodeca.com)
+
+[link with title](http://nodeca.github.io/pica/demo/ "title text!")
+
+Autoconverted link https://github.com/nodeca/pica (enable linkify to see)
+
+
+## Images
+
+![Minion](https://octodex.github.com/images/minion.png)
+![Stormtroopocat](https://octodex.github.com/images/stormtroopocat.jpg "The Stormtroopocat")
+
+Like links, Images also have a footnote style syntax
+
+![Alt text][id]
+
+With a reference later in the document defining the URL location:
+
+[id]: https://octodex.github.com/images/dojocat.jpg  "The Dojocat"
+
+
+## Footnotes
+
+Footnote 1 link[^first].
+
+Footnote 2 link[^second].
+
+Inline footnote^[Text of inline footnote] definition.
+
+Duplicated footnote reference[^second].
+
+[^first]: Footnote **can have markup**
+
+    and multiple paragraphs.
+
+[^second]: Footnote text.
+
+
+## Definition lists
+
+Term 1
+
+:   Definition 1
+with lazy continuation.
+
+Term 2 with *inline markup*
+
+:   Definition 2
+
+        { some code, part of Definition 2 }
+
+    Third paragraph of definition 2.
+
+_Compact style:_
+
+Term 1
+~ Definition 1
+
+Term 2
+~ Definition 2a
+~ Definition 2b
+
+
+## Abbreviations
+
+This is HTML abbreviation example.
+
+It converts "HTML", but keep intact partial entries like "xxxHTMLyyy" and so on.
+
+*[HTML]: Hyper Text Markup Language
+
+
+***
+
+__Advertisement :)__
+
+- __[pica](https://nodeca.github.io/pica/demo/)__ - high quality and fast image
+resize in browser.
+- __[babelfish](https://github.com/nodeca/babelfish/)__ - developer friendly
+i18n with plurals support and easy syntax.
+
+You''ll like those projects! :)', 'leaf.jpg') RETURNING id; 
+2020-03-30T13:30:49.511Z Local: 3/30/2020, 9:30:49 PM INSERT INTO posts_table(title, subtitle, author, description, cover_img) VALUES('凍頂村的故事', '傳承百年的好味道', '綠蟬工作團隊', '# Remarkable99
+
+> Experience real-time editing with Remarkable!
+
+Click the `clear` link to start with a clean slate, or get the `permalink` to share or save your results.
+
+***
+
+# h1 Heading
+## h2 Heading
+### h3 Heading
+#### h4 Heading
+##### h5 Heading
+###### h6 Heading
+
+
+## Horizontal Rules
+
+___
+
+***
+
+***
+
+
+## Typographic replacements
+
+Enable typographer option to see result.
+
+(c) (C) (r) (R) (tm) (TM) (p) (P) +-
+
+test.. test... test..... test?..... test!....
+
+!!!!!! ???? ,,
+
+Remarkable -- awesome
+
+"Smartypants, double quotes"
+
+''Smartypants, single quotes''
+
+
+## Emphasis
+
+**This is bold text**
+
+__This is bold text__
+
+*This is italic text*
+
+_This is italic text_
+
+~~Deleted text~~
+
+Superscript: 19^th^
+
+Subscript: H~2~O
+
+++Inserted text++
+
+==Marked text==
+
+
+## Blockquotes
+
+> Blockquotes can also be nested...
+>> ...by using additional greater-than signs right next to each other...
+> > > ...or with spaces between arrows.
+
+
+## Lists
+
+Unordered
+
++ Create a list by starting a line with `+`, `-`, or `*`
++ Sub-lists are made by indenting 2 spaces:
+- Marker character change forces new list start:
+    * Ac tristique libero volutpat at
+    + Facilisis in pretium nisl aliquet
+    - Nulla volutpat aliquam velit
++ Very easy!
+
+Ordered
+
+1. Lorem ipsum dolor sit amet
+2. Consectetur adipiscing elit
+3. Integer molestie lorem at massa
+
+
+1. You can use sequential numbers...
+1. ...or keep all the numbers as `1.`
+
+Start numbering with offset:
+
+57. foo
+1. bar
+
+
+## Code
+
+Inline `code`
+
+Indented code
+
+    // Some comments
+    line 1 of code
+    line 2 of code
+    line 3 of code
+
+
+Block code "fences"
+
+```
+Sample text here...
+```
+
+Syntax highlighting
+
+``` js
+var foo = function (bar) {
+return bar++;
+};
+
+console.log(foo(5));
+```
+
+## Tables
+
+| Option | Description |
+| ------ | ----------- |
+| data   | path to data files to supply the data that will be passed into templates. |
+| engine | engine to be used for processing templates. Handlebars is the default. |
+| ext    | extension to be used for dest files. |
+
+Right aligned columns
+
+| Option | Description |
+| ------:| -----------:|
+| data   | path to data files to supply the data that will be passed into templates. |
+| engine | engine to be used for processing templates. Handlebars is the default. |
+| ext    | extension to be used for dest files. |
+
+
+## Links
+
+[link text](http://dev.nodeca.com)
+
+[link with title](http://nodeca.github.io/pica/demo/ "title text!")
+
+Autoconverted link https://github.com/nodeca/pica (enable linkify to see)
+
+
+## Images
+
+![Minion](https://octodex.github.com/images/minion.png)
+![Stormtroopocat](https://octodex.github.com/images/stormtroopocat.jpg "The Stormtroopocat")
+
+Like links, Images also have a footnote style syntax
+
+![Alt text][id]
+
+With a reference later in the document defining the URL location:
+
+[id]: https://octodex.github.com/images/dojocat.jpg  "The Dojocat"
+
+
+## Footnotes
+
+Footnote 1 link[^first].
+
+Footnote 2 link[^second].
+
+Inline footnote^[Text of inline footnote] definition.
+
+Duplicated footnote reference[^second].
+
+[^first]: Footnote **can have markup**
+
+    and multiple paragraphs.
+
+[^second]: Footnote text.
+
+
+## Definition lists
+
+Term 1
+
+:   Definition 1
+with lazy continuation.
+
+Term 2 with *inline markup*
+
+:   Definition 2
+
+        { some code, part of Definition 2 }
+
+    Third paragraph of definition 2.
+
+_Compact style:_
+
+Term 1
+~ Definition 1
+
+Term 2
+~ Definition 2a
+~ Definition 2b
+
+
+## Abbreviations
+
+This is HTML abbreviation example.
+
+It converts "HTML", but keep intact partial entries like "xxxHTMLyyy" and so on.
+
+*[HTML]: Hyper Text Markup Language
+
+
+***
+
+__Advertisement :)__
+
+- __[pica](https://nodeca.github.io/pica/demo/)__ - high quality and fast image
+resize in browser.
+- __[babelfish](https://github.com/nodeca/babelfish/)__ - developer friendly
+i18n with plurals support and easy syntax.
+
+You''ll like those projects! :)', 'leaf.jpg') RETURNING id; 
+2020-03-30T13:30:49.486Z Local: 3/30/2020, 9:30:49 PM INSERT INTO orders_table(
+        buyer_name,
+        phone,
+        email,
+        bank_code,
+        bank_account,
+        country,
+        zip,
+        province,
+        county,
+        township,
+        village,
+        road,
+        items,
+        total_price,
+        unit,
+        total_quantity,
+        block_id,
+        block_link,
+        transaction_id,
+        agree_policy,
+        agree_promotion,
+        is_paid,
+        is_send,
+        is_recieved,
+        comment)
+        VALUES('Da', '0908293456', 'example@gmail.com', '301', '88882222444', 'Taiwan', '50010', 'Taiwan', 'Nantou', 'LuGu', 
+        'FongHuang', 'indus.rd', ARRAY(SELECT json_populate_record(null::OrderItem, json_array_elements('[{"id":1,"name":"Green Tea","quantity":1,"price":300,"unit":"NTD"},{"id":2,"name":"Oolong Tea","quantity":2,"price":200,"unit":"NTD"}]'))), 
+        '700', '700', '3', null, null, null, 'true', 'true', 'true', 'true', 'false', json_populate_record(null::Comment, '{"note":"First","ext":{}}')
+        ) RETURNING id; 
+2020-03-30T13:30:49.526Z Local: 3/30/2020, 9:30:49 PM INSERT INTO posts_table(title, subtitle, author, description, cover_img) VALUES('凍頂村的故事', '傳承百年的好味道', '綠蟬工作團隊', '# Remarkable99
+
+> Experience real-time editing with Remarkable!
+
+Click the `clear` link to start with a clean slate, or get the `permalink` to share or save your results.
+
+***
+
+# h1 Heading
+## h2 Heading
+### h3 Heading
+#### h4 Heading
+##### h5 Heading
+###### h6 Heading
+
+
+## Horizontal Rules
+
+___
+
+***
+
+***
+
+
+## Typographic replacements
+
+Enable typographer option to see result.
+
+(c) (C) (r) (R) (tm) (TM) (p) (P) +-
+
+test.. test... test..... test?..... test!....
+
+!!!!!! ???? ,,
+
+Remarkable -- awesome
+
+"Smartypants, double quotes"
+
+''Smartypants, single quotes''
+
+
+## Emphasis
+
+**This is bold text**
+
+__This is bold text__
+
+*This is italic text*
+
+_This is italic text_
+
+~~Deleted text~~
+
+Superscript: 19^th^
+
+Subscript: H~2~O
+
+++Inserted text++
+
+==Marked text==
+
+
+## Blockquotes
+
+> Blockquotes can also be nested...
+>> ...by using additional greater-than signs right next to each other...
+> > > ...or with spaces between arrows.
+
+
+## Lists
+
+Unordered
+
++ Create a list by starting a line with `+`, `-`, or `*`
++ Sub-lists are made by indenting 2 spaces:
+- Marker character change forces new list start:
+    * Ac tristique libero volutpat at
+    + Facilisis in pretium nisl aliquet
+    - Nulla volutpat aliquam velit
++ Very easy!
+
+Ordered
+
+1. Lorem ipsum dolor sit amet
+2. Consectetur adipiscing elit
+3. Integer molestie lorem at massa
+
+
+1. You can use sequential numbers...
+1. ...or keep all the numbers as `1.`
+
+Start numbering with offset:
+
+57. foo
+1. bar
+
+
+## Code
+
+Inline `code`
+
+Indented code
+
+    // Some comments
+    line 1 of code
+    line 2 of code
+    line 3 of code
+
+
+Block code "fences"
+
+```
+Sample text here...
+```
+
+Syntax highlighting
+
+``` js
+var foo = function (bar) {
+return bar++;
+};
+
+console.log(foo(5));
+```
+
+## Tables
+
+| Option | Description |
+| ------ | ----------- |
+| data   | path to data files to supply the data that will be passed into templates. |
+| engine | engine to be used for processing templates. Handlebars is the default. |
+| ext    | extension to be used for dest files. |
+
+Right aligned columns
+
+| Option | Description |
+| ------:| -----------:|
+| data   | path to data files to supply the data that will be passed into templates. |
+| engine | engine to be used for processing templates. Handlebars is the default. |
+| ext    | extension to be used for dest files. |
+
+
+## Links
+
+[link text](http://dev.nodeca.com)
+
+[link with title](http://nodeca.github.io/pica/demo/ "title text!")
+
+Autoconverted link https://github.com/nodeca/pica (enable linkify to see)
+
+
+## Images
+
+![Minion](https://octodex.github.com/images/minion.png)
+![Stormtroopocat](https://octodex.github.com/images/stormtroopocat.jpg "The Stormtroopocat")
+
+Like links, Images also have a footnote style syntax
+
+![Alt text][id]
+
+With a reference later in the document defining the URL location:
+
+[id]: https://octodex.github.com/images/dojocat.jpg  "The Dojocat"
+
+
+## Footnotes
+
+Footnote 1 link[^first].
+
+Footnote 2 link[^second].
+
+Inline footnote^[Text of inline footnote] definition.
+
+Duplicated footnote reference[^second].
+
+[^first]: Footnote **can have markup**
+
+    and multiple paragraphs.
+
+[^second]: Footnote text.
+
+
+## Definition lists
+
+Term 1
+
+:   Definition 1
+with lazy continuation.
+
+Term 2 with *inline markup*
+
+:   Definition 2
+
+        { some code, part of Definition 2 }
+
+    Third paragraph of definition 2.
+
+_Compact style:_
+
+Term 1
+~ Definition 1
+
+Term 2
+~ Definition 2a
+~ Definition 2b
+
+
+## Abbreviations
+
+This is HTML abbreviation example.
+
+It converts "HTML", but keep intact partial entries like "xxxHTMLyyy" and so on.
+
+*[HTML]: Hyper Text Markup Language
+
+
+***
+
+__Advertisement :)__
+
+- __[pica](https://nodeca.github.io/pica/demo/)__ - high quality and fast image
+resize in browser.
+- __[babelfish](https://github.com/nodeca/babelfish/)__ - developer friendly
+i18n with plurals support and easy syntax.
+
+You''ll like those projects! :)', 'leaf.jpg') RETURNING id; 
+2020-03-30T13:30:49.664Z Local: 3/30/2020, 9:30:49 PM Error: error: duplicate key value violates unique constraint "app_datas_table_property_key" 
+2020-03-30T13:30:49.667Z Local: 3/30/2020, 9:30:49 PM Error: error: duplicate key value violates unique constraint "app_datas_table_property_key" 
+2020-03-30T13:30:49.673Z Local: 3/30/2020, 9:30:49 PM command: INSERT, rowCount: 1 
+2020-03-30T13:30:49.683Z Local: 3/30/2020, 9:30:49 PM command: INSERT, rowCount: 1 
+2020-03-30T13:30:49.686Z Local: 3/30/2020, 9:30:49 PM command: INSERT, rowCount: 1 
+2020-03-30T13:30:49.689Z Local: 3/30/2020, 9:30:49 PM command: INSERT, rowCount: 1 
+2020-03-30T13:30:49.698Z Local: 3/30/2020, 9:30:49 PM Error: error: duplicate key value violates unique constraint "app_datas_table_property_key" 
+2020-03-30T13:30:49.747Z Local: 3/30/2020, 9:30:49 PM command: INSERT, rowCount: 1 
+2020-03-30T13:30:49.753Z Local: 3/30/2020, 9:30:49 PM command: INSERT, rowCount: 1 
+2020-03-30T13:30:49.762Z Local: 3/30/2020, 9:30:49 PM command: INSERT, rowCount: 1 
+2020-03-30T13:30:49.767Z Local: 3/30/2020, 9:30:49 PM command: INSERT, rowCount: 1 
+2020-03-30T13:30:49.795Z Local: 3/30/2020, 9:30:49 PM command: INSERT, rowCount: 1 
+2020-03-30T13:30:49.843Z Local: 3/30/2020, 9:30:49 PM command: INSERT, rowCount: 1 
+2020-03-30T13:30:49.845Z Local: 3/30/2020, 9:30:49 PM command: INSERT, rowCount: 1 
+2020-03-30T13:30:49.848Z Local: 3/30/2020, 9:30:49 PM command: INSERT, rowCount: 1 
+2020-03-30T13:30:49.850Z Local: 3/30/2020, 9:30:49 PM command: INSERT, rowCount: 1 
+2020-03-30T13:30:49.859Z Local: 3/30/2020, 9:30:49 PM command: INSERT, rowCount: 1 
+2020-03-30T13:30:49.862Z Local: 3/30/2020, 9:30:49 PM command: INSERT, rowCount: 1 
+2020-03-30T13:30:49.872Z Local: 3/30/2020, 9:30:49 PM command: INSERT, rowCount: 1 
+2020-03-30T13:30:49.876Z Local: 3/30/2020, 9:30:49 PM command: INSERT, rowCount: 1 
+2020-03-30T13:30:49.878Z Local: 3/30/2020, 9:30:49 PM command: INSERT, rowCount: 1 
+2020-03-30T13:30:49.889Z Local: 3/30/2020, 9:30:49 PM command: INSERT, rowCount: 1 
+2020-03-30T13:30:49.892Z Local: 3/30/2020, 9:30:49 PM command: INSERT, rowCount: 1 
+2020-03-30T13:30:49.905Z Local: 3/30/2020, 9:30:49 PM command: INSERT, rowCount: 1 
+2020-03-30T13:30:49.908Z Local: 3/30/2020, 9:30:49 PM command: INSERT, rowCount: 1 
+2020-03-30T13:30:49.921Z Local: 3/30/2020, 9:30:49 PM command: INSERT, rowCount: 1 
+2020-03-30T13:30:49.923Z Local: 3/30/2020, 9:30:49 PM command: INSERT, rowCount: 1 
+2020-03-30T13:30:49.954Z Local: 3/30/2020, 9:30:49 PM command: INSERT, rowCount: 1 
+2020-03-30T13:30:49.956Z Local: 3/30/2020, 9:30:49 PM command: INSERT, rowCount: 1 
+2020-03-30T13:30:49.959Z Local: 3/30/2020, 9:30:49 PM command: INSERT, rowCount: 1 
+2020-03-30T13:30:49.962Z Local: 3/30/2020, 9:30:49 PM command: INSERT, rowCount: 1 
+2020-03-30T13:30:49.969Z Local: 3/30/2020, 9:30:49 PM command: INSERT, rowCount: 1 
+2020-03-30T13:33:01.596Z Local: 3/30/2020, 9:33:01 PM SELECT 
+    id,
+    property,
+    data,
+    row_to_json(comment) AS comment,
+    create_on, 
+    latest_modify
+    FROM app_datas_table WHERE property = 'home_slider'; 
+2020-03-30T13:33:01.603Z Local: 3/30/2020, 9:33:01 PM SELECT 
+    id,
+    property,
+    data,
+    row_to_json(comment) AS comment,
+    create_on, 
+    latest_modify
+    FROM app_datas_table WHERE property = 'home_gallery'; 
+2020-03-30T13:33:01.718Z Local: 3/30/2020, 9:33:01 PM command: SELECT, rowCount: 1 
+2020-03-30T13:33:01.720Z Local: 3/30/2020, 9:33:01 PM Sending 1 rows to ::1 with  
+2020-03-30T13:33:01.733Z Local: 3/30/2020, 9:33:01 PM command: SELECT, rowCount: 1 
+2020-03-30T13:33:01.734Z Local: 3/30/2020, 9:33:01 PM Sending 1 rows to ::1 with  
+2020-03-30T13:33:29.698Z Local: 3/30/2020, 9:33:29 PM SELECT COUNT(*) FROM posts_table; 
+2020-03-30T13:33:29.752Z Local: 3/30/2020, 9:33:29 PM command: SELECT, rowCount: 1 
+2020-03-30T13:33:29.752Z Local: 3/30/2020, 9:33:29 PM Sending 1 rows to ::1 with  
+2020-03-30T13:33:29.764Z Local: 3/30/2020, 9:33:29 PM SELECT * FROM posts_table ORDER BY latest_modify DESC LIMIT 3 OFFSET 0; 
+2020-03-30T13:33:29.841Z Local: 3/30/2020, 9:33:29 PM command: SELECT, rowCount: 3 
+2020-03-30T13:33:29.866Z Local: 3/30/2020, 9:33:29 PM Sending 3 rows to ::1 with  
+2020-03-30T13:33:29.916Z Local: 3/30/2020, 9:33:29 PM SELECT * FROM posts_table ORDER BY latest_modify DESC LIMIT 3 OFFSET 3; 
+2020-03-30T13:33:29.963Z Local: 3/30/2020, 9:33:29 PM command: SELECT, rowCount: 3 
+2020-03-30T13:33:29.984Z Local: 3/30/2020, 9:33:29 PM Sending 3 rows to ::1 with  
+2020-03-30T13:33:30.038Z Local: 3/30/2020, 9:33:30 PM SELECT * FROM posts_table ORDER BY latest_modify DESC LIMIT 3 OFFSET 6; 
+2020-03-30T13:33:30.101Z Local: 3/30/2020, 9:33:30 PM command: SELECT, rowCount: 3 
+2020-03-30T13:33:30.113Z Local: 3/30/2020, 9:33:30 PM Sending 3 rows to ::1 with  
+2020-03-30T13:33:30.169Z Local: 3/30/2020, 9:33:30 PM SELECT * FROM posts_table ORDER BY latest_modify DESC LIMIT 3 OFFSET 9; 
+2020-03-30T13:33:30.218Z Local: 3/30/2020, 9:33:30 PM command: SELECT, rowCount: 3 
+2020-03-30T13:33:30.225Z Local: 3/30/2020, 9:33:30 PM Sending 3 rows to ::1 with  
+2020-03-30T13:33:30.279Z Local: 3/30/2020, 9:33:30 PM SELECT * FROM posts_table ORDER BY latest_modify DESC LIMIT 3 OFFSET 12; 
+2020-03-30T13:33:30.323Z Local: 3/30/2020, 9:33:30 PM command: SELECT, rowCount: 3 
+2020-03-30T13:33:30.335Z Local: 3/30/2020, 9:33:30 PM Sending 3 rows to ::1 with  
+2020-03-30T13:33:32.072Z Local: 3/30/2020, 9:33:32 PM SELECT * FROM posts_table WHERE id = '9'; 
+2020-03-30T13:33:32.097Z Local: 3/30/2020, 9:33:32 PM command: SELECT, rowCount: 1 
+2020-03-30T13:33:32.101Z Local: 3/30/2020, 9:33:32 PM Sending 1 rows to ::1 with  
+2020-03-30T13:33:33.357Z Local: 3/30/2020, 9:33:33 PM SELECT COUNT(*) FROM items_table; 
+2020-03-30T13:33:33.444Z Local: 3/30/2020, 9:33:33 PM command: SELECT, rowCount: 1 
+2020-03-30T13:33:33.445Z Local: 3/30/2020, 9:33:33 PM Sending 1 rows to ::1 with  
+2020-03-30T13:33:33.486Z Local: 3/30/2020, 9:33:33 PM SELECT 
+    id,
+        enable,
+        name,
+        producer_id,
+        producer_name,
+        country,
+        zip,
+        province,
+        county,
+        township,
+        village,
+        road,
+        sell_type,
+        price,
+        unit,
+        amount,
+        sold,
+        slogan,
+        description,
+        array_to_json(content) AS content,
+        array_to_json(certification) AS certification,
+        array_to_json(spec) AS spec,
+        cover_img,
+        array_to_json(imgs) AS imgs,
+        block_id,
+        block_link,
+        transaction_id,
+        traceability_link,
+        row_to_json(comment) AS comment,
+        create_on,
+        latest_modify,
+        expire_on,
+        is_limited,
+        has_expiration
+    FROM items_table AS items_table ORDER BY create_on DESC LIMIT 3 OFFSET 0; 
+2020-03-30T13:33:33.581Z Local: 3/30/2020, 9:33:33 PM command: SELECT, rowCount: 3 
+2020-03-30T13:33:33.582Z Local: 3/30/2020, 9:33:33 PM Sending 3 rows to ::1 with  
+2020-03-30T13:33:33.598Z Local: 3/30/2020, 9:33:33 PM SELECT 
+    id,
+        enable,
+        name,
+        producer_id,
+        producer_name,
+        country,
+        zip,
+        province,
+        county,
+        township,
+        village,
+        road,
+        sell_type,
+        price,
+        unit,
+        amount,
+        sold,
+        slogan,
+        description,
+        array_to_json(content) AS content,
+        array_to_json(certification) AS certification,
+        array_to_json(spec) AS spec,
+        cover_img,
+        array_to_json(imgs) AS imgs,
+        block_id,
+        block_link,
+        transaction_id,
+        traceability_link,
+        row_to_json(comment) AS comment,
+        create_on,
+        latest_modify,
+        expire_on,
+        is_limited,
+        has_expiration
+    FROM items_table AS items_table ORDER BY create_on DESC LIMIT 3 OFFSET 3; 
+2020-03-30T13:33:33.626Z Local: 3/30/2020, 9:33:33 PM command: SELECT, rowCount: 3 
+2020-03-30T13:33:33.627Z Local: 3/30/2020, 9:33:33 PM Sending 3 rows to ::1 with  
+2020-03-30T13:33:33.673Z Local: 3/30/2020, 9:33:33 PM SELECT 
+    id,
+        enable,
+        name,
+        producer_id,
+        producer_name,
+        country,
+        zip,
+        province,
+        county,
+        township,
+        village,
+        road,
+        sell_type,
+        price,
+        unit,
+        amount,
+        sold,
+        slogan,
+        description,
+        array_to_json(content) AS content,
+        array_to_json(certification) AS certification,
+        array_to_json(spec) AS spec,
+        cover_img,
+        array_to_json(imgs) AS imgs,
+        block_id,
+        block_link,
+        transaction_id,
+        traceability_link,
+        row_to_json(comment) AS comment,
+        create_on,
+        latest_modify,
+        expire_on,
+        is_limited,
+        has_expiration
+    FROM items_table AS items_table ORDER BY create_on DESC LIMIT 3 OFFSET 6; 
+2020-03-30T13:33:33.703Z Local: 3/30/2020, 9:33:33 PM command: SELECT, rowCount: 3 
+2020-03-30T13:33:33.703Z Local: 3/30/2020, 9:33:33 PM Sending 3 rows to ::1 with  
+2020-03-30T13:33:33.725Z Local: 3/30/2020, 9:33:33 PM SELECT 
+    id,
+        enable,
+        name,
+        producer_id,
+        producer_name,
+        country,
+        zip,
+        province,
+        county,
+        township,
+        village,
+        road,
+        sell_type,
+        price,
+        unit,
+        amount,
+        sold,
+        slogan,
+        description,
+        array_to_json(content) AS content,
+        array_to_json(certification) AS certification,
+        array_to_json(spec) AS spec,
+        cover_img,
+        array_to_json(imgs) AS imgs,
+        block_id,
+        block_link,
+        transaction_id,
+        traceability_link,
+        row_to_json(comment) AS comment,
+        create_on,
+        latest_modify,
+        expire_on,
+        is_limited,
+        has_expiration
+    FROM items_table AS items_table ORDER BY create_on DESC LIMIT 3 OFFSET 9; 
+2020-03-30T13:33:33.761Z Local: 3/30/2020, 9:33:33 PM command: SELECT, rowCount: 3 
+2020-03-30T13:33:33.768Z Local: 3/30/2020, 9:33:33 PM Sending 3 rows to ::1 with  
+2020-03-30T13:33:33.787Z Local: 3/30/2020, 9:33:33 PM SELECT 
+    id,
+        enable,
+        name,
+        producer_id,
+        producer_name,
+        country,
+        zip,
+        province,
+        county,
+        township,
+        village,
+        road,
+        sell_type,
+        price,
+        unit,
+        amount,
+        sold,
+        slogan,
+        description,
+        array_to_json(content) AS content,
+        array_to_json(certification) AS certification,
+        array_to_json(spec) AS spec,
+        cover_img,
+        array_to_json(imgs) AS imgs,
+        block_id,
+        block_link,
+        transaction_id,
+        traceability_link,
+        row_to_json(comment) AS comment,
+        create_on,
+        latest_modify,
+        expire_on,
+        is_limited,
+        has_expiration
+    FROM items_table AS items_table ORDER BY create_on DESC LIMIT 3 OFFSET 12; 
+2020-03-30T13:33:33.820Z Local: 3/30/2020, 9:33:33 PM command: SELECT, rowCount: 3 
+2020-03-30T13:33:33.820Z Local: 3/30/2020, 9:33:33 PM Sending 3 rows to ::1 with  
+2020-03-30T13:33:33.836Z Local: 3/30/2020, 9:33:33 PM SELECT 
+    id,
+        enable,
+        name,
+        producer_id,
+        producer_name,
+        country,
+        zip,
+        province,
+        county,
+        township,
+        village,
+        road,
+        sell_type,
+        price,
+        unit,
+        amount,
+        sold,
+        slogan,
+        description,
+        array_to_json(content) AS content,
+        array_to_json(certification) AS certification,
+        array_to_json(spec) AS spec,
+        cover_img,
+        array_to_json(imgs) AS imgs,
+        block_id,
+        block_link,
+        transaction_id,
+        traceability_link,
+        row_to_json(comment) AS comment,
+        create_on,
+        latest_modify,
+        expire_on,
+        is_limited,
+        has_expiration
+    FROM items_table AS items_table ORDER BY create_on DESC LIMIT 3 OFFSET 15; 
+2020-03-30T13:33:33.862Z Local: 3/30/2020, 9:33:33 PM command: SELECT, rowCount: 3 
+2020-03-30T13:33:33.872Z Local: 3/30/2020, 9:33:33 PM Sending 3 rows to ::1 with  
+2020-03-30T13:33:33.893Z Local: 3/30/2020, 9:33:33 PM SELECT 
+    id,
+        enable,
+        name,
+        producer_id,
+        producer_name,
+        country,
+        zip,
+        province,
+        county,
+        township,
+        village,
+        road,
+        sell_type,
+        price,
+        unit,
+        amount,
+        sold,
+        slogan,
+        description,
+        array_to_json(content) AS content,
+        array_to_json(certification) AS certification,
+        array_to_json(spec) AS spec,
+        cover_img,
+        array_to_json(imgs) AS imgs,
+        block_id,
+        block_link,
+        transaction_id,
+        traceability_link,
+        row_to_json(comment) AS comment,
+        create_on,
+        latest_modify,
+        expire_on,
+        is_limited,
+        has_expiration
+    FROM items_table AS items_table ORDER BY create_on DESC LIMIT 3 OFFSET 18; 
+2020-03-30T13:33:33.928Z Local: 3/30/2020, 9:33:33 PM command: SELECT, rowCount: 3 
+2020-03-30T13:33:33.929Z Local: 3/30/2020, 9:33:33 PM Sending 3 rows to ::1 with  
+2020-03-30T13:33:33.949Z Local: 3/30/2020, 9:33:33 PM SELECT 
+    id,
+        enable,
+        name,
+        producer_id,
+        producer_name,
+        country,
+        zip,
+        province,
+        county,
+        township,
+        village,
+        road,
+        sell_type,
+        price,
+        unit,
+        amount,
+        sold,
+        slogan,
+        description,
+        array_to_json(content) AS content,
+        array_to_json(certification) AS certification,
+        array_to_json(spec) AS spec,
+        cover_img,
+        array_to_json(imgs) AS imgs,
+        block_id,
+        block_link,
+        transaction_id,
+        traceability_link,
+        row_to_json(comment) AS comment,
+        create_on,
+        latest_modify,
+        expire_on,
+        is_limited,
+        has_expiration
+    FROM items_table AS items_table ORDER BY create_on DESC LIMIT 3 OFFSET 21; 
+2020-03-30T13:33:33.974Z Local: 3/30/2020, 9:33:33 PM command: SELECT, rowCount: 3 
+2020-03-30T13:33:33.974Z Local: 3/30/2020, 9:33:33 PM Sending 3 rows to ::1 with  
+2020-03-30T13:33:33.993Z Local: 3/30/2020, 9:33:33 PM SELECT 
+    id,
+        enable,
+        name,
+        producer_id,
+        producer_name,
+        country,
+        zip,
+        province,
+        county,
+        township,
+        village,
+        road,
+        sell_type,
+        price,
+        unit,
+        amount,
+        sold,
+        slogan,
+        description,
+        array_to_json(content) AS content,
+        array_to_json(certification) AS certification,
+        array_to_json(spec) AS spec,
+        cover_img,
+        array_to_json(imgs) AS imgs,
+        block_id,
+        block_link,
+        transaction_id,
+        traceability_link,
+        row_to_json(comment) AS comment,
+        create_on,
+        latest_modify,
+        expire_on,
+        is_limited,
+        has_expiration
+    FROM items_table AS items_table ORDER BY create_on DESC LIMIT 3 OFFSET 24; 
+2020-03-30T13:33:34.021Z Local: 3/30/2020, 9:33:34 PM command: SELECT, rowCount: 3 
+2020-03-30T13:33:34.022Z Local: 3/30/2020, 9:33:34 PM Sending 3 rows to ::1 with  
+2020-03-30T13:33:34.039Z Local: 3/30/2020, 9:33:34 PM SELECT 
+    id,
+        enable,
+        name,
+        producer_id,
+        producer_name,
+        country,
+        zip,
+        province,
+        county,
+        township,
+        village,
+        road,
+        sell_type,
+        price,
+        unit,
+        amount,
+        sold,
+        slogan,
+        description,
+        array_to_json(content) AS content,
+        array_to_json(certification) AS certification,
+        array_to_json(spec) AS spec,
+        cover_img,
+        array_to_json(imgs) AS imgs,
+        block_id,
+        block_link,
+        transaction_id,
+        traceability_link,
+        row_to_json(comment) AS comment,
+        create_on,
+        latest_modify,
+        expire_on,
+        is_limited,
+        has_expiration
+    FROM items_table AS items_table ORDER BY create_on DESC LIMIT 3 OFFSET 27; 
+2020-03-30T13:33:34.068Z Local: 3/30/2020, 9:33:34 PM command: SELECT, rowCount: 3 
+2020-03-30T13:33:34.069Z Local: 3/30/2020, 9:33:34 PM Sending 3 rows to ::1 with  
+2020-03-30T13:33:34.086Z Local: 3/30/2020, 9:33:34 PM SELECT 
+    id,
+        enable,
+        name,
+        producer_id,
+        producer_name,
+        country,
+        zip,
+        province,
+        county,
+        township,
+        village,
+        road,
+        sell_type,
+        price,
+        unit,
+        amount,
+        sold,
+        slogan,
+        description,
+        array_to_json(content) AS content,
+        array_to_json(certification) AS certification,
+        array_to_json(spec) AS spec,
+        cover_img,
+        array_to_json(imgs) AS imgs,
+        block_id,
+        block_link,
+        transaction_id,
+        traceability_link,
+        row_to_json(comment) AS comment,
+        create_on,
+        latest_modify,
+        expire_on,
+        is_limited,
+        has_expiration
+    FROM items_table AS items_table ORDER BY create_on DESC LIMIT 3 OFFSET 30; 
+2020-03-30T13:33:34.118Z Local: 3/30/2020, 9:33:34 PM command: SELECT, rowCount: 3 
+2020-03-30T13:33:34.119Z Local: 3/30/2020, 9:33:34 PM Sending 3 rows to ::1 with  
+2020-03-30T13:33:34.136Z Local: 3/30/2020, 9:33:34 PM SELECT 
+    id,
+        enable,
+        name,
+        producer_id,
+        producer_name,
+        country,
+        zip,
+        province,
+        county,
+        township,
+        village,
+        road,
+        sell_type,
+        price,
+        unit,
+        amount,
+        sold,
+        slogan,
+        description,
+        array_to_json(content) AS content,
+        array_to_json(certification) AS certification,
+        array_to_json(spec) AS spec,
+        cover_img,
+        array_to_json(imgs) AS imgs,
+        block_id,
+        block_link,
+        transaction_id,
+        traceability_link,
+        row_to_json(comment) AS comment,
+        create_on,
+        latest_modify,
+        expire_on,
+        is_limited,
+        has_expiration
+    FROM items_table AS items_table ORDER BY create_on DESC LIMIT 3 OFFSET 33; 
+2020-03-30T13:33:34.170Z Local: 3/30/2020, 9:33:34 PM command: SELECT, rowCount: 3 
+2020-03-30T13:33:34.171Z Local: 3/30/2020, 9:33:34 PM Sending 3 rows to ::1 with  
+2020-03-30T13:33:34.189Z Local: 3/30/2020, 9:33:34 PM SELECT 
+    id,
+        enable,
+        name,
+        producer_id,
+        producer_name,
+        country,
+        zip,
+        province,
+        county,
+        township,
+        village,
+        road,
+        sell_type,
+        price,
+        unit,
+        amount,
+        sold,
+        slogan,
+        description,
+        array_to_json(content) AS content,
+        array_to_json(certification) AS certification,
+        array_to_json(spec) AS spec,
+        cover_img,
+        array_to_json(imgs) AS imgs,
+        block_id,
+        block_link,
+        transaction_id,
+        traceability_link,
+        row_to_json(comment) AS comment,
+        create_on,
+        latest_modify,
+        expire_on,
+        is_limited,
+        has_expiration
+    FROM items_table AS items_table ORDER BY create_on DESC LIMIT 3 OFFSET 36; 
+2020-03-30T13:33:34.217Z Local: 3/30/2020, 9:33:34 PM command: SELECT, rowCount: 3 
+2020-03-30T13:33:34.218Z Local: 3/30/2020, 9:33:34 PM Sending 3 rows to ::1 with  
+2020-03-30T13:33:34.232Z Local: 3/30/2020, 9:33:34 PM SELECT 
+    id,
+        enable,
+        name,
+        producer_id,
+        producer_name,
+        country,
+        zip,
+        province,
+        county,
+        township,
+        village,
+        road,
+        sell_type,
+        price,
+        unit,
+        amount,
+        sold,
+        slogan,
+        description,
+        array_to_json(content) AS content,
+        array_to_json(certification) AS certification,
+        array_to_json(spec) AS spec,
+        cover_img,
+        array_to_json(imgs) AS imgs,
+        block_id,
+        block_link,
+        transaction_id,
+        traceability_link,
+        row_to_json(comment) AS comment,
+        create_on,
+        latest_modify,
+        expire_on,
+        is_limited,
+        has_expiration
+    FROM items_table AS items_table ORDER BY create_on DESC LIMIT 3 OFFSET 39; 
+2020-03-30T13:33:34.257Z Local: 3/30/2020, 9:33:34 PM command: SELECT, rowCount: 3 
+2020-03-30T13:33:34.258Z Local: 3/30/2020, 9:33:34 PM Sending 3 rows to ::1 with  
+2020-03-30T13:33:34.280Z Local: 3/30/2020, 9:33:34 PM SELECT 
+    id,
+        enable,
+        name,
+        producer_id,
+        producer_name,
+        country,
+        zip,
+        province,
+        county,
+        township,
+        village,
+        road,
+        sell_type,
+        price,
+        unit,
+        amount,
+        sold,
+        slogan,
+        description,
+        array_to_json(content) AS content,
+        array_to_json(certification) AS certification,
+        array_to_json(spec) AS spec,
+        cover_img,
+        array_to_json(imgs) AS imgs,
+        block_id,
+        block_link,
+        transaction_id,
+        traceability_link,
+        row_to_json(comment) AS comment,
+        create_on,
+        latest_modify,
+        expire_on,
+        is_limited,
+        has_expiration
+    FROM items_table AS items_table ORDER BY create_on DESC LIMIT 3 OFFSET 42; 
+2020-03-30T13:33:34.319Z Local: 3/30/2020, 9:33:34 PM Sending 3 rows to ::1 with  
+2020-03-30T13:33:34.319Z Local: 3/30/2020, 9:33:34 PM command: SELECT, rowCount: 3 
+2020-03-30T13:33:34.337Z Local: 3/30/2020, 9:33:34 PM SELECT 
+    id,
+        enable,
+        name,
+        producer_id,
+        producer_name,
+        country,
+        zip,
+        province,
+        county,
+        township,
+        village,
+        road,
+        sell_type,
+        price,
+        unit,
+        amount,
+        sold,
+        slogan,
+        description,
+        array_to_json(content) AS content,
+        array_to_json(certification) AS certification,
+        array_to_json(spec) AS spec,
+        cover_img,
+        array_to_json(imgs) AS imgs,
+        block_id,
+        block_link,
+        transaction_id,
+        traceability_link,
+        row_to_json(comment) AS comment,
+        create_on,
+        latest_modify,
+        expire_on,
+        is_limited,
+        has_expiration
+    FROM items_table AS items_table ORDER BY create_on DESC LIMIT 3 OFFSET 45; 
+2020-03-30T13:33:34.364Z Local: 3/30/2020, 9:33:34 PM command: SELECT, rowCount: 3 
+2020-03-30T13:33:34.365Z Local: 3/30/2020, 9:33:34 PM Sending 3 rows to ::1 with  
+2020-03-30T13:33:34.387Z Local: 3/30/2020, 9:33:34 PM SELECT 
+    id,
+        enable,
+        name,
+        producer_id,
+        producer_name,
+        country,
+        zip,
+        province,
+        county,
+        township,
+        village,
+        road,
+        sell_type,
+        price,
+        unit,
+        amount,
+        sold,
+        slogan,
+        description,
+        array_to_json(content) AS content,
+        array_to_json(certification) AS certification,
+        array_to_json(spec) AS spec,
+        cover_img,
+        array_to_json(imgs) AS imgs,
+        block_id,
+        block_link,
+        transaction_id,
+        traceability_link,
+        row_to_json(comment) AS comment,
+        create_on,
+        latest_modify,
+        expire_on,
+        is_limited,
+        has_expiration
+    FROM items_table AS items_table ORDER BY create_on DESC LIMIT 3 OFFSET 48; 
+2020-03-30T13:33:34.417Z Local: 3/30/2020, 9:33:34 PM command: SELECT, rowCount: 3 
+2020-03-30T13:33:34.418Z Local: 3/30/2020, 9:33:34 PM Sending 3 rows to ::1 with  
+2020-03-30T13:33:34.435Z Local: 3/30/2020, 9:33:34 PM SELECT 
+    id,
+        enable,
+        name,
+        producer_id,
+        producer_name,
+        country,
+        zip,
+        province,
+        county,
+        township,
+        village,
+        road,
+        sell_type,
+        price,
+        unit,
+        amount,
+        sold,
+        slogan,
+        description,
+        array_to_json(content) AS content,
+        array_to_json(certification) AS certification,
+        array_to_json(spec) AS spec,
+        cover_img,
+        array_to_json(imgs) AS imgs,
+        block_id,
+        block_link,
+        transaction_id,
+        traceability_link,
+        row_to_json(comment) AS comment,
+        create_on,
+        latest_modify,
+        expire_on,
+        is_limited,
+        has_expiration
+    FROM items_table AS items_table ORDER BY create_on DESC LIMIT 3 OFFSET 51; 
+2020-03-30T13:33:34.467Z Local: 3/30/2020, 9:33:34 PM command: SELECT, rowCount: 3 
+2020-03-30T13:33:34.468Z Local: 3/30/2020, 9:33:34 PM Sending 3 rows to ::1 with  
+2020-03-30T13:33:34.486Z Local: 3/30/2020, 9:33:34 PM SELECT 
+    id,
+        enable,
+        name,
+        producer_id,
+        producer_name,
+        country,
+        zip,
+        province,
+        county,
+        township,
+        village,
+        road,
+        sell_type,
+        price,
+        unit,
+        amount,
+        sold,
+        slogan,
+        description,
+        array_to_json(content) AS content,
+        array_to_json(certification) AS certification,
+        array_to_json(spec) AS spec,
+        cover_img,
+        array_to_json(imgs) AS imgs,
+        block_id,
+        block_link,
+        transaction_id,
+        traceability_link,
+        row_to_json(comment) AS comment,
+        create_on,
+        latest_modify,
+        expire_on,
+        is_limited,
+        has_expiration
+    FROM items_table AS items_table ORDER BY create_on DESC LIMIT 3 OFFSET 54; 
+2020-03-30T13:33:34.523Z Local: 3/30/2020, 9:33:34 PM command: SELECT, rowCount: 3 
+2020-03-30T13:33:34.523Z Local: 3/30/2020, 9:33:34 PM Sending 3 rows to ::1 with  
+2020-03-30T13:33:34.554Z Local: 3/30/2020, 9:33:34 PM SELECT 
+    id,
+        enable,
+        name,
+        producer_id,
+        producer_name,
+        country,
+        zip,
+        province,
+        county,
+        township,
+        village,
+        road,
+        sell_type,
+        price,
+        unit,
+        amount,
+        sold,
+        slogan,
+        description,
+        array_to_json(content) AS content,
+        array_to_json(certification) AS certification,
+        array_to_json(spec) AS spec,
+        cover_img,
+        array_to_json(imgs) AS imgs,
+        block_id,
+        block_link,
+        transaction_id,
+        traceability_link,
+        row_to_json(comment) AS comment,
+        create_on,
+        latest_modify,
+        expire_on,
+        is_limited,
+        has_expiration
+    FROM items_table AS items_table ORDER BY create_on DESC LIMIT 3 OFFSET 57; 
+2020-03-30T13:33:34.591Z Local: 3/30/2020, 9:33:34 PM command: SELECT, rowCount: 3 
+2020-03-30T13:33:34.602Z Local: 3/30/2020, 9:33:34 PM Sending 3 rows to ::1 with  
+2020-03-30T13:33:34.620Z Local: 3/30/2020, 9:33:34 PM SELECT 
+    id,
+        enable,
+        name,
+        producer_id,
+        producer_name,
+        country,
+        zip,
+        province,
+        county,
+        township,
+        village,
+        road,
+        sell_type,
+        price,
+        unit,
+        amount,
+        sold,
+        slogan,
+        description,
+        array_to_json(content) AS content,
+        array_to_json(certification) AS certification,
+        array_to_json(spec) AS spec,
+        cover_img,
+        array_to_json(imgs) AS imgs,
+        block_id,
+        block_link,
+        transaction_id,
+        traceability_link,
+        row_to_json(comment) AS comment,
+        create_on,
+        latest_modify,
+        expire_on,
+        is_limited,
+        has_expiration
+    FROM items_table AS items_table ORDER BY create_on DESC LIMIT 3 OFFSET 60; 
+2020-03-30T13:33:34.650Z Local: 3/30/2020, 9:33:34 PM command: SELECT, rowCount: 3 
+2020-03-30T13:33:34.651Z Local: 3/30/2020, 9:33:34 PM Sending 3 rows to ::1 with  
+2020-03-30T13:33:34.670Z Local: 3/30/2020, 9:33:34 PM SELECT 
+    id,
+        enable,
+        name,
+        producer_id,
+        producer_name,
+        country,
+        zip,
+        province,
+        county,
+        township,
+        village,
+        road,
+        sell_type,
+        price,
+        unit,
+        amount,
+        sold,
+        slogan,
+        description,
+        array_to_json(content) AS content,
+        array_to_json(certification) AS certification,
+        array_to_json(spec) AS spec,
+        cover_img,
+        array_to_json(imgs) AS imgs,
+        block_id,
+        block_link,
+        transaction_id,
+        traceability_link,
+        row_to_json(comment) AS comment,
+        create_on,
+        latest_modify,
+        expire_on,
+        is_limited,
+        has_expiration
+    FROM items_table AS items_table ORDER BY create_on DESC LIMIT 3 OFFSET 63; 
+2020-03-30T13:33:34.702Z Local: 3/30/2020, 9:33:34 PM command: SELECT, rowCount: 3 
+2020-03-30T13:33:34.703Z Local: 3/30/2020, 9:33:34 PM Sending 3 rows to ::1 with  
+2020-03-30T13:33:34.722Z Local: 3/30/2020, 9:33:34 PM SELECT 
+    id,
+        enable,
+        name,
+        producer_id,
+        producer_name,
+        country,
+        zip,
+        province,
+        county,
+        township,
+        village,
+        road,
+        sell_type,
+        price,
+        unit,
+        amount,
+        sold,
+        slogan,
+        description,
+        array_to_json(content) AS content,
+        array_to_json(certification) AS certification,
+        array_to_json(spec) AS spec,
+        cover_img,
+        array_to_json(imgs) AS imgs,
+        block_id,
+        block_link,
+        transaction_id,
+        traceability_link,
+        row_to_json(comment) AS comment,
+        create_on,
+        latest_modify,
+        expire_on,
+        is_limited,
+        has_expiration
+    FROM items_table AS items_table ORDER BY create_on DESC LIMIT 3 OFFSET 66; 
+2020-03-30T13:33:34.752Z Local: 3/30/2020, 9:33:34 PM command: SELECT, rowCount: 3 
+2020-03-30T13:33:34.753Z Local: 3/30/2020, 9:33:34 PM Sending 3 rows to ::1 with  
+2020-03-30T13:33:34.770Z Local: 3/30/2020, 9:33:34 PM SELECT 
+    id,
+        enable,
+        name,
+        producer_id,
+        producer_name,
+        country,
+        zip,
+        province,
+        county,
+        township,
+        village,
+        road,
+        sell_type,
+        price,
+        unit,
+        amount,
+        sold,
+        slogan,
+        description,
+        array_to_json(content) AS content,
+        array_to_json(certification) AS certification,
+        array_to_json(spec) AS spec,
+        cover_img,
+        array_to_json(imgs) AS imgs,
+        block_id,
+        block_link,
+        transaction_id,
+        traceability_link,
+        row_to_json(comment) AS comment,
+        create_on,
+        latest_modify,
+        expire_on,
+        is_limited,
+        has_expiration
+    FROM items_table AS items_table ORDER BY create_on DESC LIMIT 3 OFFSET 69; 
+2020-03-30T13:33:34.794Z Local: 3/30/2020, 9:33:34 PM command: SELECT, rowCount: 3 
+2020-03-30T13:33:34.795Z Local: 3/30/2020, 9:33:34 PM Sending 3 rows to ::1 with  
+2020-03-30T13:33:34.820Z Local: 3/30/2020, 9:33:34 PM SELECT 
+    id,
+        enable,
+        name,
+        producer_id,
+        producer_name,
+        country,
+        zip,
+        province,
+        county,
+        township,
+        village,
+        road,
+        sell_type,
+        price,
+        unit,
+        amount,
+        sold,
+        slogan,
+        description,
+        array_to_json(content) AS content,
+        array_to_json(certification) AS certification,
+        array_to_json(spec) AS spec,
+        cover_img,
+        array_to_json(imgs) AS imgs,
+        block_id,
+        block_link,
+        transaction_id,
+        traceability_link,
+        row_to_json(comment) AS comment,
+        create_on,
+        latest_modify,
+        expire_on,
+        is_limited,
+        has_expiration
+    FROM items_table AS items_table ORDER BY create_on DESC LIMIT 3 OFFSET 72; 
+2020-03-30T13:33:34.854Z Local: 3/30/2020, 9:33:34 PM command: SELECT, rowCount: 3 
+2020-03-30T13:33:34.855Z Local: 3/30/2020, 9:33:34 PM Sending 3 rows to ::1 with  
+2020-03-30T13:33:34.874Z Local: 3/30/2020, 9:33:34 PM SELECT 
+    id,
+        enable,
+        name,
+        producer_id,
+        producer_name,
+        country,
+        zip,
+        province,
+        county,
+        township,
+        village,
+        road,
+        sell_type,
+        price,
+        unit,
+        amount,
+        sold,
+        slogan,
+        description,
+        array_to_json(content) AS content,
+        array_to_json(certification) AS certification,
+        array_to_json(spec) AS spec,
+        cover_img,
+        array_to_json(imgs) AS imgs,
+        block_id,
+        block_link,
+        transaction_id,
+        traceability_link,
+        row_to_json(comment) AS comment,
+        create_on,
+        latest_modify,
+        expire_on,
+        is_limited,
+        has_expiration
+    FROM items_table AS items_table ORDER BY create_on DESC LIMIT 3 OFFSET 75; 
+2020-03-30T13:33:34.907Z Local: 3/30/2020, 9:33:34 PM command: SELECT, rowCount: 3 
+2020-03-30T13:33:34.908Z Local: 3/30/2020, 9:33:34 PM Sending 3 rows to ::1 with  
+2020-03-30T13:33:34.929Z Local: 3/30/2020, 9:33:34 PM SELECT 
+    id,
+        enable,
+        name,
+        producer_id,
+        producer_name,
+        country,
+        zip,
+        province,
+        county,
+        township,
+        village,
+        road,
+        sell_type,
+        price,
+        unit,
+        amount,
+        sold,
+        slogan,
+        description,
+        array_to_json(content) AS content,
+        array_to_json(certification) AS certification,
+        array_to_json(spec) AS spec,
+        cover_img,
+        array_to_json(imgs) AS imgs,
+        block_id,
+        block_link,
+        transaction_id,
+        traceability_link,
+        row_to_json(comment) AS comment,
+        create_on,
+        latest_modify,
+        expire_on,
+        is_limited,
+        has_expiration
+    FROM items_table AS items_table ORDER BY create_on DESC LIMIT 3 OFFSET 78; 
+2020-03-30T13:33:34.953Z Local: 3/30/2020, 9:33:34 PM command: SELECT, rowCount: 3 
+2020-03-30T13:33:34.954Z Local: 3/30/2020, 9:33:34 PM Sending 3 rows to ::1 with  
+2020-03-30T13:33:34.973Z Local: 3/30/2020, 9:33:34 PM SELECT 
+    id,
+        enable,
+        name,
+        producer_id,
+        producer_name,
+        country,
+        zip,
+        province,
+        county,
+        township,
+        village,
+        road,
+        sell_type,
+        price,
+        unit,
+        amount,
+        sold,
+        slogan,
+        description,
+        array_to_json(content) AS content,
+        array_to_json(certification) AS certification,
+        array_to_json(spec) AS spec,
+        cover_img,
+        array_to_json(imgs) AS imgs,
+        block_id,
+        block_link,
+        transaction_id,
+        traceability_link,
+        row_to_json(comment) AS comment,
+        create_on,
+        latest_modify,
+        expire_on,
+        is_limited,
+        has_expiration
+    FROM items_table AS items_table ORDER BY create_on DESC LIMIT 3 OFFSET 81; 
+2020-03-30T13:33:35.001Z Local: 3/30/2020, 9:33:35 PM Sending 3 rows to ::1 with  
+2020-03-30T13:33:35.001Z Local: 3/30/2020, 9:33:35 PM command: SELECT, rowCount: 3 
+2020-03-30T13:33:35.024Z Local: 3/30/2020, 9:33:35 PM SELECT 
+    id,
+        enable,
+        name,
+        producer_id,
+        producer_name,
+        country,
+        zip,
+        province,
+        county,
+        township,
+        village,
+        road,
+        sell_type,
+        price,
+        unit,
+        amount,
+        sold,
+        slogan,
+        description,
+        array_to_json(content) AS content,
+        array_to_json(certification) AS certification,
+        array_to_json(spec) AS spec,
+        cover_img,
+        array_to_json(imgs) AS imgs,
+        block_id,
+        block_link,
+        transaction_id,
+        traceability_link,
+        row_to_json(comment) AS comment,
+        create_on,
+        latest_modify,
+        expire_on,
+        is_limited,
+        has_expiration
+    FROM items_table AS items_table ORDER BY create_on DESC LIMIT 3 OFFSET 84; 
+2020-03-30T13:33:35.067Z Local: 3/30/2020, 9:33:35 PM command: SELECT, rowCount: 3 
+2020-03-30T13:33:35.067Z Local: 3/30/2020, 9:33:35 PM Sending 3 rows to ::1 with  
+2020-03-30T13:33:35.092Z Local: 3/30/2020, 9:33:35 PM SELECT 
+    id,
+        enable,
+        name,
+        producer_id,
+        producer_name,
+        country,
+        zip,
+        province,
+        county,
+        township,
+        village,
+        road,
+        sell_type,
+        price,
+        unit,
+        amount,
+        sold,
+        slogan,
+        description,
+        array_to_json(content) AS content,
+        array_to_json(certification) AS certification,
+        array_to_json(spec) AS spec,
+        cover_img,
+        array_to_json(imgs) AS imgs,
+        block_id,
+        block_link,
+        transaction_id,
+        traceability_link,
+        row_to_json(comment) AS comment,
+        create_on,
+        latest_modify,
+        expire_on,
+        is_limited,
+        has_expiration
+    FROM items_table AS items_table ORDER BY create_on DESC LIMIT 3 OFFSET 87; 
+2020-03-30T13:33:35.123Z Local: 3/30/2020, 9:33:35 PM command: SELECT, rowCount: 3 
+2020-03-30T13:33:35.124Z Local: 3/30/2020, 9:33:35 PM Sending 3 rows to ::1 with  
+2020-03-30T13:33:35.155Z Local: 3/30/2020, 9:33:35 PM SELECT 
+    id,
+        enable,
+        name,
+        producer_id,
+        producer_name,
+        country,
+        zip,
+        province,
+        county,
+        township,
+        village,
+        road,
+        sell_type,
+        price,
+        unit,
+        amount,
+        sold,
+        slogan,
+        description,
+        array_to_json(content) AS content,
+        array_to_json(certification) AS certification,
+        array_to_json(spec) AS spec,
+        cover_img,
+        array_to_json(imgs) AS imgs,
+        block_id,
+        block_link,
+        transaction_id,
+        traceability_link,
+        row_to_json(comment) AS comment,
+        create_on,
+        latest_modify,
+        expire_on,
+        is_limited,
+        has_expiration
+    FROM items_table AS items_table ORDER BY create_on DESC LIMIT 3 OFFSET 90; 
+2020-03-30T13:33:35.185Z Local: 3/30/2020, 9:33:35 PM command: SELECT, rowCount: 2 
+2020-03-30T13:33:35.185Z Local: 3/30/2020, 9:33:35 PM Sending 2 rows to ::1 with  
+2020-03-30T13:33:48.883Z Local: 3/30/2020, 9:33:48 PM SELECT 
+    id,
+    property,
+    data,
+    row_to_json(comment) AS comment,
+    create_on, 
+    latest_modify
+    FROM app_datas_table WHERE property = 'home_slider'; 
+2020-03-30T13:33:48.886Z Local: 3/30/2020, 9:33:48 PM SELECT 
+    id,
+    property,
+    data,
+    row_to_json(comment) AS comment,
+    create_on, 
+    latest_modify
+    FROM app_datas_table WHERE property = 'home_gallery'; 
+2020-03-30T13:33:48.921Z Local: 3/30/2020, 9:33:48 PM command: SELECT, rowCount: 1 
+2020-03-30T13:33:48.922Z Local: 3/30/2020, 9:33:48 PM Sending 1 rows to ::1 with  
+2020-03-30T13:33:48.950Z Local: 3/30/2020, 9:33:48 PM command: SELECT, rowCount: 1 
+2020-03-30T13:33:48.950Z Local: 3/30/2020, 9:33:48 PM Sending 1 rows to ::1 with  
+2020-03-30T13:36:22.067Z Local: 3/30/2020, 9:36:22 PM SELECT 
+    id,
+    property,
+    data,
+    row_to_json(comment) AS comment,
+    create_on, 
+    latest_modify
+    FROM app_datas_table WHERE property = 'home_slider'; 
+2020-03-30T13:36:22.071Z Local: 3/30/2020, 9:36:22 PM SELECT 
+    id,
+    property,
+    data,
+    row_to_json(comment) AS comment,
+    create_on, 
+    latest_modify
+    FROM app_datas_table WHERE property = 'home_gallery'; 
+2020-03-30T13:36:22.217Z Local: 3/30/2020, 9:36:22 PM Sending 1 rows to ::1 with  
+2020-03-30T13:36:22.215Z Local: 3/30/2020, 9:36:22 PM command: SELECT, rowCount: 1 
+2020-03-30T13:36:22.250Z Local: 3/30/2020, 9:36:22 PM Sending 1 rows to ::1 with  
+2020-03-30T13:36:22.249Z Local: 3/30/2020, 9:36:22 PM command: SELECT, rowCount: 1 

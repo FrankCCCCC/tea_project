@@ -25,7 +25,8 @@
     "react-scripts": "^3.4.0",
     "react-spring": "^8.0.27",
     "redux": "^4.0.5",
-    "remarkable": "^2.0.0"
+    "remarkable": "^2.0.0",
+    "sw-precache": "^5.2.1"
   },
   "scripts": {
     "start": "react-scripts build && node server.js",
